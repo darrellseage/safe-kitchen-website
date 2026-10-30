@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Kitchen Visual Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: "The Pass". Dark charcoal room, warm pass-lamp pools of light, the app's light UI glowing like plates on the pass. */
+:root {
+  --night: #0D110F;
+  --night-2: #141A17;
+  --line: #26302B;
+  --forest: #0B3B2E;
+  --forest-deep: #06261D;
+  --herb: #7FE0A3;
+  --paper: #F3EEE4;
+  --fog: #ECEFEC;
+  --fog-2: #A3ADA8;
+  /* The app's own light UI tokens (DESIGN_SYSTEM.md v0.3) */
+  --ui-surface: #FAF7F2;
+  --ui-raised: #FFFFFF;
+  --ui-sunken: #F2EDE4;
+  --ui-border: #E6DFD3;
+  --ui-ink: #1C2421;
+  --ui-muted: #4F5B56;
+  --ui-teal: #0F7C7A;
+  --ui-success: #1F8A4C;
+  --ui-warning: #B7791F;
+  --ui-danger: #C2410C;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --lamp: radial-gradient(ellipse 70% 55% at 50% -8%, rgba(255, 233, 196, 0.13), rgba(255, 233, 196, 0.04) 45%, transparent 70%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--night);
+  color: var(--fog);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.025em; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { width: min(1200px, 100% - 40px); margin-inline: auto; }
+header.cover, section { overflow-x: clip; }
+section { position: relative; padding-block: 96px; border-top: 1px solid var(--line); }
+section.lit { background: var(--lamp), var(--night); }
+:focus-visible { outline: 2px solid var(--herb); outline-offset: 3px; border-radius: 6px; }
+
+/* Board annotations */
+.note {
+  display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  color: var(--fog-2); margin-bottom: 28px;
+}
+.note b { color: var(--herb); font-weight: 700; }
+.note span { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.02; font-weight: 700; max-width: 18ch; }
+.lede { color: var(--fog-2); max-width: 58ch; margin-top: 18px; font-size: 18px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; line-height: 1.3; border: 1px solid var(--line); color: var(--fog-2); white-space: nowrap;
+  justify-self: start; align-self: start;
+}
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chip.dev { color: var(--herb); border-color: rgba(127, 224, 163, 0.35); }
+.chip.plan { color: #E6C77A; border-color: rgba(230, 199, 122, 0.35); }
+.chip.explore { color: #A9B8F0; border-color: rgba(169, 184, 240, 0.35); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px;
+  border-radius: 999px; font: 600 16px/1 var(--font-body); text-decoration: none; cursor: pointer; border: 0;
+}
+.btn.primary { background: var(--herb); color: var(--forest-deep); }
+.btn.primary:hover { background: #9BEBB8; }
+.btn.ghost { background: transparent; color: var(--fog); border: 1px solid #3A463F; }
+.btn.ghost:hover { border-color: var(--fog-2); }
+
+/* ---------- Cover ---------- */
+.cover { padding-block: 40px 0; border-top: 0; background: var(--lamp), var(--night); }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font: 700 19px/1 var(--font-display); letter-spacing: -0.01em; }
+.logo i { width: 28px; height: 28px; border-radius: 8px; background: var(--forest); border: 1px solid #1E5A47; display: grid; place-items: center; font-style: normal; }
+.logo i::after { content: ""; width: 10px; height: 6px; border-left: 2.5px solid var(--herb); border-bottom: 2.5px solid var(--herb); transform: translateY(-2px) rotate(-45deg); }
+.nav { display: flex; gap: 26px; font-size: 15px; color: var(--fog-2); flex-wrap: wrap; }
+.boardtag { font-size: 13px; color: var(--fog-2); border: 1px dashed #3A463F; padding: 6px 12px; border-radius: 999px; }
+
+.hero { display: grid; grid-template-columns: 1.02fr 1fr; gap: 48px; align-items: center; padding-block: 72px 96px; }
+.hero h1 { font-size: clamp(2.9rem, 6.4vw, 6rem); line-height: 0.96; font-weight: 800; letter-spacing: -0.04em; }
+.hero h1 .soft { color: var(--fog-2); font-weight: 600; display: block; }
+.hero h1 em { font-style: normal; color: var(--herb); }
+.hero p.sub { margin-top: 26px; font-size: 19px; color: #C4CCC7; max-width: 44ch; }
+.ctas { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
+.trustline { margin-top: 28px; font-size: 14px; color: var(--fog-2); display: flex; gap: 18px; flex-wrap: wrap; }
+.trustline span::before { content: "✓ "; color: var(--herb); }
+
+/* Device stack */
+.stage { position: relative; min-height: 540px; }
+.stage::before {
+  content: ""; position: absolute; inset: -60px -40px -40px; z-index: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255, 233, 196, 0.16), transparent 70%);
+}
+.tablet {
+  position: absolute; z-index: 2; left: 4%; top: 30px; width: 86%;
+  background: #1A201D; border-radius: 26px; padding: 12px; border: 1px solid #2E3833;
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  transform: perspective(1600px) rotateY(-9deg) rotateX(4deg);
+}
+.screen { background: var(--ui-surface); color: var(--ui-ink); border-radius: 16px; overflow: hidden; font-size: 14px; }
+.ui-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: var(--ui-raised); border-bottom: 1px solid var(--ui-border); gap: 8px; }
+.ui-head b { font-size: 16px; }
+.ui-head small { color: var(--ui-muted); font-size: 13px; display: block; font-weight: 500; }
+.saved { font-size: 12px; font-weight: 600; color: var(--ui-success); display: inline-flex; gap: 6px; align-items: center; }
+.saved::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ui-success); }
+.tasks { padding: 12px; display: grid; gap: 8px; }
+.task { display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: center; background: var(--ui-raised); border: 1px solid var(--ui-border); border-radius: 12px; padding: 10px 12px; min-height: 58px; }
+.tick { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #857D70; display: grid; place-items: center; }
+.task.done .tick { background: var(--ui-success); border-color: var(--ui-success); }
+.task.done .tick::after { content: ""; width: 11px; height: 6px; border-left: 2.5px solid #fff; border-bottom: 2.5px solid #fff; transform: translateY(-1px) rotate(-45deg); }
+.task.now { border-color: var(--ui-teal); box-shadow: 0 0 0 3px rgba(15, 124, 122, 0.14); }
+.task.now .tick { border-color: var(--ui-teal); }
+.task .t { font-weight: 600; line-height: 1.25; }
+.task .m { font-size: 12.5px; color: var(--ui-muted); }
+.task .r { font-size: 13px; font-weight: 600; color: var(--ui-muted); text-align: end; }
+.task.now .r { color: var(--ui-teal); }
+.demo-flag { position: absolute; top: -12px; right: 18px; z-index: 5; background: var(--night-2); border: 1px solid #3A463F; color: var(--fog-2); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+
+.phone {
+  position: absolute; z-index: 3; right: -2%; bottom: 0; width: 210px;
+  background: #1A201D; border-radius: 34px; padding: 9px; border: 1px solid #2E3833;
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+}
+.phone .screen { border-radius: 26px; padding: 18px 14px 16px; }
+.phone .lbl { font-size: 12px; color: var(--ui-muted); font-weight: 600; }
+.phone .big { font: 800 44px/1 var(--font-display); letter-spacing: -0.03em; margin-top: 6px; }
+.phone .big small { font-size: 20px; font-weight: 600; color: var(--ui-muted); }
+.scale { margin-top: 14px; height: 40px; border-radius: 12px; background: linear-gradient(90deg, #DCEBF5, #F2EDE4 50%, #F6E2D3); position: relative; border: 1px solid var(--ui-border); }
+.scale::after { content: ""; position: absolute; top: 50%; left: 38%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--ui-raised); border: 3px solid var(--ui-teal); box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+.phone .save { margin-top: 14px; background: var(--ui-teal); color: #fff; border-radius: 12px; text-align: center; padding: 12px; font-weight: 700; font-size: 14px; }
+.phone .meta { margin-top: 10px; font-size: 11.5px; color: var(--ui-muted); line-height: 1.4; }
+
+.mgr {
+  position: absolute; z-index: 3; left: 0; bottom: 18px; width: 250px;
+  background: rgba(20, 26, 23, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #2E3833; border-radius: 18px; padding: 16px; font-size: 13.5px;
+  box-shadow: 0 30px 60px -16px rgba(0, 0, 0, 0.7);
+}
+.mgr h4 { margin: 0 0 10px; font: 600 13px/1.2 var(--font-body); color: var(--fog-2); text-transform: uppercase; letter-spacing: 0.08em; }
+.mgr .row { display: flex; justify-content: space-between; padding: 7px 0; border-top: 1px solid var(--line); gap: 8px; }
+.mgr .row b { font-variant-numeric: tabular-nums; }
+.bar { height: 6px; border-radius: 6px; background: var(--line); margin: 4px 0 10px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 86%; background: var(--herb); border-radius: 6px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .phone { animation: float 7s ease-in-out infinite; }
+  .task.now { animation: glow 2.6s ease-in-out infinite; }
+}
+@keyframes float { 50% { transform: translateY(-10px); } }
+@keyframes glow { 50% { box-shadow: 0 0 0 6px rgba(15, 124, 122, 0.08); } }
+
+/* ---------- Brand tokens ---------- */
+.brand-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; margin-top: 48px; }
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sw { border-radius: 14px; border: 1px solid var(--line); overflow: hidden; background: var(--night-2); }
+.sw i { display: block; height: 92px; }
+.sw div { padding: 10px 12px; font-size: 13px; line-height: 1.35; }
+.sw div b { display: block; font-size: 14px; }
+.sw div span { color: var(--fog-2); }
+.type-card { border: 1px solid var(--line); border-radius: 18px; padding: 28px; background: var(--night-2); display: grid; gap: 22px; }
+.type-card .aa { font: 800 92px/0.9 var(--font-display); letter-spacing: -0.05em; }
+.type-card .meta { font-size: 14px; color: var(--fog-2); }
+.type-card .body-sample { font-size: 17px; color: #C4CCC7; }
+.lamp-demo { margin-top: 12px; height: 110px; border-radius: 14px; border: 1px solid var(--line); background: var(--lamp), var(--night); display: grid; place-items: end start; padding: 12px 14px; font-size: 13px; color: var(--fog-2); }
+
+/* ---------- Sound familiar: ticket rail ---------- */
+.rail { position: relative; margin-top: 56px; padding-top: 22px; }
+.rail::before { content: ""; position: absolute; top: 0; left: -20px; right: -20px; height: 14px; border-radius: 4px; background: linear-gradient(180deg, #5C6661, #2D3531 60%, #1C2220); box-shadow: 0 6px 14px rgba(0,0,0,0.5); }
+.tickets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.ticket {
+  position: relative; background: var(--paper); color: #2A2620; padding: 26px 20px 24px; min-height: 280px;
+  box-shadow: 0 18px 30px -10px rgba(0,0,0,0.6);
+  -webkit-mask: radial-gradient(circle 5px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100% repeat-x;
+  mask: radial-gradient(circle 5px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100% repeat-x;
+}
+.ticket:nth-child(1) { transform: rotate(-1.6deg); }
+.ticket:nth-child(2) { transform: rotate(1.2deg) translateY(8px); }
+.ticket:nth-child(3) { transform: rotate(-0.8deg) translateY(2px); }
+.ticket:nth-child(4) { transform: rotate(1.8deg) translateY(10px); }
+.ticket::before { content: ""; position: absolute; top: -10px; left: 50%; width: 46px; height: 18px; margin-left: -23px; background: linear-gradient(#B8BFBB, #7F8783); border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.35); }
+.ticket .stamp { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6E665A; border-bottom: 1.5px dashed #CFC6B6; padding-bottom: 10px; }
+.ticket h3 { font-size: 22px; line-height: 1.1; margin-top: 16px; letter-spacing: -0.02em; }
+.ticket p { margin-top: 12px; font-size: 15px; color: #4B453C; }
+.ticket .scrawl { margin-top: 14px; font-style: italic; font-size: 14px; color: #8A2E1A; transform: rotate(-2deg); display: inline-block; }
+
+/* ---------- Before / after ---------- */
+.ba { display: grid; grid-template-columns: 1fr 90px 1fr; gap: 0; align-items: center; margin-top: 56px; }
+.sheet { background: var(--paper); color: #2A2620; border-radius: 4px; padding: 22px; transform: rotate(-1.2deg); box-shadow: 0 24px 40px -14px rgba(0,0,0,0.7); position: relative; }
+.sheet h4 { margin: 0 0 12px; font: 700 15px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: 0.08em; }
+.sheet table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.sheet th, .sheet td { border: 1px solid #CFC6B6; padding: 7px 8px; text-align: start; }
+.sheet th { background: #E8E1D3; font-size: 12.5px; }
+.sheet td.blank { background: repeating-linear-gradient(-45deg, transparent 0 6px, rgba(194, 65, 12, 0.07) 6px 12px); }
+.sheet td.hand { font-style: italic; color: #34507A; }
+.sticky { position: absolute; right: -14px; bottom: -22px; width: 140px; background: #F5E07A; color: #403810; padding: 12px; font-size: 13.5px; font-style: italic; transform: rotate(4deg); box-shadow: 0 10px 20px -6px rgba(0,0,0,0.5); }
+.arrow { display: grid; place-items: center; color: var(--herb); }
+.arrow svg { width: 54px; height: 54px; }
+.records { background: var(--ui-surface); color: var(--ui-ink); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 60px -18px rgba(0,0,0,0.75); border: 1px solid #2E3833; }
+.rec { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 16px; border-top: 1px solid var(--ui-border); font-size: 14px; }
+.rec:first-of-type { border-top: 0; }
+.rec b { font-weight: 600; }
+.rec .who { grid-column: 1 / -1; font-size: 12.5px; color: var(--ui-muted); }
+.rec .val { font-weight: 700; font-variant-numeric: tabular-nums; }
+.rec.missing { background: #FFF6EC; }
+.rec.missing .val { color: var(--ui-warning); }
+.outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+.outcomes div { border-top: 2px solid var(--herb); padding-top: 14px; font: 600 22px/1.2 var(--font-display); letter-spacing: -0.015em; }
+.outcomes div span { display: block; font: 400 15px/1.5 var(--font-body); color: var(--fog-2); margin-top: 6px; letter-spacing: 0; }
+
+/* ---------- Demo ---------- */
+.demo { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; margin-top: 56px; align-items: start; }
+.demo-device { background: #1A201D; border-radius: 26px; padding: 12px; border: 1px solid #2E3833; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.7); position: relative; }
+.demo-device .screen { padding: 18px; display: grid; gap: 16px; }
+.steps { display: flex; gap: 6px; }
+.steps span { flex: 1; height: 5px; border-radius: 5px; background: var(--ui-border); }
+.steps span.on { background: var(--ui-teal); }
+.picks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.pick { background: var(--ui-raised); border: 1.5px solid var(--ui-border); border-radius: 14px; padding: 12px 10px; min-height: 84px; font: 600 13.5px/1.25 var(--font-body); color: var(--ui-ink); text-align: start; cursor: pointer; display: grid; align-content: space-between; gap: 8px; }
+.pick small { font-weight: 500; color: var(--ui-muted); font-size: 12px; }
+.pick[aria-pressed="true"] { border-color: var(--ui-teal); background: #D7F0EE; box-shadow: 0 0 0 3px rgba(15,124,122,0.15); }
+.reading { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; background: var(--ui-raised); border: 1px solid var(--ui-border); border-radius: 16px; padding: 16px; }
+.reading .val { font: 800 56px/1 var(--font-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.reading .val small { font-size: 22px; color: var(--ui-muted); font-weight: 600; }
+.reading .hint { grid-column: 1 / -1; font-size: 13px; color: var(--ui-muted); }
+.stepper { display: flex; gap: 8px; }
+.stepper button, .keypad-btn { min-width: 56px; min-height: 56px; border-radius: 14px; border: 1.5px solid var(--ui-border); background: var(--ui-sunken); font: 700 18px/1 var(--font-body); color: var(--ui-ink); cursor: pointer; }
+input[type="range"].temp { width: 100%; height: 56px; margin: 0; -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
+input[type="range"].temp::-webkit-slider-runnable-track { height: 44px; border-radius: 14px; background: linear-gradient(90deg, #DCEBF5, #F2EDE4 50%, #F6E2D3); border: 1px solid var(--ui-border); }
+input[type="range"].temp::-moz-range-track { height: 44px; border-radius: 14px; background: linear-gradient(90deg, #DCEBF5, #F2EDE4 50%, #F6E2D3); border: 1px solid var(--ui-border); }
+input[type="range"].temp::-webkit-slider-thumb { -webkit-appearance: none; width: 48px; height: 48px; margin-top: -3px; border-radius: 50%; background: #fff; border: 4px solid var(--ui-teal); box-shadow: 0 3px 8px rgba(0,0,0,0.25); }
+input[type="range"].temp::-moz-range-thumb { width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 4px solid var(--ui-teal); }
+.save-row { display: flex; gap: 10px; }
+.save-btn { flex: 1; min-height: 60px; border: 0; border-radius: 14px; background: var(--ui-teal); color: #fff; font: 700 17px/1 var(--font-body); cursor: pointer; }
+.save-btn:hover { background: #0B6462; }
+.result { border-radius: 16px; border: 1px solid var(--ui-border); background: var(--ui-raised); padding: 14px 16px; display: grid; gap: 8px; font-size: 14px; }
+.result .line { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--ui-border); padding-top: 8px; }
+.result .line:first-child { border-top: 0; padding-top: 0; }
+.result .line span { color: var(--ui-muted); }
+.result .status { display: flex; gap: 10px; align-items: start; background: #EEF5F3; border-radius: 12px; padding: 10px 12px; color: #12403A; font-size: 13.5px; }
+.result .status.out { background: #FFF1EA; color: #7A2A08; }
+.result .status i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--ui-teal); display: grid; place-items: center; color: #fff; font: 700 13px/1 var(--font-body); font-style: normal; }
+.result .status.out i { background: var(--ui-danger); }
+.empty { color: var(--ui-muted); font-size: 14px; text-align: center; padding: 14px; border: 1.5px dashed var(--ui-border); border-radius: 14px; }
+.why { display: grid; gap: 22px; }
+.why div { border-left: 2px solid var(--herb); padding-left: 16px; }
+.why b { display: block; font: 600 20px/1.25 var(--font-display); letter-spacing: -0.01em; }
+.why span { color: var(--fog-2); font-size: 15.5px; }
+.toggle-out { margin-top: 6px; background: transparent; color: var(--fog); border: 1px solid #3A463F; border-radius: 999px; min-height: 48px; padding: 0 18px; font: 600 15px/1 var(--font-body); cursor: pointer; }
+.toggle-out[aria-pressed="true"] { border-color: #E48A5C; color: #F4B08C; }
+
+/* ---------- Feature story ---------- */
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+.feat { background: var(--night-2); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 16px; align-content: start; }
+.feat .mini { background: var(--ui-surface); border-radius: 12px; padding: 12px; color: var(--ui-ink); font-size: 13px; display: grid; gap: 6px; min-height: 132px; }
+.feat .mini .r { display: flex; justify-content: space-between; gap: 8px; background: var(--ui-raised); border: 1px solid var(--ui-border); border-radius: 8px; padding: 7px 9px; }
+.feat .mini .r.warn { border-color: #EBCB98; background: #FFF8EC; }
+.feat .mini .r b { font-variant-numeric: tabular-nums; }
+.feat h3 { font-size: 24px; line-height: 1.1; }
+.pso { display: grid; gap: 8px; font-size: 15px; }
+.pso p { display: grid; grid-template-columns: 92px 1fr; gap: 10px; color: #C4CCC7; }
+.pso p strong { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fog-2); padding-top: 3px; }
+
+/* ---------- EHO ---------- */
+.eho { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; margin-top: 56px; align-items: start; }
+.timeline { display: grid; gap: 0; }
+.tl { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding-bottom: 28px; position: relative; }
+.tl::before { content: ""; position: absolute; left: 86px; top: 10px; bottom: 0; width: 2px; background: var(--line); }
+.tl:last-child::before { display: none; }
+.tl time { font: 700 22px/1 var(--font-display); color: var(--herb); font-variant-numeric: tabular-nums; }
+.tl div { padding-left: 22px; position: relative; }
+.tl div::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--night); border: 2px solid var(--herb); }
+.tl b { display: block; font-size: 18px; }
+.tl span { color: var(--fog-2); font-size: 15.5px; }
+.inspect { background: #FFFFFF; color: var(--ui-ink); border-radius: 10px; padding: 26px 28px; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.75); font-size: 14px; }
+.inspect header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ui-ink); padding-bottom: 10px; gap: 12px; flex-wrap: wrap; }
+.inspect h4 { margin: 0; font: 700 20px/1.2 var(--font-display); }
+.inspect .periods { display: flex; gap: 6px; font-size: 12.5px; }
+.inspect .periods span { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--ui-border); }
+.inspect .periods span.on { background: var(--ui-ink); color: #fff; border-color: var(--ui-ink); }
+.attn { margin-top: 16px; border: 1px solid #EBCB98; background: #FFF8EC; border-radius: 8px; padding: 12px 14px; }
+.attn b { color: #7A4E0E; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+.attn ul { margin: 6px 0 0; padding-inline-start: 18px; }
+.inspect table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13.5px; }
+.inspect th { text-align: start; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ui-muted); border-bottom: 1px solid var(--ui-border); padding: 6px 4px; }
+.inspect td { padding: 8px 4px; border-bottom: 1px solid var(--ui-border); }
+.inspect td.n { font-variant-numeric: tabular-nums; }
+.inspect s { color: var(--ui-muted); }
+.inspect .foot { margin-top: 14px; display: flex; justify-content: space-between; color: var(--ui-muted); font-size: 12.5px; gap: 8px; flex-wrap: wrap; }
+.honest { margin-top: 28px; font: 600 clamp(1.3rem, 2.4vw, 1.75rem)/1.25 var(--font-display); max-width: 30ch; letter-spacing: -0.015em; }
+
+/* ---------- Calculator ---------- */
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 56px; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.calc form { padding: 32px; display: grid; gap: 22px; background: var(--night-2); }
+.field { display: grid; gap: 8px; }
+.field label { font-weight: 600; font-size: 15px; }
+.field .hint { font-size: 13.5px; color: var(--fog-2); }
+.field .inp { display: flex; align-items: center; background: var(--night); border: 1px solid #3A463F; border-radius: 12px; min-height: 52px; padding: 0 14px; gap: 8px; }
+.field .inp:focus-within { border-color: var(--herb); }
+.field input { flex: 1; background: transparent; border: 0; color: var(--fog); font: 600 18px/1 var(--font-body); font-variant-numeric: tabular-nums; min-width: 0; outline: none; }
+.field .unit { color: var(--fog-2); font-size: 15px; }
+.out { padding: 32px; background: var(--lamp), var(--forest-deep); display: grid; gap: 22px; align-content: start; }
+.out .k { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #9DC3B1; font-weight: 600; }
+.out .v { font: 800 clamp(2.6rem, 5vw, 4rem)/1 var(--font-display); letter-spacing: -0.035em; font-variant-numeric: tabular-nums; margin-top: 6px; }
+.out .v small { font-size: 0.4em; font-weight: 600; color: #9DC3B1; letter-spacing: 0; }
+.out .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.out .formula { font-size: 13.5px; color: #9DC3B1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px; }
+.disclaim { margin-top: 18px; font-size: 14px; color: var(--fog-2); max-width: 80ch; }
+
+/* ---------- Roadmap ---------- */
+.road { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 56px; position: relative; }
+.road::before { content: ""; position: absolute; left: 0; right: 0; top: 22px; height: 2px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 18px); }
+.stop { position: relative; padding-top: 50px; display: grid; gap: 10px; align-content: start; }
+.stop::before { content: ""; position: absolute; top: 15px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--night); border: 2px solid var(--fog-2); }
+.stop.first::before { background: var(--herb); border-color: var(--herb); box-shadow: 0 0 0 6px rgba(127,224,163,0.15); }
+.stop h3 { font-size: 20px; line-height: 1.15; }
+.stop p { font-size: 14.5px; color: var(--fog-2); }
+.stop .cond { font-size: 12.5px; color: #E6C77A; }
+
+/* ---------- Pricing + CTA ---------- */
+.price { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 56px; }
+.plan { border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: var(--night-2); display: grid; gap: 16px; align-content: start; }
+.plan.feature { background: var(--lamp), var(--forest); border-color: #1E5A47; }
+.plan h3 { font-size: 26px; }
+.plan .p { font: 700 22px/1.2 var(--font-display); color: var(--fog-2); }
+.plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15.5px; }
+.plan li::before { content: "✓"; color: var(--herb); margin-inline-end: 10px; font-weight: 700; }
+.plan .tbc { font-size: 13px; color: #E6C77A; }
+.final { text-align: start; background: var(--lamp), var(--forest-deep); }
+.final .h2 { font-size: clamp(2.8rem, 7vw, 6rem); max-width: 14ch; font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; }
+.signup { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 12px; align-items: end; }
+.signup .field .inp { background: rgba(0,0,0,0.25); }
+.privacy { margin-top: 14px; font-size: 13.5px; color: #9DC3B1; max-width: 70ch; }
+.thanks { margin-top: 14px; font-weight: 600; color: var(--herb); min-height: 1.5em; }
+
+/* ---------- Mobile preview ---------- */
+.mobiles { display: flex; gap: 28px; margin-top: 56px; flex-wrap: wrap; }
+.mob { width: 280px; background: #1A201D; border-radius: 40px; padding: 10px; border: 1px solid #2E3833; box-shadow: 0 30px 60px -16px rgba(0,0,0,0.75); }
+.mob .in { border-radius: 31px; overflow: hidden; background: var(--lamp), var(--night); height: 560px; padding: 22px 18px; display: grid; align-content: start; gap: 16px; }
+.mob .bar2 { display: flex; justify-content: space-between; align-items: center; font: 700 15px/1 var(--font-display); }
+.mob .bar2 i { width: 22px; height: 14px; border-top: 2px solid var(--fog); border-bottom: 2px solid var(--fog); position: relative; }
+.mob .bar2 i::after { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px; background: var(--fog); }
+.mob h3 { font-size: 36px; line-height: 0.98; font-weight: 800; letter-spacing: -0.04em; }
+.mob h3 span { color: var(--fog-2); font-weight: 600; }
+.mob p { font-size: 14.5px; color: #C4CCC7; }
+.mob .btn { min-height: 50px; width: 100%; font-size: 15px; }
+.mob .peek { color: var(--ui-ink); background: var(--ui-surface); border-radius: 16px; padding: 10px; display: grid; gap: 6px; transform: rotate(-2deg); }
+.mob .peek .task { min-height: 46px; padding: 8px 10px; grid-template-columns: 28px 1fr auto; }
+.mob .peek .tick { width: 26px; height: 26px; }
+.mob .toggle { display: grid; grid-template-columns: 1fr 1fr; background: var(--night-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px; font-size: 14px; font-weight: 600; text-align: center; }
+.mob .toggle span { padding: 10px; border-radius: 999px; color: var(--fog-2); }
+.mob .toggle span.on { background: var(--herb); color: var(--forest-deep); }
+.cap { margin-top: 12px; font-size: 13.5px; color: var(--fog-2); text-align: center; }
+
+footer { padding-block: 48px 64px; border-top: 1px solid var(--line); color: var(--fog-2); font-size: 14px; }
+footer .wrap { display: grid; gap: 10px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  .hero, .brand-grid, .demo, .eho, .calc, .price { grid-template-columns: 1fr; }
+  .stage { min-height: 500px; }
+  .tickets, .feat-grid { grid-template-columns: repeat(2, 1fr); }
+  .road { grid-template-columns: repeat(2, 1fr); row-gap: 8px; }
+  .road::before { display: none; }
+  .ba { grid-template-columns: 1fr; gap: 28px; }
+  .arrow svg { transform: rotate(90deg); }
+  .signup { grid-template-columns: 1fr 1fr; }
+  .nav { display: none; }
+}
+@media (max-width: 600px) {
+  section { padding-block: 64px; }
+  .tickets, .feat-grid, .outcomes, .road, .signup, .out .pair { grid-template-columns: 1fr; }
+  .swatches { grid-template-columns: repeat(2, 1fr); }
+  .picks { grid-template-columns: repeat(2, 1fr); }
+  .stage { min-height: 440px; }
+  .tablet { width: 100%; left: 0; transform: none; }
+  .mgr { display: none; }
+  .phone { width: 170px; right: -6px; bottom: -10px; }
+  .phone .big { font-size: 34px; }
+  .calc form, .out { padding: 22px; }
+  .mob { width: 100%; max-width: 300px; }
+  .sticky { right: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER + HERO (Section 1) ============ -->
+<header class="cover">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="logo"><i aria-hidden="true"></i>Safe Kitchen</span>
+      <nav class="nav" aria-label="Preview navigation"><span>How it works</span><span>Features</span><span>Roadmap</span><span>Pricing</span><span>FAQ</span></nav>
+      <span class="boardtag">Visual concept · Stage 1 · not the final build</span>
+    </div>
+
+    <div class="hero">
+      <div>
+        <div class="note"><b>Section 1</b> Hero <span>Recognition first, then the promise.</span></div>
+        <h1>Your kitchen is busy enough. <span class="soft">Your paperwork <em>shouldn’t be.</em></span></h1>
+        <p class="sub">Less chasing checks. Less paperwork. More control. Meet the simpler way to manage food safety and your kitchen.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#final">Get early access</a>
+          <a class="btn ghost" href="#demo">See how it works</a>
+        </div>
+        <div class="trustline"><span>Built around Safer Food, Better Business</span><span>Designed for gloves and wet hands</span><span>England first</span></div>
+      </div>
+
+      <div class="stage" aria-label="Illustrative Safe Kitchen interface">
+        <div class="mgr" aria-hidden="true">
+          <h4>Today · 2 sites</h4>
+          <div class="row"><span>Checks done</span><b>18 of 21</b></div>
+          <div class="bar"><i></i></div>
+          <div class="row"><span>Waiting for review</span><b>1</b></div>
+          <div class="row"><span>Missing</span><b>Fridge 2 · PM</b></div>
+        </div>
+        <div class="tablet">
+          <span class="demo-flag">Illustrative · in development</span>
+          <div class="screen">
+            <div class="ui-head">
+              <div><b>Now</b><small>Lunch prep · Kitchen tablet</small></div>
+              <span class="saved">Saved</span>
+            </div>
+            <div class="tasks">
+              <div class="task done"><span class="tick"></span><div><div class="t">Opening checks</div><div class="m">Sam · 09:41</div></div><div class="r num">6/6</div></div>
+              <div class="task done"><span class="tick"></span><div><div class="t">Walk-in fridge</div><div class="m">Sam · 10:02 · slider</div></div><div class="r">Recorded</div></div>
+              <div class="task now"><span class="tick"></span><div><div class="t">Hot holding: curry</div><div class="m">Tap to record the reading</div></div><div class="r">Due now</div></div>
+              <div class="task"><span class="tick"></span><div><div class="t">Clean and disinfect prep boards</div><div class="m">Prep area</div></div><div class="r num">11:00</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="lbl">Freezer 1 · reading</div>
+            <div class="big num">−19.4<small>°C</small></div>
+            <div class="scale"></div>
+            <div class="save">Save reading</div>
+            <div class="meta">Priya · 10:14 · Keypad available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ BRAND ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Brand</b> “The Pass” <span>The calm, lit place where everything is checked before it goes out.</span></div>
+    <h2 class="h2">Charcoal and forest green, lit like the pass.</h2>
+    <p class="lede">The website is dark and cinematic. The product itself stays in the app’s real warm-white interface, so every screenshot glows on the page like a plate under the heat lamps. Fresh green is used sparingly: one button, focus rings, live states.</p>
+    <div class="brand-grid">
+      <div>
+        <div class="swatches">
+          <div class="sw"><i style="background:#0D110F"></i><div><b>Night</b><span>Page base</span></div></div>
+          <div class="sw"><i style="background:#141A17"></i><div><b>Night raised</b><span>Panels</span></div></div>
+          <div class="sw"><i style="background:#0B3B2E"></i><div><b>Forest</b><span>From the app</span></div></div>
+          <div class="sw"><i style="background:#06261D"></i><div><b>Forest deep</b><span>CTA bands</span></div></div>
+          <div class="sw"><i style="background:#7FE0A3"></i><div><b>Herb</b><span>Accent, sparingly</span></div></div>
+          <div class="sw"><i style="background:#F3EEE4"></i><div><b>Paper</b><span>The “before” world</span></div></div>
+          <div class="sw"><i style="background:#FAF7F2"></i><div><b>App surface</b><span>Product screens</span></div></div>
+          <div class="sw"><i style="background:#0F7C7A"></i><div><b>App teal</b><span>In-product actions</span></div></div>
+        </div>
+        <div class="lamp-demo">Pass-lamp lighting: one soft, warm pool of light per section. CSS only, no images.</div>
+      </div>
+      <div class="type-card">
+        <div class="aa">Aa</div>
+        <div class="meta"><b style="color:var(--fog)">Bricolage Grotesque</b> for headlines: oversized, tight, with character.</div>
+        <div class="body-sample">Plus Jakarta Sans for reading and the product interface. It’s the app’s own typeface, so the website and the product feel like one brand.</div>
+        <div class="meta num">Temperatures and times use tabular figures: 09:41 · 10:02 · 11:00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOUND FAMILIAR (Section 2) ============ -->
+<section class="lit">
+  <div class="wrap">
+    <div class="note"><b>Section 2</b> Sound familiar? <span>Dockets clip onto the rail one by one as you scroll. Empathy, not fear.</span></div>
+    <h2 class="h2">Sound familiar?</h2>
+    <div class="rail">
+      <div class="tickets">
+        <article class="ticket">
+          <div class="stamp"><span>Fri</span><span class="num">21:40</span></div>
+          <h3>The temperature sheet still needs filling in.</h3>
+          <p>Service is flat out, and the fridge log says “AM” and nothing else.</p>
+          <span class="scrawl">“do it after close”</span>
+        </article>
+        <article class="ticket">
+          <div class="stamp"><span>Tue</span><span class="num">10:12</span></div>
+          <h3>The EHO is here. Where’s last month’s folder?</h3>
+          <p>Someone’s in the office going through a box of curled paper.</p>
+          <span class="scrawl">“try the back shelf?”</span>
+        </article>
+        <article class="ticket">
+          <div class="stamp"><span>Sun</span><span class="num">23:05</span></div>
+          <h3>A cleaning check was missed. Nobody knows who.</h3>
+          <p>There’s a tick box with no initials, and three people on shift.</p>
+          <span class="scrawl">“??”</span>
+        </article>
+        <article class="ticket">
+          <div class="stamp"><span>Wed</span><span class="num">19:30</span></div>
+          <h3>The rota changed. Again.</h3>
+          <p>The manager spends the evening messaging staff one by one.</p>
+          <span class="scrawl">“seen?”</span>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRANSFORMATION (Section 3) ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Section 3</b> The transformation <span>As you scroll, the paper reorganises itself into records. On phones it’s a two-way toggle.</span></div>
+    <h2 class="h2">There’s a simpler way.</h2>
+    <div class="ba">
+      <div class="sheet" aria-label="Before: a paper temperature sheet">
+        <h4>Fridge / freezer temps · week 44</h4>
+        <table>
+          <thead><tr><th>Unit</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th></tr></thead>
+          <tbody>
+            <tr><td>Walk-in</td><td class="hand">ok</td><td class="hand">ok JP</td><td class="blank"></td><td class="hand">?</td></tr>
+            <tr><td>Fridge 2</td><td class="blank"></td><td class="hand">done</td><td class="blank"></td><td class="blank"></td></tr>
+            <tr><td>Freezer 1</td><td class="hand">✓</td><td class="blank"></td><td class="hand">✓</td><td class="blank"></td></tr>
+          </tbody>
+        </table>
+        <div class="sticky">Who did Wed close?? Need sheet for Thurs</div>
+      </div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <div class="records" aria-label="After: organised digital records">
+        <div class="ui-head"><div><b>Records · Thursday</b><small>Illustrative demo data</small></div><span class="saved">Saved</span></div>
+        <div class="rec"><b>Walk-in fridge</b><span class="val">Recorded</span><span class="who">Sam · 10:02 · Kitchen tablet · slider</span></div>
+        <div class="rec"><b>Freezer 1</b><span class="val">Recorded</span><span class="who">Priya · 10:14 · Phone · keypad</span></div>
+        <div class="rec"><b>Prep boards cleaned and disinfected</b><span class="val">Done</span><span class="who">Jon · 11:03 · Kitchen tablet</span></div>
+        <div class="rec missing"><b>Fridge 2 · afternoon</b><span class="val">Missing</span><span class="who">Shown to the manager, never hidden</span></div>
+      </div>
+    </div>
+    <div class="outcomes">
+      <div>Checks in a few taps<span>Big buttons on a shared tablet or phone. Nothing filled in for you.</span></div>
+      <div>Clear who did what<span>Name, time and device are captured automatically.</span></div>
+      <div>Records in one place<span>Organised by day and site, ready when you need them.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERACTIVE DEMO (Section 4) ============ -->
+<section class="lit" id="demo">
+  <div class="wrap">
+    <div class="note"><b>Section 4</b> Interactive demo <span>This one works: pick a check, set a reading, save it.</span></div>
+    <h2 class="h2">Built for chefs. Not paperwork.</h2>
+    <div class="demo">
+      <div class="demo-device">
+        <span class="demo-flag">Illustrative demo · not a real account · not food safety guidance</span>
+        <div class="screen">
+          <div class="steps" aria-hidden="true"><span class="on"></span><span class="on" id="s2"></span><span id="s3"></span></div>
+          <div class="picks" role="group" aria-label="Choose a check">
+            <button class="pick" type="button" aria-pressed="true" data-name="Walk-in fridge" data-min="-5" data-max="15" data-start="3.6">Walk-in fridge<small>Fridge</small></button>
+            <button class="pick" type="button" aria-pressed="false" data-name="Freezer 1" data-min="-30" data-max="0" data-start="-19.4">Freezer 1<small>Freezer</small></button>
+            <button class="pick" type="button" aria-pressed="false" data-name="Hot holding: curry" data-min="40" data-max="100" data-start="71.2">Hot holding: curry<small>Hot hold</small></button>
+            <button class="pick" type="button" aria-pressed="false" data-name="Cooked chicken" data-min="40" data-max="100" data-start="78.0">Cooked chicken<small>Probe</small></button>
+          </div>
+          <div class="reading">
+            <div class="val" aria-live="polite"><span id="rv" class="num">3.6</span><small>°C</small></div>
+            <div class="stepper"><button type="button" id="minus" aria-label="Lower by 0.1">−</button><button type="button" id="plus" aria-label="Raise by 0.1">+</button></div>
+            <input class="temp" id="temp" type="range" min="-5" max="15" step="0.1" value="3.6" aria-label="Temperature reading" style="grid-column:1 / -1">
+            <div class="hint">In the app the scale starts empty, so nobody can save a reading they didn’t take. The scale is not a safety limit, and a keypad is always available.</div>
+          </div>
+          <div class="save-row"><button class="save-btn" type="button" id="save">Save reading</button><button class="keypad-btn" type="button" aria-label="Use keypad instead">123</button></div>
+          <div id="result" class="empty">Your saved record appears here.</div>
+        </div>
+      </div>
+      <div class="why">
+        <div><b>Gloves on, hands wet</b><span>Every target is at least 48px. There’s a ±0.1 button and a keypad for exact entry.</span></div>
+        <div><b>Never prefilled</b><span>Readings, completed checks and actions are always entered by a person.</span></div>
+        <div><b>Who, when and how, automatically</b><span>Name, time, device and entry method are saved with each reading. No extra typing.</span></div>
+        <div><b>Bad readings are as easy as good ones</b><span>Staff never have to fight the app to record a problem.</span>
+          <div><button class="toggle-out" type="button" id="outBtn" aria-pressed="false">Show a reading outside its limit</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES (Section 5) ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Section 5</b> Feature stories <span>Problem, easier day, outcome. Every feature carries an honest status label.</span></div>
+    <h2 class="h2">Everything your checks need. Nothing they don’t.</h2>
+    <div class="feat-grid">
+      <article class="feat">
+        <div class="mini"><div class="r"><span>Walk-in fridge</span><b>Recorded 10:02</b></div><div class="r"><span>Freezer 1</span><b>Recorded 10:14</b></div><div class="r warn"><span>Fridge 2</span><b>Due 14:00</b></div></div>
+        <span class="chip dev">In development</span>
+        <h3>Temperature records</h3>
+        <div class="pso"><p><strong>Problem</strong>Sheets filled in late, from memory.</p><p><strong>Easier day</strong>Tap, set the reading, done.</p><p><strong>Outcome</strong>A timed, named record every time.</p></div>
+      </article>
+      <article class="feat">
+        <div class="mini"><div class="r"><span>Prep boards</span><b>Done · Jon</b></div><div class="r"><span>Fridge seals</span><b>Due Fri</b></div><div class="r"><span>Extraction hood</span><b>This week</b></div></div>
+        <span class="chip dev">In development</span>
+        <h3>Cleaning schedules</h3>
+        <div class="pso"><p><strong>Problem</strong>Ticks with no names.</p><p><strong>Easier day</strong>Staff see what’s due on their shift.</p><p><strong>Outcome</strong>Clear responsibility, no chasing.</p></div>
+      </article>
+      <article class="feat">
+        <div class="mini"><div class="r"><span>Inspection view</span><b>Last 28 days</b></div><div class="r warn"><span>Needs attention</span><b>2 items</b></div><div class="r"><span>Print or save as PDF</span><b>Ready</b></div></div>
+        <span class="chip dev">In development</span>
+        <h3>Records and inspection view</h3>
+        <div class="pso"><p><strong>Problem</strong>Hunting through folders.</p><p><strong>Easier day</strong>Every record by date, in one place.</p><p><strong>Outcome</strong>Calm when someone asks to see them.</p></div>
+      </article>
+    </div>
+    <p class="disclaim">Also planned for this section: opening and closing checks, problems and corrective actions with manager review, and the manager overview across sites.</p>
+  </div>
+</section>
+
+<!-- ============ EHO (Section 6) ============ -->
+<section class="lit">
+  <div class="wrap">
+    <div class="note"><b>Section 6</b> The inspection scenario <span>A real-time story with no promised outcome.</span></div>
+    <h2 class="h2">When the EHO walks in, be ready.</h2>
+    <div class="eho">
+      <div>
+        <div class="timeline">
+          <div class="tl"><time>10:12</time><div><b>A visitor at the back door</b><span>No warning. Lunch prep is under way.</span></div></div>
+          <div class="tl"><time>10:13</time><div><b>The manager opens the inspection view</b><span>On the office laptop, a tablet or a phone.</span></div></div>
+          <div class="tl"><time>10:14</time><div><b>The last 28 days are on screen</b><span>Temperatures, cleaning, problems and what was done about them.</span></div></div>
+        </div>
+        <p class="honest">Organised records won’t do the inspection for you. They just mean you’re not hunting for them.</p>
+      </div>
+      <div class="inspect" aria-label="Illustrative inspection view">
+        <header><h4>Inspection view · Main kitchen</h4><div class="periods"><span>Today</span><span>7 days</span><span class="on">28 days</span></div></header>
+        <div class="attn"><b>Needs attention</b><ul><li>Fridge 2: no record on 2 of 7 days</li><li>1 problem waiting for manager review</li></ul></div>
+        <table>
+          <thead><tr><th>Date</th><th>Check</th><th>Recorded by</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td class="n">30 Oct · 10:02</td><td>Walk-in fridge</td><td>Sam</td><td>Recorded</td></tr>
+            <tr><td class="n">30 Oct · 10:14</td><td>Freezer 1</td><td>Priya</td><td>Recorded</td></tr>
+            <tr><td class="n">29 Oct · 22:40</td><td>Closing checks</td><td>Jon</td><td>8 of 8</td></tr>
+            <tr><td class="n">29 Oct · 15:05</td><td>Hot holding: curry</td><td>Sam</td><td><s>Entered by mistake</s> · corrected</td></tr>
+          </tbody>
+        </table>
+        <div class="foot"><span>Illustrative demo data</span><span>Page 1 of 6 · Print or save as PDF</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR (Section 7) ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Section 7</b> Paperwork time calculator <span>This works too. Change the numbers.</span></div>
+    <h2 class="h2">How much time goes on paperwork now?</h2>
+    <div class="calc">
+      <form id="calc" novalidate>
+        <div class="field"><label for="c-sites">Kitchen sites</label><div class="inp"><input id="c-sites" type="number" inputmode="numeric" min="1" max="50" value="1"><span class="unit">sites</span></div></div>
+        <div class="field"><label for="c-mins">Paperwork per site, per day</label><div class="inp"><input id="c-mins" type="number" inputmode="numeric" min="0" max="480" value="30"><span class="unit">minutes</span></div><span class="hint">Checks, sheets, chasing signatures, filing.</span></div>
+        <div class="field"><label for="c-days">Days open per week</label><div class="inp"><input id="c-days" type="number" inputmode="numeric" min="1" max="7" value="6"><span class="unit">days</span></div></div>
+        <div class="field"><label for="c-rate">Hourly labour cost</label><div class="inp"><span class="unit">£</span><input id="c-rate" type="number" inputmode="decimal" min="0" step="0.5" value="13"><span class="unit">per hour</span></div><span class="hint">Example values shown. Replace them with your own.</span></div>
+      </form>
+      <div class="out" aria-live="polite">
+        <div><div class="k">Your estimate · hours per year</div><div class="v num" id="o-year">156<small> hours</small></div></div>
+        <div class="pair">
+          <div><div class="k">Per week</div><div class="v num" id="o-week" style="font-size:2.2rem">3.0<small> hrs</small></div></div>
+          <div><div class="k">Labour cost per year</div><div class="v num" id="o-cost" style="font-size:2.2rem">£2,028</div></div>
+        </div>
+        <div class="formula">Sites × minutes per day × days per week ÷ 60 = hours per week. × 52 weeks = hours per year. × hourly cost = cost per year.</div>
+      </div>
+    </div>
+    <p class="disclaim">This estimates the time you currently spend on paperwork, based only on the figures you enter. It isn’t a prediction of how much time Safe Kitchen will save, and those savings haven’t been independently measured.</p>
+  </div>
+</section>
+
+<!-- ============ ROADMAP (Section 8) ============ -->
+<section class="lit">
+  <div class="wrap">
+    <div class="note"><b>Section 8</b> The future <span>Exciting, honest, labelled. Food safety stays first.</span></div>
+    <h2 class="h2">Built for today’s kitchens. Ready for tomorrow.</h2>
+    <p class="lede">Food safety comes first. Here’s what we’re exploring next, and early-access members help decide what comes first.</p>
+    <div class="road">
+      <div class="stop first"><span class="chip dev">In development</span><h3>Food safety records</h3><p>Checks, temperatures, cleaning, problems and the inspection view.</p></div>
+      <div class="stop"><span class="chip plan">Planned</span><h3>Staff training records</h3><p>Who’s trained, and proof ready when someone asks.</p></div>
+      <div class="stop"><span class="chip explore">Exploring</span><h3>Connected temperature probes</h3><p>Optional hardware. Manual recording always stays available.</p></div>
+      <div class="stop"><span class="chip explore">Exploring</span><h3>AI-assisted insights</h3><p>Spotting patterns for managers. Advisory only, and it never sets limits.</p></div>
+      <div class="stop"><span class="chip explore">Exploring</span><h3>Rotas, clock-in and ordering</h3><p>Staff rotas, QR clock-in and supplier ordering.</p><span class="cond">Shown only if you approve (decision O-019)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING (Section 9) ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Section 9</b> Pricing <span>Driven by a config file. No price is shown until you set one.</span></div>
+    <h2 class="h2">Simple pricing, announced before launch.</h2>
+    <div class="price">
+      <div class="plan feature">
+        <span class="chip dev">Early access</span>
+        <h3>Single site</h3>
+        <div class="p">Pricing announced before launch</div>
+        <ul><li>Every food safety feature in the first release</li><li>Shared kitchen tablet with staff PINs</li><li>Inspection view</li></ul>
+        <span class="tbc">“Unlimited staff” shown only if you confirm it</span>
+        <a class="btn primary" href="#final">Get early access</a>
+      </div>
+      <div class="plan">
+        <span class="chip">Early access</span>
+        <h3>Multiple sites</h3>
+        <div class="p">Pricing announced before launch</div>
+        <ul><li>Everything in Single site</li><li>Manager overview across sites</li><li>Roles for owners, managers and staff</li></ul>
+        <a class="btn ghost" href="#final">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA (Section 11) ============ -->
+<section class="final" id="final">
+  <div class="wrap">
+    <div class="note"><b>Section 11</b> Final conversion <span>The FAQ (Section 10) sits just above this as an accordion.</span></div>
+    <h2 class="h2">Less paperwork. More kitchen.</h2>
+    <p class="lede" style="color:#C4CCC7">Join early access. We’ll keep you posted, and you can help shape what we build first.</p>
+    <form class="signup" id="signup" novalidate>
+      <div class="field"><label for="f-name">Your name</label><div class="inp"><input id="f-name" autocomplete="name"></div></div>
+      <div class="field"><label for="f-email">Email</label><div class="inp"><input id="f-email" type="email" autocomplete="email"></div></div>
+      <div class="field"><label for="f-biz">Business name</label><div class="inp"><input id="f-biz" autocomplete="organization"></div></div>
+      <button class="btn primary" type="submit">Get early access</button>
+    </form>
+    <p class="thanks" id="thanks" aria-live="polite"></p>
+    <p class="privacy">We’ll use your details only to reply about early access. Marketing updates are a separate, optional tick box. See our privacy notice. Safe Kitchen is not affiliated with or endorsed by the Food Standards Agency.</p>
+  </div>
+</section>
+
+<!-- ============ MOBILE ============ -->
+<section>
+  <div class="wrap">
+    <div class="note"><b>Mobile</b> 375px <span>Same story, simplified: one device, no parallax, a tap toggle instead of the scroll scene.</span></div>
+    <h2 class="h2">Designed for a phone in a busy kitchen.</h2>
+    <div class="mobiles">
+      <div>
+        <div class="mob"><div class="in">
+          <div class="bar2"><span>Safe Kitchen</span><i aria-hidden="true"></i></div>
+          <h3>Your kitchen is busy enough. <span>Your paperwork shouldn’t be.</span></h3>
+          <p>Less chasing checks. Less paperwork. More control.</p>
+          <span class="btn primary">Get early access</span>
+          <div class="peek">
+            <div class="task done"><span class="tick"></span><div><div class="t">Walk-in fridge</div><div class="m">Sam · 10:02</div></div><div class="r">Recorded</div></div>
+            <div class="task now"><span class="tick"></span><div><div class="t">Hot holding</div><div class="m">Tap to record</div></div><div class="r">Now</div></div>
+          </div>
+        </div></div>
+        <p class="cap">Hero</p>
+      </div>
+      <div>
+        <div class="mob"><div class="in">
+          <div class="bar2"><span>Safe Kitchen</span><i aria-hidden="true"></i></div>
+          <h3 style="font-size:30px">There’s a simpler way.</h3>
+          <div class="toggle"><span>Paper</span><span class="on">Safe Kitchen</span></div>
+          <div class="records" style="border-radius:14px">
+            <div class="rec"><b>Walk-in fridge</b><span class="val">Recorded</span><span class="who">Sam · 10:02</span></div>
+            <div class="rec"><b>Freezer 1</b><span class="val">Recorded</span><span class="who">Priya · 10:14</span></div>
+            <div class="rec missing"><b>Fridge 2 · PM</b><span class="val">Missing</span><span class="who">Shown, never hidden</span></div>
+          </div>
+        </div></div>
+        <p class="cap">Transformation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Safe Kitchen visual concept board · Stage 1 · 30 October 2026</span>
+    <span>All product screens, names and records shown are illustrative demo content. No temperature on this page is a safety limit or food safety guidance. “Safe Kitchen” is a working name.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var range = document.getElementById("temp");
+  var rv = document.getElementById("rv");
+  var result = document.getElementById("result");
+  var outBtn = document.getElementById("outBtn");
+  var s3 = document.getElementById("s3");
+  var picks = Array.prototype.slice.call(document.querySelectorAll(".pick"));
+  var current = picks[0];
+
+  function fmt(n) { return (n < 0 ? "−" : "") + Math.abs(n).toFixed(1); }
+  function show() { rv.textContent = fmt(parseFloat(range.value)); }
+  function nudge(d) {
+    var v = Math.round((parseFloat(range.value) + d) * 10) / 10;
+    v = Math.min(parseFloat(range.max), Math.max(parseFloat(range.min), v));
+    range.value = v; show();
+  }
+  picks.forEach(function (p) {
+    p.addEventListener("click", function () {
+      picks.forEach(function (o) { o.setAttribute("aria-pressed", "false"); });
+      p.setAttribute("aria-pressed", "true");
+      current = p;
+      range.min = p.dataset.min; range.max = p.dataset.max; range.value = p.dataset.start;
+      show();
+      result.className = "empty"; result.textContent = "Your saved record appears here.";
+      s3.className = "";
+    });
+  });
+  range.addEventListener("input", show);
+  document.getElementById("minus").addEventListener("click", function () { nudge(-0.1); });
+  document.getElementById("plus").addEventListener("click", function () { nudge(0.1); });
+
+  function render() {
+    var now = new Date();
+    var time = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+    var out = outBtn.getAttribute("aria-pressed") === "true";
+    var status = out
+      ? '<div class="status out"><i>!</i><div><b>Outside your limit (example).</b> Staff pick what happened and what they did from quick options. It goes to the manager for review, and the original reading is never overwritten.</div></div>'
+      : '<div class="status"><i>✓</i><div><b>Recorded.</b> In Safe Kitchen, each reading is compared with the limit in your approved safe method. This demo has no real limits.</div></div>';
+    result.className = "result";
+    result.innerHTML =
+      '<div class="line"><span>Check</span><b>' + current.dataset.name + '</b></div>' +
+      '<div class="line"><span>Reading</span><b class="num">' + fmt(parseFloat(range.value)) + ' °C</b></div>' +
+      '<div class="line"><span>Recorded by</span><b>Sam (demo) · ' + time + '</b></div>' +
+      '<div class="line"><span>Device · method</span><b>Kitchen tablet · slider</b></div>' + status;
+    s3.className = "on";
+  }
+  document.getElementById("save").addEventListener("click", render);
+  outBtn.addEventListener("click", function () {
+    var on = outBtn.getAttribute("aria-pressed") !== "true";
+    outBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    render();
+  });
+
+  var ids = ["c-sites", "c-mins", "c-days", "c-rate"];
+  function calc() {
+    var v = ids.map(function (id) { var n = parseFloat(document.getElementById(id).value); return isFinite(n) && n > 0 ? n : 0; });
+    var week = v[0] * v[1] * v[2] / 60;
+    var year = week * 52;
+    var cost = year * v[3];
+    document.getElementById("o-week").innerHTML = week.toFixed(1) + "<small> hrs</small>";
+    document.getElementById("o-year").innerHTML = Math.round(year).toLocaleString("en-GB") + "<small> hours</small>";
+    document.getElementById("o-cost").textContent = "£" + Math.round(cost).toLocaleString("en-GB");
+  }
+  ids.forEach(function (id) { document.getElementById(id).addEventListener("input", calc); });
+  calc();
+
+  document.getElementById("signup").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("thanks").textContent = "Concept only: nothing was sent. The real form validates, checks for spam and stores enquiries securely.";
+  });
+})();
+</script>
+</body>
+</html>
