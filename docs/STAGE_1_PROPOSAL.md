@@ -365,3 +365,29 @@ Also, to confirm: may I add decision **D-073** (separate website app) to the app
 - Create accounts or projects (Vercel, Supabase, Cloudflare, analytics, email).
 - Install dependencies, commit, push, open pull requests or publish anything.
 - Publish specific temperatures, legal requirements or any claim from §7.2.
+
+---
+
+## 13. Owner decisions (30 October 2026)
+
+| # | Question | Decision |
+|---|---|---|
+| 1 | Rotas, clock-in and ordering | **Show them** in the roadmap section, labelled "Exploring". (For the app's records this leans towards O-019 option (a); the app's DECISIONS.md is not changed without approval.) |
+| 2 | Launch date | **No date stated** anywhere on the site. |
+| 3 | Domain | Owner will buy **safekitchen.uk**. The site stays `noindex` until the owner says go live. Trademark checks (O-002) still recommended before public launch. |
+| 4 | Hosting and services | Explained again in plain English, awaiting approval. |
+| 5 | Analytics | **Google Analytics 4**, loaded only after cookie consent (UK PECR), plus Google Search Console. SEO growth plan below. |
+| 6 | Photography | **Stock photos**: licensed, self-hosted, each checked for food-safety accuracy and recorded in an image manifest. |
+| 7 | Pricing | **£14.99 a month or £149.99 a year, per site.** Multi-site businesses enquire. Follow-ups: VAT, unlimited staff, free trial. |
+| 8 | Legal details | Owner will supply later. Placeholders are clearly marked and block go-live. |
+| 9 | Final CTA | **Request a demo** or **book a call**, alongside early access. |
+
+### 13.1 SEO and analytics plan
+
+- **Measure:** GA4 with Consent Mode v2 behind an accessible cookie banner (Accept and Reject equally prominent; nothing loads before a choice). Key events: early-access sign-up, demo or call request, demo completed, calculator used, pricing viewed. Google Search Console and Bing Webmaster Tools for search queries and indexing (no cookies needed). UTM links for every campaign.
+- **Rank:** fast pages (Core Web Vitals), one clear topic per page, accurate structured data (Organization, SoftwareApplication with the real price as an Offer, FAQPage, BreadcrumbList), per-page Open Graph images.
+- **Content hub, "Kitchen guides":** useful, checked articles that answer what owners already search for, e.g. how to keep SFBB records digitally, what happens at a food hygiene inspection, paper vs digital records, and a plain-English glossary (SFBB, HACCP, EHO, food hygiene ratings). Every statement about official requirements is sourced and checked, as in the app.
+- **Free printable templates (lead magnets):** fridge and freezer temperature log, opening and closing checklist, cleaning schedule. The limit fields are left blank ("from your safe method"), so no figures are invented. Download in exchange for an optional email.
+- **Business-type pages:** takeaways, restaurants, cafés, pubs, hotel kitchens, each with genuinely different content. No thin copy-and-paste town pages.
+- **Free tool page:** the paperwork time calculator as its own page.
+- **Earn links:** founder story for hospitality trade press, guest articles, partnerships with food safety trainers and consultants, UK hospitality and SaaS directories (review sites only once the product is live).
