@@ -396,3 +396,4 @@ Also, to confirm: may I add decision **D-073** (separate website app) to the app
 
 - **Pricing:** £14.99 a month or £149.99 a year **+ VAT**, per site. **Unlimited staff per site. No hidden charges.** Multi-site businesses enquire.
 - **Booking calls:** owner wants a built-in booking calendar. It will show **only real availability**. Showing fake "booked" slots to create demand is not used, because it would be misleading under UK consumer protection law (see chat, 30 October 2026). Honest alternatives: offer a limited number of real slots each week, and show genuinely booked slots as unavailable.
+- **Services approved ("approve all"):** Vercel (hosting; Pro plan for the live business site), a separate Supabase project in London (early-access and booking storage), Cloudflare Turnstile (spam protection) and Resend (sign-up and booking emails). The owner creates the accounts. Step-by-step instructions are given when each one is needed (Stage 3).
