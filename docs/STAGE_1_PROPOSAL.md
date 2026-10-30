@@ -397,3 +397,13 @@ Also, to confirm: may I add decision **D-073** (separate website app) to the app
 - **Pricing:** £14.99 a month or £149.99 a year **+ VAT**, per site. **Unlimited staff per site. No hidden charges.** Multi-site businesses enquire.
 - **Booking calls:** owner wants a built-in booking calendar. It will show **only real availability**. Showing fake "booked" slots to create demand is not used, because it would be misleading under UK consumer protection law (see chat, 30 October 2026). Honest alternatives: offer a limited number of real slots each week, and show genuinely booked slots as unavailable.
 - **Services approved ("approve all"):** Vercel (hosting; Pro plan for the live business site), a separate Supabase project in London (early-access and booking storage), Cloudflare Turnstile (spam protection) and Resend (sign-up and booking emails). The owner creates the accounts. Step-by-step instructions are given when each one is needed (Stage 3).
+
+---
+
+## 14. Stage 2 status (30 October 2026)
+
+Built on branch `claude/stage-2-homepage`: the complete responsive homepage (all 11 sections plus an audience strip), the working temperature demo, the paperwork calculator, the pricing toggle, the FAQ and the early-access / demo / call form (validation, honeypot, timing and rate-limit spam checks; enquiries stored in memory in development only).
+
+**Changed from the plan:** scroll reveals use CSS scroll-driven animation instead of Motion, so content is never hidden when motion is reduced or JavaScript fails. Motion is used only for the before-and-after scene and the demo.
+
+**Known gaps (for Stage 3 and 4):** stock photos are linked from Unsplash because this build environment blocks downloading them (they load on the live site); the Privacy, Cookies, Terms and Accessibility pages and the booking calendar come in Stage 3; automated axe accessibility checks, SEO files (sitemap, Open Graph images, structured data beyond the FAQ) and Google Analytics with consent come in Stage 4.

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/*
+ * Safe Kitchen website tokens ("The Pass", Stage 1 proposal §3).
+ * Brand greens and the ui-* product tokens are copied from the app's
+ * DESIGN_SYSTEM.md v0.3. Components use these tokens, never raw hex values.
+ */
+@theme {
+  --font-display: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-jakarta), "Segoe UI", system-ui, sans-serif;
+
+  /* Charcoal room */
+  --color-night-950: #0d110f;
+  --color-night-900: #141a17;
+  --color-night-850: #1a201d;
+  --color-night-700: #26302b;
+  --color-night-600: #3a463f;
+
+  /* Forest (from the app) */
+  --color-forest-950: #06261d;
+  --color-forest-900: #0b3b2e;
+  --color-forest-700: #145a44;
+
+  /* Fresh green accent: use sparingly */
+  --color-herb-200: #c4f3d4;
+  --color-herb-300: #9bebb8;
+  --color-herb-400: #7fe0a3;
+
+  /* Text on dark */
+  --color-fog-50: #eceFEC;
+  --color-fog-200: #c4ccc7;
+  --color-fog-400: #a3ada8;
+  --color-mist-300: #9dc3b1;
+
+  /* The paper "before" world */
+  --color-paper: #f3eee4;
+  --color-paper-line: #cfc6b6;
+  --color-paper-ink: #2a2620;
+  --color-paper-muted: #4b453c;
+  --color-paper-pen: #34507a;
+  --color-paper-red: #8a2e1a;
+  --color-sticky: #f5e07a;
+
+  /* Temperature scale (input range only, never a limit) */
+  --color-scale-cold: #dcebf5;
+  --color-scale-warm: #f6e2d3;
+
+  /* Error text on dark backgrounds (≥ 4.5:1 on night) */
+  --color-error-on-dark: #ffb59a;
+
+  /* Status labels */
+  --color-planned: #e6c77a;
+  --color-exploring: #a9b8f0;
+
+  /* The app's own light interface (product mock-ups) */
+  --color-ui-surface: #faf7f2;
+  --color-ui-raised: #ffffff;
+  --color-ui-sunken: #f2ede4;
+  --color-ui-line: #e6dfd3;
+  --color-ui-control: #857d70;
+  --color-ui-ink: #1c2421;
+  --color-ui-muted: #4f5b56;
+  --color-ui-teal: #0f7c7a;
+  --color-ui-teal-700: #0b6462;
+  --color-ui-teal-100: #d7f0ee;
+  --color-ui-success: #1f8a4c;
+  --color-ui-success-100: #dcf3e5;
+  --color-ui-warning: #b7791f;
+  --color-ui-warning-100: #fbefd9;
+  --color-ui-danger: #c2410c;
+  --color-ui-danger-100: #fde5d8;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-glow: glow 2.6s ease-in-out infinite;
+
+  @keyframes float {
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes rise {
+    from { transform: translateY(18px); opacity: 0.001; }
+  }
+  @keyframes glow {
+    50% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-ui-teal) 10%, transparent); }
+  }
+}
+
+:root {
+  color-scheme: dark;
+  /* Pass-lamp lighting: one warm pool of light from above. */
+  --lamp: radial-gradient(ellipse 70% 55% at 50% -8%, rgb(255 233 196 / 0.13), rgb(255 233 196 / 0.04) 45%, transparent 70%);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-night-950);
+  color: var(--color-fog-50);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-herb-400);
+  color: var(--color-forest-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-herb-400);
+  outline-offset: 3px;
+}
+
+@utility lamp {
+  background-image: var(--lamp);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Paper ticket with a torn bottom edge. */
+@utility ticket-edge {
+  -webkit-mask: radial-gradient(circle 5px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100% repeat-x;
+  mask: radial-gradient(circle 5px at 50% 100%, transparent 98%, #000) 0 0 / 14px 100% repeat-x;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scroll-driven reveal (see components/ui/reveal.tsx). */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 24px));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry var(--reveal-start, 0%) entry calc(var(--reveal-start, 0%) + 55%);
+    }
+  }
+}
