@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StatusChip } from "@/components/ui/status-chip";
 import { overview } from "@/content/home";
+import { section } from "@/content/navigation";
 import { pillars } from "@/content/pillars";
 
 /** Section 1b: the five pillars, each linking to its section. */
@@ -16,7 +17,7 @@ export function PillarOverview() {
         {pillars.map((p) => (
           <li key={p.id}>
             <Link
-              href={`/#${p.id}`}
+              href={section(p.id)}
               className="group grid h-full content-start gap-3 rounded-2xl border border-line bg-surface-raised p-5 shadow-card transition-shadow hover:shadow-raised"
             >
               <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-700">

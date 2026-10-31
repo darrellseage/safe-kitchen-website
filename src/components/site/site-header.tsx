@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Dialog } from "radix-ui";
 import { useEffect, useRef, useState } from "react";
-import { ctaHref, mainNav } from "@/content/navigation";
+import { ctaHref, homeHref, mainNav } from "@/content/navigation";
 import { cn } from "@/lib/cn";
 import { buttonClasses } from "@/components/ui/button-link";
 import { Logo } from "./logo";
@@ -38,7 +38,7 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-18 w-[min(1200px,100%-40px)] items-center justify-between gap-6">
-        <Link href="/" className="rounded-lg" aria-label="Safe Kitchen home">
+        <Link href={homeHref} className="rounded-lg" aria-label="Safe Kitchen home">
           <Logo />
         </Link>
         <nav aria-label="Main" className="hidden xl:block">

@@ -5,7 +5,7 @@ import { DeviceFrame } from "@/components/ui/device-frame";
 import { ScreenHeader, TaskRow } from "@/components/product/ui-bits";
 import { nowTasks } from "@/content/demo-data";
 import { hero } from "@/content/home";
-import { ctaHref } from "@/content/navigation";
+import { ctaHref, section } from "@/content/navigation";
 
 /** Section 1: headline and a layered, illustrative view of the five pillars working together. */
 export function Hero() {
@@ -19,7 +19,7 @@ export function Hero() {
           <p className="mt-6 max-w-[46ch] text-lg text-ink-muted md:text-xl">{hero.body}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href={ctaHref}>{hero.primary}</ButtonLink>
-            <ButtonLink href="/#overview" variant="secondary">
+            <ButtonLink href={section("overview")} variant="secondary">
               {hero.secondary}
               <ArrowDown className="size-4" aria-hidden="true" />
             </ButtonLink>

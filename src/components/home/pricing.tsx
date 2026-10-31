@@ -6,7 +6,7 @@ import { annualSaving, formatGBP, pricing } from "@/config/pricing";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { pricingCopy } from "@/content/home";
-import { ctaHref } from "@/content/navigation";
+import { ctaHref, section } from "@/content/navigation";
 import { cn } from "@/lib/cn";
 
 export function Pricing() {
@@ -78,7 +78,7 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
-            <ButtonLink href="/#book-a-call" variant="ghost" className="w-full sm:w-fit">
+            <ButtonLink href={section("book-a-call")} variant="ghost" className="w-full sm:w-fit">
               Book a call
             </ButtonLink>
           </article>

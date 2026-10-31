@@ -47,3 +47,5 @@ next-env.d.ts
 
 # review tooling browser profiles
 scripts/review/chrome-profile*/
+/.next-preview/
+/.preview-publish/
