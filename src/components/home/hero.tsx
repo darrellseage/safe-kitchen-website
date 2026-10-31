@@ -1,6 +1,6 @@
 import { whenLive } from "@/config/features";
 import type { ReactNode } from "react";
-import { ArrowDown, Check, ScanEye, ShoppingBasket } from "lucide-react";
+import { ArrowDown, Check, ChefHat, ScanEye, ShoppingBasket } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DeviceFrame } from "@/components/ui/device-frame";
 import { ScreenHeader, TaskRow } from "@/components/product/ui-bits";
@@ -17,7 +17,13 @@ export function Hero() {
           <h1 id="hero-title" className="animate-rise text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.98] font-extrabold tracking-[-0.045em]">
             {hero.titleLead} <span className="block text-brand-500">{hero.titleAccent}</span>
           </h1>
-          <p className="mt-6 max-w-[46ch] text-lg text-ink-muted md:text-xl">{hero.body}</p>
+          <p className="mt-6 flex items-center gap-3 text-[clamp(1.2rem,2.2vw,1.55rem)] leading-snug font-extrabold tracking-[-0.015em] text-brand-900">
+            <span className="grid size-11 flex-none place-items-center rounded-xl bg-brand-50 text-brand-700">
+              <ChefHat className="size-6" aria-hidden="true" />
+            </span>
+            {hero.credibility}
+          </p>
+          <p className="mt-5 max-w-[46ch] text-lg text-ink-muted md:text-xl">{hero.body}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href={ctaHref}>{hero.primary}</ButtonLink>
             <ButtonLink href={section("overview")} variant="secondary">

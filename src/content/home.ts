@@ -9,6 +9,7 @@ import { whenLive, type FeatureKey } from "@/config/features";
 export const hero = {
   titleLead: "Running a kitchen is hard enough.",
   titleAccent: "The paperwork shouldn’t be.",
+  credibility: "Designed by chefs and owners. Built for real kitchens.",
   body: "Food safety records, staff training, rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.",
   primary: "Get early access",
   secondary: "See how it works",
