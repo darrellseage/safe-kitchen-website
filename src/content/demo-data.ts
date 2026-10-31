@@ -199,3 +199,10 @@ export const inspectionTabs = [
     attention: [],
   },
 ] as const;
+
+/* ---------- Site switcher (illustrative) ---------- */
+export const siteSnapshots = [
+  { id: "main", name: "Main kitchen", checks: "18 of 21", onShift: 6, attention: 2, orders: "1 arriving Thu" },
+  { id: "high-street", name: "High Street", checks: "12 of 14", onShift: 4, attention: 0, orders: "2 to approve" },
+  { id: "station-road", name: "Station Road", checks: "9 of 9", onShift: 3, attention: 1, orders: "None due" },
+] as const;

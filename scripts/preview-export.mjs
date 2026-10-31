@@ -17,7 +17,8 @@ execSync("npx next build", {
 const out = ".preview-publish";
 rmSync(out, { recursive: true, force: true });
 cpSync(".next-preview/_next", join(out, "assets"), { recursive: true });
-for (const page of ["index.html", "404.html"]) cpSync(join(".next-preview", page), join(out, page));
+const pages = ["index.html", "404.html", "privacy.html", "cookies.html", "terms.html", "accessibility.html"];
+for (const page of pages) cpSync(join(".next-preview", page), join(out, page));
 cpSync(".next-preview/images", join(out, "images"), { recursive: true });
 
 function walk(dir) {
@@ -30,7 +31,9 @@ function walk(dir) {
         readFileSync(path, "utf8")
           .replaceAll("_next/", "assets/")
           // Photos load from the page's own folder, not the site root.
-          .replace(/(["'(])\/images\//g, "$1./images/"),
+          .replace(/(["'(])\/images\//g, "$1./images/")
+          // Legal pages are separate files in the preview.
+          .replace(/href="\/(privacy|cookies|terms|accessibility)"/g, 'href="$1.html"'),
       );
   }
 }

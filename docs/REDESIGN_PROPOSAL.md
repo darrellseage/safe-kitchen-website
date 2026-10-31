@@ -231,3 +231,12 @@ Built into the existing page, not as one big block:
 - **Training:** "Stop paying for food hygiene training one employee at a time", the £24 comparison table (typical courses checked at about £15–£25), "Level 2" wording with the mandatory certificate disclosure (app D-080).
 - **Rotas** (photo, Excel, Word, three steps), **clock-in** (£1,560 illustrative example, privacy wording kept), **AI Checker** (what it helps spot), **ordering** (what it catches, £5,200 example), **food waste** (WRAP 2013 £10,000 per outlet, verified, dated), **"Why manage five systems"** comparison, **combined savings calculator** (purchasing and waste counted once), **pricing** (16.6% annual saving, never per employee), FAQ and repeated calls to action.
 - All money examples are labelled illustrative or hypothetical; logic in `src/lib/value.ts` with tests matching the brief's worked examples.
+
+---
+
+## 13. Stage 4 (Conversion) status, 31 October 2026
+
+- **Built:** chefs-and-owners section (chef and manager photos, site switcher), roadmap, early-access / demo / call form on a deep-green band, call booking calendar (`src/config/booking.ts`; placeholder hours Tue and Thu 2–5pm UK time), service connections for Supabase (website project only), Cloudflare Turnstile and Resend, each switching on with its environment variables (`docs/SETUP_SERVICES.md`), and draft legal pages with highlighted placeholders.
+- **Fixed:** the spam-timing check only started on keyboard focus, so autofilled forms (and earlier tests) were silently treated as spam. It now starts on any interaction; an end-to-end test proves a booked slot is saved and removed for the next visitor.
+- **Honest failure:** the live build without a database says sign-ups aren't open, rather than pretending to save.
+- **Needs the owner:** real call hours; company details, ICO number and retention period for the legal pages; solicitor review (O-004); creating the four service accounts.

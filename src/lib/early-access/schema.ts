@@ -34,6 +34,13 @@ export const earlyAccessSchema = z.object({
   interest: z.enum(values(interests), { error: "Choose what you’d like" }),
   message: z.string().trim().max(1000, "Message must be 1,000 characters or fewer").optional().default(""),
   marketing: z.boolean().default(false),
+  /** Chosen call slot (ISO start time), only for "Book a call". Checked against real availability on the server. */
+  slot: z
+    .string()
+    .trim()
+    .optional()
+    .default("")
+    .refine((v) => v === "" || !Number.isNaN(Date.parse(v)), "Choose a time from the list"),
 });
 
 export type EarlyAccessInput = z.infer<typeof earlyAccessSchema>;
@@ -54,5 +61,6 @@ export function fromFormData(form: FormData) {
     interest: text("interest"),
     message: text("message"),
     marketing: form.get("marketing") === "on",
+    slot: text("slot"),
   };
 }

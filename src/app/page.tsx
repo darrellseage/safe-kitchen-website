@@ -7,6 +7,9 @@ import { Pricing } from "@/components/home/pricing";
 import { PromisesBand } from "@/components/home/promises-band";
 import { ValueCalculator } from "@/components/home/value-calculator";
 import { WasteSection } from "@/components/home/waste-section";
+import { AudiencesSection } from "@/components/home/audiences-section";
+import { FinalCta } from "@/components/home/final-cta";
+import { Roadmap } from "@/components/home/roadmap";
 import { AiCheckerSection } from "@/components/home/ai-checker-section";
 import { ClockInSection } from "@/components/home/clock-in-section";
 import { Hero } from "@/components/home/hero";
@@ -17,13 +20,7 @@ import { SoundFamiliar } from "@/components/home/sound-familiar";
 import { TrainingSection } from "@/components/home/training-section";
 import { Transformation } from "@/components/home/transformation";
 import { PillarOverview } from "@/components/home/pillar-overview";
-import { SectionScaffold } from "@/components/home/section-scaffold";
-import {
-  audiences,
-  faq,
-  finalCta,
-  roadmap,
-} from "@/content/home";
+import { faq } from "@/content/home";
 
 // FAQ structured data: only facts stated on the page.
 const faqJsonLd = {
@@ -60,12 +57,12 @@ export default function HomePage() {
       <OrderingSection />
       <WasteSection />
       <ComparisonSection />
-      <SectionScaffold id="chefs-and-owners" title={audiences.title} accent={audiences.accent} stage={4} plan={[...audiences.chefs.points.map((p) => `Chefs: ${p}`), ...audiences.owners.points.slice(0, 3).map((p) => `Owners: ${p}`), "Manager switching between sites"]} />
+      <AudiencesSection />
       <ValueCalculator />
-      <SectionScaffold id="roadmap" title={roadmap.title} accent={roadmap.accent} intro={roadmap.intro} stage={4} plan={roadmap.items.map((i) => i.title)} />
+      <Roadmap />
       <Pricing />
       <Faq />
-      <SectionScaffold id="early-access" tone="green" title={finalCta.title} accent={finalCta.accent} intro={finalCta.intro} stage={4} plan={["Early access, request a demo or book a call", "Booking calendar with real availability", "Spam protection and secure storage", "Privacy notice"]} />
+      <FinalCta />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
     </main>
   );

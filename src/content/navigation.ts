@@ -5,7 +5,9 @@
  */
 const home = process.env.NEXT_PUBLIC_PREVIEW_EXPORT === "1" ? "" : "/";
 export const section = (id: string) => `${home}#${id}`;
-export const homeHref = home || "#main";
+export const homeHref = home || "index.html";
+/** Other pages: "/privacy" on the real site, "privacy.html" in the single-folder preview. */
+export const pageHref = (slug: string) => (home ? `/${slug}` : `${slug}.html`);
 
 export const mainNav = [
   { href: section("food-safety"), label: "Food safety" },
@@ -19,10 +21,10 @@ export const mainNav = [
 ] as const;
 
 export const legalNav = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/cookies", label: "Cookies" },
-  { href: "/terms", label: "Terms" },
-  { href: "/accessibility", label: "Accessibility" },
+  { href: pageHref("privacy"), label: "Privacy" },
+  { href: pageHref("cookies"), label: "Cookies" },
+  { href: pageHref("terms"), label: "Terms" },
+  { href: pageHref("accessibility"), label: "Accessibility" },
 ] as const;
 
 export const ctaHref = section("early-access");

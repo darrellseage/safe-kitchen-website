@@ -6,6 +6,8 @@ const previewExport = process.env.PREVIEW_EXPORT === "1";
 
 const nextConfig: NextConfig = {
   turbopack: {
+    // The static preview has no server, so the form uses a stand-in that saves nothing.
+    ...(previewExport ? { resolveAlias: { "@/app/actions/early-access": "./src/app/actions/early-access.preview.ts" } } : {}),
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
