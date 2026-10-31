@@ -11,7 +11,7 @@ import { TrainingDemo } from "./training-demo";
 export function TrainingSection() {
   const { comparison } = training;
   return (
-    <Section id="training" labelledBy="training-title">
+    <Section id="training" labelledBy="training-title" tone="mint">
       <SectionHeading id="training-title" eyebrow={training.eyebrow} status={training.status} title={training.title} accent={training.accent} intro={training.intro} />
       <PillarLines lines={training.lines} />
 
@@ -47,7 +47,7 @@ export function TrainingSection() {
 
       <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {training.steps.map((s, i) => (
-          <li key={s.title} className="rounded-2xl border border-line bg-surface p-5">
+          <li key={s.title} className="rounded-2xl border border-line bg-surface-raised p-5">
             <span className="grid size-8 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white tabular">{i + 1}</span>
             <p className="mt-3 font-extrabold">{s.title}</p>
             <p className="mt-1 text-[15px] text-ink-muted">{s.body}</p>

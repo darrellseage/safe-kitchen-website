@@ -9,7 +9,7 @@ import { Catches } from "./sales-bits";
 /** Section 8: the AI Checker, with its limits stated plainly. */
 export function AiCheckerSection() {
   return (
-    <Section id="ai-checker" labelledBy="ai-checker-title">
+    <Section id="ai-checker" labelledBy="ai-checker-title" tone="mint">
       <SectionHeading id="ai-checker-title" eyebrow={aiChecker.eyebrow} status={aiChecker.status} title={aiChecker.title} accent={aiChecker.accent} intro={aiChecker.intro} />
       <PillarLines lines={aiChecker.lines} />
       <Catches label="It helps you spot" items={aiChecker.catches} />

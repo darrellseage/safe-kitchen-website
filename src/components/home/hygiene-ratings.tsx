@@ -14,7 +14,7 @@ import { RevenueCalculator } from "./revenue-calculator";
 export function HygieneRatings() {
   const stats = hygieneStats.filter((s) => s.verified || siteConfig.launchPreview);
   return (
-    <Section id="hygiene-rating" labelledBy="hygiene-title" tone="green">
+    <Section id="hygiene-rating" labelledBy="hygiene-title" tone="seafoam">
       <SectionHeading id="hygiene-title" title={hygiene.title} accent={hygiene.accent} intro={hygiene.intro} />
       {stats.length ? (
         <ul className="mt-12 grid gap-4 md:grid-cols-3">

@@ -12,7 +12,7 @@ import { pillars } from "@/content/pillars";
 /** Section 1b: the five pillars, each linking to its section. */
 export function PillarOverview() {
   return (
-    <Section id="overview" labelledBy="overview-title" tone="warm">
+    <Section id="overview" labelledBy="overview-title" tone="sage">
       <SectionHeading id="overview-title" eyebrow={overview.eyebrow} title={overview.title} accent={overview.accent} intro={overview.intro} />
       <ul className="mt-12 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p) => (

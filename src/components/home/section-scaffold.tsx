@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { FeatureKey } from "@/config/features";
-import { Section } from "@/components/ui/section";
+import { Section, type SectionTone } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 /**
@@ -21,7 +21,7 @@ export function SectionScaffold({
   children,
 }: {
   id: string;
-  tone?: "white" | "warm" | "green";
+  tone?: SectionTone;
   eyebrow?: string;
   title: string;
   accent?: string;

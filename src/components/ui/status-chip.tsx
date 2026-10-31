@@ -3,8 +3,8 @@ import { cn } from "@/lib/cn";
 
 const tones = {
   available: "bg-success-100 text-success",
-  in_development: "bg-brand-100 text-brand-700",
-  planned: "bg-accent-100 text-accent-700",
+  in_development: "bg-surface-raised text-brand-700 ring-1 ring-brand-500/40",
+  planned: "bg-surface-raised text-accent-700 ring-1 ring-accent-600/40",
   vision: "bg-surface-sunken text-ink-muted",
 } as const;
 

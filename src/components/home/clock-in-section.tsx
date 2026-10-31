@@ -9,7 +9,7 @@ import { attendanceCost } from "@/lib/value";
 /** Section 7: Smart Clock-In & Attendance, with the privacy commitments alongside the demo. */
 export function ClockInSection() {
   return (
-    <Section id="clock-in" labelledBy="clock-in-title" tone="warm">
+    <Section id="clock-in" labelledBy="clock-in-title" tone="sage">
       <SectionHeading id="clock-in-title" eyebrow={clockIn.eyebrow} status={clockIn.status} title={clockIn.title} accent={clockIn.accent} intro={clockIn.intro} />
       <PillarLines lines={clockIn.lines} />
       <ExampleCard amount={gbp(attendanceCost(clockIn.example.hours, clockIn.example.rate))} text={clockIn.example.text} note={clockIn.example.note} />

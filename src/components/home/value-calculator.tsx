@@ -70,7 +70,7 @@ export function ValueCalculator() {
   ];
 
   return (
-    <Section id="savings" labelledBy="savings-title" tone="green">
+    <Section id="savings" labelledBy="savings-title" tone="sage">
       <SectionHeading id="savings-title" title={valueCalc.title} accent={valueCalc.accent} intro={valueCalc.intro} />
       <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised lg:grid-cols-[1.15fr_0.85fr]">
         <form className="grid content-start gap-7 p-6 sm:p-8" onSubmit={(e) => e.preventDefault()}>
