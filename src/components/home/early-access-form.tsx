@@ -89,7 +89,7 @@ export function EarlyAccessForm() {
       <span id="request-demo" className="sr-only" />
 
       {errorList.length > 0 || state.status === "error" ? (
-        <div ref={summary} tabIndex={-1} role="alert" className="rounded-2xl border border-ui-danger/60 bg-ui-danger/10 p-4">
+        <div ref={summary} tabIndex={-1} role="alert" className="rounded-2xl border border-danger/60 bg-danger/10 p-4">
           {state.status === "error" ? (
             <p className="font-semibold">{state.message}</p>
           ) : (
@@ -206,7 +206,7 @@ export function EarlyAccessForm() {
 }
 
 const inputClass =
-  "min-h-13 w-full rounded-xl border border-night-600 bg-night-950/70 px-4 text-base text-fog-50 outline-none transition-colors focus:border-herb-400 aria-[invalid=true]:border-ui-danger";
+  "min-h-13 w-full rounded-xl border border-night-600 bg-night-950/70 px-4 text-base text-fog-50 outline-none transition-colors focus:border-herb-400 aria-[invalid=true]:border-danger";
 
 function Field({ id, label, error, className, children }: { id: string; label: string; error?: string; className?: string; children: ReactNode }) {
   return (

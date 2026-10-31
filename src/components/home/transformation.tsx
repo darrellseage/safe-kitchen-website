@@ -155,7 +155,7 @@ function DigitalLayer({ progress, hidden }: { progress: MotionValue<number>; hid
     >
       <DeviceFrame label="Illustrative demo data">
         <ScreenHeader title="Records · Thursday" subtitle="Main kitchen" />
-        <div className="divide-y divide-ui-line">
+        <div className="divide-y divide-line">
           {recordsThursday.map((item, i) => (
             <DigitalRow key={item.title} index={i} progress={progress} item={item} />
           ))}

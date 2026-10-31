@@ -34,4 +34,8 @@ npm run build      # production build
 
 ## Status
 
-Stage 2 (homepage) is built. Enquiries are kept in memory in development only. Stage 3 adds the approved services (Supabase enquiry storage, Cloudflare Turnstile, Resend emails, booking calendar) and the supporting and legal pages.
+The site is being rebuilt in the light, five-pillar direction ([docs/REDESIGN_PROPOSAL.md](docs/REDESIGN_PROPOSAL.md)) on branch `claude/light-redesign`.
+
+- **Stage 1 (Foundation): done.** The app's own tokens and typeface, light header with pillar navigation, footer, hero, five-pillar overview, and every homepage section in order with its real headline, copy and status label. Sections still to be built show a labelled "Built in Stage N" panel.
+- Stages 2 to 6: storytelling, product demos, conversion, polish, deployment preparation.
+- Components from the earlier dark build (temperature demo, before-and-after scene, calculator, pricing, FAQ, EHO story, form) are kept and are restyled as their stage comes up.

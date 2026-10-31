@@ -38,17 +38,17 @@ export function InspectionStory() {
           </div>
 
           <Reveal>
-            <figure className="rounded-xl bg-ui-raised p-6 text-sm text-ui-ink shadow-[0_40px_80px_-20px_rgb(0_0_0/0.75)] sm:p-7">
-              <figcaption className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-ui-ink pb-2.5">
+            <figure className="rounded-xl bg-surface-raised p-6 text-sm text-ink shadow-[0_40px_80px_-20px_rgb(0_0_0/0.75)] sm:p-7">
+              <figcaption className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-ink pb-2.5">
                 <span className="font-display text-xl font-bold">Inspection view · Main kitchen</span>
                 <span className="flex gap-1.5 text-[12.5px]" aria-hidden="true">
-                  <span className="rounded-full border border-ui-line px-2.5 py-1">Today</span>
-                  <span className="rounded-full border border-ui-line px-2.5 py-1">7 days</span>
-                  <span className="rounded-full bg-ui-ink px-2.5 py-1 text-white">28 days</span>
+                  <span className="rounded-full border border-line px-2.5 py-1">Today</span>
+                  <span className="rounded-full border border-line px-2.5 py-1">7 days</span>
+                  <span className="rounded-full bg-ink px-2.5 py-1 text-white">28 days</span>
                 </span>
               </figcaption>
-              <div className="mt-4 rounded-lg border border-ui-warning/40 bg-ui-warning-100/70 p-3">
-                <p className="text-[13px] font-bold tracking-[0.06em] text-ui-ink uppercase">Needs attention</p>
+              <div className="mt-4 rounded-lg border border-warning/40 bg-warning-100/70 p-3">
+                <p className="text-[13px] font-bold tracking-[0.06em] text-ink uppercase">Needs attention</p>
                 <ul className="mt-1 list-disc ps-5">
                   <li>Fridge 2: no record on 2 of 7 days</li>
                   <li>1 problem waiting for manager review</li>
@@ -57,9 +57,9 @@ export function InspectionStory() {
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full min-w-[420px] border-collapse text-[13.5px]">
                   <thead>
-                    <tr className="text-xs tracking-[0.06em] text-ui-muted uppercase">
+                    <tr className="text-xs tracking-[0.06em] text-ink-muted uppercase">
                       {["Date", "Check", "Recorded by", "Result"].map((h) => (
-                        <th key={h} className="border-b border-ui-line px-1 py-1.5 text-start font-semibold">
+                        <th key={h} className="border-b border-line px-1 py-1.5 text-start font-semibold">
                           {h}
                         </th>
                       ))}
@@ -68,13 +68,13 @@ export function InspectionStory() {
                   <tbody>
                     {rows.map((r) => (
                       <tr key={r.date}>
-                        <td className="border-b border-ui-line px-1 py-2 tabular">{r.date}</td>
-                        <td className="border-b border-ui-line px-1 py-2">{r.check}</td>
-                        <td className="border-b border-ui-line px-1 py-2">{r.by}</td>
-                        <td className="border-b border-ui-line px-1 py-2">
+                        <td className="border-b border-line px-1 py-2 tabular">{r.date}</td>
+                        <td className="border-b border-line px-1 py-2">{r.check}</td>
+                        <td className="border-b border-line px-1 py-2">{r.by}</td>
+                        <td className="border-b border-line px-1 py-2">
                           {r.corrected ? (
                             <>
-                              <s className="text-ui-muted">Entered by mistake</s> · corrected
+                              <s className="text-ink-muted">Entered by mistake</s> · corrected
                             </>
                           ) : (
                             r.result
@@ -85,7 +85,7 @@ export function InspectionStory() {
                   </tbody>
                 </table>
               </div>
-              <p className="mt-3.5 flex flex-wrap justify-between gap-2 text-[12.5px] text-ui-muted">
+              <p className="mt-3.5 flex flex-wrap justify-between gap-2 text-[12.5px] text-ink-muted">
                 <span>Illustrative demo data</span>
                 <span>Page 1 of 6 · Print or save as PDF</span>
               </p>

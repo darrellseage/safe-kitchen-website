@@ -2,17 +2,18 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "ghost" | "light";
+type Variant = "primary" | "secondary" | "ghost";
 
+// The app's button styles (DESIGN_SYSTEM.md §5.2).
 const variants: Record<Variant, string> = {
-  primary: "bg-herb-400 text-forest-950 hover:bg-herb-300",
-  ghost: "border border-night-600 text-fog-50 hover:border-fog-400 hover:bg-white/5",
-  light: "bg-fog-50 text-night-950 hover:bg-white",
+  primary: "bg-accent-600 text-white hover:bg-accent-700",
+  secondary: "border-[1.5px] border-line bg-surface-raised text-ink hover:border-control-border",
+  ghost: "text-accent-600 hover:text-accent-700",
 };
 
 export const buttonClasses = (variant: Variant = "primary", className?: string) =>
   cn(
-    "inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-6 text-base font-semibold transition-colors duration-200",
+    "inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-6 text-base font-bold transition-colors duration-200",
     variants[variant],
     className,
   );

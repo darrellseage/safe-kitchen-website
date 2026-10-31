@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-/** Dark hardware frame around a light product screen. */
+/** A product screen sitting on the page: white, hairline border, soft long shadow. */
 export function DeviceFrame({
   children,
   kind = "tablet",
@@ -16,24 +16,17 @@ export function DeviceFrame({
   return (
     <div
       className={cn(
-        "relative border border-night-600/70 bg-night-850 shadow-[0_40px_80px_-20px_rgb(0_0_0/0.7)]",
-        kind === "tablet" ? "rounded-[26px] p-3" : "rounded-[34px] p-2.5",
+        "relative",
+        kind === "phone" ? "rounded-[36px] bg-ink p-2.5 shadow-raised" : "rounded-3xl border border-line bg-surface-raised shadow-raised",
         className,
       )}
     >
       {label ? (
-        <span className="absolute -top-3 right-5 z-10 rounded-full border border-night-600 bg-night-900 px-2.5 py-1 text-xs font-semibold text-fog-400">
+        <span className="absolute -top-3 right-5 z-10 rounded-full border border-line bg-surface-raised px-2.5 py-1 text-xs font-bold text-ink-muted shadow-card">
           {label}
         </span>
       ) : null}
-      <div
-        className={cn(
-          "overflow-hidden bg-ui-surface text-ui-ink",
-          kind === "tablet" ? "rounded-2xl" : "rounded-[26px]",
-        )}
-      >
-        {children}
-      </div>
+      <div className={cn("overflow-hidden bg-surface text-ink", kind === "phone" ? "rounded-[28px]" : "rounded-3xl")}>{children}</div>
     </div>
   );
 }

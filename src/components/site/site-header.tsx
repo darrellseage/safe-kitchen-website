@@ -19,9 +19,9 @@ export function SiteHeader() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 12);
-      setHidden(y > 200 && y > lastY.current + 4);
-      if (y < lastY.current - 4 || y < 200) setHidden(false);
+      setScrolled(y > 8);
+      if (y < 200 || y < lastY.current - 4) setHidden(false);
+      else if (y > lastY.current + 4) setHidden(true);
       lastY.current = y;
     };
     onScroll();
@@ -32,8 +32,8 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 transition-[transform,background-color,border-color] duration-300",
-        scrolled ? "border-b border-night-700/80 bg-night-950/80 backdrop-blur-xl" : "border-b border-transparent",
+        "sticky top-0 z-40 border-b bg-surface-raised/90 backdrop-blur-xl transition-[transform,border-color,box-shadow] duration-300",
+        scrolled ? "border-line shadow-card" : "border-transparent",
         hidden && !open && "-translate-y-full",
       )}
     >
@@ -41,11 +41,11 @@ export function SiteHeader() {
         <Link href="/" className="rounded-lg" aria-label="Safe Kitchen home">
           <Logo />
         </Link>
-        <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex gap-8 text-[15px] text-fog-400">
+        <nav aria-label="Main" className="hidden xl:block">
+          <ul className="flex gap-7 text-[15px] font-semibold text-ink-muted">
             {mainNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="rounded transition-colors hover:text-fog-50">
+                <Link href={item.href} className="rounded transition-colors hover:text-ink">
                   {item.label}
                 </Link>
               </li>
@@ -60,19 +60,21 @@ export function SiteHeader() {
           </span>
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger
-              className="inline-flex size-12 items-center justify-center rounded-full border border-night-600 lg:hidden"
+              className="inline-flex size-12 items-center justify-center rounded-full border-[1.5px] border-line text-ink xl:hidden"
               aria-label="Open menu"
             >
               <Menu className="size-5" aria-hidden="true" />
             </Dialog.Trigger>
             <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-50 bg-night-950/70 backdrop-blur-sm" />
-              <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[min(360px,88vw)] flex-col gap-8 border-l border-night-700 bg-night-900 p-6">
+              <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/30 backdrop-blur-sm" />
+              <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[min(360px,88vw)] flex-col gap-8 bg-surface-raised p-6 shadow-overlay">
                 <div className="flex items-center justify-between">
                   <Dialog.Title asChild>
-                    <span><Logo /></span>
+                    <span>
+                      <Logo />
+                    </span>
                   </Dialog.Title>
-                  <Dialog.Close className="inline-flex size-12 items-center justify-center rounded-full border border-night-600" aria-label="Close menu">
+                  <Dialog.Close className="inline-flex size-12 items-center justify-center rounded-full border-[1.5px] border-line" aria-label="Close menu">
                     <X className="size-5" aria-hidden="true" />
                   </Dialog.Close>
                 </div>
@@ -84,7 +86,7 @@ export function SiteHeader() {
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="flex min-h-12 items-center rounded-xl px-3 font-display text-2xl font-semibold hover:bg-white/5"
+                          className="flex min-h-13 items-center rounded-xl px-3 text-xl font-bold text-ink hover:bg-surface"
                         >
                           {item.label}
                         </Link>

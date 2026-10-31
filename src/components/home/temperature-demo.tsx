@@ -113,17 +113,17 @@ export function TemperatureDemo() {
           <div className="flex items-center justify-between gap-3">
             <ol className="flex flex-1 gap-1.5" aria-label={`Step ${step} of 3`}>
               {[1, 2, 3].map((n) => (
-                <li key={n} className={cn("h-1.5 flex-1 rounded-full", n <= step ? "bg-ui-teal" : "bg-ui-line")} />
+                <li key={n} className={cn("h-1.5 flex-1 rounded-full", n <= step ? "bg-accent-600" : "bg-line")} />
               ))}
             </ol>
-            <button type="button" onClick={reset} className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-semibold text-ui-muted hover:text-ui-ink">
+            <button type="button" onClick={reset} className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-semibold text-ink-muted hover:text-ink">
               <RotateCcw className="size-4" aria-hidden="true" />
               Start again
             </button>
           </div>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-semibold text-ui-muted">1. Choose a check</legend>
+            <legend className="mb-2 text-sm font-semibold text-ink-muted">1. Choose a check</legend>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
               {checks.map((c) => {
                 const Icon = c.icon;
@@ -137,14 +137,14 @@ export function TemperatureDemo() {
                     className={cn(
                       "grid min-h-24 content-between gap-2 rounded-2xl border-[1.5px] p-3 text-start text-[14px] leading-tight font-semibold transition-[background-color,border-color,box-shadow]",
                       active
-                        ? "border-ui-teal bg-ui-teal-100 shadow-[0_0_0_3px_rgb(15_124_122/0.15)]"
-                        : "border-ui-line bg-ui-raised hover:border-ui-control",
+                        ? "border-accent-600 bg-accent-100 shadow-[0_0_0_3px_rgb(15_124_122/0.15)]"
+                        : "border-line bg-surface-raised hover:border-control-border",
                     )}
                   >
-                    <Icon className={cn("size-5", active ? "text-ui-teal" : "text-ui-muted")} aria-hidden="true" />
+                    <Icon className={cn("size-5", active ? "text-accent-600" : "text-ink-muted")} aria-hidden="true" />
                     <span>
                       {c.name}
-                      <span className="block text-xs font-medium text-ui-muted">{c.kind}</span>
+                      <span className="block text-xs font-medium text-ink-muted">{c.kind}</span>
                     </span>
                   </button>
                 );
@@ -152,12 +152,12 @@ export function TemperatureDemo() {
             </div>
           </fieldset>
 
-          <div className="rounded-2xl border border-ui-line bg-ui-raised p-4">
-            <p className="text-sm font-semibold text-ui-muted">2. Enter the reading</p>
+          <div className="rounded-2xl border border-line bg-surface-raised p-4">
+            <p className="text-sm font-semibold text-ink-muted">2. Enter the reading</p>
             <div className="mt-1 flex items-center justify-between gap-3">
               <p className="font-display text-[clamp(2.6rem,6vw,3.6rem)] leading-none font-extrabold tracking-tight tabular" aria-live="polite">
-                {value === null ? <span className="text-ui-control">––.–</span> : formatReading(value)}
-                <span className="ms-1 text-xl font-semibold text-ui-muted">°C</span>
+                {value === null ? <span className="text-control-border">––.–</span> : formatReading(value)}
+                <span className="ms-1 text-xl font-semibold text-ink-muted">°C</span>
               </p>
               <div className="flex gap-2">
                 <NudgeButton label="Lower by 0.1" disabled={value === null} onClick={() => value !== null && setFromSlider(clampToScale(value - 0.1, check.scale))}>
@@ -171,7 +171,7 @@ export function TemperatureDemo() {
 
             <ScaleSlider key={check.id} label={`${check.name} reading`} scale={check.scale} value={value} onChange={setFromSlider} />
 
-            <p className="mt-2 text-[13px] text-ui-muted">
+            <p className="mt-2 text-[13px] text-ink-muted">
               {value === null ? "Tap the scale to set the reading. " : ""}
               The scale is not a safety limit.
             </p>
@@ -181,7 +181,7 @@ export function TemperatureDemo() {
                 type="button"
                 aria-expanded={keypad}
                 onClick={() => setKeypad((k) => !k)}
-                className="inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-ui-teal hover:text-ui-teal-700"
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-accent-600 hover:text-accent-700"
               >
                 <Keyboard className="size-4" aria-hidden="true" />
                 {keypad ? "Hide keypad" : "Type the exact reading"}
@@ -210,7 +210,7 @@ export function TemperatureDemo() {
             type="button"
             onClick={save}
             disabled={value === null}
-            className="min-h-15 rounded-2xl bg-ui-teal text-[17px] font-bold text-white transition-colors hover:bg-ui-teal-700 disabled:cursor-not-allowed disabled:bg-ui-control/40 disabled:text-white/90"
+            className="min-h-15 rounded-2xl bg-accent-600 text-[17px] font-bold text-white transition-colors hover:bg-accent-700 disabled:cursor-not-allowed disabled:bg-control-border/40 disabled:text-white/90"
           >
             Save reading
           </button>
@@ -226,7 +226,7 @@ export function TemperatureDemo() {
                 onSend={sendProblem}
               />
             ) : (
-              <p className="rounded-2xl border-[1.5px] border-dashed border-ui-line p-4 text-center text-sm text-ui-muted">
+              <p className="rounded-2xl border-[1.5px] border-dashed border-line p-4 text-center text-sm text-ink-muted">
                 3. Your saved record appears here.
               </p>
             )}
@@ -284,7 +284,7 @@ function NudgeButton({ label, disabled, onClick, children }: { label: string; di
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="grid size-14 place-items-center rounded-2xl border-[1.5px] border-ui-line bg-ui-sunken text-ui-ink transition-colors hover:border-ui-control disabled:opacity-40"
+      className="grid size-14 place-items-center rounded-2xl border-[1.5px] border-line bg-surface-sunken text-ink transition-colors hover:border-control-border disabled:opacity-40"
     >
       {children}
     </button>
@@ -339,16 +339,16 @@ function ScaleSlider({ label, scale, value, onChange }: { label: string; scale: 
           if (e.currentTarget.hasPointerCapture(e.pointerId)) fromPointer(e);
         }}
         onKeyDown={onKey}
-        className="relative h-16 cursor-pointer touch-none rounded-2xl border border-ui-line bg-[linear-gradient(90deg,var(--color-scale-cold),var(--color-ui-sunken)_50%,var(--color-scale-warm))] outline-offset-4 focus-visible:outline-2 focus-visible:outline-ui-teal"
+        className="relative h-16 cursor-pointer touch-none rounded-2xl border border-line bg-[linear-gradient(90deg,var(--color-scale-cold),var(--color-surface-sunken)_50%,var(--color-scale-warm))] outline-offset-4 focus-visible:outline-2 focus-visible:outline-accent-600"
       >
         {pos !== null ? (
           <span
-            className="absolute top-1/2 size-12 -translate-1/2 rounded-full border-4 border-ui-teal bg-ui-raised shadow-md"
+            className="absolute top-1/2 size-12 -translate-1/2 rounded-full border-4 border-accent-600 bg-surface-raised shadow-md"
             style={{ left: `${pos * 100}%` }}
           />
         ) : null}
       </div>
-      <div className="mt-1.5 flex justify-between text-xs text-ui-muted tabular" aria-hidden="true">
+      <div className="mt-1.5 flex justify-between text-xs text-ink-muted tabular" aria-hidden="true">
         <span>{formatReading(scale.min)}°</span>
         <span>{formatReading(scale.max)}°</span>
       </div>
@@ -372,10 +372,10 @@ function KeypadEntry({ check, typed, error, onType }: { check: DemoCheck; typed:
         aria-invalid={error}
         aria-describedby={error ? `${id}-error` : undefined}
         placeholder="e.g. 3.4"
-        className="min-h-13 rounded-xl border-[1.5px] border-ui-control bg-ui-raised px-4 text-lg font-semibold tabular focus:border-ui-teal focus:outline-none"
+        className="min-h-13 rounded-xl border-[1.5px] border-control-border bg-surface-raised px-4 text-lg font-semibold tabular focus:border-accent-600 focus:outline-none"
       />
       {error ? (
-        <p id={`${id}-error`} className="text-sm font-semibold text-ui-danger">
+        <p id={`${id}-error`} className="text-sm font-semibold text-danger">
           Enter a number with up to one decimal place, like 3.4 or −18.
         </p>
       ) : null}
@@ -405,15 +405,15 @@ function SavedResult({
     ["Device · method", `Kitchen tablet · ${entry.method}`],
   ];
   return (
-    <div className="grid gap-3 rounded-2xl border border-ui-line bg-ui-raised p-4 text-sm">
+    <div className="grid gap-3 rounded-2xl border border-line bg-surface-raised p-4 text-sm">
       <div className="flex items-center justify-between">
         <p className="font-semibold">Saved record</p>
         <SavedPill />
       </div>
       <dl className="grid gap-2">
         {rows.map(([k, v]) => (
-          <div key={k} className="flex justify-between gap-3 border-t border-ui-line pt-2">
-            <dt className="text-ui-muted">{k}</dt>
+          <div key={k} className="flex justify-between gap-3 border-t border-line pt-2">
+            <dt className="text-ink-muted">{k}</dt>
             <dd className="text-end font-semibold tabular">{v}</dd>
           </div>
         ))}
@@ -421,7 +421,7 @@ function SavedResult({
 
       {problem === "off" ? (
         <>
-          <p className="flex gap-2.5 rounded-xl bg-ui-teal-100 p-3 text-[13.5px] text-ui-teal-700">
+          <p className="flex gap-2.5 rounded-xl bg-accent-100 p-3 text-[13.5px] text-accent-700">
             <Check className="mt-0.5 size-4 flex-none" aria-hidden="true" />
             <span>
               <b>Recorded.</b> In Safe Kitchen, each reading is compared with the limit in your approved safe method. This
@@ -431,7 +431,7 @@ function SavedResult({
           <button
             type="button"
             onClick={onStartProblem}
-            className="min-h-12 rounded-xl border-[1.5px] border-ui-line font-semibold text-ui-ink hover:border-ui-control"
+            className="min-h-12 rounded-xl border-[1.5px] border-line font-semibold text-ink hover:border-control-border"
           >
             See what happens with a problem reading
           </button>
@@ -440,7 +440,7 @@ function SavedResult({
 
       {problem === "choosing" ? (
         <div className="grid gap-3">
-          <p className="flex gap-2.5 rounded-xl bg-ui-danger-100 p-3 text-[13.5px] text-ui-danger">
+          <p className="flex gap-2.5 rounded-xl bg-danger-100 p-3 text-[13.5px] text-danger">
             <AlertTriangle className="mt-0.5 size-4 flex-none" aria-hidden="true" />
             <span>
               <b>Outside your limit (example).</b> Pick what happened and what you did. Nothing is typed unless you want to.
@@ -452,17 +452,17 @@ function SavedResult({
             type="button"
             onClick={onSend}
             disabled={picked.length === 0}
-            className="min-h-13 rounded-xl bg-ui-ink font-bold text-white disabled:opacity-40"
+            className="min-h-13 rounded-xl bg-ink font-bold text-white disabled:opacity-40"
           >
             Confirm and send to manager
           </button>
-          <p className="text-xs text-ui-muted">By sending, staff confirm they did the things they ticked.</p>
+          <p className="text-xs text-ink-muted">By sending, staff confirm they did the things they ticked.</p>
         </div>
       ) : null}
 
       {problem === "sent" ? (
-        <p className="flex gap-2.5 rounded-xl bg-ui-warning-100 p-3 text-[13.5px] text-ui-ink">
-          <Clock className="mt-0.5 size-4 flex-none text-ui-warning" aria-hidden="true" />
+        <p className="flex gap-2.5 rounded-xl bg-warning-100 p-3 text-[13.5px] text-ink">
+          <Clock className="mt-0.5 size-4 flex-none text-warning" aria-hidden="true" />
           <span>
             <b>Waiting for manager review.</b> It’s never approved automatically, and the original reading stays in the
             record. In the real app, guidance on what to do comes only from reviewed food safety content.
@@ -488,7 +488,7 @@ function ChipGroup({ legend, items, picked, onToggle }: { legend: string; items:
               onClick={() => onToggle(item)}
               className={cn(
                 "min-h-11 rounded-full border-[1.5px] px-3.5 text-[13.5px] font-semibold transition-colors",
-                on ? "border-ui-teal bg-ui-teal-100 text-ui-teal-700" : "border-ui-line bg-ui-raised text-ui-ink hover:border-ui-control",
+                on ? "border-accent-600 bg-accent-100 text-accent-700" : "border-line bg-surface-raised text-ink hover:border-control-border",
               )}
             >
               {item}

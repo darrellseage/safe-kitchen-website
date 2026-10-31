@@ -3,9 +3,10 @@
 export const siteConfig = {
   name: "Safe Kitchen",
   url: "https://safekitchen.uk",
-  tagline: "Food safety made simple.",
+  tagline: "One kitchen. One system. Everything where it should be.",
+  promise: "Less admin. Less waste. More control.",
   description:
-    "Digital food safety records for UK kitchens. Temperature checks, cleaning schedules and inspection-ready records, built around Safer Food, Better Business.",
+    "Kitchen management software for UK restaurants, takeaways, cafés and pubs: simple food safety records, smart staff rotas, clock-in and attendance, an AI checker and smart supplier ordering.",
   /**
    * Keep false until the owner says "go live" (trademark checks, O-002).
    * While false, every page asks search engines not to index it.
