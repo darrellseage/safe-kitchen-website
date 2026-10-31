@@ -73,4 +73,13 @@ export const images = {
     licence: "Unsplash License",
     accuracyNote: "Premises only.",
   },
+  owner: {
+    src: u("1758887261865-a2b89c0f7ac5"),
+    alt: "A smiling restaurant owner standing in his restaurant",
+    focal: "50% 22%",
+    sourceUrl: "https://unsplash.com/photos/man-with-beard-in-a-red-shirt-smiling-indoors--tJfonfU7Qc",
+    photographer: "Babak Eshaghian",
+    licence: "Unsplash License",
+    accuracyNote: "Front-of-house portrait. No food handling shown.",
+  },
 } satisfies Record<string, StockImage>;

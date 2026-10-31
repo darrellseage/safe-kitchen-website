@@ -1,3 +1,4 @@
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { inspection } from "@/content/home";
@@ -11,36 +12,35 @@ const rows = [
 
 export function InspectionStory() {
   return (
-    <section aria-labelledby="eho-title" className="lamp border-t border-night-700 py-24 md:py-32">
-      <div className="mx-auto w-[min(1200px,100%-40px)]">
-        <SectionHeading id="eho-title" title={inspection.title} />
+    <Section id="inspection" labelledBy="eho-title" tone="green">
+        <SectionHeading id="eho-title" eyebrow={inspection.eyebrow} status={inspection.status} title={inspection.title} accent={inspection.accent} />
         <div className="mt-14 grid grid-cols-[minmax(0,1fr)] items-start gap-14 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <ol className="grid">
               {inspection.timeline.map((t, i) => (
                 <li key={t.time} className="relative grid grid-cols-[76px_1fr] gap-4 pb-8 last:pb-0">
                   {i < inspection.timeline.length - 1 ? (
-                    <span aria-hidden="true" className="absolute top-3 bottom-0 left-[87px] w-0.5 bg-night-700" />
+                    <span aria-hidden="true" className="absolute top-3 bottom-0 left-[87px] w-0.5 bg-brand-100" />
                   ) : null}
-                  <time className="font-display text-[22px] leading-none font-bold text-herb-400 tabular">{t.time}</time>
+                  <time className="text-[22px] leading-none font-extrabold text-brand-700 tabular">{t.time}</time>
                   <Reveal delay={i * 0.15} y={12} className="relative ps-6">
-                    <span aria-hidden="true" className="absolute top-1.5 -left-[7px] size-3 rounded-full border-2 border-herb-400 bg-night-950" />
-                    <p className="text-lg font-semibold">{t.title}</p>
-                    <p className="text-[15.5px] text-fog-400">{t.body}</p>
+                    <span aria-hidden="true" className="absolute top-1.5 -left-[7px] size-3 rounded-full border-2 border-brand-500 bg-brand-50" />
+                    <p className="text-lg font-bold">{t.title}</p>
+                    <p className="text-[15.5px] text-ink-muted">{t.body}</p>
                   </Reveal>
                 </li>
               ))}
             </ol>
-            <p className="mt-10 max-w-[30ch] font-display text-[clamp(1.35rem,2.4vw,1.8rem)] leading-tight font-semibold tracking-[-0.015em]">
+            <p className="mt-10 max-w-[30ch] text-[clamp(1.35rem,2.4vw,1.8rem)] leading-tight font-extrabold text-brand-900 tracking-[-0.015em]">
               {inspection.closing}
             </p>
-            <p className="mt-4 max-w-[52ch] text-sm text-fog-400">{inspection.note}</p>
+            <p className="mt-4 max-w-[52ch] text-sm text-ink-muted">{inspection.note}</p>
           </div>
 
           <Reveal>
-            <figure className="rounded-xl bg-surface-raised p-6 text-sm text-ink shadow-[0_40px_80px_-20px_rgb(0_0_0/0.75)] sm:p-7">
+            <figure className="rounded-xl bg-surface-raised p-6 text-sm text-ink border border-line shadow-raised sm:p-7">
               <figcaption className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-ink pb-2.5">
-                <span className="font-display text-xl font-bold">Inspection view · Main kitchen</span>
+                <span className="text-xl font-extrabold">Inspection view · Main kitchen</span>
                 <span className="flex gap-1.5 text-[12.5px]" aria-hidden="true">
                   <span className="rounded-full border border-line px-2.5 py-1">Today</span>
                   <span className="rounded-full border border-line px-2.5 py-1">7 days</span>
@@ -92,7 +92,6 @@ export function InspectionStory() {
             </figure>
           </Reveal>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

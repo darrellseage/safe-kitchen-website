@@ -55,6 +55,9 @@
   --color-paper-pen: #34507a;
   --color-sticky: #f5e07a;
 
+  /* Chat bubble in the before-and-after scene */
+  --color-chat: #e7f6e3;
+
   /* Temperature scale (input range only, never a limit) */
   --color-scale-cold: #dcebf5;
   --color-scale-warm: #f6e2d3;

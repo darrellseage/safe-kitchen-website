@@ -37,5 +37,6 @@ npm run build      # production build
 The site is being rebuilt in the light, five-pillar direction ([docs/REDESIGN_PROPOSAL.md](docs/REDESIGN_PROPOSAL.md)) on branch `claude/light-redesign`.
 
 - **Stage 1 (Foundation): done.** The app's own tokens and typeface, light header with pillar navigation, footer, hero, five-pillar overview, and every homepage section in order with its real headline, copy and status label. Sections still to be built show a labelled "Built in Stage N" panel.
-- Stages 2 to 6: storytelling, product demos, conversion, polish, deployment preparation.
+- **Stage 2 (Storytelling): done.** Hero with all five pillars, "Sound familiar?", the paperwork calculator, the scroll-driven before-and-after scene, the food safety temperature demo and the EHO section, all in the light style.
+- Stages 3 to 6: product demos, conversion, polish, deployment preparation.
 - Components from the earlier dark build (temperature demo, before-and-after scene, calculator, pricing, FAQ, EHO story, form) are kept and are restyled as their stage comes up.

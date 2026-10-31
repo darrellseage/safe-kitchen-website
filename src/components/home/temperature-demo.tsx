@@ -210,7 +210,7 @@ export function TemperatureDemo() {
             type="button"
             onClick={save}
             disabled={value === null}
-            className="min-h-15 rounded-2xl bg-accent-600 text-[17px] font-bold text-white transition-colors hover:bg-accent-700 disabled:cursor-not-allowed disabled:bg-control-border/40 disabled:text-white/90"
+            className="min-h-15 rounded-2xl bg-accent-600 text-[17px] font-bold text-white transition-colors hover:bg-accent-700 disabled:cursor-not-allowed disabled:bg-surface-sunken disabled:text-ink-muted"
           >
             Save reading
           </button>
@@ -235,10 +235,10 @@ export function TemperatureDemo() {
       </DeviceFrame>
 
       <div className="grid gap-8">
-        <div className="rounded-3xl border border-night-700 bg-night-900 p-5">
+        <div className="rounded-3xl border border-line bg-surface-raised p-5 shadow-card">
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-xs font-semibold tracking-[0.08em] text-fog-400 uppercase">Manager view · today</p>
-            <span className="text-xs text-fog-400">Updates as you save</span>
+            <p className="text-xs font-bold tracking-[0.08em] text-brand-700 uppercase">Manager view · today</p>
+            <span className="text-xs text-ink-muted">Updates as you save</span>
           </div>
           <ul className="grid gap-2">
             <AnimatePresence initial={false}>
@@ -249,13 +249,13 @@ export function TemperatureDemo() {
                   initial={reduce ? false : { opacity: 0, y: -12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="grid grid-cols-[1fr_auto] gap-x-3 rounded-xl border border-night-700 bg-night-950/60 px-3.5 py-2.5 text-sm"
+                  className="grid grid-cols-[1fr_auto] gap-x-3 rounded-xl border border-line bg-surface px-3.5 py-2.5 text-sm"
                 >
                   <span className="font-semibold">{e.name}</span>
-                  <span className={cn("font-semibold tabular", e.review ? "text-planned" : "text-fog-50")}>
+                  <span className={cn("font-semibold tabular", e.review ? "text-warning-ink" : "text-ink")}>
                     {e.review ? "Waiting for review" : e.reading}
                   </span>
-                  <span className="col-span-2 text-xs text-fog-400 tabular">
+                  <span className="col-span-2 text-xs text-ink-muted tabular">
                     {e.id > 2 ? "Sam (demo)" : "Sam"} · {e.time} · {e.method}
                   </span>
                 </motion.li>
@@ -266,9 +266,9 @@ export function TemperatureDemo() {
 
         <ul className="grid gap-6">
           {demo.why.map((w) => (
-            <li key={w.title} className="border-s-2 border-herb-400 ps-4">
-              <h3 className="font-display text-xl leading-snug font-semibold tracking-[-0.01em]">{w.title}</h3>
-              <p className="text-[15.5px] text-fog-400">{w.body}</p>
+            <li key={w.title} className="border-s-2 border-accent-600 ps-4">
+              <h3 className="text-xl leading-snug font-extrabold tracking-[-0.01em]">{w.title}</h3>
+              <p className="text-[15.5px] text-ink-muted">{w.body}</p>
             </li>
           ))}
         </ul>
