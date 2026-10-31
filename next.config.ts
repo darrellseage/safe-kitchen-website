@@ -14,9 +14,8 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    // Stock photos are served from Unsplash (licences and accuracy reviews in
-    // src/content/images.ts). Only this host is allowed.
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com", pathname: "/photo-*" }],
+    // Stock photos are stored in public/images (licences and accuracy reviews
+    // in src/content/images.ts). No outside image hosts are allowed.
     qualities: [70, 80],
     unoptimized: previewExport,
   },

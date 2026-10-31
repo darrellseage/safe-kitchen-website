@@ -4,6 +4,7 @@ import { PillarIcon } from "@/components/ui/pillar-icon";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StatusChip } from "@/components/ui/status-chip";
+import { KitchenTypes } from "./kitchen-types";
 import { overview } from "@/content/home";
 import { section } from "@/content/navigation";
 import { pillars } from "@/content/pillars";
@@ -34,6 +35,7 @@ export function PillarOverview() {
           </li>
         ))}
       </ul>
+      <KitchenTypes />
     </Section>
   );
 }

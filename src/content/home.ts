@@ -25,6 +25,16 @@ export const overview = {
   intro: "Six connected tools, designed for busy kitchen teams and the people who run the business.",
 };
 
+export const kitchenTypes = {
+  label: "Made for kitchens like yours",
+  types: [
+    { label: "Takeaways", image: "takeaway" },
+    { label: "Restaurants", image: "restaurant" },
+    { label: "Cafés", image: "cafe" },
+    { label: "Pubs", image: "pub" },
+  ],
+} as const;
+
 export const familiar = {
   title: "Sound familiar?",
   intro: "None of this is about bad kitchens. It’s what happens when paperwork has to compete with service.",

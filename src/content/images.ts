@@ -1,9 +1,9 @@
 /**
- * Stock photo manifest. Every photo used on the site is listed here with its
+ * Stock photo manifest. Files are stored in public/images (downloaded
+ * 31 Oct 2026 at 1600px wide), so the site doesn't depend on Unsplash. Every photo used on the site is listed here with its
  * source, licence and food-safety accuracy review (copied from the app's
  * reviewed manifest, src/demo-content/images.ts, 29 Oct 2026). Photos are
- * served from Unsplash; self-host or replace with commissioned photos before
- * launch where possible.
+ * replaced by commissioned photos before launch where possible.
  */
 export type StockImage = {
   src: string;
@@ -16,11 +16,11 @@ export type StockImage = {
   accuracyNote: string;
 };
 
-const u = (id: string) => `https://images.unsplash.com/photo-${id}`;
+const local = (name: string) => `/images/${name}.jpg`;
 
 export const images = {
   kitchenLine: {
-    src: u("1771360963016-1408c2de12c4"),
+    src: local("kitchen-line"),
     alt: "A chef cooking at a stainless-steel range in a busy commercial kitchen",
     focal: "50% 40%",
     sourceUrl: "https://unsplash.com/photos/a-chef-cooking-in-a-commercial-kitchen-F9v4iq0RDZ0",
@@ -29,7 +29,7 @@ export const images = {
     accuracyNote: "Chef's hair is not covered: use only as a darkened background, never to illustrate hygiene.",
   },
   plating: {
-    src: u("1532635211-8ec15f2ce05c"),
+    src: local("plating"),
     alt: "A chef in a cap, apron and disposable gloves plating dishes on a counter",
     focal: "55% 30%",
     sourceUrl: "https://unsplash.com/photos/man-cooking-in-kitchen-iv6yNy7oBqQ",
@@ -38,7 +38,7 @@ export const images = {
     accuracyNote: "Hair covered, gloves worn. Avoid close crops of the yellow-gloved hand.",
   },
   takeaway: {
-    src: u("1774028156636-e514fa039c19"),
+    src: local("takeaway"),
     alt: "Inside a takeaway, with menu boards above the counter",
     focal: "50% 50%",
     sourceUrl: "https://unsplash.com/photos/interior-of-a-pink-and-white-diner-with-menu-boards-rT-_NtST13Q",
@@ -47,7 +47,7 @@ export const images = {
     accuracyNote: "Premises only.",
   },
   restaurant: {
-    src: u("1667388969250-1c7220bf3f37"),
+    src: local("restaurant"),
     alt: "A warmly lit restaurant dining room with wooden tables",
     focal: "50% 50%",
     sourceUrl: "https://unsplash.com/photos/a-room-with-tables-and-chairs-e4B5AvA7Jqo",
@@ -56,7 +56,7 @@ export const images = {
     accuracyNote: "Premises only.",
   },
   cafe: {
-    src: u("1767201364709-6081f4be46cc"),
+    src: local("cafe"),
     alt: "A bright café counter with a coffee machine and baked goods",
     focal: "50% 50%",
     sourceUrl: "https://unsplash.com/photos/a-bright-coffee-shop-counter-with-baked-goods-QFTFsEdvrwE",
@@ -65,7 +65,7 @@ export const images = {
     accuracyNote: "Premises only.",
   },
   pub: {
-    src: u("1759503167345-a371b3fe36fd"),
+    src: local("pub"),
     alt: "The front of a traditional pub with hanging flower baskets",
     focal: "50% 50%",
     sourceUrl: "https://unsplash.com/photos/people-inside-a-teal-colored-building-with-hanging-flowers-_V9xd3nOogY",
@@ -74,11 +74,29 @@ export const images = {
     accuracyNote: "Premises only.",
   },
   owner: {
-    src: u("1758887261865-a2b89c0f7ac5"),
+    src: local("owner"),
     alt: "A smiling restaurant owner standing in his restaurant",
     focal: "50% 22%",
     sourceUrl: "https://unsplash.com/photos/man-with-beard-in-a-red-shirt-smiling-indoors--tJfonfU7Qc",
     photographer: "Babak Eshaghian",
+    licence: "Unsplash License",
+    accuracyNote: "Front-of-house portrait. No food handling shown.",
+  },
+  chef: {
+    src: local("chef"),
+    alt: "A chef in a white jacket and tall chef’s hat standing with arms folded in a kitchen",
+    focal: "50% 35%",
+    sourceUrl: "https://unsplash.com/photos/chef-in-white-uniform-in-kitchen-GrpoMEmbQrA",
+    photographer: "Ionel Lagaillarde",
+    licence: "Unsplash License",
+    accuracyNote: "Clean whites, hair covered by hat.",
+  },
+  manager: {
+    src: local("manager"),
+    alt: "A restaurant manager standing in a modern restaurant, with staff working behind her",
+    focal: "50% 30%",
+    sourceUrl: "https://unsplash.com/photos/woman-holding-a-mug-in-a-modern-office-kitchen-vxmmzZbQ_0M",
+    photographer: "Rodrigo Rodrigues | WOLF Λ R T",
     licence: "Unsplash License",
     accuracyNote: "Front-of-house portrait. No food handling shown.",
   },
