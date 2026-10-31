@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Kitchen Light Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: the app's own warm-white world. Scattered kitchen admin settles into neat cards: "everything where it should be". */
+:root {
+  --white: #FFFFFF;
+  --surface: #FAF7F2;
+  --sunken: #F2EDE4;
+  --line: #E6DFD3;
+  --ink: #1C2421;
+  --muted: #4F5B56;
+  --brand-950: #06261D;
+  --brand-900: #0B3B2E;
+  --brand-700: #145A44;
+  --brand-500: #2E8B6A;
+  --brand-100: #DCEFE6;
+  --brand-50: #EEF7F2;
+  --teal: #0F7C7A;
+  --teal-700: #0B6462;
+  --teal-500: #14A3A0;
+  --teal-100: #D7F0EE;
+  --success: #1F8A4C;
+  --success-100: #DCF3E5;
+  --warning: #B7791F;
+  --warning-ink: #7A4E0E;
+  --warning-100: #FBEFD9;
+  --danger: #C2410C;
+  --font: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --shadow-card: 0 1px 2px rgba(28, 36, 33, 0.05), 0 4px 14px rgba(28, 36, 33, 0.05);
+  --shadow-raised: 0 2px 4px rgba(28, 36, 33, 0.05), 0 24px 48px -16px rgba(28, 36, 33, 0.18);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--white); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; letter-spacing: -0.03em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { width: min(1200px, 100% - 40px); margin-inline: auto; }
+section { padding-block: 96px; }
+section.alt { background: var(--surface); }
+section.tint { background: var(--brand-50); }
+:focus-visible { outline: 3px solid var(--brand-900); outline-offset: 3px; border-radius: 6px; }
+
+.note { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-700); margin-bottom: 18px; display: flex; gap: 10px 14px; flex-wrap: wrap; align-items: center; }
+.note span { font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
+.h2 { font-size: clamp(2.1rem, 4.6vw, 3.8rem); line-height: 1.04; font-weight: 800; max-width: 20ch; }
+.h2 em { font-style: normal; color: var(--brand-500); }
+.lede { color: var(--muted); max-width: 60ch; margin-top: 16px; font-size: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; line-height: 1.3; white-space: nowrap; width: fit-content; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chip.dev { background: var(--brand-100); color: var(--brand-700); }
+.chip.plan { background: var(--teal-100); color: var(--teal-700); }
+.chip.vision { background: var(--sunken); color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; border: 0; }
+.btn.primary { background: var(--teal); color: #fff; }
+.btn.primary:hover { background: var(--teal-700); }
+.btn.secondary { background: var(--white); color: var(--ink); border: 1.5px solid var(--line); }
+.btn.secondary:hover { border-color: #857D70; }
+.card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-card); }
+.device { background: var(--white); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow-raised); overflow: hidden; }
+.demo-flag { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--sunken); border-radius: 999px; padding: 4px 10px; display: inline-block; }
+
+/* Header */
+.top { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 72px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; color: var(--brand-900); }
+.logo i { width: 32px; height: 32px; border-radius: 9px; background: var(--teal); display: grid; place-items: center; }
+.logo i::after { content: ""; width: 11px; height: 6px; border-left: 2.6px solid #fff; border-bottom: 2.6px solid #fff; transform: translateY(-2px) rotate(-45deg); }
+.nav { display: flex; gap: 24px; font-size: 15px; font-weight: 600; color: var(--muted); flex-wrap: wrap; }
+.boardtag { font-size: 12.5px; font-weight: 600; color: var(--muted); border: 1px dashed var(--line); padding: 5px 12px; border-radius: 999px; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; padding-block: 72px 56px; }
+.hero h1 { font-size: clamp(2.8rem, 6vw, 5.4rem); line-height: 0.98; font-weight: 800; letter-spacing: -0.045em; }
+.hero h1 span { color: var(--brand-500); display: block; }
+.hero .sub { margin-top: 24px; font-size: 19px; color: var(--muted); max-width: 46ch; }
+.ctas { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+.stage { position: relative; min-height: 500px; }
+.stage::before { content: ""; position: absolute; inset: 30px 0 0 40px; border-radius: 32px; background: linear-gradient(160deg, var(--brand-50), var(--teal-100)); }
+.tab { position: absolute; left: 0; top: 40px; width: 64%; }
+.ui-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); gap: 8px; }
+.ui-head b { font-size: 16px; }
+.ui-head small { display: block; color: var(--muted); font-size: 13px; font-weight: 500; }
+.saved { font-size: 12px; font-weight: 700; color: var(--success); display: inline-flex; gap: 6px; align-items: center; }
+.saved::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+.tasks { padding: 12px; display: grid; gap: 8px; background: var(--surface); font-size: 14px; }
+.task { display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.tick { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #857D70; display: grid; place-items: center; }
+.task.done .tick { background: var(--success); border-color: var(--success); }
+.task.done .tick::after, .tick.on::after { content: ""; width: 10px; height: 5px; border-left: 2.5px solid #fff; border-bottom: 2.5px solid #fff; transform: translateY(-1px) rotate(-45deg); }
+.task.now { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,124,122,0.14); }
+.task.now .tick { border-color: var(--teal); }
+.task b { font-weight: 700; display: block; line-height: 1.25; }
+.task small { font-size: 12.5px; color: var(--muted); }
+.task .r { font-size: 13px; font-weight: 700; color: var(--muted); }
+.task.now .r { color: var(--teal); }
+.float { position: absolute; padding: 14px 16px; border-radius: 16px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-raised); font-size: 14px; }
+.f-clock { right: 0; top: 0; width: 210px; }
+.f-ai { right: 0; bottom: 130px; width: 230px; }
+.f-order { left: 6%; bottom: 10px; width: 270px; border-color: #EBCB98; background: #FFFBF3; }
+.f-clock .big { font-weight: 800; font-size: 28px; letter-spacing: -0.03em; }
+.mini-k { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.amber { color: var(--warning-ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .f-clock { animation: bob 7s ease-in-out infinite; }
+  .f-ai { animation: bob 8s ease-in-out -2s infinite; }
+}
+@keyframes bob { 50% { transform: translateY(-8px); } }
+
+/* Pillars */
+.pillars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 40px; }
+.pillar { padding: 20px; display: grid; gap: 10px; align-content: start; text-decoration: none; color: inherit; transition: box-shadow 0.2s, border-color 0.2s; }
+.pillar:hover { box-shadow: var(--shadow-raised); border-color: #D5CCBC; }
+.pillar .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--brand-50); display: grid; place-items: center; color: var(--brand-700); }
+.pillar .ico svg { width: 22px; height: 22px; }
+.pillar h3 { font-size: 19px; line-height: 1.2; }
+.pillar p { font-size: 14.5px; color: var(--muted); }
+
+/* Sound familiar */
+.scen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+.scen article { overflow: hidden; }
+.photo { height: 180px; background: linear-gradient(135deg, #E9E3D8, #D9D1C3); display: grid; place-items: center; text-align: center; padding: 16px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.scen .body { padding: 20px; display: grid; gap: 8px; }
+.scen .who { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-700); }
+.scen h3 { font-size: 21px; line-height: 1.2; }
+.scen p { color: var(--muted); font-size: 15.5px; }
+
+/* Rota */
+.rota { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 28px; margin-top: 48px; align-items: start; }
+.paper { background: #FDFBF6; border: 1px solid var(--line); border-radius: 6px; padding: 16px; transform: rotate(-2deg); box-shadow: var(--shadow-raised); font-style: italic; color: #34507A; font-size: 14px; }
+.paper table { width: 100%; border-collapse: collapse; }
+.paper td, .paper th { border: 1px solid #DDD3C1; padding: 6px; text-align: start; }
+.paper th { font-style: normal; color: var(--ink); font-size: 12.5px; background: #F3EEE4; }
+.grid-rota { padding: 14px; display: grid; gap: 10px; }
+.summary { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13.5px; font-weight: 600; }
+.summary span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; }
+.summary .warn { background: var(--warning-100); border-color: #EBCB98; color: var(--warning-ink); }
+.week { width: 100%; border-collapse: separate; border-spacing: 4px; font-size: 13px; }
+.week th { font-size: 12px; color: var(--muted); text-align: start; font-weight: 700; padding: 2px 4px; }
+.shift { background: var(--teal-100); color: var(--teal-700); border-radius: 8px; padding: 6px 8px; font-weight: 700; white-space: nowrap; }
+.shift.check { background: var(--warning-100); color: var(--warning-ink); outline: 1.5px solid #EBCB98; cursor: pointer; }
+.shift.check.ok { background: var(--teal-100); color: var(--teal-700); outline: 0; }
+.shift.off { background: transparent; color: #8C958F; font-weight: 500; }
+.who-chip { background: var(--warning-100); color: var(--warning-ink); border-radius: 999px; padding: 3px 9px; font-weight: 700; font-size: 12.5px; }
+.publish { justify-self: start; }
+.publish[disabled] { background: #C9C2B5; cursor: not-allowed; }
+
+/* Workflow rail */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 64px; counter-reset: s; }
+.flow div { position: relative; padding: 46px 10px 0 0; font-weight: 700; font-size: 16px; }
+.flow div::before { counter-increment: s; content: counter(s); position: absolute; top: 0; left: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; font-size: 14px; z-index: 1; }
+.flow div::after { content: ""; position: absolute; top: 15px; left: 32px; right: 0; height: 2px; background: var(--teal-100); }
+.flow div:last-child::after { display: none; }
+.flow div span { display: block; font-weight: 500; font-size: 14px; color: var(--muted); margin-top: 2px; }
+.flow div.here::before { box-shadow: 0 0 0 6px rgba(15,124,122,0.18); }
+
+/* Clock-in */
+.clock { display: grid; grid-template-columns: 300px 1fr; gap: 28px; margin-top: 44px; align-items: start; }
+.phone { border-radius: 36px; padding: 10px; background: var(--ink); box-shadow: var(--shadow-raised); }
+.phone .scr { background: var(--surface); border-radius: 28px; padding: 22px 16px; min-height: 470px; display: grid; gap: 14px; align-content: start; }
+.methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+.methods button { min-height: 44px; border: 0; border-radius: 9px; background: transparent; font-size: 12.5px; font-weight: 700; color: var(--muted); cursor: pointer; }
+.methods button[aria-pressed="true"] { background: var(--teal-100); color: var(--teal-700); }
+.shiftcard { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.shiftcard b { font-size: 18px; display: block; }
+.shiftcard small { color: var(--muted); font-size: 13.5px; }
+.clockbtn { min-height: 64px; border-radius: 16px; border: 0; background: var(--teal); color: #fff; font-weight: 800; font-size: 19px; cursor: pointer; }
+.clockbtn:hover { background: var(--teal-700); }
+.status { border-radius: 14px; padding: 12px 14px; font-size: 14px; display: flex; gap: 10px; align-items: start; }
+.status.wait { background: var(--white); border: 1px solid var(--line); color: var(--muted); }
+.status.done { background: var(--success-100); color: #12502E; }
+.spin { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--teal-100); border-top-color: var(--teal); flex: none; }
+@media (prefers-reduced-motion: no-preference) { .spin { animation: spin 0.9s linear infinite; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.privacy { font-size: 12.5px; color: var(--muted); }
+.board { display: grid; gap: 16px; }
+.board .card { padding: 18px; }
+.att { display: grid; gap: 8px; margin-top: 10px; }
+.att div { display: grid; grid-template-columns: 1fr auto; gap: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; }
+.att .in { color: var(--success); font-weight: 700; }
+.att .late { color: var(--warning-ink); font-weight: 700; }
+.att .not { color: var(--muted); font-weight: 600; }
+.att .fresh { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,124,122,0.12); }
+.ts { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+.ts th { text-align: start; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 6px 4px; border-bottom: 1px solid var(--line); }
+.ts td { padding: 8px 4px; border-bottom: 1px solid var(--line); }
+.privacy-panel { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.privacy-panel div { padding: 16px; border-radius: 14px; background: var(--white); border: 1px solid var(--line); font-size: 15px; }
+.privacy-panel b { display: block; margin-bottom: 4px; }
+
+/* AI checker */
+.ai { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; margin-top: 44px; align-items: start; }
+.ai-dash { padding: 20px; }
+.seg { display: inline-grid; grid-template-columns: 1fr 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.seg button { min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; font-weight: 700; font-size: 14px; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--white); color: var(--ink); box-shadow: var(--shadow-card); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.tiles div { background: var(--surface); border-radius: 12px; padding: 12px; }
+.tiles b { display: block; font-size: 28px; font-weight: 800; letter-spacing: -0.03em; }
+.tiles span { font-size: 13px; color: var(--muted); }
+.flags { display: grid; gap: 8px; margin-top: 16px; }
+.flag { text-align: start; width: 100%; border: 1px solid var(--line); background: var(--white); border-radius: 12px; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; cursor: pointer; min-height: 56px; }
+.flag:hover { border-color: #D5CCBC; }
+.flag[aria-expanded="true"] { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,124,122,0.12); }
+.sev { font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: 999px; }
+.sev.review { background: var(--warning-100); color: var(--warning-ink); }
+.sev.info { background: var(--teal-100); color: var(--teal-700); }
+.flag b { font-size: 15px; }
+.why { padding: 18px; display: grid; gap: 10px; font-size: 15px; }
+.why h4 { font-size: 18px; letter-spacing: -0.01em; }
+.why .k { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-700); }
+.why a { color: var(--teal); font-weight: 700; }
+.fine { font-size: 13.5px; color: var(--muted); margin-top: 18px; max-width: 80ch; }
+
+/* Ordering */
+.order { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; align-items: start; }
+.basket { padding: 18px; display: grid; gap: 10px; }
+.line-item { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 15px; }
+.line-item small { display: block; color: var(--muted); font-size: 13px; }
+.alert { border: 1.5px solid #EBCB98; background: #FFFBF3; border-radius: 16px; padding: 18px; display: grid; gap: 12px; box-shadow: var(--shadow-raised); }
+.alert h4 { font-size: 19px; color: var(--warning-ink); }
+.alert .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px; }
+.alert .cmp div { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.alert .acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.alert .acts .btn { min-height: 46px; font-size: 14.5px; padding: 0 16px; }
+.track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 18px; font-size: 13px; font-weight: 700; text-align: center; }
+.track span { padding: 10px 4px; border-radius: 10px; background: var(--surface); color: var(--muted); border: 1px solid var(--line); }
+.track span.on { background: var(--teal-100); color: var(--teal-700); border-color: transparent; }
+
+/* Brand board */
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 36px; }
+.sw { overflow: hidden; }
+.sw i { display: block; height: 72px; border-bottom: 1px solid var(--line); }
+.sw div { padding: 10px; font-size: 13px; line-height: 1.35; }
+.sw b { display: block; font-size: 13.5px; }
+.sw span { color: var(--muted); }
+.typeline { margin-top: 28px; display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; padding: 24px; }
+.typeline .aa { font-size: 88px; font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; color: var(--brand-900); }
+
+footer { padding-block: 40px 56px; background: var(--surface); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: grid; gap: 8px; }
+footer b { color: var(--brand-900); font-size: 18px; letter-spacing: -0.02em; }
+
+@media (max-width: 1000px) {
+  .hero, .rota, .clock, .ai, .order { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: repeat(2, 1fr); }
+  .scen, .privacy-panel { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; gap: 0; }
+  .flow div { padding: 0 0 22px 48px; min-height: 52px; }
+  .flow div::after { top: 32px; left: 15px; right: auto; width: 2px; height: calc(100% - 32px); }
+  .swatches { grid-template-columns: repeat(3, 1fr); }
+  .nav { display: none; }
+  .phone { max-width: 320px; }
+}
+@media (max-width: 600px) {
+  section { padding-block: 64px; }
+  .stage { min-height: 520px; }
+  .tab { width: 100%; top: 10px; }
+  .f-clock { top: auto; bottom: 150px; right: 0; }
+  .f-ai { display: none; }
+  .f-order { left: 0; bottom: 0; width: 88%; }
+  .pillars { grid-template-columns: 1fr; }
+  .tiles { grid-template-columns: 1fr 1fr 1fr; }
+  .alert .cmp { grid-template-columns: 1fr; }
+  .track { grid-template-columns: 1fr 1fr; }
+  .week-wrap { overflow-x: auto; }
+  .boardtag { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="logo"><i aria-hidden="true"></i>Safe Kitchen</span>
+    <nav class="nav" aria-label="Preview navigation"><span>Food safety</span><span>Rotas &amp; clock-in</span><span>AI Checker</span><span>Ordering</span><span>Pricing</span><span>FAQ</span></nav>
+    <span class="boardtag">Light concept · for approval</span>
+  </div>
+</header>
+
+<!-- Hero -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="note">Section 1 · Hero <span>Bright, calm, the app’s own colours.</span></div>
+        <h1>Running a kitchen is hard enough. <span>The paperwork shouldn’t be.</span></h1>
+        <p class="sub">Food safety, staff rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.</p>
+        <div class="ctas"><a class="btn primary" href="#final">Get early access</a><a class="btn secondary" href="#pillars">See how it works</a></div>
+      </div>
+      <div class="stage" aria-label="Illustrative Safe Kitchen screens">
+        <div class="device tab">
+          <div class="ui-head"><div><b>Now</b><small>Lunch prep · Kitchen tablet</small></div><span class="saved">Saved</span></div>
+          <div class="tasks">
+            <div class="task done"><span class="tick"></span><div><b>Opening checks</b><small>Sam · 09:41</small></div><span class="r num">6/6</span></div>
+            <div class="task done"><span class="tick"></span><div><b>Walk-in fridge</b><small>Sam · 10:02</small></div><span class="r">Recorded</span></div>
+            <div class="task now"><span class="tick"></span><div><b>Hot holding: curry</b><small>Tap to record</small></div><span class="r">Due now</span></div>
+            <div class="task"><span class="tick"></span><div><b>Clean prep boards</b><small>Prep area</small></div><span class="r num">11:00</span></div>
+          </div>
+        </div>
+        <div class="float f-clock"><div class="mini-k">Clock-in</div><div class="big num">08:57</div><div style="font-size:13.5px;color:var(--success);font-weight:700">✓ Clocked in · The Olive Tree</div></div>
+        <div class="float f-ai"><div class="mini-k">AI Checker · today</div><div style="font-weight:800;font-size:17px;margin-top:4px">2 things need attention</div><div style="font-size:13.5px;color:var(--muted)">Fridge 2 · no afternoon reading</div></div>
+        <div class="float f-order"><div class="mini-k amber">Ordering</div><div style="font-weight:800" class="amber">Possible duplicate order</div><div style="font-size:13.5px;color:var(--muted)">Chicken breast 20 kg is already on Thursday’s delivery</div></div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted)">All screens are illustrative. Food safety is in development; the other pillars are planned.</p>
+  </div>
+</section>
+
+<!-- Pillars -->
+<section class="alt" id="pillars">
+  <div class="wrap">
+    <div class="note">Section 1b · Product overview <span>Jump links to each pillar, with honest status.</span></div>
+    <h2 class="h2">One kitchen. One system. <em>Everything where it should be.</em></h2>
+    <div class="pillars">
+      <a class="card pillar" href="#pillars"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></span><span class="chip dev">In development</span><h3>Simple Food Safety</h3><p>Temperatures, cleaning and checks in a few taps. Records ready to find.</p></a>
+      <a class="card pillar" href="#rota"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="chip plan">Planned</span><h3>Smart Staff Rotas</h3><p>Upload the rota you already made. Check it, then send it.</p></a>
+      <a class="card pillar" href="#clock"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="chip plan">Planned</span><h3>Clock-In &amp; Attendance</h3><p>Know who’s in, and turn shifts into timesheets.</p></a>
+      <a class="card pillar" href="#ai"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="chip plan">Planned</span><h3>AI Checker</h3><p>Spots missing and unusual records, and tells you why.</p></a>
+      <a class="card pillar" href="#order"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><span class="chip plan">Planned</span><h3>Smart Ordering</h3><p>Catch duplicates and odd quantities before they cost you.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- Sound familiar -->
+<section>
+  <div class="wrap">
+    <div class="note">Section 2 · Sound familiar? <span>Three real moments. Real kitchen photos go in the grey spaces.</span></div>
+    <h2 class="h2">Sound familiar?</h2>
+    <div class="scen">
+      <article class="card"><div class="photo">Photo: a busy commercial kitchen line during evening service</div><div class="body"><span class="who">The chef</span><h3>It’s Friday night. The checks still aren’t done.</h3><p>Orders are coming in, the team is stretched, and someone still needs to fill in the temperature sheet.</p></div></article>
+      <article class="card"><div class="photo">Photo: an office shelf of ring binders and folders</div><div class="body"><span class="who">The inspection</span><h3>The EHO wants last month’s records.</h3><p>The manager is in the office, searching through folders for the right week.</p></div></article>
+      <article class="card"><div class="photo">Photo: a restaurant owner on the phone, away from the site</div><div class="body"><span class="who">The owner</span><h3>You’re away. Were the checks done?</h3><p>The only way to find out is to call the manager, again.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- Rota -->
+<section class="tint" id="rota">
+  <div class="wrap">
+    <div class="note">Section 6 · Smart Rotas <span class="chip plan">Planned</span> <span>Tap the amber shifts to check them, then publish.</span></div>
+    <h2 class="h2">Already made your rota? <em>Don’t make it twice.</em></h2>
+    <p class="lede">Upload a photo, screenshot, PDF or spreadsheet of the rota you already use. Safe Kitchen turns it into a digital week you can check, correct and send to your team.</p>
+    <div class="rota">
+      <div>
+        <div class="paper" aria-label="Photo of a handwritten rota">
+          <table><tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th></tr>
+          <tr><td>Sam</td><td>9–5</td><td>9–5</td><td>off</td></tr>
+          <tr><td>Priya</td><td>12–10</td><td>12–10?</td><td>12–10</td></tr>
+          <tr><td>Jo</td><td>off</td><td>5–11</td><td>5–11</td></tr></table>
+        </div>
+        <p style="margin-top:22px;font-size:14px;color:var(--muted)">Photo of the rota on the office wall</p>
+      </div>
+      <div class="device">
+        <div class="ui-head"><div><b>Draft from your photo</b><small>Week of 3 Nov · Main kitchen</small></div><span class="demo-flag">Illustrative demo</span></div>
+        <div class="grid-rota">
+          <div class="summary" aria-live="polite"><span>9 shifts found</span><span class="warn" id="toCheck">2 to check</span><span class="warn" id="toMatch">1 person to match</span></div>
+          <div class="week-wrap">
+          <table class="week">
+            <tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th></tr>
+            <tr><th>Sam</th><td><span class="shift">09:00–17:00</span></td><td><span class="shift">09:00–17:00</span></td><td><span class="shift off">Off</span></td></tr>
+            <tr><th>Priya</th><td><span class="shift">12:00–22:00</span></td><td><button class="shift check" data-fix="12:00–22:00">Check this</button></td><td><span class="shift">12:00–22:00</span></td></tr>
+            <tr><th><button class="who-chip" id="matchBtn">“Jo”: who is this?</button></th><td><span class="shift off">Off</span></td><td><span class="shift">17:00–23:00</span></td><td><button class="shift check" data-fix="17:00–23:00">Check this</button></td></tr>
+          </table>
+          </div>
+          <button class="btn primary publish" id="publish" disabled>Publish and notify staff</button>
+          <p id="pubMsg" class="privacy" aria-live="polite">Imported rotas are always a draft until a manager checks them.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow" aria-label="From rota to timesheet">
+      <div>Create rota<span>Upload or build it</span></div>
+      <div>Send to staff<span>Notifications on publish</span></div>
+      <div class="here">Clock in<span>Location, QR or tablet PIN</span></div>
+      <div>Track attendance<span>Live for managers</span></div>
+      <div>Review timesheets<span>Ready for payroll</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Clock-in -->
+<section id="clock">
+  <div class="wrap">
+    <div class="note">Section 7 · Clock-In &amp; Attendance <span class="chip plan">Planned</span> <span>Choose a method, then tap Clock in.</span></div>
+    <h2 class="h2">Know who’s in. Know who’s late. <em>Know who’s working.</em></h2>
+    <p class="lede">Smart staff clock-ins, location verification and automatic timesheets, connected directly to your rota.</p>
+    <div class="clock">
+      <div class="phone">
+        <div class="scr">
+          <span class="demo-flag" style="justify-self:start">Illustrative demo</span>
+          <div class="methods" role="group" aria-label="Clock-in method">
+            <button type="button" aria-pressed="true" data-m="loc">Location</button>
+            <button type="button" aria-pressed="false" data-m="qr">QR code</button>
+            <button type="button" aria-pressed="false" data-m="pin">Tablet PIN</button>
+          </div>
+          <div class="shiftcard"><small>Today’s shift · Jo</small><b class="num">17:00–23:00</b><small>The Olive Tree · Main kitchen</small></div>
+          <button class="clockbtn" id="clockBtn" type="button">Clock in</button>
+          <div id="clockStatus" aria-live="polite"></div>
+          <p class="privacy" id="methodNote">Location is checked only at the moment you clock in. No tracking during your shift.</p>
+        </div>
+      </div>
+      <div class="board">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b>Who’s in · Main kitchen</b><span class="demo-flag">Manager view</span></div>
+          <div class="att">
+            <div><span>Sam · 09:00 shift</span><span class="in num">✓ In 08:57</span></div>
+            <div><span>Priya · 12:00 shift</span><span class="late num">In 12:09 · 9 min late</span></div>
+            <div id="joRow"><span>Jo · 17:00 shift</span><span class="not">Not clocked in yet</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b>Rota vs actual · this week</b><span class="btn secondary" style="min-height:40px;font-size:14px;padding:0 14px">Export timesheet</span></div>
+          <table class="ts">
+            <thead><tr><th>Person</th><th>Scheduled</th><th>Actual</th><th>Difference</th></tr></thead>
+            <tbody>
+              <tr><td>Sam</td><td class="num">32.0 h</td><td class="num">32.3 h</td><td class="num">+0.3 h</td></tr>
+              <tr><td>Priya</td><td class="num">40.0 h</td><td class="num">39.1 h</td><td class="num amber">−0.9 h · 1 late</td></tr>
+              <tr><td>Jo</td><td class="num">18.0 h</td><td class="num" id="joHours">12.0 h</td><td class="num">Shift in progress</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="privacy-panel">
+      <div><b>Only at clock-in</b>Location is checked when someone clocks in or out. There’s no tracking during shifts.</div>
+      <div><b>An alternative for everyone</b>Staff who can’t or don’t want to share location can clock in on the kitchen tablet with their PIN.</div>
+      <div><b>Managers stay in charge</b>Location checks reduce mistakes, but they aren’t foolproof. Managers review and correct records, and changes are kept.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI checker -->
+<section class="alt" id="ai">
+  <div class="wrap">
+    <div class="note">Section 8 · AI Checker <span class="chip plan">Planned</span> <span>Open a flagged item to see why.</span></div>
+    <h2 class="h2">An extra pair of eyes <em>on your kitchen.</em></h2>
+    <p class="lede">Know what needs attention, without checking every form. Daily or weekly summaries, with urgent items flagged straight away.</p>
+    <div class="ai">
+      <div class="card ai-dash">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div><b style="font-size:20px">Your kitchen at a glance</b><div class="demo-flag" style="margin-top:6px">Sample data</div></div>
+          <div class="seg" role="group" aria-label="Summary period"><button type="button" aria-pressed="true" data-p="day">Daily</button><button type="button" aria-pressed="false" data-p="week">Weekly</button></div>
+        </div>
+        <div class="tiles" aria-live="polite">
+          <div><b class="num" id="t1">46</b><span>Checks recorded</span></div>
+          <div><b class="num" id="t2">2</b><span>Outstanding</span></div>
+          <div><b class="num" id="t3">1</b><span>Needs review</span></div>
+        </div>
+        <div class="flags">
+          <button class="flag" type="button" aria-expanded="true" data-i="0"><span class="sev review">Review</span><b>Fridge 2: no afternoon reading</b><span aria-hidden="true">›</span></button>
+          <button class="flag" type="button" aria-expanded="false" data-i="1"><span class="sev review">Review</span><b>Cleaning record incomplete: prep area</b><span aria-hidden="true">›</span></button>
+          <button class="flag" type="button" aria-expanded="false" data-i="2"><span class="sev info">Info</span><b>Corrective action waiting 2 days</b><span aria-hidden="true">›</span></button>
+        </div>
+      </div>
+      <div class="card why" id="why" aria-live="polite"></div>
+    </div>
+    <p class="fine">The AI Checker supports managers. It can’t confirm that a check was physically done, and it never replaces your own judgement or your legal responsibilities. Safety limits come from your approved methods, never from AI.</p>
+  </div>
+</section>
+
+<!-- Ordering -->
+<section id="order">
+  <div class="wrap">
+    <div class="note">Section 9 · Smart Ordering <span class="chip plan">Planned</span> <span>Add the chicken to see the check.</span></div>
+    <h2 class="h2">Catch costly ordering mistakes <em>before they happen.</em></h2>
+    <div class="order">
+      <div class="card basket">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:18px">Order · Example Foods Ltd</b><span class="demo-flag">Illustrative demo</span></div>
+        <div class="line-item"><div>Rapeseed oil 20 L<small>Usual order</small></div><b class="num">× 2</b></div>
+        <div class="line-item"><div>Basmati rice 10 kg<small>Usual order</small></div><b class="num">× 3</b></div>
+        <div class="line-item" id="chickenLine" style="border-style:dashed"><div>Chicken breast<small>Example price £6.20/kg</small></div><button class="btn primary" id="addChicken" style="min-height:44px;font-size:14.5px;padding:0 16px">Add 20 kg</button></div>
+        <div class="track" aria-label="Order status steps"><span class="on">Build</span><span id="st2">Check</span><span id="st3">Approve</span><span id="st4">Send</span><span id="st5">Track</span></div>
+      </div>
+      <div id="orderAlert" aria-live="polite"><p class="privacy" style="padding:18px">Possible problems are checked before anything is sent to your supplier.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Brand -->
+<section class="alt">
+  <div class="wrap">
+    <div class="note">Brand · from the app’s design system <span>No new colours. Plus Jakarta Sans throughout.</span></div>
+    <h2 class="h2">The app’s own look, <em>on a bigger stage.</em></h2>
+    <div class="swatches">
+      <div class="card sw"><i style="background:#FFFFFF"></i><div><b>White</b><span>Main background</span></div></div>
+      <div class="card sw"><i style="background:#FAF7F2"></i><div><b>Warm white</b><span>Alternate sections</span></div></div>
+      <div class="card sw"><i style="background:#EEF7F2"></i><div><b>Green tint</b><span>Pillar sections</span></div></div>
+      <div class="card sw"><i style="background:#0B3B2E"></i><div><b>Deep green</b><span>Logo, headings</span></div></div>
+      <div class="card sw"><i style="background:#2E8B6A"></i><div><b>Green</b><span>Highlighted words</span></div></div>
+      <div class="card sw"><i style="background:#0F7C7A"></i><div><b>Teal</b><span>Buttons, as in the app</span></div></div>
+    </div>
+    <div class="card typeline"><div class="aa">Aa</div><div><b>Plus Jakarta Sans</b>, the app’s typeface. Extra-bold for headlines, regular for reading. Times, hours and prices use tabular figures: <span class="num">08:57 · 32.0 h · £14.99</span></div></div>
+  </div>
+</section>
+
+<section class="tint" id="final">
+  <div class="wrap">
+    <div class="note">Section 16 · Final call to action</div>
+    <h2 class="h2" style="font-size:clamp(2.6rem,6vw,5rem)">Less admin. Less waste. <em>More control.</em></h2>
+    <p class="lede">Discover a simpler, smarter way to manage your kitchen.</p>
+    <div class="ctas"><span class="btn primary">Get early access</span><span class="btn secondary">Request a demo</span><span class="btn secondary">Book a call</span></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><b>One kitchen. One system. Everything where it should be.</b><span>Light concept board for approval · 31 October 2026. All screens, names, prices and records are illustrative sample data. Safe Kitchen is not affiliated with or endorsed by the Food Standards Agency.</span></div></footer>
+
+<script>
+(function () {
+  /* Rota review */
+  var checks = Array.prototype.slice.call(document.querySelectorAll(".shift.check"));
+  var matchBtn = document.getElementById("matchBtn");
+  var publish = document.getElementById("publish");
+  var matched = false;
+  function updateRota() {
+    var left = checks.filter(function (c) { return !c.classList.contains("ok"); }).length;
+    var toCheck = document.getElementById("toCheck");
+    var toMatch = document.getElementById("toMatch");
+    toCheck.textContent = left ? left + " to check" : "All shifts checked";
+    toCheck.className = left ? "warn" : "";
+    toMatch.textContent = matched ? "Everyone matched" : "1 person to match";
+    toMatch.className = matched ? "" : "warn";
+    publish.disabled = left > 0 || !matched;
+  }
+  checks.forEach(function (c) {
+    c.addEventListener("click", function () { c.classList.add("ok"); c.textContent = c.dataset.fix; updateRota(); });
+  });
+  matchBtn.addEventListener("click", function () { matched = true; matchBtn.outerHTML = "Jo Walsh"; updateRota(); });
+  publish.addEventListener("click", function () {
+    document.getElementById("pubMsg").textContent = "Published. 3 staff notified (demo). They’ll see their shifts on their phones.";
+    publish.disabled = true; publish.textContent = "Published";
+  });
+
+  /* Clock-in */
+  var method = "loc";
+  var notes = {
+    loc: "Location is checked only at the moment you clock in. No tracking during your shift.",
+    qr: "Scan the code on the kitchen screen. It changes regularly so it can’t be copied.",
+    pin: "No location needed. Clock in on the shared kitchen tablet with your own PIN."
+  };
+  var checking = { loc: "Checking you’re at The Olive Tree…", qr: "Checking the QR code…", pin: "Checking your PIN…" };
+  Array.prototype.forEach.call(document.querySelectorAll(".methods button"), function (b) {
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".methods button"), function (o) { o.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true"); method = b.dataset.m;
+      document.getElementById("methodNote").textContent = notes[method];
+    });
+  });
+  var clockBtn = document.getElementById("clockBtn");
+  var status = document.getElementById("clockStatus");
+  clockBtn.addEventListener("click", function () {
+    if (clockBtn.dataset.state === "in") return;
+    clockBtn.disabled = true;
+    status.innerHTML = '<div class="status wait"><span class="spin" aria-hidden="true"></span><span>' + checking[method] + "</span></div>";
+    setTimeout(function () {
+      var via = { loc: "location confirmed", qr: "QR code", pin: "kitchen tablet PIN" }[method];
+      status.innerHTML = '<div class="status done"><strong>✓</strong><span><b>Clocked in · 16:56</b><br>Server time · ' + via + "</span></div>";
+      clockBtn.textContent = "Clock out"; clockBtn.dataset.state = "in"; clockBtn.disabled = false;
+      var jo = document.getElementById("joRow");
+      jo.className = "fresh"; jo.innerHTML = '<span>Jo · 17:00 shift</span><span class="in num">✓ In 16:56</span>';
+    }, 1100);
+  });
+
+  /* AI checker */
+  var flags = [
+    { t: "Fridge 2: no afternoon reading", why: "Fridge 2 is set to be checked twice a day. The morning reading was recorded at 09:12, but nothing has been recorded since.", rec: "Fridge 2 · today’s records", next: "Ask the shift lead to take a reading now, and check the reminder is set for the afternoon." },
+    { t: "Cleaning record incomplete: prep area", why: "The closing clean for the prep area was started at 22:41, but two of the five items weren’t ticked.", rec: "Closing clean · prep area · yesterday", next: "Check with the closing team whether the items were done and not ticked, or still need doing." },
+    { t: "Corrective action waiting 2 days", why: "A problem with the walk-in fridge seal was recorded on Tuesday and is still waiting for a manager review.", rec: "Problem · walk-in fridge seal", next: "Review the problem, add what was done, and mark it resolved or arrange a repair." }
+  ];
+  var why = document.getElementById("why");
+  var flagBtns = Array.prototype.slice.call(document.querySelectorAll(".flag"));
+  function showFlag(i) {
+    flagBtns.forEach(function (b) { b.setAttribute("aria-expanded", b.dataset.i == i ? "true" : "false"); });
+    var f = flags[i];
+    why.innerHTML = '<span class="k">Why this was flagged</span><h4>' + f.t + "</h4><p>" + f.why + '</p><span class="k">Record</span><a href="#ai">' + f.rec + ' ›</a><span class="k">Suggested follow-up</span><p>' + f.next + '</p><p class="privacy">Flags are prompts to check, not proof that anything went wrong.</p>';
+  }
+  flagBtns.forEach(function (b) { b.addEventListener("click", function () { showFlag(+b.dataset.i); }); });
+  showFlag(0);
+  Array.prototype.forEach.call(document.querySelectorAll(".seg button"), function (b) {
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".seg button"), function (o) { o.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      var week = b.dataset.p === "week";
+      document.getElementById("t1").textContent = week ? "318" : "46";
+      document.getElementById("t2").textContent = week ? "7" : "2";
+      document.getElementById("t3").textContent = week ? "3" : "1";
+    });
+  });
+
+  /* Ordering */
+  var price = 6.2, kg = 20;
+  var alertBox = document.getElementById("orderAlert");
+  document.getElementById("addChicken").addEventListener("click", function () {
+    document.getElementById("chickenLine").innerHTML = '<div>Chicken breast<small>Example price £6.20/kg</small></div><b class="num">20 kg</b>';
+    document.getElementById("chickenLine").style.borderStyle = "solid";
+    document.getElementById("st2").className = "on";
+    var dup = (price * kg).toLocaleString("en-GB", { style: "currency", currency: "GBP" });
+    alertBox.innerHTML = '<div class="alert" role="alert"><h4>Possible duplicate order detected</h4><p style="font-size:15px">Chicken breast is already on an incoming order.</p>' +
+      '<div class="cmp"><div><b>Already ordered</b><br>20 kg · arriving Thu 6 Nov<br><span style="color:var(--muted)">Ordered by Priya, Mon</span></div><div><b>This order</b><br>20 kg · arriving Thu 6 Nov<br><span style="color:var(--muted)">Possible duplicate spend: <b class="num">' + dup + '</b></span></div></div>' +
+      '<p class="privacy">Illustrative calculation: 20 kg × example price £6.20/kg. Not a measured saving.</p>' +
+      '<div class="acts"><button class="btn primary" id="fixQty">Remove from this order</button><button class="btn secondary" id="keepBoth">Keep both orders</button></div></div>';
+    document.getElementById("fixQty").addEventListener("click", function () { finish("Removed. Your order is ready for manager approval."); });
+    document.getElementById("keepBoth").addEventListener("click", function () { finish("Both orders kept. The manager will see the note when approving."); });
+  });
+  function finish(msg) {
+    alertBox.innerHTML = '<div class="card" style="padding:18px"><b>' + msg + '</b><p class="privacy" style="margin-top:6px">Next: manager approval, then the order is sent by email or supplier link where supported. “Sent” is never shown as “accepted”.</p></div>';
+    ["st3", "st4"].forEach(function (id, i) { setTimeout(function () { document.getElementById(id).className = "on"; }, 400 * (i + 1)); });
+  }
+})();
+</script>
+</body>
+</html>
