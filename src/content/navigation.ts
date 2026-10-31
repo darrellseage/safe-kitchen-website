@@ -13,6 +13,7 @@ export const mainNav = [
   { href: section("rotas"), label: "Rotas & clock-in" },
   { href: section("ai-checker"), label: "AI Checker" },
   { href: section("ordering"), label: "Ordering" },
+  { href: section("savings"), label: "Savings" },
   { href: section("pricing"), label: "Pricing" },
   { href: section("faq"), label: "FAQ" },
 ] as const;

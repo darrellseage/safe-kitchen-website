@@ -118,7 +118,7 @@ export const orderingDemo = {
     { product: "Basmati rice", detail: "10 kg", quantity: 3 },
   ],
   newLine: { product: "Chicken breast", quantity: 20, unit: "kg", delivery: "Thu 6 Nov" },
-  incoming: [{ product: "Chicken breast", quantity: 20, unit: "kg", delivery: "Thu 6 Nov", orderedBy: "Priya", orderedOn: "Monday" }],
+  incoming: [{ product: "Chicken breast", quantity: 20, unit: "kg", delivery: "Thu 6 Nov", orderedBy: "Priya", orderedOn: "earlier today" }],
 };
 
 /* ---------- Staff training demo (illustrative; not the real course content) ---------- */

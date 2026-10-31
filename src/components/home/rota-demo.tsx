@@ -15,6 +15,7 @@ type Step = "upload" | "reading" | "review" | "confirm" | "published";
 const formats = [
   { icon: Camera, label: "Photo" },
   { icon: ImageIcon, label: "Screenshot" },
+  { icon: FileText, label: "Word" },
   { icon: FileText, label: "PDF" },
   { icon: FileSpreadsheet, label: "Excel or CSV" },
 ];

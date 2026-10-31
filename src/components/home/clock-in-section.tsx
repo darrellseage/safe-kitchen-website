@@ -3,6 +3,8 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { clockIn } from "@/content/home";
 import { ClockInDemo } from "./clock-in-demo";
 import { PillarLines } from "./pillar-lines";
+import { ExampleCard, gbp } from "./sales-bits";
+import { attendanceCost } from "@/lib/value";
 
 /** Section 7: Smart Clock-In & Attendance, with the privacy commitments alongside the demo. */
 export function ClockInSection() {
@@ -10,6 +12,7 @@ export function ClockInSection() {
     <Section id="clock-in" labelledBy="clock-in-title" tone="warm">
       <SectionHeading id="clock-in-title" eyebrow={clockIn.eyebrow} status={clockIn.status} title={clockIn.title} accent={clockIn.accent} intro={clockIn.intro} />
       <PillarLines lines={clockIn.lines} />
+      <ExampleCard amount={gbp(attendanceCost(clockIn.example.hours, clockIn.example.rate))} text={clockIn.example.text} note={clockIn.example.note} />
       <div className="mt-12">
         <ClockInDemo />
       </div>

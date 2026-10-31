@@ -133,7 +133,9 @@ export function OrderingDemo() {
                 <AlertTriangle className="size-5" aria-hidden="true" />
                 Possible duplicate order detected
               </p>
-              <p>{duplicate.product} is already on an incoming order for the same delivery.</p>
+              <p>
+                {duplicate.quantity} {duplicate.unit} {duplicate.product.toLowerCase()} was already ordered {duplicate.orderedOn}, for the same delivery.
+              </p>
               <div className="grid gap-2.5 text-[14.5px] sm:grid-cols-2">
                 <div className={cn("rounded-xl border bg-surface-raised p-3", phase === "viewing" ? "border-accent-600 shadow-[0_0_0_3px_var(--color-accent-100)]" : "border-line")}>
                   <p className="font-bold">Already ordered</p>
@@ -141,7 +143,7 @@ export function OrderingDemo() {
                     {duplicate.quantity} {duplicate.unit} · arriving {duplicate.delivery}
                   </p>
                   <p className="text-ink-muted">
-                    Ordered by {duplicate.orderedBy} on {duplicate.orderedOn}
+                    Ordered by {duplicate.orderedBy} {duplicate.orderedOn}
                   </p>
                 </div>
                 <div className="rounded-xl border border-line bg-surface-raised p-3">

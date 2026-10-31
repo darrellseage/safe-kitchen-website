@@ -220,3 +220,14 @@ Website consequences: the pricing section and FAQ say the price covers every pil
 - **Inspection Mode** replaces the simple EHO view, straight after training: tabs for daily records (In development), staff training (Planned), suppliers (In development), pest control (In development; uploaded contractor reports Planned) and documents (uploads Planned).
 - **"Level 2" wording is on hold** until the owner confirms the course's accreditation (app O-034). The course is called "Food Safety and Hygiene course"; setting `levelClaim` in `src/content/home.ts` adds "Level 2" everywhere at once.
 - Header gains a "Training" link; the overview shows six pillars; FAQ gains training and "what can I keep for an inspection?" answers; "Staff training records" leaves the roadmap list.
+
+---
+
+## 12. Sales and marketing enhancements (31 October 2026, owner brief)
+
+Built into the existing page, not as one big block:
+- **Value band** after the hero: protect your reputation, reduce costs, save time, train your team. "One simple platform. Unlimited staff. From £14.99 per month."
+- **Food hygiene ratings** section with FSA Food and You 2 Wave 11 figures and a **revenue-at-risk calculator**. The three figures are **not yet verified** (gov.uk was unreachable from the build environment; earlier waves report 35–40% for takeaways), so the real site hides them and the private preview marks them "Figure being verified" (`src/content/stats.ts`).
+- **Training:** "Stop paying for food hygiene training one employee at a time", the £24 comparison table (typical courses checked at about £15–£25), "Level 2" wording with the mandatory certificate disclosure (app D-080).
+- **Rotas** (photo, Excel, Word, three steps), **clock-in** (£1,560 illustrative example, privacy wording kept), **AI Checker** (what it helps spot), **ordering** (what it catches, £5,200 example), **food waste** (WRAP 2013 £10,000 per outlet, verified, dated), **"Why manage five systems"** comparison, **combined savings calculator** (purchasing and waste counted once), **pricing** (16.6% annual saving, never per employee), FAQ and repeated calls to action.
+- All money examples are labelled illustrative or hypothetical; logic in `src/lib/value.ts` with tests matching the brief's worked examples.

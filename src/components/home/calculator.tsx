@@ -5,6 +5,9 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { calculator } from "@/content/home";
 import { calculatorExample, calculatorLimits, estimatePaperwork, type CalculatorInput } from "@/lib/calculator";
+import { pricing } from "@/config/pricing";
+import { minutesPerWeekToCover } from "@/lib/value";
+import { ExampleCard } from "./sales-bits";
 
 const fields: Array<{ key: keyof CalculatorInput; label: string; unit: string; hint?: string; prefix?: string; step?: number }> = [
   { key: "sites", label: "Kitchen sites", unit: "sites" },
@@ -93,6 +96,7 @@ export function PaperworkCalculator() {
         </div>
       </div>
       <p className="mt-5 max-w-[80ch] text-sm text-ink-muted">{calculator.disclaimer}</p>
+      <ExampleCard amount={String(Math.ceil(minutesPerWeekToCover(pricing.annual, 15)))} text={calculator.coverLine.replace("{minutes}", "{amount}")} note={calculator.coverNote} />
     </Section>
   );
 }

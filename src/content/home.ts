@@ -35,6 +35,56 @@ export const kitchenTypes = {
   ],
 } as const;
 
+/** The overall sales promise, shown straight after the hero. */
+export const promises = {
+  items: [
+    { title: "Protect your reputation", body: "Organised records, checks you can see and training you can prove." },
+    { title: "Reduce costs", body: "Catch duplicate orders and cut avoidable waste before it hits your profit." },
+    { title: "Save time", body: "Less paperwork and chasing, more time running your business." },
+    { title: "Train your team", body: "Unlimited Level 2 food hygiene training, with no per-person course fees." },
+  ],
+  footer: "One simple platform. Unlimited staff. From £14.99 per month.",
+};
+
+export const hygiene = {
+  title: "Your food hygiene rating",
+  accent: "could be costing you customers.",
+  intro: "Your food hygiene rating matters to your customers. It isn’t just a sticker on the door: it can influence whether they choose your business.",
+  helps: [
+    "Keep organised, complete food safety records",
+    "See which checks are done, missing or overdue",
+    "Track staff training and certificates",
+    "Have everything ready when the EHO walks in",
+  ],
+  helpsTitle: "How Safe Kitchen helps",
+  disclaimer: "Safe Kitchen helps you keep and show good records. It can’t guarantee any hygiene rating: ratings depend on the inspection of your premises, practices and management.",
+  calculator: {
+    title: "What could losing customer confidence cost your business?",
+    note: "A hypothetical scenario to show the scale of even small changes in sales. It isn’t a prediction of what any rating would cost you.",
+  },
+};
+
+export const comparison = {
+  title: "Why manage five different systems",
+  accent: "when you could use one?",
+  before: {
+    title: "The usual way",
+    items: ["Paper food safety records", "Training bought one person at a time", "Rotas typed up by hand", "Spreadsheet timesheets", "Manual checks on orders", "Records spread across folders and apps", "Time spent chasing missing information"],
+  },
+  after: {
+    title: "With Safe Kitchen",
+    items: ["Food safety records in one place", "Training included, unlimited staff", "Rotas from a photo or spreadsheet", "Clock-in and attendance tracking", "Smart ordering checks", "Automatic alerts", "Management dashboards across sites"],
+  },
+};
+
+export const valueCalc = {
+  title: "How much could Safe Kitchen",
+  accent: "be worth to your business?",
+  intro: "Adjust the figures to match your kitchen. Every number is an estimate from your own figures, not a promised saving.",
+  overlapNote: "Ordering and food waste reductions overlap (over-ordering causes waste), so only the larger of the two counts towards the total.",
+  timeNote: "Management time value isn’t automatically a cash saving on your payroll.",
+};
+
 export const familiar = {
   title: "Sound familiar?",
   intro: "None of this is about bad kitchens. It’s what happens when paperwork has to compete with service.",
@@ -59,10 +109,12 @@ export const familiar = {
 
 export const calculator = {
   title: "How much time is paperwork costing your kitchen?",
-  intro: "Put in your own figures to see what kitchen admin costs you today.",
+  intro: "Spend less time on paperwork and more time running your kitchen. Start by seeing what admin costs you today.",
   disclaimer:
     "This estimates the time you currently spend on paperwork, based only on the figures you enter. It isn’t a prediction of how much time Safe Kitchen will save, and those savings haven’t been independently measured.",
   defaultsNote: "Example values shown. Replace them with your own.",
+  coverLine: "Save just {minutes} minutes a week and you’ve recovered the value of your annual subscription in management time.",
+  coverNote: "At £15 an hour and £149.99 a year. Time value isn’t automatically a cash saving on your payroll.",
 };
 
 export const transformation = {
@@ -84,7 +136,7 @@ export const demo = {
   accent: "More kitchen.",
   intro: "You became a chef to cook, not to fill in paperwork. Try a temperature check the way your team would.",
   flag: whenLive("Illustrative demo · not a real account · not food safety guidance", "Interactive demo · sample data · not food safety guidance"),
-  lines: ["Stop chasing checks. Start running your kitchen.", "Your records shouldn’t be harder to find than your ingredients."],
+  lines: ["Built for busy kitchens, not complicated office work.", "Less paperwork. More time to run your business.", "Your records shouldn’t be harder to find than your ingredients."],
   why: [
     { title: "Gloves on, hands wet", body: "Every control is at least 48px. Tap anywhere on the scale, nudge by 0.1, or type the exact reading." },
     { title: "Never prefilled", body: "The scale starts empty, so nobody can save a reading they didn’t take." },
@@ -99,16 +151,26 @@ export const demo = {
  * only once the owner confirms the course is accredited or delivered with an
  * accredited provider; every mention on the site follows it.
  */
-const levelClaim: string | null = null;
-export const courseName = levelClaim ? `${levelClaim} Food Safety and Hygiene course` : "Food Safety and Hygiene course";
+const levelClaim: string | null = "Level 2"; // owner decision 31 Oct 2026 (app D-080): in-house course, Safe Kitchen certificates
+export const courseName = levelClaim ? `${levelClaim} Food Hygiene course` : "Food Hygiene course";
+
+/** Shown wherever the course is promoted. Required with the "Level 2" wording (D-080). */
+export const certificateDisclosure =
+  "Safe Kitchen runs its own in-house course and issues Safe Kitchen certificates after a successful assessment. It isn’t an externally accredited or regulated qualification, and it isn’t endorsed by any awarding or governing body.";
 
 export const training = {
   eyebrow: "Staff Training & Certificates",
   status: "trainingCourse" as FeatureKey,
-  title: "Train your team",
-  accent: "without the paperwork.",
-  intro: `Add a new starter and Safe Kitchen sends our ${courseName} straight to their phone, or they can do it on the kitchen tablet. The lessons, the test and the certificate are all in the app, and the certificate is saved to their record automatically.`,
-  lines: ["New starter? Course sent in one tap.", "Learn on a phone or the kitchen tablet.", "Certificates saved, ready for the EHO.", "Included in your plan. No per-course fees."],
+  title: "Stop paying for food hygiene training",
+  accent: "one employee at a time.",
+  intro: `Our in-house ${courseName} is included in your subscription, with unlimited staff per site and no per-person course fees. Add a new starter and it goes straight to their phone, or they can do it on the kitchen tablet. Lessons, test and certificate are all in the app.`,
+  lines: ["Unlimited staff training. No additional per-person course fees.", "New staff? No additional course fee.", "30 staff. One subscription. Unlimited food hygiene training."],
+  comparison: {
+    title: "What separate courses could cost",
+    coursePrice: 24,
+    staff: [10, 20, 30, 50],
+    note: "Illustrative: one course per person at £24, against one year of Safe Kitchen for one site. Typical online Level 2 food hygiene courses cost about £15 to £25 per person (prices checked October 2026). Your costs will vary.",
+  },
   steps: [
     { title: "Add the employee", body: "Safe Kitchen recommends the course for their role. You confirm." },
     { title: "Course sent to their phone", body: "Or they sit it on the shared kitchen tablet." },
@@ -121,11 +183,16 @@ export const training = {
 export const rotas = {
   eyebrow: "Smart Staff Rotas",
   status: "rotas" as FeatureKey,
-  title: "Already made your rota?",
-  accent: "Don’t make it twice.",
+  title: "Take a photo of your rota.",
+  accent: "Let Safe Kitchen do the rest.",
   intro:
-    "Upload the rota you already use, from a photo, screenshot, PDF or Excel spreadsheet. Safe Kitchen turns it into a digital week you can check, correct and send to your team.",
-  lines: ["From photo to rota.", "Upload it. Check it. Send it.", "Less time organising shifts. More time running your kitchen."],
+    "Already made this week’s rota? Don’t make it twice. Snap the one on the wall, or upload your Excel spreadsheet or Word document, and Safe Kitchen turns it into an editable digital rota for your team.",
+  lines: ["No retyping shifts.", "No rota photos lost in WhatsApp.", "Less time organising shifts. More time running your kitchen."],
+  steps: [
+    { title: "Upload your rota", body: "A photo, Excel spreadsheet, Word document, screenshot or PDF." },
+    { title: "Safe Kitchen converts it", body: "Into a digital schedule, highlighting anything it isn’t sure about." },
+    { title: "Review and send", body: "Check the shifts, then send the rota straight to your staff’s phones." },
+  ],
   note: "Imported rotas are always a draft until a manager has checked them. Nothing is sent to staff until you press Publish.",
 };
 
@@ -143,9 +210,15 @@ export const workflow = {
 export const clockIn = {
   eyebrow: "Smart Clock-In & Attendance",
   status: "clockIn" as FeatureKey,
-  title: "Know who’s in. Know who’s late.",
-  accent: "Know who’s working.",
-  intro: "Smart staff clock-ins, location verification and automatic timesheets, connected directly to your rota.",
+  title: "Know who’s clocked in.",
+  accent: "Know when. Know where.",
+  intro: "Clock-in and clock-out on staff phones, location verification at the moment of clocking, attendance records and accurate timesheets, connected directly to your rota. Less manual admin, more manager oversight.",
+  example: {
+    hours: 2,
+    rate: 15,
+    text: "Two wrongly recorded paid hours a week at £15 an hour adds up to {amount} a year.",
+    note: "Illustrative scenario, not a saving Safe Kitchen is guaranteed to produce.",
+  },
   lines: [
     "Clock in. Get on with your shift.",
     "No more guessing who’s on the clock.",
@@ -162,30 +235,34 @@ export const clockIn = {
 export const aiChecker = {
   eyebrow: "AI Checker",
   status: "aiChecker" as FeatureKey,
-  title: "An extra pair of eyes",
-  accent: "on your kitchen.",
+  title: "A second set of eyes",
+  accent: "on your kitchen records.",
   intro:
-    "You can’t check every form. The AI Checker looks through your records for anything missing, incomplete or unusual, explains why, and links you straight to it. Daily or weekly summaries, with urgent items flagged straight away.",
-  lines: ["Know what needs attention, without checking every form.", "From paperwork to useful insights.", "Stay informed, even when you’re not there."],
+    "This is what sets Safe Kitchen apart from a basic digital diary. You can’t check every form, so the AI Checker looks through your records for anything missing, incomplete or unusual, explains why, and links you straight to it. Daily or weekly summaries, with urgent items flagged to managers straight away.",
+  catches: ["Missing temperature checks", "Overdue cleaning tasks", "Unusual temperature readings", "Incomplete records", "Outstanding corrective actions", "Training gaps", "Manager alerts"],
+  lines: ["Know what’s been checked, what’s missing and what needs attention.", "Stay informed, even when you’re not there."],
   note: "The AI Checker supports managers. It can’t confirm that a check was physically done or that a record is true, and it never replaces your own judgement or legal responsibilities. Safety limits come from your approved methods, never from AI.",
 };
 
 export const ordering = {
   eyebrow: "Smart Supplier Ordering",
   status: "ordering" as FeatureKey,
-  title: "Catch costly ordering mistakes",
-  accent: "before they happen.",
-  intro: "Build orders for the suppliers you already use. Safe Kitchen checks for duplicates and unusual quantities before anything is sent, and keeps every order in one place.",
-  lines: ["Know what’s ordered before you order again.", "Your orders, all in one place.", "Less waste. Better stock control."],
+  title: "Stop duplicate orders",
+  accent: "before they cost you money.",
+  intro: "Unnecessary orders eat into your profit. Build orders for the suppliers you already use, and Safe Kitchen’s AI checks help your managers spot mistakes before anything is bought.",
+  catches: ["Duplicate orders", "Unusually large orders", "Possible over-ordering", "Possible under-ordering", "Stock shortages", "Unnecessary purchases", "Unusual ordering patterns"],
+  lines: ["Stop unnecessary orders eating into your profit.", "Know what’s ordered before you order again."],
+  example: { weekly: 5000, percent: 2, text: "If £5,000 of weekly purchasing included just 2% avoidable spend, that’s {amount} a year." },
   steps: ["Build order", "Check order", "Manager approval", "Send to supplier", "Track delivery"],
   note: "Orders are sent by email or by a direct supplier link where the supplier supports it. A sent order is never shown as accepted until the supplier confirms.",
 };
 
-export const orderingCalculator = {
-  title: "Small ordering mistakes can add up.",
-  intro: "Use your own figures to estimate what duplicate or wrong orders could cost over a year.",
-  disclaimer:
-    "This is an estimate based only on the figures you enter. It isn’t a measured or promised saving, and Safe Kitchen can’t catch every mistake.",
+export const waste = {
+  title: "Stop throwing your profits",
+  accent: "in the bin.",
+  intro: "Food waste is money you’ve already spent. Better ordering, clearer stock awareness and tighter daily routines all help you waste less.",
+  example: { annual: 10000, percent: 10, text: "Cut a £10,000 food waste bill by 10% and that’s {amount} back each year." },
+  disclaimer: "Illustrative figures, not a guaranteed saving. Results depend on how each kitchen works.",
 };
 
 export const audiences = {
@@ -230,9 +307,13 @@ export const roadmap = {
 };
 
 export const pricingCopy = {
-  title: "One simple price.",
-  accent: "Everything included.",
-  intro: "One plan per site covers every Safe Kitchen tool as it launches: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
+  title: "Your entire kitchen team.",
+  accent: "One simple subscription.",
+  tagline: "Everything your kitchen needs from £14.99 a month.",
+  intro: whenLive(
+    "One plan per site covers every Safe Kitchen tool as it launches: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
+    "One plan per site covers every Safe Kitchen tool: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
+  ),
   monthlyLabel: "Monthly",
   annualLabel: "Annually",
   multiTitle: "Several sites?",
