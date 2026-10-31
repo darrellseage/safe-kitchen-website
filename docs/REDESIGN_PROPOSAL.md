@@ -196,3 +196,18 @@ No change: the website stays a **separate Next.js app** (D-073) with no connecti
 6. **Typeface:** use the app's **Plus Jakarta Sans only** (recommended, for a consistent brand), or keep a separate display font for headlines?
 
 Once these are answered, I'll start Stage 1 (Foundation).
+
+---
+
+## 10. Owner decisions (31 October 2026)
+
+| # | Decision | Recorded in the app as |
+|---|---|---|
+| 1 | All-in-one platform, food safety first: rotas and smart ordering are in. **No payroll** (attendance is exported as timesheets) | D-075 (resolves O-019) |
+| 2 | **£14.99 a month or £149.99 a year + VAT per site covers everything**, all five pillars, unlimited staff | D-076 (resolves O-025) |
+| 3 | **No AI cameras.** The AI Checker checks that forms and records are filled in correctly | D-077 |
+| 4 | Rota import adds **Excel and CSV spreadsheet files**, so any schedule can be brought in. Word stays "Our vision" | D-078 |
+| 5 | Shared kitchen tablet with a staff PIN is the **no-location clock-in alternative** | D-078 |
+| 6 | **Plus Jakarta Sans only**, consistent with the app | Website only |
+
+Website consequences: the pricing section and FAQ say the price covers every pillar as each one launches. "Timesheet exports for payroll" becomes "Timesheet exports (Excel or CSV) for your payroll". AI camera monitoring is not shown anywhere. Stage 1 (Foundation) started 31 October 2026.
