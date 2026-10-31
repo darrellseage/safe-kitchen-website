@@ -1,23 +1,22 @@
 import { PaperworkCalculator } from "@/components/home/calculator";
 import { FoodSafety } from "@/components/home/food-safety";
+import { AiCheckerSection } from "@/components/home/ai-checker-section";
+import { ClockInSection } from "@/components/home/clock-in-section";
 import { Hero } from "@/components/home/hero";
+import { OrderingSection } from "@/components/home/ordering-section";
+import { RotasSection } from "@/components/home/rotas-section";
 import { InspectionStory } from "@/components/home/inspection-story";
 import { SoundFamiliar } from "@/components/home/sound-familiar";
 import { Transformation } from "@/components/home/transformation";
 import { PillarOverview } from "@/components/home/pillar-overview";
 import { SectionScaffold } from "@/components/home/section-scaffold";
-import { WorkflowRail } from "@/components/home/workflow-rail";
 import {
-  aiChecker,
   audiences,
-  clockIn,
   faq,
   finalCta,
-  ordering,
   orderingCalculator,
   pricingCopy,
   roadmap,
-  rotas,
 } from "@/content/home";
 
 // FAQ structured data: only facts stated on the page.
@@ -45,13 +44,11 @@ export default function HomePage() {
       <PaperworkCalculator />
       <Transformation />
       <FoodSafety />
-      <SectionScaffold id="rotas" eyebrow={rotas.eyebrow} status={rotas.status} title={rotas.title} accent={rotas.accent} intro={rotas.intro} stage={3} plan={["Photo or spreadsheet becomes a weekly rota", "“2 to check · 1 person to match” review", "Publish and notify staff", "Draft until a manager checks it"]}>
-        <WorkflowRail />
-      </SectionScaffold>
-      <SectionScaffold id="clock-in" tone="warm" eyebrow={clockIn.eyebrow} status={clockIn.status} title={clockIn.title} accent={clockIn.accent} intro={clockIn.intro} stage={3} plan={["Phone clock-in by location, QR code or kitchen tablet PIN", "Manager’s “Who’s in” board updates live", "Rota vs actual hours and timesheet export", "Privacy: location only at clock-in, no tracking"]} />
-      <SectionScaffold id="ai-checker" eyebrow={aiChecker.eyebrow} status={aiChecker.status} title={aiChecker.title} accent={aiChecker.accent} intro={aiChecker.intro} stage={3} plan={["“Your kitchen at a glance” with Daily / Weekly switch", "Explore flagged records and see why each was flagged", "Suggested follow-ups linked to the record", "Clear limits on what AI can and can’t do"]} />
-      <SectionScaffold id="ordering" tone="warm" eyebrow={ordering.eyebrow} status={ordering.status} title={ordering.title} accent={ordering.accent} intro={ordering.intro} stage={3} plan={["Add 20 kg chicken breast to an order", "“Possible duplicate order detected”, with the existing order", "Illustrative duplicate spend at an example price", "Build → Check → Approve → Send → Track"]} />
-      <SectionScaffold id="ordering-cost" tone="warm" title={orderingCalculator.title} intro={orderingCalculator.intro} stage={4} plan={["Orders per week, mistakes per month, average cost of a mistake", "Estimated yearly cost, formula shown", "Your figures only, no promised savings"]} />
+      <RotasSection />
+      <ClockInSection />
+      <AiCheckerSection />
+      <OrderingSection />
+      <SectionScaffold id="ordering-cost" title={orderingCalculator.title} intro={orderingCalculator.intro} stage={4} plan={["Orders per week, mistakes per month, average cost of a mistake", "Estimated yearly cost, formula shown", "Your figures only, no promised savings"]} />
       <SectionScaffold id="chefs-and-owners" title={audiences.title} accent={audiences.accent} stage={4} plan={[...audiences.chefs.points.map((p) => `Chefs: ${p}`), ...audiences.owners.points.slice(0, 3).map((p) => `Owners: ${p}`), "Manager switching between sites"]} />
       <InspectionStory />
       <SectionScaffold id="roadmap" title={roadmap.title} accent={roadmap.accent} intro={roadmap.intro} stage={4} plan={roadmap.items.map((i) => i.title)} />
