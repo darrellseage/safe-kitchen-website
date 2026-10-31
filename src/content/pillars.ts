@@ -10,6 +10,13 @@ export const pillars = [
     icon: "thermometer",
   },
   {
+    id: "training",
+    name: "Staff Training",
+    benefit: "A food safety course sent to staff phones, with the test and certificate saved in the app.",
+    status: "trainingCourse",
+    icon: "graduation",
+  },
+  {
     id: "rotas",
     name: "Smart Staff Rotas",
     benefit: "Upload the rota you already made, from a photo or spreadsheet. Check it, then send it.",

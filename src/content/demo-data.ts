@@ -119,3 +119,82 @@ export const orderingDemo = {
   newLine: { product: "Chicken breast", quantity: 20, unit: "kg", delivery: "Thu 6 Nov" },
   incoming: [{ product: "Chicken breast", quantity: 20, unit: "kg", delivery: "Thu 6 Nov", orderedBy: "Priya", orderedOn: "Monday" }],
 };
+
+/* ---------- Staff training demo (illustrative; not the real course content) ---------- */
+export const courseLessons = ["Personal hygiene", "Cleaning", "Cross-contamination", "Chilling and cooking", "Allergens", "Pest control"];
+
+export const trainingQuestion = {
+  question: "Before handling ready-to-eat food, what should you do?",
+  options: ["Wash and dry your hands", "Wipe your hands on your apron", "Nothing, if you’re in a hurry"],
+  correct: 0,
+};
+
+export const staffCertificates = [
+  { name: "Priya Shah", role: "Head chef", detail: "Uploaded certificate · external provider · seen by manager", status: "Certificate saved", tone: "ok" },
+  { name: "Jo Walsh", role: "Chef", detail: "Refresher due next month", status: "Due soon", tone: "warn" },
+] as const;
+
+/* ---------- Inspection Mode demo (illustrative) ---------- */
+export const inspectionTabs = [
+  {
+    id: "records",
+    label: "Daily records",
+    status: "inspectionView",
+    rows: [
+      { a: "30 Oct · 10:02", b: "Walk-in fridge", c: "Sam", d: "Recorded" },
+      { a: "30 Oct · 10:14", b: "Freezer 1", c: "Priya", d: "Recorded" },
+      { a: "29 Oct · 22:40", b: "Closing checks", c: "Jo", d: "8 of 8" },
+      { a: "29 Oct · 15:05", b: "Hot holding: curry", c: "Sam", d: "Corrected", corrected: true },
+    ],
+    head: ["Date", "Check", "Recorded by", "Result"],
+    attention: ["Fridge 2: no record on 2 of 7 days", "1 problem waiting for manager review"],
+  },
+  {
+    id: "training",
+    label: "Staff training",
+    status: "staffCertificates",
+    rows: [
+      { a: "Priya Shah", b: "Head chef", c: "External certificate", d: "Saved" },
+      { a: "Sam Patel", b: "Kitchen assistant", c: "Safe Kitchen course", d: "Saved" },
+      { a: "Jo Walsh", b: "Chef", c: "Safe Kitchen course", d: "Refresher due" },
+    ],
+    head: ["Name", "Role", "Certificate", "Status"],
+    attention: ["1 refresher due next month"],
+  },
+  {
+    id: "suppliers",
+    label: "Suppliers",
+    status: "supplierList",
+    rows: [
+      { a: "Example Foods Ltd", b: "Meat, poultry, dry goods", c: "Tue, Thu", d: "Approved" },
+      { a: "Green Valley Produce", b: "Fruit and vegetables", c: "Daily", d: "Approved" },
+      { a: "Coastline Fish Co.", b: "Fresh fish", c: "Wed, Fri", d: "Approved" },
+    ],
+    head: ["Supplier", "Supplies", "Deliveries", "Status"],
+    attention: [],
+  },
+  {
+    id: "pest",
+    label: "Pest control",
+    status: "pestControl",
+    rows: [
+      { a: "Daily", b: "Pest checks (kitchen, stores)", c: "Opening checks", d: "28 of 28 days" },
+      { a: "14 Oct", b: "Contractor visit report", c: "Uploaded PDF (planned)", d: "No activity found" },
+      { a: "Next visit", b: "Contractor visit", c: "Booked", d: "11 Nov" },
+    ],
+    head: ["When", "Record", "Source", "Result"],
+    attention: [],
+  },
+  {
+    id: "documents",
+    label: "Documents",
+    status: "documentUploads",
+    rows: [
+      { a: "Food business registration", b: "Uploaded PDF", c: "Mar 2025", d: "Saved" },
+      { a: "Pest control contract", b: "Uploaded PDF", c: "Jan 2026", d: "Saved" },
+      { a: "Safer Food, Better Business methods", b: "In the app", c: "Signed off", d: "Up to date" },
+    ],
+    head: ["Document", "Type", "Date", "Status"],
+    attention: [],
+  },
+] as const;

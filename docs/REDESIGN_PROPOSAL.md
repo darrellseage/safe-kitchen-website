@@ -211,3 +211,12 @@ Once these are answered, I'll start Stage 1 (Foundation).
 | 6 | **Plus Jakarta Sans only**, consistent with the app | Website only |
 
 Website consequences: the pricing section and FAQ say the price covers every pillar as each one launches. "Timesheet exports for payroll" becomes "Timesheet exports (Excel or CSV) for your payroll". AI camera monitoring is not shown anywhere. Stage 1 (Foundation) started 31 October 2026.
+
+---
+
+## 11. Addition: Staff Training and Inspection Mode (31 October 2026, owner request)
+
+- **Staff Training & Certificates** becomes a sixth pillar, with its own section straight after Simple Food Safety: add an employee → course sent to their phone (or done on the kitchen tablet) → lessons and test in the app → certificate saved to their record and shown in Inspection Mode. Status **Planned** (app D-064, D-065). External certificates can be uploaded alongside.
+- **Inspection Mode** replaces the simple EHO view, straight after training: tabs for daily records (In development), staff training (Planned), suppliers (In development), pest control (In development; uploaded contractor reports Planned) and documents (uploads Planned).
+- **"Level 2" wording is on hold** until the owner confirms the course's accreditation (app O-034). The course is called "Food Safety and Hygiene course"; setting `levelClaim` in `src/content/home.ts` adds "Level 2" everywhere at once.
+- Header gains a "Training" link; the overview shows six pillars; FAQ gains training and "what can I keep for an inspection?" answers; "Staff training records" leaves the roadmap list.

@@ -9,17 +9,17 @@ import type { FeatureKey } from "@/config/features";
 export const hero = {
   titleLead: "Running a kitchen is hard enough.",
   titleAccent: "The paperwork shouldn’t be.",
-  body: "Food safety, staff rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.",
+  body: "Food safety records, staff training, rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.",
   primary: "Get early access",
   secondary: "See how it works",
-  note: "All screens are illustrative. Food safety is in development; rotas, clock-in, the AI Checker and ordering are planned.",
+  note: "All screens are illustrative. Food safety records are in development; training, rotas, clock-in, the AI Checker and ordering are planned.",
 };
 
 export const overview = {
   eyebrow: "What Safe Kitchen does",
   title: "One kitchen. One system.",
   accent: "Everything where it should be.",
-  intro: "Five connected tools, designed for busy kitchen teams and the people who run the business.",
+  intro: "Six connected tools, designed for busy kitchen teams and the people who run the business.",
 };
 
 export const familiar = {
@@ -78,6 +78,31 @@ export const demo = {
     { title: "Who, when and how, automatically", body: "Name, time, device and entry method are saved with each reading. No extra typing." },
     { title: "Bad readings are as easy as good ones", body: "Staff never have to fight the app to record a problem, and the original reading is never overwritten." },
   ],
+};
+
+/**
+ * Staff training. The course's level and accreditation are still to be
+ * confirmed (app DECISIONS.md O-034). Set `levelClaim` (for example "Level 2")
+ * only once the owner confirms the course is accredited or delivered with an
+ * accredited provider; every mention on the site follows it.
+ */
+const levelClaim: string | null = null;
+export const courseName = levelClaim ? `${levelClaim} Food Safety and Hygiene course` : "Food Safety and Hygiene course";
+
+export const training = {
+  eyebrow: "Staff Training & Certificates",
+  status: "trainingCourse" as FeatureKey,
+  title: "Train your team",
+  accent: "without the paperwork.",
+  intro: `Add a new starter and Safe Kitchen sends our ${courseName} straight to their phone, or they can do it on the kitchen tablet. The lessons, the test and the certificate are all in the app, and the certificate is saved to their record automatically.`,
+  lines: ["New starter? Course sent in one tap.", "Learn on a phone or the kitchen tablet.", "Certificates saved, ready for the EHO."],
+  steps: [
+    { title: "Add the employee", body: "Safe Kitchen recommends the course for their role. You confirm." },
+    { title: "Course sent to their phone", body: "Or they sit it on the shared kitchen tablet." },
+    { title: "Lessons and test in the app", body: "Short lessons, then the test. Progress shows on your dashboard." },
+    { title: "Certificate saved", body: "Filed to their record, and two taps away during an inspection." },
+  ],
+  note: "Already trained elsewhere? Upload existing certificates and they sit alongside Safe Kitchen ones, clearly labelled with their provider.",
 };
 
 export const rotas = {
@@ -164,10 +189,11 @@ export const audiences = {
 };
 
 export const inspection = {
-  eyebrow: "Simple Food Safety",
+  eyebrow: "Inspection Mode",
   status: "inspectionView" as FeatureKey,
   title: "When the EHO walks in,",
-  accent: "be ready.",
+  accent: "everything’s in one place.",
+  intro: "Daily records, staff training and certificates, your supplier list, pest control and other documents, all stored in the app and a tap away. No folders, no hunting, no “it’s in the office somewhere”.",
   timeline: [
     { time: "10:12", title: "A visitor at the back door", body: "No warning. Lunch prep is under way." },
     { time: "10:13", title: "The manager opens the inspection view", body: "On the office laptop, a tablet or a phone." },
@@ -182,7 +208,6 @@ export const roadmap = {
   accent: "Ready for tomorrow.",
   intro: "Food safety comes first. Here’s what’s planned next, and what we’re exploring. Early-access members help decide what comes first.",
   items: [
-    { key: "training", title: "Staff training records", body: "Who’s trained in what, with proof ready when someone asks." },
     { key: "probes", title: "Bluetooth temperature probes", body: "Readings straight from the probe, confirmed by the chef. Typing a reading always stays available." },
     { key: "sensors", title: "Connected fridge and freezer sensors", body: "Readings through the day, with alerts naming the unit." },
     { key: "supplierIntegrations", title: "More supplier connections", body: "Direct ordering links with more suppliers, where they support it." },
@@ -223,6 +248,14 @@ export const faq = {
     {
       q: "Can staff use it on phones or tablets?",
       a: "Yes. It’s designed for phones and tablets first, and works on a desktop too. A shared kitchen tablet can be used with personal staff PINs, so everyone’s entries are their own.",
+    },
+    {
+      q: "Is there food safety training for staff?",
+      a: `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. You can also upload certificates from other training providers. Training is planned and not available yet.`,
+    },
+    {
+      q: "What can I keep in the app for an inspection?",
+      a: "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF. Daily records, the supplier list and pest checks are part of our first release; training and document uploads are planned to follow.",
     },
     {
       q: "Can I import the rota I already use?",

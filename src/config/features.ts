@@ -22,6 +22,13 @@ export const featureStatus = {
   managerOverview: "in_development",
   inspectionView: "in_development",
   sharedTablet: "in_development",
+  // Food safety documents kept for inspections (core phases 6–8)
+  supplierList: "in_development",
+  pestControl: "in_development",
+  documentUploads: "planned",
+  // Pillar: Staff Training & Certificates (D-064, D-065; course scope open, O-034)
+  trainingCourse: "planned",
+  staffCertificates: "planned",
   // Pillar 2: Smart Staff Rotas (Growth Phase 6, D-049, D-054, D-078)
   rotas: "planned",
   rotaImport: "planned",
@@ -33,7 +40,6 @@ export const featureStatus = {
   // Pillar 5: Smart Supplier Ordering (Growth Phase 5, D-047, D-048)
   ordering: "planned",
   // Future
-  training: "planned",
   probes: "vision",
   sensors: "vision",
   supplierIntegrations: "vision",

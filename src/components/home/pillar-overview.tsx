@@ -13,7 +13,7 @@ export function PillarOverview() {
   return (
     <Section id="overview" labelledBy="overview-title" tone="warm">
       <SectionHeading id="overview-title" eyebrow={overview.eyebrow} title={overview.title} accent={overview.accent} intro={overview.intro} />
-      <ul className="mt-12 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+      <ul className="mt-12 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p) => (
           <li key={p.id}>
             <Link

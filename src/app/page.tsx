@@ -7,6 +7,7 @@ import { OrderingSection } from "@/components/home/ordering-section";
 import { RotasSection } from "@/components/home/rotas-section";
 import { InspectionStory } from "@/components/home/inspection-story";
 import { SoundFamiliar } from "@/components/home/sound-familiar";
+import { TrainingSection } from "@/components/home/training-section";
 import { Transformation } from "@/components/home/transformation";
 import { PillarOverview } from "@/components/home/pillar-overview";
 import { SectionScaffold } from "@/components/home/section-scaffold";
@@ -44,13 +45,14 @@ export default function HomePage() {
       <PaperworkCalculator />
       <Transformation />
       <FoodSafety />
+      <TrainingSection />
+      <InspectionStory />
       <RotasSection />
       <ClockInSection />
       <AiCheckerSection />
       <OrderingSection />
       <SectionScaffold id="ordering-cost" title={orderingCalculator.title} intro={orderingCalculator.intro} stage={4} plan={["Orders per week, mistakes per month, average cost of a mistake", "Estimated yearly cost, formula shown", "Your figures only, no promised savings"]} />
       <SectionScaffold id="chefs-and-owners" title={audiences.title} accent={audiences.accent} stage={4} plan={[...audiences.chefs.points.map((p) => `Chefs: ${p}`), ...audiences.owners.points.slice(0, 3).map((p) => `Owners: ${p}`), "Manager switching between sites"]} />
-      <InspectionStory />
       <SectionScaffold id="roadmap" title={roadmap.title} accent={roadmap.accent} intro={roadmap.intro} stage={4} plan={roadmap.items.map((i) => i.title)} />
       <SectionScaffold id="pricing" tone="warm" title={pricingCopy.title} accent={pricingCopy.accent} intro={pricingCopy.intro} stage={4} plan={["£14.99 a month or £149.99 a year + VAT, per site", "Monthly / annual switch with the saving", "Several sites: book a call"]} />
       <SectionScaffold id="faq" title={faq.title} stage={4} plan={faq.items.map((i) => i.q)} />

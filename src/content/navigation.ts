@@ -9,6 +9,7 @@ export const homeHref = home || "#main";
 
 export const mainNav = [
   { href: section("food-safety"), label: "Food safety" },
+  { href: section("training"), label: "Training" },
   { href: section("rotas"), label: "Rotas & clock-in" },
   { href: section("ai-checker"), label: "AI Checker" },
   { href: section("ordering"), label: "Ordering" },
