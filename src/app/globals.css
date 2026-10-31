@@ -12,10 +12,13 @@
 
   /* Brand: deep green (app) */
   --color-brand-950: #06261d;
+  /* Deep green for backgrounds only: never redefined by .tone-forest */
+  --color-deep: #0b3b2e;
   --color-brand-900: #0b3b2e;
   --color-brand-800: #104a3a;
   --color-brand-700: #145a44;
   --color-brand-500: #2e8b6a;
+  --color-brand-200: #c5e4d3;
   --color-brand-100: #dcefe6;
   --color-brand-50: #eef7f2;
 
@@ -139,4 +142,45 @@ h1, h2, h3 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/*
+ * Deep-green ("forest") sections: section-level text turns light by
+ * redefining the colour tokens. Anything with a light background inside
+ * (cards, demos, chips, calculators) gets the normal tokens back, so it
+ * keeps its dark text.
+ */
+@layer base {
+.tone-forest {
+  --color-ink: #ffffff;
+  --color-ink-muted: rgb(255 255 255 / 0.84);
+  --color-ink-subtle: rgb(255 255 255 / 0.72);
+  --color-brand-900: #ffffff;
+  --color-brand-700: #a7e3c4;
+  --color-brand-500: #8fdcb5;
+  --color-line: rgb(255 255 255 / 0.2);
+  color: #ffffff;
+}
+
+.tone-forest :where(
+    [class*="bg-surface"],
+    [class*="bg-paper"],
+    [class*="bg-brand-50"],
+    [class*="bg-accent-50"],
+    [class*="bg-accent-100"],
+    [class*="bg-warning-100"],
+    [class*="bg-success-100"],
+    [class*="bg-danger-100"],
+    [class*="bg-sticky"],
+    [class*="bg-chat"]
+  ) {
+  --color-ink: #1c2421;
+  --color-ink-muted: #4f5b56;
+  --color-ink-subtle: #616d68;
+  --color-brand-900: #0b3b2e;
+  --color-brand-700: #145a44;
+  --color-brand-500: #2e8b6a;
+  --color-line: #e6dfd3;
+  color: var(--color-ink);
+}
 }

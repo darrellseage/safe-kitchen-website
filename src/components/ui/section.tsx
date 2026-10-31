@@ -14,6 +14,10 @@ const tones = {
   sage: "bg-brand-100",
   /** Soft teal-green (accent-100). */
   seafoam: "bg-accent-100",
+  /** Noticeably stronger green, still with dark text (brand-200). */
+  fern: "bg-brand-200",
+  /** Deep brand green with light text (see .tone-forest in globals.css). */
+  forest: "bg-deep tone-forest",
   /** Kept for older call sites: same as mint. */
   green: "bg-brand-50",
 } as const;

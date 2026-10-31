@@ -11,7 +11,7 @@ const visuals: Array<StockImage | "folders"> = [images.plating, "folders", image
 /** Section 2: three moments kitchen teams and owners recognise. */
 export function SoundFamiliar() {
   return (
-    <Section id="familiar" labelledBy="familiar-title">
+    <Section id="familiar" labelledBy="familiar-title" tone="fern">
       <SectionHeading id="familiar-title" title={familiar.title} intro={familiar.intro} />
       <ul className="mt-12 grid gap-5 md:grid-cols-3">
         {familiar.scenarios.map((s, i) => {

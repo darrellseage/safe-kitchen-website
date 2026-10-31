@@ -17,7 +17,7 @@ export function Pricing() {
   const percent = Math.round((saving / (pricing.monthly * 12)) * 1000) / 10;
 
   return (
-    <Section id="pricing" labelledBy="pricing-title" tone="mint">
+    <Section id="pricing" labelledBy="pricing-title" tone="fern">
       <div className="flex flex-wrap items-end justify-between gap-8">
         <SectionHeading id="pricing-title" title={pricingCopy.title} accent={pricingCopy.accent} intro={pricingCopy.intro} />
         <div role="group" aria-label="Billing period" className="grid grid-cols-2 rounded-full border border-line bg-surface-raised p-1 text-[15px] font-bold">

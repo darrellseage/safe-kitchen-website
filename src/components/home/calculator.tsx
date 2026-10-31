@@ -29,7 +29,7 @@ export function PaperworkCalculator() {
   const r = estimatePaperwork(input);
 
   return (
-    <Section id="paperwork-cost" labelledBy="calc-title" tone="warm">
+    <Section id="paperwork-cost" labelledBy="calc-title" tone="forest">
       <SectionHeading id="calc-title" title={calculator.title} intro={calculator.intro} />
       <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-card lg:grid-cols-2">
         <form className="grid gap-6 p-6 sm:p-8" onSubmit={(e) => e.preventDefault()}>

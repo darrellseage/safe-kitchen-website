@@ -8,7 +8,7 @@ const icons = [ShieldCheck, PiggyBank, Clock3, GraduationCap];
 /** The overall sales promise: reputation, costs, time, training. The page's one deep-green band. */
 export function PromisesBand() {
   return (
-    <section aria-label="What Safe Kitchen does for your business" className="bg-brand-900 text-white">
+    <section aria-label="What Safe Kitchen does for your business" className="bg-deep text-white">
       <div className="mx-auto w-[min(1200px,100%-40px)] py-14">
         <ul className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {promises.items.map((p, i) => {

@@ -70,7 +70,7 @@ export function ValueCalculator() {
   ];
 
   return (
-    <Section id="savings" labelledBy="savings-title" tone="sage">
+    <Section id="savings" labelledBy="savings-title" tone="forest">
       <SectionHeading id="savings-title" title={valueCalc.title} accent={valueCalc.accent} intro={valueCalc.intro} />
       <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised lg:grid-cols-[1.15fr_0.85fr]">
         <form className="grid content-start gap-7 p-6 sm:p-8" onSubmit={(e) => e.preventDefault()}>
@@ -96,7 +96,7 @@ export function ValueCalculator() {
           ))}
         </form>
 
-        <div className="grid content-start gap-5 bg-brand-900 p-6 text-white sm:p-8" aria-live="polite">
+        <div className="grid content-start gap-5 bg-deep p-6 text-white sm:p-8" aria-live="polite">
           <p className="text-[13px] font-bold tracking-[0.08em] text-accent-300 uppercase">Your illustrative yearly value</p>
           <ul className="grid gap-3">
             {rows.map((row) => (

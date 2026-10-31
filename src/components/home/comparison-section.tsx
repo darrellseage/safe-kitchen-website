@@ -6,7 +6,7 @@ import { comparison } from "@/content/home";
 /** The usual collection of separate methods, against one system. No competitor prices. */
 export function ComparisonSection() {
   return (
-    <Section id="one-system" labelledBy="comparison-title" tone="seafoam">
+    <Section id="one-system" labelledBy="comparison-title" tone="fern">
       <SectionHeading id="comparison-title" title={comparison.title} accent={comparison.accent} />
       <div className="mt-12 grid gap-4 md:grid-cols-2">
         <div className="rounded-3xl border border-line bg-surface-raised p-7">

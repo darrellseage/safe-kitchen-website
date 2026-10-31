@@ -10,7 +10,7 @@ import { orderingReduction } from "@/lib/value";
 /** Section 9: Smart Supplier Ordering with the duplicate-order check. */
 export function OrderingSection() {
   return (
-    <Section id="ordering" labelledBy="ordering-title" tone="warm">
+    <Section id="ordering" labelledBy="ordering-title" tone="forest">
       <SectionHeading id="ordering-title" eyebrow={ordering.eyebrow} status={ordering.status} title={ordering.title} accent={ordering.accent} intro={ordering.intro} />
       <PillarLines lines={ordering.lines} />
       <Catches label="AI checks help you catch" items={ordering.catches} />
