@@ -3,6 +3,7 @@
  * made up. No figure here is a safety limit or food safety guidance.
  */
 import type { RecordItem, TaskState } from "@/components/product/ui-bits";
+import { whenLive } from "@/config/features";
 import type { RotaReview } from "@/lib/demos/rota-review";
 
 export const nowTasks: Array<{ title: string; meta: string; right: string; state: TaskState }> = [
@@ -179,7 +180,7 @@ export const inspectionTabs = [
     status: "pestControl",
     rows: [
       { a: "Daily", b: "Pest checks (kitchen, stores)", c: "Opening checks", d: "28 of 28 days" },
-      { a: "14 Oct", b: "Contractor visit report", c: "Uploaded PDF (planned)", d: "No activity found" },
+      { a: "14 Oct", b: "Contractor visit report", c: whenLive("Uploaded PDF (planned)", "Uploaded PDF"), d: "No activity found" },
       { a: "Next visit", b: "Contractor visit", c: "Booked", d: "11 Nov" },
     ],
     head: ["When", "Record", "Source", "Result"],

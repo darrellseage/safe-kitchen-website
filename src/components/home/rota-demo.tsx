@@ -1,5 +1,6 @@
 "use client";
 
+import { whenLive } from "@/config/features";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Camera, Check, FileSpreadsheet, FileText, Image as ImageIcon, RotateCcw, Send } from "lucide-react";
 import { useState } from "react";
@@ -79,7 +80,7 @@ export function RotaDemo() {
         </ul>
       </div>
 
-      <DeviceFrame label="Illustrative demo · planned feature">
+      <DeviceFrame label={whenLive("Illustrative demo · planned feature", "Interactive demo · sample data")}>
         <div className="flex items-center justify-between gap-3 border-b border-line bg-surface-raised px-4 py-3">
           <div>
             <p className="font-bold">{step === "published" ? "Rota · week of 3 Nov" : "Draft from your photo"}</p>

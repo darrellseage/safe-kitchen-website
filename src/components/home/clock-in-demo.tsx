@@ -1,5 +1,6 @@
 "use client";
 
+import { whenLive } from "@/config/features";
 import { motion, useReducedMotion } from "motion/react";
 import { Check, Download, KeyRound, MapPin, QrCode } from "lucide-react";
 import { useRef, useState } from "react";
@@ -62,7 +63,7 @@ export function ClockInDemo() {
     <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-8 lg:grid-cols-[320px_1fr]">
       <DeviceFrame kind="phone" className="mx-auto w-full max-w-[320px]">
         <div className="grid min-h-[500px] content-start gap-4 px-4 py-6">
-          <span className="w-fit rounded-full bg-surface-sunken px-2.5 py-1 text-xs font-bold text-ink-muted">Illustrative demo · planned feature</span>
+          <span className="w-fit rounded-full bg-surface-sunken px-2.5 py-1 text-xs font-bold text-ink-muted">{whenLive("Illustrative demo · planned feature", "Interactive demo")}</span>
           <div role="group" aria-label="How to clock in" className="grid grid-cols-3 gap-1 rounded-xl border border-line bg-surface-raised p-1">
             {methods.map((m) => (
               <button

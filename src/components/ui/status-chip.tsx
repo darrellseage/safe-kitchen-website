@@ -1,4 +1,4 @@
-import { featureStatus, statusLabels, type FeatureKey } from "@/config/features";
+import { statusLabels, statusOf, type FeatureKey } from "@/config/features";
 import { cn } from "@/lib/cn";
 
 const tones = {
@@ -10,7 +10,9 @@ const tones = {
 
 /** Honest status label for a feature, driven by src/config/features.ts. */
 export function StatusChip({ feature, className }: { feature: FeatureKey; className?: string }) {
-  const status = featureStatus[feature];
+  const status = statusOf(feature);
+  // Live features need no label.
+  if (status === "available") return null;
   return (
     <span
       className={cn(

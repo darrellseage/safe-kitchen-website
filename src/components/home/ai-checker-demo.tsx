@@ -1,5 +1,6 @@
 "use client";
 
+import { whenLive } from "@/config/features";
 import { ChevronRight, FileText, Sparkles } from "lucide-react";
 import { useState, type CSSProperties } from "react";
 import { aiFlags, aiReport, aiSummaries, type AiFlag } from "@/content/demo-data";
@@ -32,7 +33,7 @@ export function AiCheckerDemo() {
           <div>
             <p className="text-xl font-extrabold">Your kitchen at a glance</p>
             <span className="mt-1 inline-block rounded-full bg-surface-sunken px-2.5 py-1 text-xs font-bold text-ink-muted">
-              Illustrative demo · sample data · planned feature
+              {whenLive("Illustrative demo · sample data · planned feature", "Interactive demo · sample data")}
             </span>
           </div>
           <div role="group" aria-label="Summary period" className="grid grid-cols-2 rounded-full border border-line bg-surface p-1">

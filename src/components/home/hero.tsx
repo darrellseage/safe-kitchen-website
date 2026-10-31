@@ -1,3 +1,4 @@
+import { whenLive } from "@/config/features";
 import type { ReactNode } from "react";
 import { ArrowDown, Check, ScanEye, ShoppingBasket } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -54,7 +55,7 @@ function HeroVisual() {
         className="absolute inset-x-0 top-12 bottom-6 rounded-[32px] bg-[linear-gradient(160deg,var(--color-brand-50),var(--color-accent-100))] sm:left-12"
       />
       <div className="absolute top-12 left-0 w-full sm:w-[62%]">
-        <DeviceFrame label="Illustrative">
+        <DeviceFrame label={whenLive("Illustrative", "Sample data")}>
           <ScreenHeader title="Now" subtitle="Lunch prep · Kitchen tablet" />
           <div className="grid gap-2 p-3 text-sm">
             {nowTasks.map((t) => (
@@ -65,7 +66,7 @@ function HeroVisual() {
       </div>
 
       <FloatCard className="top-0 right-0 w-52 animate-bob max-sm:top-auto max-sm:right-2 max-sm:bottom-2">
-        <CardLabel>Clock-in · planned</CardLabel>
+        <CardLabel>{whenLive("Clock-in · planned", "Clock-in")}</CardLabel>
         <p className="mt-1 text-[28px] leading-none font-extrabold tracking-[-0.03em] tabular">08:57</p>
         <p className="mt-1.5 flex items-center gap-1 text-[13.5px] font-bold text-success">
           <Check className="size-4" aria-hidden="true" />
@@ -76,7 +77,7 @@ function HeroVisual() {
       <FloatCard className="right-0 bottom-6 hidden w-60 animate-bob [animation-delay:-2.5s] sm:block">
         <CardLabel>
           <ScanEye className="size-3.5" aria-hidden="true" />
-          AI Checker · planned
+          {whenLive("AI Checker · planned", "AI Checker")}
         </CardLabel>
         <p className="mt-1 text-[17px] font-extrabold">2 things need attention</p>
         <p className="text-[13px] text-ink-muted">Fridge 2: no afternoon reading</p>
@@ -85,7 +86,7 @@ function HeroVisual() {
       <FloatCard className="bottom-6 left-0 hidden w-[17rem] border-warning/40 bg-warning-100/50 sm:block">
         <CardLabel>
           <ShoppingBasket className="size-3.5" aria-hidden="true" />
-          Ordering · planned
+          {whenLive("Ordering · planned", "Ordering")}
         </CardLabel>
         <p className="mt-1 font-extrabold text-warning-ink">Possible duplicate order</p>
         <p className="text-[13px] text-ink-muted">Chicken breast 20 kg is already on Thursday’s delivery</p>

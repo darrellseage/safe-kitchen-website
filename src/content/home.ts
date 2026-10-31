@@ -4,7 +4,7 @@
  * status table (§3) and claims list (§6): no invented figures, no FSA
  * endorsement, honest feature status, sample data always labelled.
  */
-import type { FeatureKey } from "@/config/features";
+import { whenLive, type FeatureKey } from "@/config/features";
 
 export const hero = {
   titleLead: "Running a kitchen is hard enough.",
@@ -12,7 +12,10 @@ export const hero = {
   body: "Food safety records, staff training, rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.",
   primary: "Get early access",
   secondary: "See how it works",
-  note: "All screens are illustrative. Food safety records are in development; training, rotas, clock-in, the AI Checker and ordering are planned.",
+  note: whenLive(
+    "All screens are illustrative. Food safety records are in development; training, rotas, clock-in, the AI Checker and ordering are planned.",
+    "Screens show sample data.",
+  ),
 };
 
 export const overview = {
@@ -70,7 +73,7 @@ export const demo = {
   title: "Less paperwork.",
   accent: "More kitchen.",
   intro: "You became a chef to cook, not to fill in paperwork. Try a temperature check the way your team would.",
-  flag: "Illustrative demo · not a real account · not food safety guidance",
+  flag: whenLive("Illustrative demo · not a real account · not food safety guidance", "Interactive demo · sample data · not food safety guidance"),
   lines: ["Stop chasing checks. Start running your kitchen.", "Your records shouldn’t be harder to find than your ingredients."],
   why: [
     { title: "Gloves on, hands wet", body: "Every control is at least 48px. Tap anywhere on the scale, nudge by 0.1, or type the exact reading." },
@@ -226,74 +229,108 @@ export const pricingCopy = {
   multiBody: "Running a few kitchens? Tell us about your sites and we’ll talk it through.",
 };
 
+type FaqItem = { q: string; a: string };
+
+/** FAQ. Answers that mention a feature's status have a launched version (whenLive). */
+const faqItems: Array<FaqItem & { hideWhenLive?: boolean }> = [
+  {
+    q: "What’s available now?",
+    a: "Safe Kitchen is in development and isn’t open to customers yet. Food safety records are being built first. Staff training, rotas, clock-in and attendance, the AI Checker and supplier ordering are planned to follow. Every feature on this page carries a label showing its status, and early-access members hear first as each one opens.",
+    hideWhenLive: true,
+  },
+  {
+    q: "Is it easy for chefs to use?",
+    a: whenLive(
+      "That’s the whole point. Safe Kitchen is designed so a routine check takes a few taps on a shared tablet or phone, with big buttons that work with gloves on. Readings are never filled in for you, and staff only see what needs doing now. We’re testing it with real kitchen teams during early access.",
+      "That’s the whole point. Safe Kitchen is designed so a routine check takes a few taps on a shared tablet or phone, with big buttons that work with gloves on. Readings are never filled in for you, and staff only see what needs doing now.",
+    ),
+  },
+  {
+    q: "Does it replace paper food safety records?",
+    a: "It’s designed to hold your daily food safety records digitally, organised by date, so you don’t need paper sheets for the checks you record in Safe Kitchen. Your business stays responsible for its food safety system, and your local authority can advise on what they expect to see.",
+  },
+  {
+    q: "Can I show records to an EHO?",
+    a: whenLive(
+      "Yes, that’s what Inspection Mode is for. Records are on screen in a clear layout, with anything missing or unresolved shown honestly, and you can print them or save them as a PDF. It’s in development and part of our first release.",
+      "Yes, that’s what Inspection Mode is for. Records are on screen in a clear layout, with anything missing or unresolved shown honestly, and you can print them or save them as a PDF.",
+    ),
+  },
+  {
+    q: "Is there food safety training for staff?",
+    a: whenLive(
+      `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers. Training is planned and not available yet.`,
+      `Yes. When you add a new member of staff, Safe Kitchen sends our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers.`,
+    ),
+  },
+  {
+    q: "What can I keep in the app for an inspection?",
+    a: whenLive(
+      "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF. Daily records, the supplier list and pest checks are part of our first release; training and document uploads are planned to follow.",
+      "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF.",
+    ),
+  },
+  {
+    q: "Can I import the rota I already use?",
+    a: whenLive(
+      "That’s the plan. You’ll be able to upload a photo, screenshot, PDF or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check and correct it before anything is sent to staff. This feature is planned and not available yet.",
+      "Yes. Upload a photo, screenshot, PDF or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check and correct it before anything is sent to staff.",
+    ),
+  },
+  {
+    q: "Does clock-in track where my staff are?",
+    a: whenLive(
+      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Location checks reduce mistakes but aren’t foolproof, so managers can review and correct records. Clock-in is planned and not available yet.",
+      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Location checks reduce mistakes but aren’t foolproof, so managers can review and correct records.",
+    ),
+  },
+  {
+    q: "What does the AI Checker actually check?",
+    a: whenLive(
+      "Your records and forms: checks that are missing, incomplete, overdue or look unusual, and problems still waiting for review. It explains why each item was flagged and links to the record. It doesn’t use cameras, it can’t confirm a check was physically done, and it never replaces a manager’s judgement. It’s planned and not available yet.",
+      "Your records and forms: checks that are missing, incomplete, overdue or look unusual, and problems still waiting for review. It explains why each item was flagged and links to the record. It doesn’t use cameras, it can’t confirm a check was physically done, and it never replaces a manager’s judgement.",
+    ),
+  },
+  {
+    q: "Which suppliers can I order from?",
+    a: whenLive(
+      "The plan is that you’ll build orders for the suppliers you already use, and Safe Kitchen will send them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly. We’ll only name supported suppliers once a connection is confirmed. Ordering is planned and not available yet.",
+      "You build orders for the suppliers you already use, and Safe Kitchen sends them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly.",
+    ),
+  },
+  {
+    q: "Can I manage multiple sites?",
+    a: "Yes. Safe Kitchen is built for businesses with one site or several, with roles for owners, managers and staff. Pricing is per site, and multi-site businesses can book a call to talk it through.",
+  },
+  {
+    q: "What happens if the internet goes down?",
+    a: whenLive(
+      "We’re building daily checks to keep working without a connection and to sync when you’re back online, without losing or duplicating records. This isn’t available yet. We’ll only say it works offline once it’s been fully tested.",
+      "Daily checks keep working without a connection and sync when you’re back online, without losing or duplicating records.",
+    ),
+  },
+  {
+    q: "How secure is the data?",
+    a: whenLive(
+      "Each business’s records are kept separate at database level, with automated tests that prove one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs on shared tablets, and records are never silently changed. Data is planned to be hosted in the UK.",
+      "Each business’s records are kept separate at database level, with automated tests that prove one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs on shared tablets, and records are never silently changed. Data is hosted in the UK.",
+    ),
+  },
+  {
+    q: "How much does it cost?",
+    a: "£14.99 a month or £149.99 a year, plus VAT, for each site. That covers every Safe Kitchen tool, including the staff food safety course and certificates, with unlimited staff and no hidden charges.",
+  },
+  {
+    q: "Is Safe Kitchen approved by the Food Standards Agency?",
+    a: "No. Safe Kitchen is built around the FSA’s Safer Food, Better Business system, but it isn’t affiliated with or endorsed by the FSA or any local authority.",
+  },
+];
+
 export const faq = {
   title: "Questions kitchen owners ask.",
-  items: [
-    {
-      q: "What’s available now?",
-      a: "Safe Kitchen is in development and isn’t open to customers yet. Food safety records are being built first. Rotas, clock-in and attendance, the AI Checker and supplier ordering are planned to follow. Every feature on this page carries a label showing its status, and early-access members hear first as each one opens.",
-    },
-    {
-      q: "Is it easy for chefs to use?",
-      a: "That’s the whole point. Safe Kitchen is designed so a routine check takes a few taps on a shared tablet or phone, with big buttons that work with gloves on. Readings are never filled in for you, and staff only see what needs doing now. We’re testing it with real kitchen teams during early access.",
-    },
-    {
-      q: "Does it replace paper food safety records?",
-      a: "It’s designed to hold your daily food safety records digitally, organised by date, so you don’t need paper sheets for the checks you record in Safe Kitchen. Your business stays responsible for its food safety system, and your local authority can advise on what they expect to see.",
-    },
-    {
-      q: "Can I show records to an EHO?",
-      a: "Yes, that’s what the inspection view is for. Records are on screen in a clear layout, with anything missing or unresolved shown honestly, and you can print them or save them as a PDF. It’s in development and part of our first release.",
-    },
-    {
-      q: "Can staff use it on phones or tablets?",
-      a: "Yes. It’s designed for phones and tablets first, and works on a desktop too. A shared kitchen tablet can be used with personal staff PINs, so everyone’s entries are their own.",
-    },
-    {
-      q: "Is there food safety training for staff?",
-      a: `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers. Training is planned and not available yet.`,
-    },
-    {
-      q: "What can I keep in the app for an inspection?",
-      a: "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF. Daily records, the supplier list and pest checks are part of our first release; training and document uploads are planned to follow.",
-    },
-    {
-      q: "Can I import the rota I already use?",
-      a: "That’s the plan. You’ll be able to upload a photo, screenshot, PDF or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check and correct it before anything is sent to staff. This feature is planned and not available yet.",
-    },
-    {
-      q: "Does clock-in track where my staff are?",
-      a: "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Location checks reduce mistakes but aren’t foolproof, so managers can review and correct records. Clock-in is planned and not available yet.",
-    },
-    {
-      q: "What does the AI Checker actually check?",
-      a: "Your records and forms: checks that are missing, incomplete, overdue or look unusual, and problems still waiting for review. It explains why each item was flagged and links to the record. It doesn’t use cameras, it can’t confirm a check was physically done, and it never replaces a manager’s judgement. It’s planned and not available yet.",
-    },
-    {
-      q: "Which suppliers can I order from?",
-      a: "The plan is that you’ll build orders for the suppliers you already use, and Safe Kitchen will send them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly. We’ll only name supported suppliers once a connection is confirmed. Ordering is planned and not available yet.",
-    },
-    {
-      q: "Can I manage multiple sites?",
-      a: "Yes. Safe Kitchen is built for businesses with one site or several, with roles for owners, managers and staff. Pricing is per site, and multi-site businesses can book a call to talk it through.",
-    },
-    {
-      q: "What happens if the internet goes down?",
-      a: "We’re building daily checks to keep working without a connection and to sync when you’re back online, without losing or duplicating records. This isn’t available yet. We’ll only say it works offline once it’s been fully tested.",
-    },
-    {
-      q: "How secure is the data?",
-      a: "Each business’s records are kept separate at database level, with automated tests that prove one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs on shared tablets, and records are never silently changed. Data is planned to be hosted in the UK.",
-    },
-    {
-      q: "How much does it cost?",
-      a: "£14.99 a month or £149.99 a year, plus VAT, for each site. That covers every Safe Kitchen tool as it launches, including the staff food safety course and certificates, with unlimited staff and no hidden charges.",
-    },
-    {
-      q: "Is Safe Kitchen approved by the Food Standards Agency?",
-      a: "No. Safe Kitchen is built around the FSA’s Safer Food, Better Business system, but it isn’t affiliated with or endorsed by the FSA or any local authority.",
-    },
-  ],
+  items: faqItems
+    .filter((i) => !(i.hideWhenLive && whenLive("show", "hide") === "hide"))
+    .map(({ q, a }): FaqItem => ({ q, a })),
 };
 
 export const finalCta = {

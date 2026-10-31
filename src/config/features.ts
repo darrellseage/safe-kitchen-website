@@ -4,6 +4,8 @@
  * it is really live for customers. Change a status here and every label on
  * the site follows.
  */
+import { siteConfig } from "./site";
+
 export type FeatureStatus = "available" | "in_development" | "planned" | "vision";
 
 export const statusLabels: Record<FeatureStatus, string> = {
@@ -47,3 +49,13 @@ export const featureStatus = {
 } as const satisfies Record<string, FeatureStatus>;
 
 export type FeatureKey = keyof typeof featureStatus;
+
+/** A feature's status, or "available" for everything in a launch preview. */
+export function statusOf(key: FeatureKey): FeatureStatus {
+  return siteConfig.launchPreview ? "available" : featureStatus[key];
+}
+
+/** Picks the honest wording now, or the launched wording in a launch preview. */
+export function whenLive(now: string, launched: string): string {
+  return siteConfig.launchPreview ? launched : now;
+}

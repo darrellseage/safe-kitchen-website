@@ -1,6 +1,7 @@
 // Builds a static copy of the homepage for a private review link.
 // Usage: node scripts/preview-export.mjs
-//   1. builds into .next-preview/ (PREVIEW_EXPORT=1; the normal build is unaffected)
+//   1. builds into .next-preview/ as a launch preview (every feature shown as live;
+//      the normal build is unaffected and keeps honest status labels)
 //   2. prepares .preview-publish/: the page host reserves names starting with "_",
 //      so Next.js's "_next" folder is renamed "assets" and every reference updated.
 import { execSync } from "node:child_process";
@@ -9,7 +10,7 @@ import { join } from "node:path";
 
 execSync("npx next build", {
   stdio: "inherit",
-  env: { ...process.env, PREVIEW_EXPORT: "1", NEXT_PUBLIC_PREVIEW_EXPORT: "1" },
+  env: { ...process.env, PREVIEW_EXPORT: "1", NEXT_PUBLIC_PREVIEW_EXPORT: "1", NEXT_PUBLIC_LAUNCH_PREVIEW: "1" },
 });
 
 const out = ".preview-publish";

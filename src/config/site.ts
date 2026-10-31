@@ -12,6 +12,13 @@ export const siteConfig = {
    * While false, every page asks search engines not to index it.
    */
   allowIndexing: false,
+  /**
+   * Launch preview: shows the site as it will look once every feature is live
+   * (no status labels, launched wording). For private review only, so the
+   * owner can see the finished site. Never turn this on for the public site
+   * until the features really are live. Set by NEXT_PUBLIC_LAUNCH_PREVIEW=1.
+   */
+  launchPreview: process.env.NEXT_PUBLIC_LAUNCH_PREVIEW === "1",
   /** Shown in the footer and privacy policy once supplied by the owner. */
   company: null as null | { legalName: string; address: string; companyNumber?: string; icoNumber?: string; email: string },
 } as const;
