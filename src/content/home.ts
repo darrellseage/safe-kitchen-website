@@ -95,7 +95,7 @@ export const training = {
   title: "Train your team",
   accent: "without the paperwork.",
   intro: `Add a new starter and Safe Kitchen sends our ${courseName} straight to their phone, or they can do it on the kitchen tablet. The lessons, the test and the certificate are all in the app, and the certificate is saved to their record automatically.`,
-  lines: ["New starter? Course sent in one tap.", "Learn on a phone or the kitchen tablet.", "Certificates saved, ready for the EHO."],
+  lines: ["New starter? Course sent in one tap.", "Learn on a phone or the kitchen tablet.", "Certificates saved, ready for the EHO.", "Included in your plan. No per-course fees."],
   steps: [
     { title: "Add the employee", body: "Safe Kitchen recommends the course for their role. You confirm." },
     { title: "Course sent to their phone", body: "Or they sit it on the shared kitchen tablet." },
@@ -219,7 +219,7 @@ export const roadmap = {
 export const pricingCopy = {
   title: "One simple price.",
   accent: "Everything included.",
-  intro: "One plan per site covers every Safe Kitchen tool as it launches: food safety, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
+  intro: "One plan per site covers every Safe Kitchen tool as it launches: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
   monthlyLabel: "Monthly",
   annualLabel: "Annually",
   multiTitle: "Several sites?",
@@ -251,7 +251,7 @@ export const faq = {
     },
     {
       q: "Is there food safety training for staff?",
-      a: `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. You can also upload certificates from other training providers. Training is planned and not available yet.`,
+      a: `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers. Training is planned and not available yet.`,
     },
     {
       q: "What can I keep in the app for an inspection?",
@@ -287,7 +287,7 @@ export const faq = {
     },
     {
       q: "How much does it cost?",
-      a: "£14.99 a month or £149.99 a year, plus VAT, for each site. That covers every Safe Kitchen tool as it launches, with unlimited staff and no hidden charges.",
+      a: "£14.99 a month or £149.99 a year, plus VAT, for each site. That covers every Safe Kitchen tool as it launches, including the staff food safety course and certificates, with unlimited staff and no hidden charges.",
     },
     {
       q: "Is Safe Kitchen approved by the Food Standards Agency?",

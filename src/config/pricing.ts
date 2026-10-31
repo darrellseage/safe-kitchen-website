@@ -1,4 +1,5 @@
-// Owner decision, 30 Oct 2026 (app DECISIONS.md D-074). Change prices here only.
+// Owner decisions (app DECISIONS.md D-074, D-076, D-079): one price per site
+// covers everything, including staff training. Change prices here only.
 export const pricing = {
   currency: "GBP",
   monthly: 14.99,
@@ -8,7 +9,8 @@ export const pricing = {
   includes: [
     "Unlimited staff",
     "No hidden charges",
-    "Every food safety feature in the first release",
+    "Every tool as it launches: food safety, training, rotas, clock-in, AI Checker and ordering",
+    "Staff food safety course and certificates included",
     "Shared kitchen tablet with personal staff PINs",
     "Inspection view, print or save as PDF",
   ],
