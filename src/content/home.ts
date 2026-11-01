@@ -9,42 +9,125 @@ import { whenLive, type FeatureKey } from "@/config/features";
 export const hero = {
   titleLead: "Running a kitchen is hard enough.",
   titleAccent: "The paperwork shouldn’t be.",
-  credibility: "Designed by chefs and owners. Built for real kitchens.",
-  body: "Food safety records, staff training, rotas, supplier ordering and intelligent oversight. One simple platform designed to make running your kitchen easier.",
+  credibility: "Designed by chefs and owners, for chefs and owners.",
+  body: "Safe Kitchen is the all-in-one kitchen management app for takeaways, restaurants, cafés and pubs. Food safety records, unlimited staff training, rotas, clock-in and smart ordering, with AI checks that catch costly mistakes. Less paperwork, more time running your kitchen.",
   primary: "Get early access",
-  secondary: "See how it works",
+  secondary: "Take the 60-second tour",
+  priceLead: "From",
+  priceTail: "a month per site + VAT",
+  pricePoints: ["Unlimited staff", "Level 2 food hygiene training included", "No set-up fees"],
+  freeNote: "Early access is free. No card. No commitment.",
   note: whenLive(
-    "All screens are illustrative. Food safety records are in development; training, rotas, clock-in, the AI Checker and ordering are planned.",
+    "Safe Kitchen is in development. Screens show sample data, and every feature is labelled with its real status.",
     "Screens show sample data.",
   ),
 };
 
-export const overview = {
-  eyebrow: "What Safe Kitchen does",
-  title: "One kitchen. One system.",
-  accent: "Everything where it should be.",
-  intro: "Six connected tools, designed for busy kitchen teams and the people who run the business.",
+
+/** The six messages the homepage must land (owner, 1 Nov 2026). Shown straight after the hero. */
+export const promises = {
+  label: "Why kitchens choose Safe Kitchen",
+  items: [
+    { title: "Less paperwork, more kitchen", body: "Checks take a few taps, so your team spends its time cooking, not filling in forms." },
+    { title: "Everything in one system", body: "Food safety, training, rotas, clock-in and ordering in one easy-to-use app." },
+    { title: "AI that catches costly mistakes", body: "Missing checks, incomplete records and duplicate orders flagged before they cost you." },
+    { title: "Unlimited staff and training", body: "Level 2 food hygiene training for every member of staff, at one affordable price per site." },
+  ],
+  footer: "Built around the realities of busy professional kitchens.",
 };
 
-export const kitchenTypes = {
-  label: "Made for kitchens like yours",
-  types: [
-    { label: "Takeaways", image: "takeaway" },
-    { label: "Restaurants", image: "restaurant" },
-    { label: "Cafés", image: "cafe" },
-    { label: "Pubs", image: "pub" },
-  ],
-} as const;
-
-/** The overall sales promise, shown straight after the hero. */
-export const promises = {
-  items: [
-    { title: "Protect your reputation", body: "Organised records, checks you can see and training you can prove." },
-    { title: "Reduce costs", body: "Catch duplicate orders and cut avoidable waste before it hits your profit." },
-    { title: "Save time", body: "Less paperwork and chasing, more time running your business." },
-    { title: "Train your team", body: "Unlimited Level 2 food hygiene training, with no per-person course fees." },
-  ],
-  footer: "One simple platform. Unlimited staff. From £14.99 per month.",
+/** The guided tour: one sample day, each step linking to its full interactive demo. */
+export const tour = {
+  eyebrow: "The 60-second tour",
+  title: "A day in your kitchen,",
+  accent: "with Safe Kitchen.",
+  intro: "Six moments from one sample day. Step through them, or press play. Every step links to a full interactive demo further down the page.",
+  flag: "Sample day · illustrative data",
+  steps: [
+    {
+      id: "clock-in",
+      time: "08:55",
+      feature: "clockIn",
+      pillar: "Clock-in",
+      icon: "clock",
+      title: "Sam clocks in on his phone",
+      body: "Location is checked only at that moment. No location? He uses his PIN on the kitchen tablet instead.",
+      screen: { heading: "Clock-in", lines: [{ text: "Sam · Chef", value: "08:55", tone: "ok" }, { text: "Rota: 09:00 to 17:00", value: "On time", tone: "ok" }] },
+      demo: "clock-in",
+      demoLabel: "Try clock-in",
+    },
+    {
+      id: "checks",
+      time: "09:40",
+      feature: "temperatures",
+      pillar: "Food safety",
+      icon: "thermometer",
+      title: "Opening checks in a few taps",
+      body: "Fridge readings, cleaning and opening checks on the shared tablet. Name, time and device are saved automatically.",
+      screen: { heading: "Now · Opening", lines: [{ text: "Walk-in fridge reading", value: "Saved", tone: "ok" }, { text: "Opening checklist", value: "4 of 6", tone: "now" }] },
+      demo: "food-safety",
+      demoLabel: "Try a temperature check",
+    },
+    {
+      id: "training",
+      time: "11:00",
+      feature: "trainingCourse",
+      pillar: "Training",
+      icon: "graduation",
+      title: "Priya starts her Level 2 course",
+      body: "Added as a new starter, the course goes straight to her phone. No per-person fee, and the certificate saves to her record.",
+      screen: { heading: "Training", lines: [{ text: "Level 2 Food Hygiene", value: "Lesson 3 of 8", tone: "now" }, { text: "Course fee", value: "Included", tone: "ok" }] },
+      demo: "training",
+      demoLabel: "Try the training course",
+    },
+    {
+      id: "rota",
+      time: "14:00",
+      feature: "rotaImport",
+      pillar: "Rotas",
+      icon: "calendar",
+      title: "Next week’s rota, from a photo",
+      body: "The manager photographs the rota on the wall. Safe Kitchen turns it into a draft and highlights anything it isn’t sure about.",
+      screen: { heading: "Rota import · draft", lines: [{ text: "18 shifts read", value: "Check 1", tone: "now" }, { text: "Send to staff phones", value: "After review", tone: "todo" }] },
+      demo: "rotas",
+      demoLabel: "Try the rota import",
+    },
+    {
+      id: "ordering",
+      time: "16:30",
+      feature: "ordering",
+      pillar: "Ordering",
+      icon: "basket",
+      title: "A duplicate order caught",
+      body: "Someone adds 20 kg of chicken breast that’s already on Thursday’s delivery. Safe Kitchen flags it before anything is sent.",
+      screen: { heading: "Order check", lines: [{ text: "Chicken breast 20 kg", value: "Possible duplicate", tone: "warn" }, { text: "Manager approval", value: "Needed", tone: "todo" }] },
+      demo: "ordering",
+      demoLabel: "Try the order check",
+    },
+    {
+      id: "ai",
+      time: "22:15",
+      feature: "aiChecker",
+      pillar: "AI Checker",
+      icon: "eye",
+      title: "The AI Checker’s end-of-day summary",
+      body: "One afternoon fridge reading is missing. The manager sees it tonight, not at the next inspection, and every record is ready in Inspection Mode.",
+      screen: { heading: "AI Checker · today", lines: [{ text: "Fridge 2: no afternoon reading", value: "Needs attention", tone: "warn" }, { text: "Inspection Mode", value: "Up to date", tone: "ok" }] },
+      demo: "ai-checker",
+      demoLabel: "Try the AI Checker",
+    },
+  ] satisfies Array<{
+    id: string;
+    time: string;
+    feature: FeatureKey;
+    pillar: string;
+    icon: "clock" | "thermometer" | "graduation" | "calendar" | "basket" | "eye";
+    title: string;
+    body: string;
+    screen: { heading: string; lines: Array<{ text: string; value: string; tone: "ok" | "now" | "todo" | "warn" }> };
+    demo: string;
+    demoLabel: string;
+  }>,
 };
 
 export const hygiene = {
@@ -58,6 +141,7 @@ export const hygiene = {
     "Have everything ready when the EHO walks in",
   ],
   helpsTitle: "How Safe Kitchen helps",
+  calculatorLink: "Work out what’s at risk for your business",
   disclaimer: "Safe Kitchen helps you keep and show good records. It can’t guarantee any hygiene rating: ratings depend on the inspection of your premises, practices and management.",
   calculator: {
     title: "What could losing customer confidence cost your business?",
@@ -123,15 +207,10 @@ export const transformation = {
   intro: "Paper logs, rota photos on WhatsApp, supplier emails and sticky notes. Scroll to see them find their place.",
   paperLabel: "Before",
   digitalLabel: "Safe Kitchen",
-  outcomes: [
-    { title: "Checks in a few taps", body: "Big buttons on a shared tablet or phone. Nothing is filled in for you." },
-    { title: "Clear who did what", body: "Name, time and device are saved with every record, automatically." },
-    { title: "Everything in one place", body: "Records, rotas and orders, organised by day and site." },
-  ],
 };
 
 export const demo = {
-  eyebrow: "Simple Food Safety",
+  eyebrow: "Inspection-ready records",
   status: "temperatures" as FeatureKey,
   title: "Less paperwork.",
   accent: "More kitchen.",
@@ -217,8 +296,7 @@ export const clockIn = {
   example: {
     hours: 2,
     rate: 15,
-    text: "Two wrongly recorded paid hours a week at £15 an hour adds up to {amount} a year.",
-    note: "Illustrative scenario, not a saving Safe Kitchen is guaranteed to produce.",
+    text: "Illustrative: two wrongly recorded paid hours a week at £15 an hour adds up to {amount} a year.",
   },
   lines: [
     "Clock in. Get on with your shift.",
@@ -253,30 +331,91 @@ export const ordering = {
   intro: "Unnecessary orders eat into your profit. Build orders for the suppliers you already use, and Safe Kitchen’s AI checks help your managers spot mistakes before anything is bought.",
   catches: ["Duplicate orders", "Unusually large orders", "Possible over-ordering", "Possible under-ordering", "Stock shortages", "Unnecessary purchases", "Unusual ordering patterns"],
   lines: ["Stop unnecessary orders eating into your profit.", "Know what’s ordered before you order again."],
-  example: { weekly: 5000, percent: 2, text: "If £5,000 of weekly purchasing included just 2% avoidable spend, that’s {amount} a year." },
+  example: { weekly: 5000, percent: 2, text: "Illustrative: if £5,000 of weekly purchasing included just 2% avoidable spend, that’s {amount} a year." },
   steps: ["Build order", "Check order", "Manager approval", "Send to supplier", "Track delivery"],
   note: "Orders are sent by email or by a direct supplier link where the supplier supports it. A sent order is never shown as accepted until the supplier confirms.",
 };
 
 export const waste = {
-  title: "Stop throwing your profits",
-  accent: "in the bin.",
-  intro: "Food waste is money you’ve already spent. Better ordering, clearer stock awareness and tighter daily routines all help you waste less.",
-  example: { annual: 10000, percent: 10, text: "Cut a £10,000 food waste bill by 10% and that’s {amount} back each year." },
-  disclaimer: "Illustrative figures, not a guaranteed saving. Results depend on how each kitchen works.",
+  title: "Less waste, too.",
+  body: "Food waste is money you’ve already spent. Fewer duplicate and oversized orders means less going in the bin.",
+  disclaimer: "Results depend on how each kitchen works. Safe Kitchen doesn’t promise a particular saving.",
 };
 
-export const audiences = {
-  title: "Simple for your team.",
-  accent: "Powerful for your business.",
-  chefs: {
-    title: "For chefs and kitchen teams",
-    points: ["Easier daily routines", "Less paperwork", "Your rota on your phone", "Clear responsibilities", "Less chasing"],
-  },
-  owners: {
-    title: "For owners and managers",
-    points: ["See what’s happening, even when you’re away", "Everything organised by site", "Oversight of every order", "Useful insights, not more reports", "More control across sites"],
-  },
+/** "Built for you": the four buyers (conversion review R8). Links point at the demos. */
+export const buyers = {
+  eyebrow: "Built for you",
+  title: "Whoever runs the kitchen,",
+  accent: "it’s built around your day.",
+  tabs: [
+    {
+      id: "takeaway",
+      label: "Takeaway owner",
+      image: "takeaway",
+      headline: "Fast service, small team, tight margins.",
+      pains: ["New staff starting all the time", "Checks squeezed in between orders", "Your hygiene rating is on show to every customer", "No room in the margin for duplicate orders"],
+      helps: [
+        { title: "New starter? Course on day one", body: "The Level 2 course goes to their phone, with no per-person fee.", href: "training" },
+        { title: "Checks in a few taps", body: "Big buttons that work mid-rush on a shared tablet or phone.", href: "food-safety" },
+        { title: "Duplicate orders caught", body: "Flagged before anything is sent to the supplier.", href: "ordering" },
+      ],
+    },
+    {
+      id: "chef",
+      label: "Head chef",
+      image: "chef",
+      headline: "You want to cook, not chase paperwork.",
+      pains: ["Checks competing with service", "Chasing the team for missing entries", "Rotas lost in WhatsApp", "Gaps in the paperwork landing on you"],
+      helps: [
+        { title: "Made for gloves and wet hands", body: "Nothing is filled in for you, and a bad reading is as quick to record as a good one.", href: "food-safety" },
+        { title: "Rota from a photo", body: "Snap the rota you’ve already made and send it to everyone’s phone.", href: "rotas" },
+        { title: "It checks the paperwork, not your team", body: "The AI Checker flags gaps in records before the end of the day. It doesn’t watch or judge staff.", href: "ai-checker" },
+      ],
+    },
+    {
+      id: "manager",
+      label: "Restaurant manager",
+      image: "manager",
+      headline: "Everything you chase, in one place.",
+      pains: ["Missing checks and unsigned records", "Rota changes and late arrivals", "Approving supplier orders", "Being ready when the EHO walks in"],
+      helps: [
+        { title: "Who’s in, who’s late", body: "Clock-in connected to the rota, ready to review as timesheets.", href: "clock-in" },
+        { title: "A daily summary", body: "The AI Checker tells you what needs attention, and links straight to it.", href: "ai-checker" },
+        { title: "Inspection-ready", body: "Records, training certificates, suppliers and pest control a tap away.", href: "inspection" },
+      ],
+    },
+    {
+      id: "multi-site",
+      label: "Multi-site operator",
+      image: null,
+      headline: "The same standards at every site.",
+      pains: ["Different ways of working at each site", "Not knowing what’s happening when you’re away", "Software costs that grow with every new hire", "Bringing a new site up to standard"],
+      helps: [
+        { title: "One view across your sites", body: "Checks, shifts, attention items and orders, site by site. Try the site switcher here.", href: null },
+        { title: "Priced per site, never per person", body: "Every member of staff at every site is included. Adding a site is one more plan.", href: "pricing" },
+        { title: "Roles for everyone", body: "Owners, managers and staff each see only what they need.", href: "pricing" },
+      ],
+    },
+  ] satisfies Array<{
+    id: string;
+    label: string;
+    image: "takeaway" | "chef" | "manager" | null;
+    headline: string;
+    pains: string[];
+    helps: Array<{ title: string; body: string; href: string | null }>;
+  }>,
+  painsTitle: "What gets in the way",
+  helpsTitle: "What helps most",
+  siteSwitcherNote: "Switch between sites and see each one’s day at a glance.",
+};
+
+/** "Your numbers": the three calculators in one place (conversion review R7). */
+export const numbers = {
+  eyebrow: "Your numbers",
+  title: "What could Safe Kitchen",
+  accent: "be worth to you?",
+  intro: "Three quick calculators using your own figures. They’re estimates to help you decide, not promised savings.",
+  tabs: { value: "Overall value", admin: "Admin time", revenue: "Revenue at risk" },
 };
 
 export const inspection = {
@@ -308,17 +447,100 @@ export const roadmap = {
 };
 
 export const pricingCopy = {
-  title: "Your entire kitchen team.",
-  accent: "One simple subscription.",
-  tagline: "Everything your kitchen needs from £14.99 a month.",
+  eyebrow: "Pricing",
+  title: "One price per site.",
+  accent: "Your whole team included.",
   intro: whenLive(
-    "One plan per site covers every Safe Kitchen tool as it launches: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
-    "One plan per site covers every Safe Kitchen tool: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff. No hidden charges.",
+    "One plan covers every Safe Kitchen tool as it launches: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff, and no set-up fees.",
+    "One plan covers every Safe Kitchen tool: food safety, staff training, rotas, clock-in, the AI Checker and ordering. Unlimited staff, and no set-up fees.",
   ),
   monthlyLabel: "Monthly",
-  annualLabel: "Annually",
+  annualLabel: "Annual",
+  annualBadge: "Best value",
+  perMonth: "a month",
+  perYear: "a year",
+  incVat: "including VAT",
+  annualSaving: "Save {amount} a year compared with paying monthly",
+  includesTitle: "Every plan includes",
+  neverPayTitle: "What you’ll never pay for",
   multiTitle: "Several sites?",
-  multiBody: "Running a few kitchens? Tell us about your sites and we’ll talk it through.",
+  multiExample: "{sites} sites = {amount} a month + VAT, with every member of staff at every site included.",
+  multiBody: "Tell us about your sites and we’ll talk it through.",
+  coverLine: "Save just {minutes} minutes of management time a week and the annual plan has paid for itself.",
+  coverNote: "At £15 an hour. Time value isn’t automatically a cash saving on your payroll.",
+  earlyNote: whenLive(
+    "Not open yet: join early access free, with no card and no commitment, and we’ll tell you as soon as you can subscribe.",
+    "Join early access free, with no card and no commitment.",
+  ),
+  founding: {
+    title: "Founding customer offer",
+    body: "The first {limit} businesses to subscribe at launch keep their launch price for as long as their subscription continues without a break, plus a free onboarding call to get set up.",
+    terms: "Applies to the original plan and site. VAT is charged separately at the rate that applies. Starts at launch; full terms will be published before then.",
+  },
+};
+
+/** "Where Safe Kitchen is today": honest status, data security and limits (conversion review R9). */
+export const trust = {
+  eyebrow: "Straight answers",
+  title: "Where Safe Kitchen is today,",
+  accent: "and how your data is looked after.",
+  intro: "We’d rather tell you exactly where things stand than over-promise. Here’s what’s built, what’s coming, and the limits you should know about.",
+  demoNote: "Every demo on this page is interactive and uses sample data, to show how Safe Kitchen is designed to work. A demo doesn’t mean the feature is open to customers yet.",
+  built: {
+    title: "Built and being tested",
+    note: "Not open to customers yet",
+    items: ["Business accounts and secure sign-in", "Two-step verification for owners and managers", "Business, sites and staff set-up, with invitations", "Shared kitchen tablet with personal staff PINs"],
+  },
+  groups: [
+    {
+      status: "in_development",
+      title: "In development",
+      features: [
+        ["temperatures", "Daily food safety records"],
+        ["cleaning", "Cleaning and checklists"],
+        ["inspectionView", "Inspection Mode"],
+        ["supplierList", "Supplier list and pest control records"],
+        ["managerOverview", "Manager overview"],
+      ],
+    },
+    {
+      status: "planned",
+      title: "Planned next",
+      features: [
+        ["trainingCourse", "Level 2 training and certificates"],
+        ["rotaImport", "Rotas from a photo or spreadsheet"],
+        ["clockIn", "Clock-in and attendance"],
+        ["aiChecker", "AI Checker"],
+        ["ordering", "Smart ordering"],
+        ["recordExports", "Exporting your records"],
+        ["offline", "Working offline"],
+      ],
+    },
+  ] satisfies Array<{ status: "in_development" | "planned"; title: string; features: Array<[FeatureKey, string]> }>,
+  cards: [
+    {
+      title: "Your records are kept separate",
+      body: "Each business’s records are kept apart at database level, with automated tests proving one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs, and records are never silently changed: every correction is kept. Data is planned to be hosted in the UK.",
+    },
+    {
+      title: "Your records stay yours",
+      body: "Inspection Mode lets you print records or save them as a PDF. We’re also building a way to export your records if you ever leave Safe Kitchen. We’ll only say it’s available once it’s built and tested.",
+    },
+    {
+      title: "If the internet drops",
+      body: "Offline recording is planned but not available yet. Until it is, daily checks need a connection. We’ll only say Safe Kitchen works offline once it’s been fully tested.",
+    },
+    { title: "Training certificates", body: certificateDisclosure },
+    {
+      title: "AI is never in charge",
+      body: "The AI Checker points managers to records worth a look. It can’t confirm a check was physically done, it never sets safety limits, and it never replaces your own judgement.",
+    },
+    {
+      title: "Not affiliated with the FSA",
+      body: "Safe Kitchen is built around the Food Standards Agency’s Safer Food, Better Business system, but it isn’t affiliated with or endorsed by the FSA or any local authority.",
+    },
+  ],
+  exploringTitle: "Ideas we’re exploring",
 };
 
 type FaqItem = { q: string; a: string };
@@ -327,8 +549,16 @@ type FaqItem = { q: string; a: string };
 const faqItems: Array<FaqItem & { hideWhenLive?: boolean }> = [
   {
     q: "What’s available now?",
-    a: "Safe Kitchen is in development and isn’t open to customers yet. Food safety records are being built first. Staff training, rotas, clock-in and attendance, the AI Checker and supplier ordering are planned to follow. Every feature on this page carries a label showing its status, and early-access members hear first as each one opens.",
+    a: "Safe Kitchen is in development and isn’t open to customers yet. Accounts, sign-in and the shared kitchen tablet are built and being tested, and daily food safety records are being built now. Staff training, rotas, clock-in, the AI Checker and ordering are planned to follow. Every feature on this page carries a label showing its status, and early-access members hear first as each one opens.",
     hideWhenLive: true,
+  },
+  {
+    q: "Is early access free?",
+    a: "Yes. Joining early access is completely free, with no payment card and no commitment. You’ll hear first as features open, and you can help shape what we build.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "£14.99 a month (£17.99 including VAT) or £149.99 a year (£179.99 including VAT) for each site. That covers every Safe Kitchen tool, including the staff food hygiene course and certificates, with unlimited staff and no set-up fees.",
   },
   {
     q: "Is it easy for chefs to use?",
@@ -338,95 +568,52 @@ const faqItems: Array<FaqItem & { hideWhenLive?: boolean }> = [
     ),
   },
   {
-    q: "Does it replace paper food safety records?",
-    a: "It’s designed to hold your daily food safety records digitally, organised by date, so you don’t need paper sheets for the checks you record in Safe Kitchen. Your business stays responsible for its food safety system, and your local authority can advise on what they expect to see.",
-  },
-  {
-    q: "Can I show records to an EHO?",
+    q: "Can I show my records to an EHO?",
     a: whenLive(
-      "Yes, that’s what Inspection Mode is for. Records are on screen in a clear layout, with anything missing or unresolved shown honestly, and you can print them or save them as a PDF. It’s in development and part of our first release.",
-      "Yes, that’s what Inspection Mode is for. Records are on screen in a clear layout, with anything missing or unresolved shown honestly, and you can print them or save them as a PDF.",
+      "Yes, that’s what Inspection Mode is for. Your daily food safety records, cleaning and pest control checks, supplier list, staff training records and certificates, and documents you upload are brought together on screen, with anything missing or unresolved shown honestly. You can print them or save them as a PDF. Inspection Mode is in development; training and document uploads are planned to follow.",
+      "Yes, that’s what Inspection Mode is for. Your daily food safety records, cleaning and pest control checks, supplier list, staff training records and certificates, and documents you upload are brought together on screen, with anything missing or unresolved shown honestly. You can print them or save them as a PDF.",
     ),
   },
   {
-    q: "Is there food safety training for staff?",
+    q: "What are the training certificates?",
     a: whenLive(
-      `Yes, that’s planned. When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers. Training is planned and not available yet.`,
-      `Yes. When you add a new member of staff, Safe Kitchen sends our ${courseName} to their phone, or they can do it on the kitchen tablet. The lessons and test are in the app, and the certificate is saved to their record automatically. It’s included in your plan, with no per-course fees. You can also upload certificates from other training providers.`,
-    ),
-  },
-  {
-    q: "What can I keep in the app for an inspection?",
-    a: whenLive(
-      "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF. Daily records, the supplier list and pest checks are part of our first release; training and document uploads are planned to follow.",
-      "Your daily food safety records, cleaning and pest control checks, your supplier list, staff training records and certificates, and other documents you upload, such as pest control reports. Inspection Mode brings them together so you can show them on screen or as a PDF.",
+      `When you add a new member of staff, Safe Kitchen can send our ${courseName} to their phone, or they can do it on the kitchen tablet. After a successful assessment, a Safe Kitchen certificate is saved to their record. ${certificateDisclosure} You can also upload certificates from other providers. Training is planned and not available yet.`,
+      `When you add a new member of staff, Safe Kitchen sends our ${courseName} to their phone, or they can do it on the kitchen tablet. After a successful assessment, a Safe Kitchen certificate is saved to their record. ${certificateDisclosure} You can also upload certificates from other providers.`,
     ),
   },
   {
     q: "Can I import the rota I already use?",
     a: whenLive(
-      "That’s the plan. You’ll be able to upload a photo, screenshot, PDF or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check and correct it before anything is sent to staff. This feature is planned and not available yet.",
-      "Yes. Upload a photo, screenshot, PDF or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check and correct it before anything is sent to staff.",
+      "That’s the plan. You’ll be able to upload a photo, screenshot, PDF, Word document or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check it before anything is sent to staff. This feature is planned and not available yet.",
+      "Yes. Upload a photo, screenshot, PDF, Word document or Excel spreadsheet of your existing rota. Safe Kitchen turns it into a draft, highlights anything it isn’t sure about, and you check it before anything is sent to staff.",
     ),
   },
   {
     q: "Does clock-in track where my staff are?",
     a: whenLive(
-      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Location checks reduce mistakes but aren’t foolproof, so managers can review and correct records. Clock-in is planned and not available yet.",
-      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Location checks reduce mistakes but aren’t foolproof, so managers can review and correct records.",
-    ),
-  },
-  {
-    q: "What does the AI Checker actually check?",
-    a: whenLive(
-      "Your records and forms: checks that are missing, incomplete, overdue or look unusual, and problems still waiting for review. It explains why each item was flagged and links to the record. It doesn’t use cameras, it can’t confirm a check was physically done, and it never replaces a manager’s judgement. It’s planned and not available yet.",
-      "Your records and forms: checks that are missing, incomplete, overdue or look unusual, and problems still waiting for review. It explains why each item was flagged and links to the record. It doesn’t use cameras, it can’t confirm a check was physically done, and it never replaces a manager’s judgement.",
+      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead. Clock-in is planned and not available yet.",
+      "No. Location is checked only at the moment someone clocks in or out, never during a shift. Staff who can’t or don’t want to share their location can clock in on the kitchen tablet with their own PIN instead.",
     ),
   },
   {
     q: "Which suppliers can I order from?",
     a: whenLive(
-      "The plan is that you’ll build orders for the suppliers you already use, and Safe Kitchen will send them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly. We’ll only name supported suppliers once a connection is confirmed. Ordering is planned and not available yet.",
+      "The plan is that you’ll build orders for the suppliers you already use, and Safe Kitchen will send them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly. Ordering is planned and not available yet.",
       "You build orders for the suppliers you already use, and Safe Kitchen sends them by email, or by a direct link where a supplier supports one. You keep paying suppliers directly.",
     ),
-  },
-  {
-    q: "Can I manage multiple sites?",
-    a: "Yes. Safe Kitchen is built for businesses with one site or several, with roles for owners, managers and staff. Pricing is per site, and multi-site businesses can book a call to talk it through.",
-  },
-  {
-    q: "What happens if the internet goes down?",
-    a: whenLive(
-      "We’re building daily checks to keep working without a connection and to sync when you’re back online, without losing or duplicating records. This isn’t available yet. We’ll only say it works offline once it’s been fully tested.",
-      "Daily checks keep working without a connection and sync when you’re back online, without losing or duplicating records.",
-    ),
-  },
-  {
-    q: "How secure is the data?",
-    a: whenLive(
-      "Each business’s records are kept separate at database level, with automated tests that prove one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs on shared tablets, and records are never silently changed. Data is planned to be hosted in the UK.",
-      "Each business’s records are kept separate at database level, with automated tests that prove one business can’t see another’s data. Owners and managers use two-step verification, staff use personal PINs on shared tablets, and records are never silently changed. Data is hosted in the UK.",
-    ),
-  },
-  {
-    q: "How much does it cost?",
-    a: "£14.99 a month or £149.99 a year, plus VAT, for each site. That covers every Safe Kitchen tool, including the staff food safety course and certificates, with unlimited staff and no hidden charges.",
-  },
-  {
-    q: "Is Safe Kitchen approved by the Food Standards Agency?",
-    a: "No. Safe Kitchen is built around the FSA’s Safer Food, Better Business system, but it isn’t affiliated with or endorsed by the FSA or any local authority.",
   },
 ];
 
 export const faq = {
-  title: "Questions kitchen owners ask.",
+  title: "Other questions.",
   items: faqItems
     .filter((i) => !(i.hideWhenLive && whenLive("show", "hide") === "hide"))
     .map(({ q, a }): FaqItem => ({ q, a })),
 };
 
 export const finalCta = {
-  title: "Less admin. Less waste.",
-  accent: "More control.",
-  intro: "Discover a simpler, smarter way to manage your kitchen. Join early access, request a demo or book a call.",
+  title: "Less paperwork.",
+  accent: "More time running your kitchen.",
+  intro: "Join early access free. Be first to try each feature as it opens, and help shape what we build. Or request a demo or book a call.",
+  freePoints: ["Free to join", "No payment card", "No commitment"],
 };

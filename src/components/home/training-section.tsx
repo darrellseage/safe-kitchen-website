@@ -1,9 +1,9 @@
 import { Section } from "@/components/ui/section";
-import { SectionCta } from "./section-cta";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { certificateDisclosure, training } from "@/content/home";
 import { trainingComparison } from "@/lib/value";
 import { PillarLines } from "./pillar-lines";
+import { StepCards } from "./step-cards";
 import { gbp } from "./sales-bits";
 import { TrainingDemo } from "./training-demo";
 
@@ -45,22 +45,13 @@ export function TrainingSection() {
         <p className="border-t border-line px-6 py-4 text-[13px] text-ink-muted">{comparison.note}</p>
       </div>
 
-      <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {training.steps.map((s, i) => (
-          <li key={s.title} className="rounded-2xl border border-line bg-surface-raised p-5">
-            <span className="grid size-8 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white tabular">{i + 1}</span>
-            <p className="mt-3 font-extrabold">{s.title}</p>
-            <p className="mt-1 text-[15px] text-ink-muted">{s.body}</p>
-          </li>
-        ))}
-      </ol>
+      <StepCards steps={training.steps} />
       <div className="mt-12">
         <TrainingDemo />
       </div>
       <p className="mt-6 max-w-[85ch] text-sm text-ink-muted">
         {certificateDisclosure} {training.note}
       </p>
-      <SectionCta text="New staff? No additional course fee. Training is included from £14.99 a month." />
     </Section>
   );
 }

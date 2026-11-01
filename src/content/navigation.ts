@@ -10,14 +10,14 @@ export const homeHref = home || "index.html";
 export const pageHref = (slug: string) => (home ? `/${slug}` : `${slug}.html`);
 
 export const mainNav = [
-  { href: section("food-safety"), label: "Food safety" },
+  { href: section("tour"), label: "Tour" },
   { href: section("training"), label: "Training" },
-  { href: section("rotas"), label: "Rotas & clock-in" },
   { href: section("ai-checker"), label: "AI Checker" },
+  { href: section("rotas"), label: "Rotas" },
   { href: section("ordering"), label: "Ordering" },
-  { href: section("savings"), label: "Savings" },
+  { href: section("food-safety"), label: "Records" },
   { href: section("pricing"), label: "Pricing" },
-  { href: section("faq"), label: "FAQ" },
+  { href: section("straight-answers"), label: "FAQ" },
 ] as const;
 
 export const legalNav = [

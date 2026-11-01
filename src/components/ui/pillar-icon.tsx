@@ -1,5 +1,6 @@
 import { CalendarDays, Clock3, GraduationCap, ScanEye, ShoppingBasket, Thermometer, type LucideIcon } from "lucide-react";
-import type { PillarIcon as PillarIconName } from "@/content/pillars";
+
+export type PillarIconName = "thermometer" | "calendar" | "graduation" | "clock" | "eye" | "basket";
 
 const icons: Record<PillarIconName, LucideIcon> = {
   thermometer: Thermometer,

@@ -39,7 +39,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cn("py-20 md:py-28", tones[tone], className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cn("py-16 md:py-24", tones[tone], className)}>
       <div className="mx-auto w-[min(1200px,100%-40px)]">{children}</div>
     </section>
   );

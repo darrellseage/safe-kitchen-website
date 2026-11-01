@@ -1,8 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Section } from "@/components/ui/section";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { valueCalc } from "@/content/home";
 import { cn } from "@/lib/cn";
 import { combinedValue, type ValueInputs } from "@/lib/value";
@@ -54,7 +52,7 @@ const defaults: Record<keyof ValueInputs, string> = {
   percentWasteReduction: "10",
 };
 
-/** Combined illustrative value, with purchasing and waste counted once. */
+/** Combined illustrative value, with purchasing and waste counted once. A tab of "Your numbers". */
 export function ValueCalculator() {
   const id = useId();
   const [text, setText] = useState(defaults);
@@ -70,9 +68,7 @@ export function ValueCalculator() {
   ];
 
   return (
-    <Section id="savings" labelledBy="savings-title" tone="forest">
-      <SectionHeading id="savings-title" title={valueCalc.title} accent={valueCalc.accent} intro={valueCalc.intro} />
-      <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised lg:grid-cols-[1.15fr_0.85fr]">
+    <div className="grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised lg:grid-cols-[1.15fr_0.85fr]">
         <form className="grid content-start gap-7 p-6 sm:p-8" onSubmit={(e) => e.preventDefault()}>
           {groups.map((g) => (
             <fieldset key={g.title} className="grid gap-4">
@@ -125,6 +121,5 @@ export function ValueCalculator() {
           </p>
         </div>
       </div>
-    </Section>
   );
 }

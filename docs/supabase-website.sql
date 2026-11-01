@@ -2,18 +2,30 @@
 -- never the app's). Run once in the Supabase SQL editor.
 -- Row Level Security is on with no policies: only the server-side secret key
 -- used by the website can read or write. Nothing is exposed to browsers.
+--
+-- Enquiries are saved in two steps (owner decision 1 Nov 2026):
+--   step 1: email, what they'd like, optional marketing consent (saved at once)
+--   step 2: name and business details (completed_at is set)
+-- Rows with completed_at null are step-1-only enquiries.
 
 create table if not exists public.enquiries (
   id uuid primary key,
   received_at timestamptz not null default now(),
-  name text not null check (char_length(name) between 1 and 100),
   email text not null check (char_length(email) between 3 and 254),
-  business text not null check (char_length(business) between 1 and 120),
-  business_type text not null,
-  sites text not null,
   interest text not null check (interest in ('early_access', 'demo', 'call')),
-  message text not null default '' check (char_length(message) <= 1000),
-  marketing_opt_in boolean not null default false
+  -- Marketing consent: what was agreed to, and when (UK GDPR, PECR).
+  marketing_opt_in boolean not null default false,
+  marketing_consent_at timestamptz,
+  marketing_consent_version text,
+  marketing_consent_text text,
+  -- Step 2
+  name text check (name is null or char_length(name) between 1 and 100),
+  business text check (business is null or char_length(business) <= 120),
+  business_type text,
+  sites text,
+  message text check (message is null or char_length(message) <= 1000),
+  completed_at timestamptz,
+  constraint consent_recorded check (not marketing_opt_in or marketing_consent_at is not null)
 );
 
 create table if not exists public.call_bookings (

@@ -5,10 +5,11 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { familiar } from "@/content/home";
 import { images, type StockImage } from "@/content/images";
+import { HygieneRatings } from "./hygiene-ratings";
 
 const visuals: Array<StockImage | "folders"> = [images.plating, "folders", images.owner];
 
-/** Section 2: three moments kitchen teams and owners recognise. */
+/** The problem: three moments kitchen teams and owners recognise, and what's at stake for the hygiene rating. */
 export function SoundFamiliar() {
   return (
     <Section id="familiar" labelledBy="familiar-title" tone="fern">
@@ -20,7 +21,7 @@ export function SoundFamiliar() {
             <li key={s.who}>
               <Reveal delay={i * 0.1} className="h-full">
                 <article className="grid h-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-card">
-                  <div className="relative aspect-[4/3] bg-surface-sunken">
+                  <div className="relative aspect-[16/9] bg-surface-sunken md:aspect-[4/3]">
                     {visual === "folders" ? (
                       <FoldersIllustration />
                     ) : (
@@ -46,6 +47,7 @@ export function SoundFamiliar() {
           );
         })}
       </ul>
+      <HygieneRatings />
     </Section>
   );
 }

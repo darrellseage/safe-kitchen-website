@@ -30,3 +30,10 @@ export async function selectColumn(table: string, column: string, filter: string
   const rows = (await res.json()) as Array<Record<string, string>>;
   return rows.map((r) => r[column]);
 }
+
+/** Updates rows matching a PostgREST filter and returns how many changed. */
+export async function updateRows<T extends Record<string, unknown>>(table: string, filter: string, values: T): Promise<number> {
+  const res = await rest(`${table}?${filter}`, { method: "PATCH", headers: { Prefer: "return=representation" }, body: JSON.stringify(values) });
+  if (!res.ok) throw new Error(`Supabase update failed (${res.status})`);
+  return ((await res.json()) as unknown[]).length;
+}

@@ -1,13 +1,12 @@
 import { Check, X } from "lucide-react";
-import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { comparison } from "@/content/home";
 
-/** The usual collection of separate methods, against one system. No competitor prices. */
-export function ComparisonSection() {
+/** The usual collection of separate methods, against one system. No competitor prices. Closes "Your numbers". */
+export function ComparisonPart() {
   return (
-    <Section id="one-system" labelledBy="comparison-title" tone="fern">
-      <SectionHeading id="comparison-title" title={comparison.title} accent={comparison.accent} />
+    <div id="one-system" className="mt-20 scroll-mt-24 border-t border-line pt-16">
+      <SectionHeading id="comparison-title" as="h3" title={comparison.title} accent={comparison.accent} />
       <div className="mt-12 grid gap-4 md:grid-cols-2">
         <div className="rounded-3xl border border-line bg-surface-raised p-7">
           <p className="text-xl font-extrabold text-ink-muted">{comparison.before.title}</p>
@@ -32,6 +31,6 @@ export function ComparisonSection() {
           </ul>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }

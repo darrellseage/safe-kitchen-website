@@ -69,14 +69,6 @@ export function Transformation() {
         <Dashboard progress={progress} hidden={!showingAfter} />
       </div>
 
-      <ul className="mt-14 grid gap-6 md:grid-cols-3">
-        {transformation.outcomes.map((o) => (
-          <li key={o.title} className="border-t-2 border-accent-600 pt-4">
-            <h3 className="text-[21px] leading-tight font-extrabold tracking-[-0.015em]">{o.title}</h3>
-            <p className="mt-1.5 text-ink-muted">{o.body}</p>
-          </li>
-        ))}
-      </ul>
     </Section>
   );
 }

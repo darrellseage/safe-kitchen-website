@@ -135,6 +135,15 @@ h1, h2, h3 {
   }
 }
 
+/* Guided tour: progress bar for the step that's playing. */
+@keyframes tour-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.tour-progress {
+  animation: tour-progress linear both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

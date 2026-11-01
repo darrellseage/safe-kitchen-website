@@ -21,7 +21,7 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-brand-900", className)}>
+    <span className={cn("inline-flex items-center gap-2 text-lg font-extrabold tracking-tight whitespace-nowrap text-brand-900 sm:gap-2.5", className)}>
       <LogoMark />
       {siteConfig.name}
     </span>

@@ -1,4 +1,6 @@
-import { Check, Info } from "lucide-react";
+import Link from "next/link";
+import { Check } from "lucide-react";
+import { section } from "@/content/navigation";
 import type { ReactNode } from "react";
 
 /** Chips listing what a feature helps catch. */
@@ -18,22 +20,19 @@ export function Catches({ label, items }: { label: string; items: readonly strin
   );
 }
 
-/** A worked money example, always labelled as illustrative. */
-export function ExampleCard({ amount, text, note }: { amount: string; text: string; note?: string }) {
+/** A one-line worked money example, always labelled as illustrative, linking to the calculators. */
+export function ExampleLine({ amount, text, note }: { amount: string; text: string; note?: string }) {
   const [before, after] = text.split("{amount}");
   return (
-    <aside className="mt-8 flex max-w-3xl gap-4 rounded-2xl border border-brand-100 bg-brand-50 p-5">
-      <Info className="mt-1 size-5 flex-none text-brand-700" aria-hidden="true" />
-      <div>
-        <p className="text-[13px] font-bold tracking-[0.08em] text-brand-700 uppercase">Illustrative example</p>
-        <p className="mt-1 text-lg">
-          {before}
-          <b className="text-2xl font-extrabold text-brand-900 tabular">{amount}</b>
-          {after}
-        </p>
-        {note ? <p className="mt-1 text-[13px] text-ink-muted">{note}</p> : null}
-      </div>
-    </aside>
+    <p className="mt-6 max-w-3xl text-[16.5px] text-ink-muted">
+      {before}
+      <b className="font-extrabold text-ink tabular">{amount}</b>
+      {after}
+      {note ? ` ${note}` : ""}{" "}
+      <Link href={section("savings")} className="font-bold whitespace-nowrap text-accent-600 underline underline-offset-2">
+        Work out your own numbers
+      </Link>
+    </p>
   );
 }
 

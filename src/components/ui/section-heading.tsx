@@ -16,6 +16,7 @@ export function SectionHeading({
   status,
   className,
   size = "lg",
+  as: Tag = "h2",
 }: {
   id: string;
   eyebrow?: string;
@@ -25,6 +26,8 @@ export function SectionHeading({
   status?: FeatureKey;
   className?: string;
   size?: "lg" | "xl";
+  /** h3 when the heading sits inside another section. */
+  as?: "h2" | "h3";
 }) {
   return (
     <div className={cn("max-w-3xl", className)}>
@@ -34,7 +37,7 @@ export function SectionHeading({
           {status ? <StatusChip feature={status} /> : null}
         </div>
       ) : null}
-      <h2
+      <Tag
         id={id}
         className={cn(
           "font-extrabold tracking-[-0.035em] text-ink",
@@ -43,7 +46,7 @@ export function SectionHeading({
       >
         {title}
         {accent ? <span className="text-brand-500"> {accent}</span> : null}
-      </h2>
+      </Tag>
       {intro ? <p className="mt-5 max-w-[60ch] text-lg text-ink-muted">{intro}</p> : null}
     </div>
   );

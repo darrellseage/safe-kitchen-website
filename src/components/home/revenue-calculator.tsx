@@ -12,7 +12,7 @@ export function RevenueCalculator() {
   const [percent, setPercent] = useState("5");
   const result = revenueAtRisk(num(turnover), num(percent));
   return (
-    <div className="grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-card lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised lg:grid-cols-[1.1fr_0.9fr]">
       <div className="grid content-start gap-5 p-6 sm:p-8">
         <h3 className="text-2xl font-extrabold tracking-[-0.02em]">{hygiene.calculator.title}</h3>
         <div className="grid gap-5 sm:grid-cols-2">

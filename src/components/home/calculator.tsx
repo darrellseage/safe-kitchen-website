@@ -1,13 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Section } from "@/components/ui/section";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { calculator } from "@/content/home";
 import { calculatorExample, calculatorLimits, estimatePaperwork, type CalculatorInput } from "@/lib/calculator";
-import { pricing } from "@/config/pricing";
-import { minutesPerWeekToCover } from "@/lib/value";
-import { ExampleCard } from "./sales-bits";
 
 const fields: Array<{ key: keyof CalculatorInput; label: string; unit: string; hint?: string; prefix?: string; step?: number }> = [
   { key: "sites", label: "Kitchen sites", unit: "sites" },
@@ -19,7 +14,7 @@ const fields: Array<{ key: keyof CalculatorInput; label: string; unit: string; h
 const whole = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
 const money = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 });
 
-/** Section 3: the visitor's own estimate of current admin time and cost. */
+/** The visitor's own estimate of current admin time and cost. A tab of "Your numbers". */
 export function PaperworkCalculator() {
   const [text, setText] = useState<Record<keyof CalculatorInput, string>>(
     () => Object.fromEntries(Object.entries(calculatorExample).map(([k, v]) => [k, String(v)])) as Record<keyof CalculatorInput, string>,
@@ -29,9 +24,8 @@ export function PaperworkCalculator() {
   const r = estimatePaperwork(input);
 
   return (
-    <Section id="paperwork-cost" labelledBy="calc-title" tone="forest">
-      <SectionHeading id="calc-title" title={calculator.title} intro={calculator.intro} />
-      <div className="mt-12 grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-card lg:grid-cols-2">
+    <div>
+      <div className="grid overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-card lg:grid-cols-2">
         <form className="grid gap-6 p-6 sm:p-8" onSubmit={(e) => e.preventDefault()}>
           {fields.map((f) => {
             const fid = `${id}-${f.key}`;
@@ -96,7 +90,6 @@ export function PaperworkCalculator() {
         </div>
       </div>
       <p className="mt-5 max-w-[80ch] text-sm text-ink-muted">{calculator.disclaimer}</p>
-      <ExampleCard amount={String(Math.ceil(minutesPerWeekToCover(pricing.annual, 15)))} text={calculator.coverLine.replace("{minutes}", "{amount}")} note={calculator.coverNote} />
-    </Section>
+    </div>
   );
 }

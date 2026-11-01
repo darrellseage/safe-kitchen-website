@@ -1,37 +1,70 @@
 import { whenLive } from "@/config/features";
 import type { ReactNode } from "react";
-import { ArrowDown, Check, ChefHat, ScanEye, ShoppingBasket } from "lucide-react";
+import Link from "next/link";
+import { Check, ChefHat, PlayCircle, ScanEye, ShoppingBasket } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DeviceFrame } from "@/components/ui/device-frame";
 import { ScreenHeader, TaskRow } from "@/components/product/ui-bits";
 import { nowTasks } from "@/content/demo-data";
 import { hero } from "@/content/home";
+import { founder } from "@/content/founder";
+import { formatGBP, pricing } from "@/config/pricing";
 import { ctaHref, section } from "@/content/navigation";
 
-/** Section 1: headline and a layered, illustrative view of the five pillars working together. */
+/** Section 1: what it is, who it's for, the price, and the founder line, all on the first screen. */
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="overflow-x-clip bg-surface-raised">
-      <div className="mx-auto grid w-[min(1200px,100%-40px)] items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid w-[min(1200px,100%-40px)] items-center gap-12 py-10 md:py-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <h1 id="hero-title" className="animate-rise text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.98] font-extrabold tracking-[-0.045em]">
-            {hero.titleLead} <span className="block text-brand-500">{hero.titleAccent}</span>
-          </h1>
-          <p className="mt-6 flex items-center gap-3 text-[clamp(1.2rem,2.2vw,1.55rem)] leading-snug font-extrabold tracking-[-0.015em] text-brand-900">
-            <span className="grid size-11 flex-none place-items-center rounded-xl bg-brand-50 text-brand-700">
-              <ChefHat className="size-6" aria-hidden="true" />
+          <p className="mb-5 flex w-fit items-center gap-2.5 rounded-full bg-brand-50 py-1.5 ps-1.5 pe-4 text-[15px] font-extrabold text-brand-900">
+            <span className="grid size-8 flex-none place-items-center rounded-full bg-deep text-white">
+              <ChefHat className="size-4.5" aria-hidden="true" />
             </span>
             {hero.credibility}
           </p>
-          <p className="mt-5 max-w-[46ch] text-lg text-ink-muted md:text-xl">{hero.body}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href={ctaHref}>{hero.primary}</ButtonLink>
-            <ButtonLink href={section("overview")} variant="secondary">
+          <h1 id="hero-title" className="animate-rise text-[clamp(2.5rem,5vw,4.4rem)] leading-[0.98] font-extrabold tracking-[-0.045em]">
+            {hero.titleLead} <span className="block text-brand-500">{hero.titleAccent}</span>
+          </h1>
+          <p className="mt-5 max-w-[54ch] text-lg text-ink-muted">{hero.body}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border border-line bg-surface px-4 py-3">
+            <p className="flex items-baseline gap-x-1.5">
+              <span className="text-sm text-ink-muted">{hero.priceLead}</span>
+              <span className="text-2xl font-extrabold tracking-[-0.03em] text-brand-900 tabular">{formatGBP(pricing.monthly)}</span>
+              <span className="text-sm font-semibold text-ink-muted">{hero.priceTail}</span>
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-1 text-[14.5px] font-semibold">
+              {hero.pricePoints.map((p) => (
+                <li key={p} className="flex items-center gap-1.5">
+                  <Check className="size-4 flex-none text-brand-500" aria-hidden="true" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <ButtonLink href={ctaHref} className="max-sm:w-full">
+              {hero.primary}
+            </ButtonLink>
+            <ButtonLink href={section("tour")} variant="secondary" className="max-sm:w-full">
+              <PlayCircle className="size-5" aria-hidden="true" />
               {hero.secondary}
-              <ArrowDown className="size-4" aria-hidden="true" />
             </ButtonLink>
           </div>
-          <p className="mt-8 max-w-[56ch] text-sm text-ink-muted">{hero.note}</p>
+          <p className="mt-3 text-sm font-semibold text-brand-700">{hero.freeNote}</p>
+          <p className="mt-6 flex items-center gap-3 border-t border-line pt-5 text-[15px] text-ink-muted">
+            <span aria-hidden="true" className="grid size-9 flex-none place-items-center rounded-full bg-deep text-[13px] font-extrabold text-white">
+              {founder.initials}
+            </span>
+            <span>
+              {founder.short}{" "}
+              <Link href={section("founder")} className="font-semibold text-accent-600 underline underline-offset-2">
+                Read Darrell’s story
+              </Link>
+            </span>
+          </p>
+          <p className="mt-4 max-w-[60ch] text-[13px] text-ink-muted">{hero.note}</p>
         </div>
         <HeroVisual />
       </div>
@@ -54,7 +87,7 @@ function HeroVisual() {
     <div
       role="img"
       aria-label="Illustration of Safe Kitchen: a kitchen tablet showing today's food safety checks, with cards for a staff clock-in, an AI Checker summary and a possible duplicate supplier order."
-      className="relative mx-auto h-[540px] w-full max-w-[580px] animate-rise [animation-delay:150ms] sm:h-[540px]"
+      className="relative mx-auto h-[470px] w-full max-w-[580px] animate-rise [animation-delay:150ms] sm:h-[540px]"
     >
       <div
         aria-hidden="true"

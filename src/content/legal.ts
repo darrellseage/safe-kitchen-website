@@ -21,22 +21,24 @@ export const legalDraftNotice = "Draft: to be reviewed by a solicitor before Saf
 
 export const privacy: LegalPage = {
   title: "Privacy notice",
-  updated: "Draft, 31 October 2026",
+  updated: "Draft, 1 November 2026",
   intro: `This notice explains how ${siteConfig.name} uses the information you give us through this website.`,
   sections: [
     { heading: "Who we are", body: [`${company.name} (“we”) runs ${siteConfig.name}. Our address is ${company.address}. Company number: ${company.number}. ICO registration: ${company.ico}.`, `For anything about your data, email ${company.email}.`] },
     {
       heading: "What we collect",
       body: [
-        "When you join early access, request a demo or book a call, we collect your name, email address, business name, type of business, number of sites, what you asked for, any message you write, the call time you chose, and whether you ticked the box for product updates.",
+        "Our form has two steps. In step 1 we collect your email address and what you asked for (early access, a demo or a call). We save these as soon as you press the button in step 1, even if you don’t go on to step 2, and the form tells you this before you send it.",
+        "In step 2 we collect your name, business name (optional), type of business, number of sites, any message you write and, for a call, the time you chose. Step 2 is optional for early access.",
+        "If you tick the product news box, we also record that you agreed, when, and the exact wording you agreed to.",
         "To protect the form from spam we check how quickly it was filled in and how many times it was sent from your connection. We use your IP address for that check but we don’t store it with your enquiry.",
       ],
     },
     {
       heading: "Why we use it, and our lawful basis",
       body: [
-        "To reply to your enquiry, arrange a demo or hold your call: our legitimate interest in responding to people who contact us.",
-        "To send you product updates, only if you tick the box: your consent. You can withdraw it at any time with the unsubscribe link or by emailing us.",
+        "To reply to your enquiry, arrange a demo or hold your call, and to tell you about early access if that’s what you asked for: our legitimate interest in responding to people who contact us. These are messages about what you asked for, not marketing.",
+        "To send you product news, only if you tick the box: your consent. The box is never ticked for you, and you can withdraw your consent at any time with the unsubscribe link or by emailing us.",
         "To keep the website and form secure and free of spam: our legitimate interest in protecting our service.",
       ],
     },
@@ -47,7 +49,7 @@ export const privacy: LegalPage = {
         "We never sell your data or share it for other companies’ marketing.",
       ],
     },
-    { heading: "How long we keep it", body: ["We keep enquiries for [retention period to confirm], then delete them, unless you become a customer, in which case your customer agreement explains what we keep."] },
+    { heading: "How long we keep it", body: ["We keep enquiries, including step-1-only enquiries, for [retention period to confirm], then delete them, unless you become a customer, in which case your customer agreement explains what we keep. If you ask us to stop contacting you, we keep only what we need to make sure we don’t contact you again."] },
     {
       heading: "Your rights",
       body: [
@@ -60,7 +62,7 @@ export const privacy: LegalPage = {
 
 export const cookies: LegalPage = {
   title: "Cookies",
-  updated: "Draft, 31 October 2026",
+  updated: "Draft, 1 November 2026",
   intro: "We keep cookies to a minimum.",
   sections: [
     { heading: "Cookies we use now", body: ["This website doesn’t use advertising or tracking cookies.", "When the spam protection on our form is switched on, Cloudflare Turnstile may use strictly necessary data in your browser to tell people from bots. This is needed for the form to work safely, so it doesn’t need your consent."] },
@@ -71,12 +73,22 @@ export const cookies: LegalPage = {
 
 export const terms: LegalPage = {
   title: "Website terms of use",
-  updated: "Draft, 31 October 2026",
+  updated: "Draft, 1 November 2026",
   intro: `These terms cover your use of the ${siteConfig.name} website. Separate terms will cover the ${siteConfig.name} service itself.`,
   sections: [
     { heading: "About the information on this site", body: [`We work hard to keep this site accurate, but it describes a product that is still being developed. Features marked as in development, planned or our vision may change or may not be released.`, "Demonstrations, figures and calculators on this site are illustrative. They aren’t food safety guidance, legal advice or a promise of any saving or outcome."] },
     { heading: "Food safety", body: [`Your business is always responsible for its own food safety. ${siteConfig.name} is a tool that helps you keep records and run your kitchen; it doesn’t replace your food safety management system, your own judgement or professional advice.`, `${siteConfig.name} is not affiliated with or endorsed by the Food Standards Agency or any local authority.`] },
     { heading: "Using the site", body: ["Please don’t misuse the site, for example by trying to break its security, sending spam through the form or copying its content for commercial use without permission."] },
+    {
+      heading: "Founding customer price lock (draft, not yet active)",
+      body: [
+        "This offer starts only when Safe Kitchen launches for paying customers, and these draft terms will be finalised and published before then.",
+        "The first 100 business customers whose first subscription payment succeeds after launch keep the price of their original plan (monthly or annual) for their original site for as long as that subscription continues without a break. If the subscription is cancelled or lapses, the locked price ends.",
+        "The price lock covers the price before VAT. VAT is charged separately at the rate that applies at the time. It doesn’t apply to additional sites or a change of plan [to confirm]. It can’t be transferred or exchanged for cash.",
+        "Founding customers also get one free onboarding call to help them get set up.",
+        "[Launch date, how places are counted and confirmed, and what happens if a business changes ownership: to be completed with legal advice.]",
+      ],
+    },
     { heading: "Our liability", body: ["[To be completed with legal advice.]"] },
     { heading: "Law", body: ["These terms are governed by the law of England and Wales."] },
   ],
@@ -84,7 +96,7 @@ export const terms: LegalPage = {
 
 export const accessibility: LegalPage = {
   title: "Accessibility statement",
-  updated: "Draft, 31 October 2026",
+  updated: "Draft, 1 November 2026",
   intro: `We want everyone to be able to use the ${siteConfig.name} website, including people using screen readers, keyboards, magnification or other assistive technology.`,
   sections: [
     { heading: "Our standard", body: ["We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA."] },

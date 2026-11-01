@@ -1,15 +1,16 @@
-import { Clock3, GraduationCap, PiggyBank, ShieldCheck } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button-link";
+import { Bot, ChefHat, GraduationCap, Layers3, NotebookPen } from "lucide-react";
 import { promises } from "@/content/home";
-import { ctaHref } from "@/content/navigation";
 
-const icons = [ShieldCheck, PiggyBank, Clock3, GraduationCap];
+const icons = [NotebookPen, Layers3, Bot, GraduationCap];
 
-/** The overall sales promise: reputation, costs, time, training. The page's one deep-green band. */
+/** The homepage's key messages (owner, 1 Nov 2026), straight after the hero. */
 export function PromisesBand() {
   return (
-    <section aria-label="What Safe Kitchen does for your business" className="bg-deep text-white">
-      <div className="mx-auto w-[min(1200px,100%-40px)] py-14">
+    <section aria-labelledby="promises-title" className="bg-deep text-white">
+      <div className="mx-auto w-[min(1200px,100%-40px)] py-12 md:py-14">
+        <h2 id="promises-title" className="sr-only">
+          {promises.label}
+        </h2>
         <ul className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {promises.items.map((p, i) => {
             const Icon = icons[i];
@@ -19,19 +20,17 @@ export function PromisesBand() {
                   <Icon className="size-5.5" aria-hidden="true" />
                 </span>
                 <span>
-                  <span className="block text-xl font-extrabold tracking-[-0.02em]">{p.title}.</span>
-                  <span className="block text-[15px] text-white/80">{p.body}</span>
+                  <span className="block text-xl leading-tight font-extrabold tracking-[-0.02em]">{p.title}</span>
+                  <span className="mt-1 block text-[15px] text-white/80">{p.body}</span>
                 </span>
               </li>
             );
           })}
         </ul>
-        <div className="mt-9 flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-7">
-          <p className="text-lg font-extrabold">{promises.footer}</p>
-          <ButtonLink href={ctaHref} variant="light">
-            Get early access
-          </ButtonLink>
-        </div>
+        <p className="mt-9 flex items-center gap-3 border-t border-white/15 pt-7 text-lg font-extrabold">
+          <ChefHat className="size-6 flex-none text-accent-300" aria-hidden="true" />
+          {promises.footer}
+        </p>
       </div>
     </section>
   );

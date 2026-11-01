@@ -1,8 +1,24 @@
 # Safe Kitchen website: conversion review
 
-> **Status:** recommendations for the owner's approval. **No website changes have been made.**
-> **Date:** 31 October 2026. **Reviewed:** the launch preview (branch `claude/light-redesign`, commit `1c68f8a`).
+> **Status (1 Nov 2026):** P1, P2 and P3 **approved by the owner and implemented** on branch `claude/light-redesign`, awaiting the owner's approval of the updated preview. Nothing has been deployed publicly.
+> **Reviewed:** the launch preview at commit `1c68f8a` (31 Oct 2026).
 > **Scope:** sales conversion optimisation, not a redesign. The brand, interactive demos, functionality and content-integrity safeguards stay. Known placeholders (hygiene statistics, legal drafts, stock photos, booking hours) are out of scope here.
+
+## 0. Owner decisions (1 Nov 2026) and what was built
+
+| Topic | Decision | Where it lives |
+|---|---|---|
+| Founder story | Darrell Seage, named with permission; 15+ years, Head Chef and Kitchen Manager roles; restaurants, cafés, pan-Asian kitchens, large hospitality operations, multiple outlets at a holiday park. **No photo until a genuine one is supplied.** | `src/content/founder.ts`, `founder-story.tsx` |
+| Early access | Free, no payment card, no commitment | Hero, pricing, form, FAQ |
+| Pricing | £14.99 + VAT (£17.99 inc.) monthly, £149.99 + VAT (£179.99 inc.) annual, per site, unlimited staff, Level 2 training included, **no set-up fees** | `src/config/pricing.ts` (app D-081) |
+| Founding offer | Price lock for the first 100 paying businesses, original plan and site, uninterrupted subscription, VAT separate, free onboarding call. **Not active until launch**; hidden on the site (`foundingOffer.announce`) until the owner approves its wording. Draft terms on the Terms page. | app D-082 |
+| Form | Two steps; step 1 (email + choice + optional marketing consent) saved at once and the user is told before sending; consent wording, version and time recorded; privacy notice updated | `early-access-form.tsx`, `src/lib/early-access/` |
+| Data export | Development requirement; shown only as "Planned" | app D-083 |
+| Free trial | Plan for 30 days, no card, subject to feasibility; **not on the website** | app D-084 |
+
+**Page structure after the changes:** 16 sections instead of 22: Hero → key messages → 60-second tour → founder → problem (Sound familiar + hygiene rating) → before and after → Training → AI Checker → Rotas + clock-in → Ordering + food waste → Inspection-ready records (temperature demo + Inspection Mode) → Built for you (4 tabs) → Your numbers (3 calculators + five systems vs one) → Pricing → Straight answers (status, data, limits, ideas, FAQ) → Sign-up form. Every interactive demo is kept.
+
+**Measured page height** (reduced motion): phone 43,654 → about 40,900px; tablet 33,538 → about 30,700px; desktop 25,932 → about 24,300px. Most of the length is the interactive demos, which were kept as instructed.
 
 ---
 

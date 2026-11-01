@@ -37,8 +37,8 @@ export function SiteHeader() {
         hidden && !open && "-translate-y-full",
       )}
     >
-      <div className="mx-auto flex h-18 w-[min(1200px,100%-40px)] items-center justify-between gap-6">
-        <Link href={homeHref} className="rounded-lg" aria-label="Safe Kitchen home">
+      <div className="mx-auto flex h-18 w-[min(1200px,100%-32px)] items-center justify-between gap-3 sm:gap-6">
+        <Link href={homeHref} className="flex min-h-12 items-center rounded-lg" aria-label="Safe Kitchen home">
           <Logo />
         </Link>
         <nav aria-label="Main" className="hidden xl:block">
@@ -52,12 +52,12 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:block">
-            <Link href={ctaHref} className={buttonClasses("primary", "min-h-11 px-5 text-[15px]")}>
-              Get early access
-            </Link>
-          </span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Always visible, including on phones; the header hides while scrolling down, so it never covers content. */}
+          <Link href={ctaHref} className={buttonClasses("primary", "min-h-12 px-3.5 text-[15px] whitespace-nowrap sm:px-5")}>
+            <span className="sm:hidden">Early access</span>
+            <span className="hidden sm:inline">Get early access</span>
+          </Link>
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger
               className="inline-flex size-12 items-center justify-center rounded-full border-[1.5px] border-line text-ink xl:hidden"

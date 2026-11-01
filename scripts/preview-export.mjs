@@ -1,7 +1,9 @@
 // Builds a static copy of the homepage for a private review link.
-// Usage: node scripts/preview-export.mjs
-//   1. builds into .next-preview/ as a launch preview (every feature shown as live;
-//      the normal build is unaffected and keeps honest status labels)
+// Usage: node scripts/preview-export.mjs [--launch]
+//   1. builds into .next-preview/ with honest status labels (owner, 1 Nov 2026:
+//      keep built, demo and in-development features clearly distinct). The
+//      founding offer is shown so the owner can approve its wording; it stays
+//      hidden on the real site. --launch shows every feature as live instead.
 //   2. prepares .preview-publish/: the page host reserves names starting with "_",
 //      so Next.js's "_next" folder is renamed "assets" and every reference updated,
 //      and photo paths are made relative so they load inside the page.
@@ -11,7 +13,13 @@ import { join } from "node:path";
 
 execSync("npx next build", {
   stdio: "inherit",
-  env: { ...process.env, PREVIEW_EXPORT: "1", NEXT_PUBLIC_PREVIEW_EXPORT: "1", NEXT_PUBLIC_LAUNCH_PREVIEW: "1" },
+  env: {
+    ...process.env,
+    PREVIEW_EXPORT: "1",
+    NEXT_PUBLIC_PREVIEW_EXPORT: "1",
+    NEXT_PUBLIC_SHOW_FOUNDING_OFFER: "1",
+    ...(process.argv.includes("--launch") ? { NEXT_PUBLIC_LAUNCH_PREVIEW: "1" } : {}),
+  },
 });
 
 const out = ".preview-publish";
