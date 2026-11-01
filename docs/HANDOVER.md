@@ -8,7 +8,7 @@
 
 ## 1. Start here (for a new Claude chat)
 
-1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-084 concern the website).
+1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-086 concern the website).
 2. Work in **`darrellseage/safe-kitchen-website`** on branch **`claude/light-redesign`**. Don't touch the app repository's code. Only its decision documents are updated, on branch `claude/website-decisions`.
 3. Check everything still runs:
    ```bash
@@ -29,7 +29,7 @@
 | Website repo | `darrellseage/safe-kitchen-website` |
 | Website working branch | **`claude/light-redesign`** (all current work). Older branches: `claude/stage-1-proposal` (the repo's default branch; there is no `main` yet), `claude/stage-2-homepage` |
 | App repo | `darrellseage/safe-kitchen` (default `main`) |
-| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-084, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
+| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-086, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
 | Pull requests | None opened yet. Only open one when the owner asks |
 | **Current private preview** | https://claude.ai/artifact/X7w92WYj6C2RpCM7a9uNMV (artifact slug `f3e9fc83-81af-4501-918b-3c2455941b58`), private to the owner |
 | Older private preview (left unchanged on purpose, may have been shared for a second opinion) | https://claude.ai/artifact/LThWT9aaAdEG9nEVDKB8M2 (slug `9d97efb5-6821-4864-80cf-a78c437d0d35`, "launch preview" look from 31 Oct) |
@@ -234,7 +234,7 @@ All ten review priorities were approved and built (full reasoning in `docs/CONVE
 ## 13. Rules to keep following
 
 - Ask before installing software, committing, pushing, publishing, connecting services or deploying. Work one step at a time.
-- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-085**) on its branch.
+- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-087**) on its branch.
 - Don't activate payments or public offers, or launch anything publicly, without explicit approval.
 - No invented figures, testimonials, accreditations or features. Every money figure is labelled illustrative, and statistics need a verified source.
 - Keep honest status labels on the public site. The launch-preview look is for private review only.
