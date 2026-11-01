@@ -1,14 +1,14 @@
 /**
  * Founder story. Every fact here comes from the owner (1 Nov 2026), who gave
  * permission to use his name. Don't add roles, venues, awards or figures he
- * hasn't confirmed. `photo` stays null until he supplies a genuine photograph:
- * never use a stock or generated image of "the founder".
+ * hasn't confirmed. The photo is his own, supplied 1 Nov 2026: never replace
+ * it with a stock or generated image of "the founder".
  */
 export const founder = {
   name: "Darrell Seage",
   role: "Founder of Safe Kitchen",
   initials: "DS",
-  photo: null as null | { src: string; alt: string },
+  photo: { src: "/images/founder-darrell.jpg", alt: "Darrell Seage, founder of Safe Kitchen, in a black chef’s jacket in a professional kitchen", focal: "50% 30%" } as null | { src: string; alt: string; focal: string },
   short: "Created by Darrell Seage, head chef and kitchen manager with over 15 years in professional kitchens.",
   eyebrow: "Designed by chefs and owners, for chefs and owners",
   title: "Built by someone who’s",

@@ -4,15 +4,15 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { founder } from "@/content/founder";
 
-/** The founder's real kitchen experience. No photo until a genuine one is supplied. */
+/** The founder's real kitchen experience, with his own photo. */
 export function FounderStory() {
   return (
     <Section id="founder" labelledBy="founder-title" tone="mint">
       <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="grid gap-5">
-          <figure className="relative aspect-[16/10] max-w-[420px] lg:aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised">
+          <figure className="relative aspect-[4/3] max-w-[420px] lg:aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-raised">
             {founder.photo ? (
-              <Image src={founder.photo.src} alt={founder.photo.alt} fill sizes="(min-width: 1024px) 30vw, 90vw" quality={80} className="object-cover" />
+              <Image src={founder.photo.src} alt={founder.photo.alt} fill sizes="(min-width: 1024px) 30vw, 90vw" quality={80} className="object-cover" style={{ objectPosition: founder.photo.focal }} />
             ) : (
               <div className="absolute inset-0 grid place-items-center bg-[linear-gradient(160deg,var(--color-brand-50),var(--color-accent-100))]">
                 <span aria-hidden="true" className="grid size-24 place-items-center rounded-full bg-deep text-4xl lg:size-36 lg:text-5xl font-extrabold tracking-[-0.04em] text-white">

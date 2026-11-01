@@ -26,7 +26,7 @@ describe("homepage links", () => {
 });
 
 describe("founder", () => {
-  it("never shows a photo that isn't genuine (none supplied yet)", () => {
-    expect(founder.photo).toBeNull();
+  it("uses Darrell's own photo, stored on the site", () => {
+    expect(founder.photo?.src).toBe("/images/founder-darrell.jpg");
   });
 });

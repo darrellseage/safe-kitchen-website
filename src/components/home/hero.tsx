@@ -1,5 +1,6 @@
 import { whenLive } from "@/config/features";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Check, ChefHat, PlayCircle, ScanEye, ShoppingBasket } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -54,9 +55,13 @@ export function Hero() {
           </div>
           <p className="mt-3 text-sm font-semibold text-brand-700">{hero.freeNote}</p>
           <p className="mt-6 flex items-center gap-3 border-t border-line pt-5 text-[15px] text-ink-muted">
-            <span aria-hidden="true" className="grid size-9 flex-none place-items-center rounded-full bg-deep text-[13px] font-extrabold text-white">
-              {founder.initials}
-            </span>
+            {founder.photo ? (
+              <Image src={founder.photo.src} alt="" width={44} height={44} quality={80} className="size-11 flex-none rounded-full object-cover" style={{ objectPosition: founder.photo.focal }} />
+            ) : (
+              <span aria-hidden="true" className="grid size-11 flex-none place-items-center rounded-full bg-deep text-[13px] font-extrabold text-white">
+                {founder.initials}
+              </span>
+            )}
             <span>
               {founder.short}{" "}
               <Link href={section("founder")} className="font-semibold text-accent-600 underline underline-offset-2">
