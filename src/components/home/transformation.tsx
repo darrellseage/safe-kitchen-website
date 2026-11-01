@@ -13,6 +13,7 @@ import {
 import { useRef, useState, type ReactNode } from "react";
 import { CalendarDays, Check, Mail, ScanEye, ShoppingBasket, Thermometer } from "lucide-react";
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { paperSheet } from "@/content/demo-data";
 import { transformation } from "@/content/home";
@@ -44,31 +45,31 @@ export function Transformation() {
 
   return (
     <Section id="how-it-works" labelledBy="transform-title" className="overflow-x-clip">
-      <div className="flex flex-wrap items-end justify-between gap-8">
-        <SectionHeading id="transform-title" title={transformation.title} intro={transformation.intro} />
-        <div role="group" aria-label="Compare before and after" className="grid grid-cols-2 rounded-full border border-line bg-surface p-1 text-[15px] font-bold">
-          {[false, true].map((after) => (
-            <button
-              key={String(after)}
-              type="button"
-              aria-pressed={showingAfter === after}
-              onClick={() => show(after)}
-              className={cn(
-                "min-h-12 rounded-full px-5 transition-colors",
-                showingAfter === after ? "bg-surface-raised text-ink shadow-card" : "text-ink-muted hover:text-ink",
-              )}
-            >
-              {after ? transformation.digitalLabel : transformation.paperLabel}
-            </button>
-          ))}
+      <SectionHeading id="transform-title" title={transformation.title} intro={transformation.intro} />
+      <DemoReveal label="See the before and after">
+        <div className="flex justify-end">
+          <div role="group" aria-label="Compare before and after" className="grid grid-cols-2 rounded-full border border-line bg-surface p-1 text-[15px] font-bold">
+            {[false, true].map((after) => (
+              <button
+                key={String(after)}
+                type="button"
+                aria-pressed={showingAfter === after}
+                onClick={() => show(after)}
+                className={cn(
+                  "min-h-12 rounded-full px-5 transition-colors",
+                  showingAfter === after ? "bg-surface-raised text-ink shadow-card" : "text-ink-muted hover:text-ink",
+                )}
+              >
+                {after ? transformation.digitalLabel : transformation.paperLabel}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div ref={stage} className="relative mx-auto mt-12 h-[620px] max-w-[980px] rounded-[32px] bg-surface sm:h-[520px]">
-        <Scattered progress={progress} hidden={showingAfter} />
-        <Dashboard progress={progress} hidden={!showingAfter} />
-      </div>
-
+        <div ref={stage} className="relative mx-auto mt-6 h-[620px] max-w-[980px] rounded-[32px] bg-surface sm:h-[520px]">
+          <Scattered progress={progress} hidden={showingAfter} />
+          <Dashboard progress={progress} hidden={!showingAfter} />
+        </div>
+      </DemoReveal>
     </Section>
   );
 }

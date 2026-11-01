@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { aiChecker } from "@/content/home";
 import { AiCheckerDemo } from "./ai-checker-demo";
@@ -12,9 +13,9 @@ export function AiCheckerSection() {
       <SectionHeading id="ai-checker-title" eyebrow={aiChecker.eyebrow} status={aiChecker.status} title={aiChecker.title} accent={aiChecker.accent} intro={aiChecker.intro} />
       <PillarLines lines={aiChecker.lines} />
       <Catches label="It helps you spot" items={aiChecker.catches} />
-      <div className="mt-12">
+      <DemoReveal label="Try the AI Checker demo">
         <AiCheckerDemo />
-      </div>
+      </DemoReveal>
       <p className="mt-6 max-w-[85ch] text-sm text-ink-muted">{aiChecker.note}</p>
     </Section>
   );

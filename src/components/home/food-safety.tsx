@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { demo } from "@/content/home";
 import { InspectionPart } from "./inspection-story";
@@ -14,9 +15,9 @@ export function FoodSafety() {
           <li key={l}>{l}</li>
         ))}
       </ul>
-      <div className="mt-12">
+      <DemoReveal label="Try a temperature check">
         <TemperatureDemo />
-      </div>
+      </DemoReveal>
       <InspectionPart />
     </Section>
   );

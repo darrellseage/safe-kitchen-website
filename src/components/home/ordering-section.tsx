@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ordering } from "@/content/home";
 import { orderingReduction } from "@/lib/value";
@@ -19,9 +20,9 @@ export function OrderingSection() {
         text={ordering.example.text}
         note="Not a guaranteed saving: managers review every warning before anything is bought."
       />
-      <div className="mt-12">
+      <DemoReveal label="Try the order check demo">
         <OrderingDemo />
-      </div>
+      </DemoReveal>
       <WastePart />
     </Section>
   );

@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/ui/reveal";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { inspection } from "@/content/home";
 import { InspectionModeDemo } from "./inspection-mode-demo";
@@ -26,7 +27,9 @@ export function InspectionPart() {
           <p className="mt-10 max-w-[30ch] text-[clamp(1.35rem,2.4vw,1.8rem)] leading-tight font-extrabold tracking-[-0.015em] text-brand-900">{inspection.closing}</p>
           <p className="mt-4 max-w-[52ch] text-sm text-ink-muted">{inspection.note}</p>
         </div>
-        <InspectionModeDemo />
+        <DemoReveal label="Try Inspection Mode" className="mt-0 md:mt-0">
+          <InspectionModeDemo />
+        </DemoReveal>
       </div>
     </div>
   );

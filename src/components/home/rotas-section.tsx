@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { rotas } from "@/content/home";
 import { PillarLines } from "./pillar-lines";
@@ -14,9 +15,9 @@ export function RotasSection() {
       <SectionHeading id="rotas-title" eyebrow={rotas.eyebrow} status={rotas.status} title={rotas.title} accent={rotas.accent} intro={rotas.intro} />
       <PillarLines lines={rotas.lines} />
       <StepCards steps={rotas.steps} />
-      <div className="mt-12">
+      <DemoReveal label="Try the rota import demo">
         <RotaDemo />
-      </div>
+      </DemoReveal>
       <WorkflowRail />
       <ClockInPart />
     </Section>

@@ -1,4 +1,5 @@
 import { SectionHeading } from "@/components/ui/section-heading";
+import { DemoReveal } from "./demo-reveal";
 import { clockIn } from "@/content/home";
 import { ClockInDemo } from "./clock-in-demo";
 import { PillarLines } from "./pillar-lines";
@@ -12,9 +13,9 @@ export function ClockInPart() {
       <SectionHeading id="clock-in-title" as="h3" eyebrow={clockIn.eyebrow} status={clockIn.status} title={clockIn.title} accent={clockIn.accent} intro={clockIn.intro} />
       <PillarLines lines={clockIn.lines} />
       <ExampleLine amount={gbp(attendanceCost(clockIn.example.hours, clockIn.example.rate))} text={clockIn.example.text} />
-      <div className="mt-12">
+      <DemoReveal label="Try the clock-in demo">
         <ClockInDemo />
-      </div>
+      </DemoReveal>
       <ul className="mt-10 grid gap-2 sm:gap-4 md:grid-cols-3" aria-label="Clock-in and privacy">
         {clockIn.privacy.map((p) => (
           <li key={p.title} className="rounded-2xl border border-line bg-surface-raised p-4 sm:p-5">

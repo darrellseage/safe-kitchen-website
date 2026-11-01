@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/section";
+import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { certificateDisclosure, training } from "@/content/home";
 import { trainingComparison } from "@/lib/value";
@@ -46,9 +47,9 @@ export function TrainingSection() {
       </div>
 
       <StepCards steps={training.steps} />
-      <div className="mt-12">
+      <DemoReveal label="Try the training course demo">
         <TrainingDemo />
-      </div>
+      </DemoReveal>
       <p className="mt-6 max-w-[85ch] text-sm text-ink-muted">
         {certificateDisclosure} {training.note}
       </p>
