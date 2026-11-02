@@ -41,6 +41,9 @@ export const featureStatus = {
   aiChecker: "planned",
   // Pillar 5: Smart Supplier Ordering (Growth Phase 5, D-047, D-048)
   ordering: "planned",
+  // Allergen module (app D-088; part of the launch, D-087)
+  allergens: "planned",
+  ppdsLabels: "planned",
   // Customer data and reliability (app PROJECT_PLAN; D-083 record export, D-038 offline-first)
   recordExports: "planned",
   offline: "planned",

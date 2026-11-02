@@ -15,6 +15,7 @@ export const pricing = {
     "Food safety management and records",
     "Inspection view, print or save as PDF",
     "AI Checker for your records",
+    "Allergen menus, filter and Natasha’s Law labels",
     "Rotas from a photo or spreadsheet",
     "Clock-in and attendance tracking",
     "Smart ordering checks",

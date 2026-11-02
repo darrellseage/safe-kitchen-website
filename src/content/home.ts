@@ -342,6 +342,28 @@ export const waste = {
   disclaimer: "Results depend on how each kitchen works. Safe Kitchen doesn’t promise a particular saving.",
 };
 
+/** Allergens (app D-088, part of the launch): the risk, the facts and how Safe Kitchen helps. */
+export const allergens = {
+  eyebrow: "Allergen menus",
+  status: "allergens" as FeatureKey,
+  title: "Allergens.",
+  accent: "The one question you can’t afford to get wrong.",
+  intro:
+    "A customer asks, “Is there nut in this?” It’s Saturday night, the chef who wrote the menu is off, and the supplier changed the curry paste last week. One wrong answer can put someone in hospital, and put your business in court.",
+  factsTitle: "What’s at stake",
+  helpsTitle: "How Safe Kitchen helps",
+  helps: [
+    { title: "Every dish, every allergen", body: "Build each dish from its ingredients once, and Safe Kitchen shows which of the 14 allergens it contains, signed off by a manager." },
+    { title: "Answers in two taps", body: "Staff tap a dish on the kitchen tablet, or filter “dishes without sesame”, instead of guessing or hunting for the chef." },
+    { title: "Customers can check for themselves", body: "A QR-code allergen menu and a printable chart, always up to date, with a prompt to tell staff about their allergy." },
+    { title: "Changes don’t slip through", body: "Change a recipe or a supplier product, and every affected dish is flagged for re-checking before it’s shown again." },
+    { title: "Natasha’s Law labels", body: "Print ingredient and allergen labels for food you prepack on site, from the same records." },
+    { title: "Ready for the EHO", body: "Allergen records, sign-offs and changes sit in Inspection Mode, next to your staff’s allergen training." },
+  ],
+  demoLabel: "Try the allergen filter",
+  note: "Safe Kitchen shows the allergens you’ve recorded for each dish. It can’t see what happens in your kitchen, so cross-contact controls and a conversation with every allergy customer are still essential. Your business stays responsible for the food it serves.",
+};
+
 /** "Built for you": the four buyers (conversion review R8). Links point at the demos. */
 export const buyers = {
   eyebrow: "Built for you",
@@ -511,6 +533,7 @@ export const trust = {
         ["rotaImport", "Rotas from a photo or spreadsheet"],
         ["clockIn", "Clock-in and attendance"],
         ["aiChecker", "AI Checker"],
+        ["allergens", "Allergen menus, filter and labels"],
         ["ordering", "Smart ordering"],
         ["recordExports", "Exporting your records"],
         ["offline", "Working offline"],
@@ -565,6 +588,13 @@ const faqItems: Array<FaqItem & { hideWhenLive?: boolean }> = [
     a: whenLive(
       "That’s the whole point. Safe Kitchen is designed so a routine check takes a few taps on a shared tablet or phone, with big buttons that work with gloves on. Readings are never filled in for you, and staff only see what needs doing now. We’re testing it with real kitchen teams during early access.",
       "That’s the whole point. Safe Kitchen is designed so a routine check takes a few taps on a shared tablet or phone, with big buttons that work with gloves on. Readings are never filled in for you, and staff only see what needs doing now.",
+    ),
+  },
+  {
+    q: "Can customers check allergens themselves?",
+    a: whenLive(
+      "That’s the plan. Each site will have a QR-code allergen menu and a printable chart, built from the allergen records your manager has signed off, with a filter for the 14 regulated allergens. It never tells a customer a dish is “safe for them”: it shows what’s in each dish and any cross-contact risks you’ve recorded, and asks them to tell staff about their allergy. Allergen menus are planned and not available yet.",
+      "Yes. Each site has a QR-code allergen menu and a printable chart, built from the allergen records your manager has signed off, with a filter for the 14 regulated allergens. It never tells a customer a dish is “safe for them”: it shows what’s in each dish and any cross-contact risks you’ve recorded, and asks them to tell staff about their allergy.",
     ),
   },
   {

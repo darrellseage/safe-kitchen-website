@@ -2,6 +2,7 @@
  * Illustrative demo records for product mock-ups. Names, times and readings are
  * made up. No figure here is a safety limit or food safety guidance.
  */
+import type { Dish } from "@/lib/allergens";
 import type { RecordItem, TaskState } from "@/components/product/ui-bits";
 import { whenLive } from "@/config/features";
 import type { RotaReview } from "@/lib/demos/rota-review";
@@ -206,3 +207,24 @@ export const siteSnapshots = [
   { id: "high-street", name: "High Street", checks: "12 of 14", onShift: 4, attention: 0, orders: "2 to approve" },
   { id: "station-road", name: "Station Road", checks: "9 of 9", onShift: 3, attention: 1, orders: "None due" },
 ] as const;
+
+/**
+ * Allergen demo (app D-088): a made-up sample menu. The allergens shown are
+ * invented for the demo, not information about any real dish or recipe.
+ */
+export const allergenMenu: Dish[] = [
+  { id: "tikka", name: "Chicken tikka masala", contains: ["milk", "nuts", "mustard"], state: "signed-off" },
+  { id: "samosa", name: "Vegetable samosas", contains: ["gluten"], state: "signed-off" },
+  { id: "fish", name: "Fish and chips", contains: ["fish", "gluten", "eggs"], state: "signed-off" },
+  { id: "chips", name: "Chips", contains: [], mayContain: { allergens: ["fish", "gluten", "eggs"], reason: "Cooked in the same fryer as battered fish" }, state: "signed-off" },
+  { id: "hummus", name: "Hummus and flatbread", contains: ["sesame", "gluten"], state: "signed-off" },
+  { id: "thai", name: "Thai green curry with prawns", contains: ["crustaceans", "fish", "soybeans"], state: "signed-off" },
+  { id: "salad", name: "Chickpea and quinoa salad", contains: ["celery", "sulphites"], state: "signed-off" },
+  {
+    id: "pudding",
+    name: "Sticky toffee pudding",
+    contains: ["gluten", "eggs", "milk"],
+    state: "recheck",
+    recheckReason: "The supplier changed the toffee sauce product. A manager needs to check its allergens before this dish is shown again.",
+  },
+];

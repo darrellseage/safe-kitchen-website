@@ -1,4 +1,5 @@
 import { AiCheckerSection } from "@/components/home/ai-checker-section";
+import { AllergensSection } from "@/components/home/allergens-section";
 import { AudiencesSection } from "@/components/home/audiences-section";
 import { FinalCta } from "@/components/home/final-cta";
 import { FoodSafety } from "@/components/home/food-safety";
@@ -30,7 +31,7 @@ const faqJsonLd = {
 /**
  * Homepage, in the order approved in docs/CONVERSION_REVIEW.md §3 (1 Nov 2026):
  * first impression, tour and founder near the top, then the problem, the five
- * strongest selling points, who it's for, the numbers, pricing, straight
+ * strongest selling points (plus allergen menus, app D-088), who it's for, the numbers, pricing, straight
  * answers and the sign-up form. Every interactive demo is kept.
  */
 export default function HomePage() {
@@ -47,6 +48,7 @@ export default function HomePage() {
       <RotasSection />
       <OrderingSection />
       <FoodSafety />
+      <AllergensSection />
       <AudiencesSection />
       <YourNumbers />
       <Pricing />

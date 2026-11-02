@@ -89,6 +89,21 @@ const ok = (c, m) => { if (!c) fails++; console.log((c ? 'PASS ' : 'FAIL ') + m)
   ok(pt.includes('£29.89') && pt.includes('£44.97') && pt.includes('Set-up fees') && pt.includes('12 minutes'), 'Pricing: saving, 3-site example, never-pay list, 12-minute line');
   ok(!pt.includes('Founding customer offer'), 'Pricing: founding offer hidden by default');
   // 10. Trust + FAQ
+  // Allergen menus (app D-088)
+  const al = p.locator('#allergens');
+  const alt = await al.innerText();
+  ok(alt.includes('Planned') && alt.includes('14') && alt.includes('Natasha’s Law'), 'Allergens: section, Planned status, 14 allergens, Natasha’s Law labels');
+  ok((await al.locator('a[href^="https://"]').count()) >= 6 && alt.includes('£43,816') && alt.includes('Six years in prison'), 'Allergens: every fact links to its source');
+  ok(!/safe for you/i.test(alt.replace(/never (says|tells)[^.]*“safe for (you|them)”/gi, '')), 'Allergens: never claims a dish is "safe for you"');
+  await al.getByRole('button', { name: 'Clear' }).click();
+  await al.getByRole('button', { name: 'Sesame', exact: true }).click();
+  ok(!(await al.getByText('Hummus and flatbread').isVisible()) && (await al.getByText('Chicken tikka masala').isVisible()), 'Allergen demo: filter leaves out dishes containing sesame');
+  await al.getByRole('button', { name: 'Clear' }).click();
+  await al.getByRole('button', { name: 'Fish', exact: true }).click();
+  ok(await al.getByText(/May contain fish/).isVisible(), 'Allergen demo: "may contain" warning stays visible');
+  ok(await al.getByText('Waiting for a manager to re-check').isVisible(), 'Allergen demo: staff see the dish waiting for a re-check');
+  await al.getByRole('button', { name: 'Customer', exact: true }).click();
+  ok(!(await al.getByText('Sticky toffee pudding').count()) && (await al.getByText('Please tell a member of staff about your allergy').isVisible()), 'Allergen demo: customers never see unchecked dishes, and are asked to tell staff');
   const tt = await p.locator('#straight-answers').innerText();
   ok(tt.includes('Built and being tested') && tt.includes('Exporting your records') && tt.includes('Working offline') && tt.includes('isn’t an externally accredited'), 'Trust: status, exports, offline, certificates');
   ok(tt.includes('Planned features are part of our launch plan') && tt.includes('Our vision') && !/exploring/i.test(tt), 'Trust: Planned = launch plan, "Our vision" for later ideas (D-086, D-087)');
