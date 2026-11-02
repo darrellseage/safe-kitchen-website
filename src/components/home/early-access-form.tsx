@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import Script from "next/script";
 import { CalendarDays, CheckCircle2 } from "lucide-react";
 import { startTransition, useActionState, useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
@@ -91,10 +91,19 @@ function StartStep({
   setInterest: (v: string) => void;
 }) {
   const id = useId();
-  const startedInput = useRef<HTMLInputElement>(null);
+  // When the person first started filling in the form, for the spam check. Kept in a ref, not a hidden
+  // field: React resets a hidden field's value when the form re-renders (for example to show an error),
+  // which made a quick correction look like a bot and silently dropped a genuine sign-up.
+  const startedAt = useRef<number | null>(null);
   const errors = state.status === "invalid" ? state.errors : {};
   const markStarted = () => {
-    if (startedInput.current && !startedInput.current.value) startedInput.current.value = String(Date.now());
+    startedAt.current ??= Date.now();
+  };
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    data.set(STARTED_FIELD, startedAt.current ? String(startedAt.current) : "");
+    startTransition(() => action(data));
   };
   const emailId = `${id}-email`;
 
@@ -103,7 +112,7 @@ function StartStep({
       action={action}
       noValidate
       className="relative grid gap-6 rounded-3xl border border-line bg-surface-raised p-6 shadow-raised sm:p-8"
-      onSubmit={submitWith(action)}
+      onSubmit={onSubmit}
       // Spam check: note when a person first starts filling in the form. Any
       // interaction counts, including browser autofill, which may not focus a field.
       onFocusCapture={markStarted}
@@ -158,7 +167,6 @@ function StartStep({
         <label htmlFor={`${id}-hp`}>Leave this empty</label>
         <input id={`${id}-hp`} name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" />
       </div>
-      <input ref={startedInput} type="hidden" name={STARTED_FIELD} defaultValue="" />
       {turnstileSiteKey ? (
         <>
           <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
@@ -173,9 +181,9 @@ function StartStep({
         <p id={`${id}-notice`} className="max-w-[60ch] text-sm text-ink-muted">
           Free, with no payment card and no commitment. When you press the button we save your email address and your choice, so we can contact you about
           it. Product news is separate and only sent if you tick the box. Read our{" "}
-          <Link href={pageHref("privacy")} className="font-semibold text-accent-600 underline underline-offset-2">
+          <SiteLink href={pageHref("privacy")} className="font-semibold text-accent-600 underline underline-offset-2">
             privacy notice
-          </Link>
+          </SiteLink>
           .
         </p>
       </div>
