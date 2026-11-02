@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { founder } from "@/content/founder";
 import { buyers, tour } from "@/content/home";
-import { mainNav } from "@/content/navigation";
+import { hrefFor, mainNav } from "@/content/navigation";
 
 // Every id="…" used by a homepage component.
 const dir = join(process.cwd(), "src/components/home");
@@ -22,6 +22,24 @@ describe("homepage links", () => {
   });
   it("every menu item links to a section that exists", () => {
     for (const item of mainNav) expect(ids, item.href).toContain(item.href.split("#")[1]);
+  });
+});
+
+describe("header and footer links on every page", () => {
+  it("real site: section links start with / and work from any page", () => {
+    expect(hrefFor("/#tour", "/privacy", false)).toBe("/#tour");
+    expect(hrefFor("/#tour", "/", false)).toBe("/#tour");
+    expect(hrefFor("/privacy", "/terms", false)).toBe("/privacy");
+  });
+  it("preview: section links stay on the homepage and lead back to it from other pages", () => {
+    expect(hrefFor("#tour", "/", true)).toBe("#tour");
+    expect(hrefFor("#pricing", "/index.html", true)).toBe("#pricing");
+    for (const page of ["/privacy", "/cookies", "/terms", "/accessibility", "/privacy.html"])
+      expect(hrefFor("#early-access", page, true)).toBe("index.html#early-access");
+  });
+  it("preview: page links are left alone", () => {
+    expect(hrefFor("privacy.html", "/terms", true)).toBe("privacy.html");
+    expect(hrefFor("index.html", "/terms", true)).toBe("index.html");
   });
 });
 

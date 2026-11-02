@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ComponentProps } from "react";
+import { SiteLink } from "@/components/site/site-link";
 import { cn } from "@/lib/cn";
 
 type Variant = "primary" | "secondary" | "ghost" | "light";
@@ -24,6 +24,6 @@ export function ButtonLink({
   variant = "primary",
   className,
   ...props
-}: ComponentProps<typeof Link> & { variant?: Variant }) {
-  return <Link className={buttonClasses(variant, className)} {...props} />;
+}: ComponentProps<typeof SiteLink> & { variant?: Variant }) {
+  return <SiteLink className={buttonClasses(variant, className)} {...props} />;
 }

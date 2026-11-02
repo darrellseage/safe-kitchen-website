@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { legalNav, mainNav } from "@/content/navigation";
 import { Logo } from "./logo";
+import { SiteLink } from "./site-link";
 
 export function SiteFooter() {
   const { company } = siteConfig;
@@ -17,9 +17,9 @@ export function SiteFooter() {
           <ul className="grid gap-1">
             {mainNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
+                <SiteLink href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
                   {item.label}
-                </Link>
+                </SiteLink>
               </li>
             ))}
           </ul>
@@ -29,9 +29,9 @@ export function SiteFooter() {
           <ul className="grid gap-1">
             {legalNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
+                <SiteLink href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
                   {item.label}
-                </Link>
+                </SiteLink>
               </li>
             ))}
           </ul>

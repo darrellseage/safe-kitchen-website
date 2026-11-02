@@ -1,7 +1,7 @@
 import { whenLive } from "@/config/features";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import { Check, ChefHat, PlayCircle, ScanEye, ShoppingBasket } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DeviceFrame } from "@/components/ui/device-frame";
@@ -64,9 +64,9 @@ export function Hero() {
             )}
             <span>
               {founder.short}{" "}
-              <Link href={section("founder")} className="font-semibold text-accent-600 underline underline-offset-2">
+              <SiteLink href={section("founder")} className="font-semibold text-accent-600 underline underline-offset-2">
                 Read Darrell’s story
-              </Link>
+              </SiteLink>
             </span>
           </p>
           <p className="mt-4 max-w-[60ch] text-[13px] text-ink-muted">{hero.note}</p>

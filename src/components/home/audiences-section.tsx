@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import { ArrowRight, X } from "lucide-react";
 import { Tabs } from "radix-ui";
 import { Section } from "@/components/ui/section";
@@ -64,13 +64,13 @@ export function AudiencesSection() {
                     {t.helps.map((h) => (
                       <li key={h.title}>
                         {h.href ? (
-                          <Link href={section(h.href)} className="group grid gap-1 rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-accent-600">
+                          <SiteLink href={section(h.href)} className="group grid gap-1 rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-accent-600">
                             <span className="flex items-center justify-between gap-3 text-lg font-extrabold">
                               {h.title}
                               <ArrowRight className="size-4.5 flex-none text-accent-600 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" aria-hidden="true" />
                             </span>
                             <span className="text-[15.5px] text-ink-muted">{h.body}</span>
-                          </Link>
+                          </SiteLink>
                         ) : (
                           <div className="grid gap-1 rounded-2xl border border-line bg-surface p-4">
                             <span className="text-lg font-extrabold">{h.title}</span>

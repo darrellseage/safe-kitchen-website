@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import { Check } from "lucide-react";
 import { section } from "@/content/navigation";
 import type { ReactNode } from "react";
@@ -29,9 +29,9 @@ export function ExampleLine({ amount, text, note }: { amount: string; text: stri
       <b className="font-extrabold text-ink tabular">{amount}</b>
       {after}
       {note ? ` ${note}` : ""}{" "}
-      <Link href={section("savings")} className="font-bold whitespace-nowrap text-accent-600 underline underline-offset-2">
+      <SiteLink href={section("savings")} className="font-bold whitespace-nowrap text-accent-600 underline underline-offset-2">
         Work out your own numbers
-      </Link>
+      </SiteLink>
     </p>
   );
 }

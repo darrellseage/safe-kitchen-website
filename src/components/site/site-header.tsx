@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Dialog } from "radix-ui";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +7,7 @@ import { ctaHref, homeHref, mainNav } from "@/content/navigation";
 import { cn } from "@/lib/cn";
 import { buttonClasses } from "@/components/ui/button-link";
 import { Logo } from "./logo";
+import { SiteLink } from "./site-link";
 
 /** Sticky header that steps out of the way while reading and returns on scroll up. */
 export function SiteHeader() {
@@ -38,26 +38,26 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-18 w-[min(1200px,100%-32px)] items-center justify-between gap-3 sm:gap-6">
-        <Link href={homeHref} className="flex min-h-12 items-center rounded-lg" aria-label="Safe Kitchen home">
+        <SiteLink href={homeHref} className="flex min-h-12 items-center rounded-lg" aria-label="Safe Kitchen home">
           <Logo />
-        </Link>
+        </SiteLink>
         <nav aria-label="Main" className="hidden xl:block">
           <ul className="flex gap-7 text-[15px] font-semibold text-ink-muted">
             {mainNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="rounded transition-colors hover:text-ink">
+                <SiteLink href={item.href} className="rounded transition-colors hover:text-ink">
                   {item.label}
-                </Link>
+                </SiteLink>
               </li>
             ))}
           </ul>
         </nav>
         <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Always visible, including on phones; the header hides while scrolling down, so it never covers content. */}
-          <Link href={ctaHref} className={buttonClasses("primary", "min-h-12 px-3.5 text-[15px] whitespace-nowrap sm:px-5")}>
+          <SiteLink href={ctaHref} className={buttonClasses("primary", "min-h-12 px-3.5 text-[15px] whitespace-nowrap sm:px-5")}>
             <span className="sm:hidden">Early access</span>
             <span className="hidden sm:inline">Get early access</span>
-          </Link>
+          </SiteLink>
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger
               className="inline-flex size-12 items-center justify-center rounded-full border-[1.5px] border-line text-ink xl:hidden"
@@ -83,20 +83,20 @@ export function SiteHeader() {
                   <ul className="grid gap-1">
                     {mainNav.map((item) => (
                       <li key={item.href}>
-                        <Link
+                        <SiteLink
                           href={item.href}
                           onClick={() => setOpen(false)}
                           className="flex min-h-13 items-center rounded-xl px-3 text-xl font-bold text-ink hover:bg-surface"
                         >
                           {item.label}
-                        </Link>
+                        </SiteLink>
                       </li>
                     ))}
                   </ul>
                 </nav>
-                <Link href={ctaHref} onClick={() => setOpen(false)} className={buttonClasses("primary", "mt-auto")}>
+                <SiteLink href={ctaHref} onClick={() => setOpen(false)} className={buttonClasses("primary", "mt-auto")}>
                   Get early access
-                </Link>
+                </SiteLink>
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>

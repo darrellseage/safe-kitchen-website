@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { PillarIcon } from "@/components/ui/pillar-icon";
@@ -107,10 +107,10 @@ export function GuidedTour() {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-            <Link href={section(step.demo)} className="inline-flex min-h-12 items-center gap-1.5 font-bold text-accent-600 hover:text-accent-700">
+            <SiteLink href={section(step.demo)} className="inline-flex min-h-12 items-center gap-1.5 font-bold text-accent-600 hover:text-accent-700">
               {step.demoLabel}
               <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
+            </SiteLink>
             <div className="flex items-center gap-2">
               <span className="me-1 text-sm text-ink-muted tabular">
                 {index + 1} of {steps.length}
