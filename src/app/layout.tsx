@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
 // The app's typeface (DESIGN_SYSTEM.md §3), used for everything.
-const jakarta = Plus_Jakarta_Sans({ variable: "--font-jakarta", subsets: ["latin"], display: "swap" });
+// Stored in the site (src/app/fonts) so builds never depend on Google Fonts. Latin character set,
+// variable weights 200 to 800, from Google Fonts (v12); licence: PlusJakartaSans-OFL.txt (SIL Open Font Licence 1.1).
+const jakarta = localFont({
+  src: "./fonts/PlusJakartaSans-latin.woff2",
+  weight: "200 800",
+  style: "normal",
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
