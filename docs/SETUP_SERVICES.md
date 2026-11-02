@@ -51,14 +51,18 @@ Vercel is the company that will host the website. Darrell does each step in the 
 - [x] The first build published the repository's default branch, `claude/stage-1-proposal`, which holds only two old documents (the Stage 1 proposal and the first visual concept), not the website.
 - [x] **Settings → Deployment Protection → Vercel Authentication → All Deployments**, saved. Checked in a private browser window: visitors now get a Vercel sign-in page. Everything on Vercel is private to Darrell's Vercel account.
 
-### 4b. Choose the version Vercel publishes (next)
+### 4b. Choose the version Vercel publishes (done 2 November 2026)
+- [x] `main` created from `claude/light-redesign` and pushed; Vercel **Production Branch** set to `main`.
+- [x] **Framework Preset** changed from "Other" to **Next.js** (Vercel had guessed "Other" from the old two-document branch at import, so it served files instead of building the site and every page said "404"). Production redeployed: the real website now shows, signed in only.
+
+The original steps, for reference:
 The website code is on `claude/light-redesign`; the repository has no `main` branch yet.
 1. Darrell approves committing the waiting changes on `claude/light-redesign`.
 2. With Darrell's go-ahead, Claude creates a `main` branch from it and pushes it to GitHub.
 3. In Vercel: **Settings → Git → Production Branch**, type `main`, **Save**.
 4. **Deployments** tab: the newest `main` build should finish with a green tick. Open it (signed in) to check it's the real website.
 
-### 4c. Keep data processing in the UK
+### 4c. Keep data processing in the UK (next)
 The form's server code runs in Washington DC (`iad1`) by default; the privacy notice says data stays in London.
 1. **Settings → Functions → Function Region**: choose **London, England (lhr1)**, **Save**.
 2. **Deployments**: open the newest build's **⋯** menu → **Redeploy**, so the change takes effect.
@@ -69,9 +73,18 @@ Only after sections 1 to 3 above are set up.
 2. Never add `NEXT_PUBLIC_LAUNCH_PREVIEW`, `NEXT_PUBLIC_SHOW_FOUNDING_OFFER`, `PREVIEW_EXPORT` or `NEXT_PUBLIC_PREVIEW_EXPORT`: those are only for the private review copy.
 3. **Redeploy** the newest build, then test the form while signed in.
 
+### Domain connected (done 2 November 2026)
+- [x] `safekitchen.uk` and `www.safekitchen.uk` added in Vercel (**Settings → Domains**), both on Production.
+- [x] At names.co.uk (**Online Control Panel → DNS Administration → Add/Modify DNS Zone**, after ticking "I accept…" and **Activate** for advanced DNS), the two existing holding-page records were replaced:
+  - A record, host empty (the domain itself): `85.233.160.22` → **`216.198.79.1`**
+  - CNAME `www`: `fwd3.hosts.co.uk` → **`b1e5faa4a0089fba.vercel-dns-017.com.`**
+- [x] Vercel shows both domains as configured (blue ticks) and generated the free SSL certificate (https) automatically.
+- The site is still private on the domain too: All Deployments protection shows the Vercel sign-in page until go-live (4e step 4).
+- No email (MX) records were set up or changed. Resend will need its own DNS records later (section 3).
+
 ### 4e. Go live (final stage, only with Darrell's go-ahead)
 1. Choose a Vercel plan. The free **Hobby** plan is for personal, non-commercial use, so a business site needs **Pro** (check the current price on vercel.com).
-2. **Settings → Domains → Add**: `safekitchen.uk`, then add the DNS records Vercel shows where the domain was bought.
+2. ~~Connect `safekitchen.uk`~~ (done 2 November 2026, see above).
 3. Claude switches `allowIndexing` on in `src/config/site.ts` so search engines can list the site (after the trademark check).
 4. **Settings → Deployment Protection**: change **All Deployments** to **Standard Protection**, so the public can see `safekitchen.uk` while previews stay private.
 5. Check the live site in a private window on a phone and a computer.
