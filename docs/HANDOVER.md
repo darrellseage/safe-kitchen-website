@@ -8,7 +8,7 @@
 
 ## 1. Start here (for a new Claude chat)
 
-1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-087 concern the website).
+1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-088 concern the website).
 2. Work in **`darrellseage/safe-kitchen-website`** on branch **`claude/light-redesign`**. Don't touch the app repository's code. Only its decision documents are updated, on branch `claude/website-decisions`.
 3. Check everything still runs:
    ```bash
@@ -29,7 +29,7 @@
 | Website repo | `darrellseage/safe-kitchen-website` |
 | Website working branch | **`claude/light-redesign`** (all current work). Older branches: `claude/stage-1-proposal` (the repo's default branch; there is no `main` yet), `claude/stage-2-homepage` |
 | App repo | `darrellseage/safe-kitchen` (default `main`) |
-| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-087, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
+| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-088, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
 | Pull requests | None opened yet. Only open one when the owner asks |
 | **Current private preview** | https://claude.ai/artifact/X7w92WYj6C2RpCM7a9uNMV (artifact slug `f3e9fc83-81af-4501-918b-3c2455941b58`), private to the owner |
 | Older private preview (left unchanged on purpose, may have been shared for a second opinion) | https://claude.ai/artifact/LThWT9aaAdEG9nEVDKB8M2 (slug `9d97efb5-6821-4864-80cf-a78c437d0d35`, "launch preview" look from 31 Oct) |
@@ -115,6 +115,12 @@ Daily temperature records · cleaning · checklists · problems and corrective a
 
 ### Planned
 **Level 2 Food Hygiene course** (in-house, Safe Kitchen certificates, D-080) · staff certificates and uploads of certificates from other providers · document uploads · **rotas** and **rota import** from a photo, screenshot, PDF, Word or Excel file (always a draft until a manager publishes; D-054, D-078, D-080) · **clock-in and attendance** (location checked only at clock-in, tablet PIN alternative; D-078) · timesheet export · **AI Checker** (checks records and forms; no cameras; never authoritative; D-077) · **smart supplier ordering** (duplicate and unusual order checks, manager approval, "sent" ≠ "accepted") · **record export when a customer leaves** (D-083: not advertised until built and tested) · **offline daily checks** (D-038: not claimed until tested).
+
+### Allergen module (planned, part of the launch, app D-088, added 2 Nov 2026)
+Dish allergen records built from ingredients (the 14 regulated allergens, manager sign-off, versioned), a staff view and filter, a customer QR allergen menu and printable chart, change alerts on recipe or supplier changes, Natasha's Law (PPDS) labels, and allergen records in Inspection Mode.
+- **Website:** "Allergens" section after "Inspection-ready records" (`allergens-section.tsx`, `allergen-demo.tsx`, logic in `src/lib/allergens.ts` with tests), with six sourced facts in `src/content/stats.ts` (`allergenFacts`).
+- **Tone rules:** no "deaths per year" scare figure (deaths are rare, under 10 a year); no names of people who died; never "safe for you". Research and wording: `docs/ALLERGEN_PROPOSAL.md`.
+- **Before launch:** have a solicitor confirm "unlimited fine and up to two years in prison".
 
 ### Our vision (ideas)
 Bluetooth temperature probes · connected fridge and freezer sensors (manual entry always available; D-056, D-057) · more supplier connections · smarter stock suggestions.
@@ -237,7 +243,7 @@ All ten review priorities were approved and built (full reasoning in `docs/CONVE
 ## 13. Rules to keep following
 
 - Ask before installing software, committing, pushing, publishing, connecting services or deploying. Work one step at a time.
-- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-088**) on its branch.
+- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-089**) on its branch.
 - Don't activate payments or public offers, or launch anything publicly, without explicit approval.
 - No invented figures, testimonials, accreditations or features. Every money figure is labelled illustrative, and statistics need a verified source.
 - Keep honest status labels on the public site. The launch-preview look is for private review only.
@@ -250,7 +256,7 @@ I'm Darrell, continuing work on the Safe Kitchen marketing website.
 Please read docs/HANDOVER.md in the darrellseage/safe-kitchen-website repository
 (branch claude/light-redesign) before doing anything, then docs/CONVERSION_REVIEW.md.
 The app repository darrellseage/safe-kitchen (branch claude/website-decisions) holds
-the decision log (DECISIONS.md D-073 to D-087): don't change the app's code.
+the decision log (DECISIONS.md D-073 to D-088): don't change the app's code.
 Run the checks in section 1 of the handover, then give me a short summary of where
 we are and wait for my instructions. Ask before committing, pushing, publishing,
 installing anything or connecting services, and don't deploy or activate any
