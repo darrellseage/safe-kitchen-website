@@ -91,6 +91,7 @@ const ok = (c, m) => { if (!c) fails++; console.log((c ? 'PASS ' : 'FAIL ') + m)
   // 10. Trust + FAQ
   const tt = await p.locator('#straight-answers').innerText();
   ok(tt.includes('Built and being tested') && tt.includes('Exporting your records') && tt.includes('Working offline') && tt.includes('isn’t an externally accredited'), 'Trust: status, exports, offline, certificates');
+  ok(tt.includes('Planned features are part of our launch plan') && tt.includes('Our vision') && !/exploring/i.test(tt), 'Trust: Planned = launch plan, "Our vision" for later ideas (D-086, D-087)');
   await p.locator('#faq').getByRole('button', { name: 'How much does it cost?' }).click();
   ok(await p.locator('#faq').getByText('£17.99 including VAT', { exact: false }).isVisible(), 'FAQ opens');
   ok(await p.locator('#faq [data-state]').filter({ has: p.locator('h4') }).count() >= 9, 'FAQ: shortened list present');

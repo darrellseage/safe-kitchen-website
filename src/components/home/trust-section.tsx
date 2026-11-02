@@ -9,7 +9,7 @@ import { Faq } from "./faq";
 
 /**
  * "Straight answers" (conversion review R9, R11, R12): what's really built,
- * what's coming, data security and limits, ideas we're exploring, then the FAQ.
+ * what's coming, data security and limits, our vision (ideas for later), then the FAQ.
  * The status lists come from src/config/features.ts, so they can't drift from
  * the labels elsewhere on the page.
  */

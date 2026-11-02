@@ -436,14 +436,14 @@ export const inspection = {
 export const roadmap = {
   title: "Built for today’s kitchens.",
   accent: "Ready for tomorrow.",
-  intro: "Food safety comes first. Here’s what’s planned next, and what we’re exploring. Early-access members help decide what comes first.",
+  intro: "Food safety comes first. Every feature marked “Planned” is part of our launch plan. Beyond that, here’s our vision for later. Early-access members help shape what comes next.",
   items: [
     { key: "probes", title: "Bluetooth temperature probes", body: "Readings straight from the probe, confirmed by the chef. Typing a reading always stays available." },
     { key: "sensors", title: "Connected fridge and freezer sensors", body: "Readings through the day, with alerts naming the unit." },
     { key: "supplierIntegrations", title: "More supplier connections", body: "Direct ordering links with more suppliers, where they support it." },
     { key: "stockSuggestions", title: "Smarter stock suggestions", body: "Order suggestions, only where reliable stock and usage data exists." },
   ] satisfies Array<{ key: FeatureKey; title: string; body: string }>,
-  note: "Planned features and ideas we’re exploring may change or may not happen. We’ll only describe a feature as available once it’s live and tested.",
+  note: "Planned features are part of our launch plan. Ideas in our vision may change or may not happen. We’ll only describe a feature as available once it’s live and tested.",
 };
 
 export const pricingCopy = {
@@ -540,7 +540,7 @@ export const trust = {
       body: "Safe Kitchen is built around the Food Standards Agency’s Safer Food, Better Business system, but it isn’t affiliated with or endorsed by the FSA or any local authority.",
     },
   ],
-  exploringTitle: "Ideas we’re exploring",
+  exploringTitle: "Our vision: ideas for later",
 };
 
 type FaqItem = { q: string; a: string };
