@@ -40,13 +40,41 @@ If you skip Resend for now, enquiries are still saved in Supabase; you just won'
 
 ## 4. Vercel: puts the website online
 
-1. Go to vercel.com and sign up with your GitHub account.
-2. **Add New → Project**, choose the `safe-kitchen-website` repository, and import it. Vercel recognises it as Next.js automatically.
-3. Before the first deploy, open **Environment Variables** and add every value from steps 1 to 3 (the names are listed in `.env.example`).
-4. Deploy. You'll get a private preview address. The site asks search engines not to list it until we switch `allowIndexing` on at go-live.
-5. A business site needs Vercel's **Pro** plan (about $20 a month). The free plan is fine for private previews.
+Vercel is the company that will host the website. Darrell does each step in the Vercel dashboard in a web browser, with Claude talking him through it one step at a time. Button names in Vercel's dashboard sometimes change; if one doesn't match, send Claude a screenshot.
 
-Connecting `safekitchen.uk` itself comes in the final stage, with your go-ahead.
+**Good to know before you start:**
+- Importing a repository makes Vercel build and publish it straight away, on a public `….vercel.app` address, unless Deployment Protection is set to **All Deployments**.
+- Every push to GitHub makes Vercel build a new version automatically. Pushes to the production branch replace the main version; pushes to other branches make separate preview versions.
+
+### 4a. Done (2 November 2026)
+- [x] Vercel account created and the `safe-kitchen-website` repository imported (project `safe-kitchen-website`).
+- [x] The first build published the repository's default branch, `claude/stage-1-proposal`, which holds only two old documents (the Stage 1 proposal and the first visual concept), not the website.
+- [x] **Settings → Deployment Protection → Vercel Authentication → All Deployments**, saved. Checked in a private browser window: visitors now get a Vercel sign-in page. Everything on Vercel is private to Darrell's Vercel account.
+
+### 4b. Choose the version Vercel publishes (next)
+The website code is on `claude/light-redesign`; the repository has no `main` branch yet.
+1. Darrell approves committing the waiting changes on `claude/light-redesign`.
+2. With Darrell's go-ahead, Claude creates a `main` branch from it and pushes it to GitHub.
+3. In Vercel: **Settings → Git → Production Branch**, type `main`, **Save**.
+4. **Deployments** tab: the newest `main` build should finish with a green tick. Open it (signed in) to check it's the real website.
+
+### 4c. Keep data processing in the UK
+The form's server code runs in Washington DC (`iad1`) by default; the privacy notice says data stays in London.
+1. **Settings → Functions → Function Region**: choose **London, England (lhr1)**, **Save**.
+2. **Deployments**: open the newest build's **⋯** menu → **Redeploy**, so the change takes effect.
+
+### 4d. Add the service keys
+Only after sections 1 to 3 above are set up.
+1. **Settings → Environment Variables**. Add each name from `.env.example` with its value, one at a time. Tick **Production** and **Preview**.
+2. Never add `NEXT_PUBLIC_LAUNCH_PREVIEW`, `NEXT_PUBLIC_SHOW_FOUNDING_OFFER`, `PREVIEW_EXPORT` or `NEXT_PUBLIC_PREVIEW_EXPORT`: those are only for the private review copy.
+3. **Redeploy** the newest build, then test the form while signed in.
+
+### 4e. Go live (final stage, only with Darrell's go-ahead)
+1. Choose a Vercel plan. The free **Hobby** plan is for personal, non-commercial use, so a business site needs **Pro** (check the current price on vercel.com).
+2. **Settings → Domains → Add**: `safekitchen.uk`, then add the DNS records Vercel shows where the domain was bought.
+3. Claude switches `allowIndexing` on in `src/config/site.ts` so search engines can list the site (after the trademark check).
+4. **Settings → Deployment Protection**: change **All Deployments** to **Standard Protection**, so the public can see `safekitchen.uk` while previews stay private.
+5. Check the live site in a private window on a phone and a computer.
 
 ---
 

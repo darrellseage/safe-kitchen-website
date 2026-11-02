@@ -8,13 +8,13 @@
 
 ## 1. Start here (for a new Claude chat)
 
-1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-086 concern the website).
+1. Read this file first, then `docs/CONVERSION_REVIEW.md` (latest decisions) and the app's `CLAUDE.md` and `DECISIONS.md` (D-073 to D-087 concern the website).
 2. Work in **`darrellseage/safe-kitchen-website`** on branch **`claude/light-redesign`**. Don't touch the app repository's code. Only its decision documents are updated, on branch `claude/website-decisions`.
 3. Check everything still runs:
    ```bash
    cd safe-kitchen-website
    npm install                 # only if node_modules is missing (ask first)
-   npx tsc --noEmit && npm run lint && npm test && npm run build
+   npm run typecheck && npm run lint && npm test && npm run build   # typecheck generates Next.js route types first
    npm run dev                 # http://localhost:3000
    NODE_PATH=$(npm root -g) node scripts/browser-checks/conversion.js
    ```
@@ -29,11 +29,12 @@
 | Website repo | `darrellseage/safe-kitchen-website` |
 | Website working branch | **`claude/light-redesign`** (all current work). Older branches: `claude/stage-1-proposal` (the repo's default branch; there is no `main` yet), `claude/stage-2-homepage` |
 | App repo | `darrellseage/safe-kitchen` (default `main`) |
-| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-086, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
+| App branch with website decisions | **`claude/website-decisions`** (decision log only: D-073 to D-087, CLAUDE.md product focus, PROJECT_PLAN, TRAINING_PLATFORM_PLAN) |
 | Pull requests | None opened yet. Only open one when the owner asks |
 | **Current private preview** | https://claude.ai/artifact/X7w92WYj6C2RpCM7a9uNMV (artifact slug `f3e9fc83-81af-4501-918b-3c2455941b58`), private to the owner |
 | Older private preview (left unchanged on purpose, may have been shared for a second opinion) | https://claude.ai/artifact/LThWT9aaAdEG9nEVDKB8M2 (slug `9d97efb5-6821-4864-80cf-a78c437d0d35`, "launch preview" look from 31 Oct) |
-| Live website | **None.** The domain `safekitchen.uk` is planned (owner to buy). No hosting account has been connected |
+| Live website | **None.** The domain `safekitchen.uk` is planned (owner to buy). |
+| Vercel | Account created and repo imported on 2 Nov 2026 (project `safe-kitchen-website`). **Deployment Protection: All Deployments**, so everything needs Darrell's Vercel sign-in. It currently shows the old `claude/stage-1-proposal` branch. Next steps: `docs/SETUP_SERVICES.md` §4b to §4e. Darrell is new to this: talk him through one step at a time |
 
 Key commits on `claude/light-redesign` (newest first): see `git log --oneline`. Milestones: `1c68f8a` Stage 4 · `95df36e` conversion review · `0d2f8d3` conversion changes · `12d93b8` founder photo · `6e4d7f3` phone "Try the demo" buttons · then the handover commit.
 
@@ -99,6 +100,8 @@ Prices live only in `src/config/pricing.ts` (with tests in `tests/pricing.test.t
 ## 5. Complete feature list and honest status
 
 Statuses come from `src/config/features.ts` (the single source for every label on the site) and the app's `CLAUDE.md`. **Nothing is open to customers yet.**
+
+**Labels describe the current stage, not the scope (app D-086, D-087):** every "Planned" feature (rotas, location-checked clock-in, ordering, AI Checker, training and the rest) is a mandatory part of the agreed full-featured launch. "Our vision" items are not part of the launch commitment. The app's PROJECT_PLAN.md still needs updating to match (owner to approve).
 
 ### Built in the app and being tested (not open to customers)
 - Business accounts and secure sign-in (app Phase 2B-1)
@@ -189,15 +192,15 @@ All ten review priorities were approved and built (full reasoning in `docs/CONVE
 
 - **Unit tests:** `npm test` (51 tests: pricing including VAT, value calculations, calculator, booking slots and time zones, spam checks, the two-step store, demo logic, homepage links).
 - **Browser checks:** `scripts/browser-checks/` (see its README). Last run on 1 Nov 2026: demos 27/27, conversion all passed, form all passed, mobile all passed. Against the static preview, the founding offer showing and the booked time not disappearing are expected differences.
-- **Also passing:** `npx tsc --noEmit`, `npm run lint`, `npm run build`.
+- **Also passing:** `npm run typecheck` (runs `next typegen` first; plain `npx tsc --noEmit` fails on a fresh copy because Next.js generates `LayoutProps`), `npm run lint`, `npm run build`.
 
 ## 10. Known issues, limits and untested areas
 
-- **FSA hygiene statistics** (48% / 66% / 14%) are **unverified**, because gov.uk was blocked by the session's network policy. They're hidden on the real site and shown only in the "launch" preview. Allow `www.gov.uk` and `assets.publishing.service.gov.uk` in the environment, then verify them.
+- **FSA hygiene statistics: verified 1 Nov 2026** against the FSA's *FHRS Food and You 2 report: wave 11* on GOV.UK (published 29 September 2026; England, Wales and Northern Ireland only, fieldwork May to August 2025): 48% of takeaway orderers consider the rating, 52% of people who know the scheme say 4 is the lowest they'd accept, 14% would only accept a 5. The earlier "66%" (52% + 14% added together) was removed. Never present these as UK-wide or as applying to Scotland. Shown on the real site, with source and coverage.
 - **Legal pages are drafts** with `[placeholders]` (company details, ICO number, retention period, liability, founding-offer details). A solicitor review is needed.
 - **Call hours are placeholders** (Tue/Thu 2–5pm).
 - **Stock photos** are stand-ins.
-- **No services connected** (Supabase, Turnstile, Resend, Vercel). The database script `docs/supabase-website.sql` was changed for the two-step form; run the current version when setting up (no tables exist yet).
+- **Services:** Vercel account and project exist (2 Nov 2026, private behind All Deployments protection). Supabase, Turnstile and Resend not set up yet. The database script `docs/supabase-website.sql` was changed for the two-step form; run the current version when setting up (no tables exist yet).
 - **Rate limiter** is in memory per server instance. On Vercel it isn't shared between instances; Turnstile is the main protection.
 - **Step 2** of the form relies on step 1's id and email (Turnstile runs on step 1 only). The two-step form needs JavaScript; there's no no-JavaScript fallback for step 2 (untested).
 - **Screen-reader testing** hasn't been done (keyboard and automated checks have).
@@ -226,15 +229,15 @@ All ten review priorities were approved and built (full reasoning in `docs/CONVE
 3. **Approve the founder story wording** (first person).
 4. Real **call hours**.
 5. Company and legal details, ICO registration, solicitor review.
-6. Buy **safekitchen.uk**. Create the Supabase website project, Cloudflare Turnstile, Resend and Vercel accounts (step-by-step guide in `docs/SETUP_SERVICES.md`; never paste secret keys into chat).
-7. Allow gov.uk in the Claude environment's network settings so the FSA statistics can be verified.
+6. Buy **safekitchen.uk**. Create the Supabase website project, Cloudflare Turnstile and Resend accounts (Vercel done 2 Nov 2026; remaining Vercel steps in `docs/SETUP_SERVICES.md` §4b to §4e) (step-by-step guide in `docs/SETUP_SERVICES.md`; never paste secret keys into chat).
+7. ~~Allow gov.uk so the FSA statistics can be verified~~ (done 1 Nov 2026). The font (Plus Jakarta Sans, SIL Open Font Licence) is now stored in `src/app/fonts/`, so builds no longer need Google Fonts.
 8. Decide when to start **Stage 5** (analytics with consent, SEO, accessibility and performance polish) and **Stage 6** (deployment preparation).
 9. Whether to open pull requests for `claude/light-redesign` and `claude/website-decisions`.
 
 ## 13. Rules to keep following
 
 - Ask before installing software, committing, pushing, publishing, connecting services or deploying. Work one step at a time.
-- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-087**) on its branch.
+- **Don't change the Safe Kitchen app's code.** Website decisions go in the app's `DECISIONS.md` (next ID **D-088**) on its branch.
 - Don't activate payments or public offers, or launch anything publicly, without explicit approval.
 - No invented figures, testimonials, accreditations or features. Every money figure is labelled illustrative, and statistics need a verified source.
 - Keep honest status labels on the public site. The launch-preview look is for private review only.
@@ -247,7 +250,7 @@ I'm Darrell, continuing work on the Safe Kitchen marketing website.
 Please read docs/HANDOVER.md in the darrellseage/safe-kitchen-website repository
 (branch claude/light-redesign) before doing anything, then docs/CONVERSION_REVIEW.md.
 The app repository darrellseage/safe-kitchen (branch claude/website-decisions) holds
-the decision log (DECISIONS.md D-073 to D-084): don't change the app's code.
+the decision log (DECISIONS.md D-073 to D-087): don't change the app's code.
 Run the checks in section 1 of the handover, then give me a short summary of where
 we are and wait for my instructions. Ask before committing, pushing, publishing,
 installing anything or connecting services, and don't deploy or activate any
