@@ -4,34 +4,50 @@
  * Unverified figures appear only in the private launch preview, marked as
  * being verified; the real site hides them until `verified` is true.
  */
-export type Stat = { value: string; label: string; source: string; sourceUrl: string; verified: boolean; note?: string };
+export type Stat = {
+  value: string;
+  label: string;
+  source: string;
+  sourceUrl: string;
+  verified: boolean;
+  /** Who was surveyed, where and when, shown next to the source. */
+  coverage?: string;
+  note?: string;
+};
 
+/**
+ * Verified on 1 Nov 2026 against the GOV.UK publication below (wave 11 report,
+ * "Use of the FHRS in decision making"). Each figure is quoted exactly as
+ * reported, for the group the report gives it for. The survey covers England,
+ * Wales and Northern Ireland only: never present these figures as UK-wide or
+ * as applying to Scotland.
+ */
 const fsaWave11 = {
-  source: "Food Standards Agency, Food and You 2: FHRS report, Wave 11 (2026)",
+  source: "Food Standards Agency, Food Hygiene Rating Scheme (FHRS) Food and You 2 report: wave 11, published 29 September 2026",
   sourceUrl:
     "https://www.gov.uk/government/publications/food-hygiene-rating-scheme-fhrs-food-and-you-2-report-wave-11/food-hygiene-rating-scheme-fhrs-food-and-you-2-report-wave-11",
+  coverage: "Survey of people in England, Wales and Northern Ireland (not Scotland), carried out May to August 2025.",
 };
 
 export const hygieneStats: Stat[] = [
   {
     value: "48%",
-    label: "of consumers consider food hygiene ratings when choosing a takeaway",
+    label: "of people who order takeaways consider the food hygiene rating when deciding where to order from",
     ...fsaWave11,
-    verified: false,
-    note: "Not yet confirmed: earlier waves reported 35% to 40% for takeaways.",
+    verified: true,
   },
   {
-    value: "66%",
-    label: "of people who know the scheme consider a rating of 4 or 5 the lowest they’d accept",
+    value: "52%",
+    label: "of people who have heard of the scheme say 4 (good) is the lowest rating they’d generally accept",
     ...fsaWave11,
-    verified: false,
-    note: "Search results show 52% chose 4 as the lowest acceptable rating; the 4-or-5 total is not yet confirmed.",
+    verified: true,
+    note: "Replaces an earlier 66%, which was 52% (rating 4) plus 14% (rating 5) added together and isn’t a figure the report gives.",
   },
   {
     value: "14%",
-    label: "of people who know the scheme would only accept a rating of 5",
+    label: "of people who have heard of the scheme would only consider a rating of 5 acceptable",
     ...fsaWave11,
-    verified: false,
+    verified: true,
   },
 ];
 

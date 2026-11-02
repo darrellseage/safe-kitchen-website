@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SiteLink } from "@/components/site/site-link";
 import { ArrowRight, Check, ExternalLink } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -33,6 +33,7 @@ export function HygieneRatings() {
             {stats[0].source}
             <ExternalLink className="ms-1 inline size-3.5 align-[-2px]" aria-hidden="true" />
           </a>
+          {stats[0].coverage ? ` ${stats[0].coverage}` : null}
         </p>
       ) : null}
 
@@ -47,10 +48,10 @@ export function HygieneRatings() {
           ))}
         </ul>
         <p className="mt-5 max-w-[80ch] text-sm text-ink-muted">{hygiene.disclaimer}</p>
-        <Link href={section("savings")} className="mt-4 inline-flex min-h-12 items-center gap-1.5 font-bold text-accent-600 hover:text-accent-700">
+        <SiteLink href={section("savings")} className="mt-4 inline-flex min-h-12 items-center gap-1.5 font-bold text-accent-600 hover:text-accent-700">
           {hygiene.calculatorLink}
           <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
+        </SiteLink>
       </div>
     </div>
   );

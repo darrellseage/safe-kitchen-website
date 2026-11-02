@@ -45,7 +45,11 @@ const ok = (c, m) => { if (!c) fails++; console.log((c ? 'PASS ' : 'FAIL ') + m)
   ok(await f.locator('img[src*="founder-darrell"]').count() === 1, 'Founder: Darrell\'s own photo shown');
   // 5. Problem section
   const hyg = p.locator('#hygiene-rating');
-  ok(await hyg.getByText('48%').count() === 0, 'Real site hides unverified FSA figures');
+  const hygText = await hyg.innerText();
+  ok(['48%', '52%', '14%'].every(v => hygText.includes(v)) && !hygText.includes('66%'), 'FSA figures: verified 48%, 52%, 14% shown; derived 66% gone');
+  ok(hygText.includes('people who order takeaways') && hygText.includes('people who have heard of the scheme'), 'FSA figures: surveyed groups described');
+  ok(hygText.includes('published 29 September 2026') && hygText.includes('England, Wales and Northern Ireland (not Scotland)'), 'FSA figures: source date and coverage shown');
+  ok(!hygText.includes('Figure being verified'), 'FSA figures: no "being verified" badge');
   // 6. Features
   const tr = await p.locator('#training').innerText();
   ok(tr.includes('£90.01') && tr.includes('£1,050.01') && tr.includes('Level 2 Food Hygiene course') && tr.includes('isn’t an externally accredited'), 'Training: comparison table, Level 2 name and disclosure');
