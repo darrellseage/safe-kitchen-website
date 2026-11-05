@@ -56,7 +56,7 @@ Rejected approaches: anything implying a rating outcome ("Get your five"), anyth
 | 3 | **Inspection Mode** (timeline + tablet demo) | How does it actually work? | Demonstrate the core promise | The 10:12 visit; the real Inspection Mode demo; the "can't guarantee a rating" line |
 | 4 | **Try a check** (temperature demo, kept) | How does it work for my staff? | Demonstrate, not assert | Existing demo, restyled; the four principles |
 | 5 | **Who it's for** (four fear cards from C) | Why should I care? (by role) | Self-recognition | Takeaway owner, head chef, manager, multi-site; each with one honest limit |
-| 6 | **The rest of the day** (planned features, labelled) | What else does it do? | Scope without over-claiming | Training, rotas, clock-in, AI Checker, ordering as one compact row of tickets/cards with "Planned"; existing demos behind "Try" buttons |
+| 6 | **The rest of the day** (planned features, labelled) | What else does it do? | Scope without over-claiming | Training, allergens, rotas, clock-in, AI Checker, ordering as one compact row of tickets/cards with "Planned" (all part of the launch plan, app D-086/D-087); existing demos, including the allergen demo, behind "Try" buttons |
 | 7 | **Pricing + straight answers** | What does it cost? Why trust it? | Decision | Two plans with VAT, never-charged list, 3-site example; then the status index (from B), data/exports/offline, certificates disclosure, FSA non-affiliation, "Why we don't say EHO approved" |
 | 8 | **Founder** | Why should I trust it? | Credibility | Photo, story, quote, pilot plan |
 | 9 | **Join early access** (two-step form) | What happens next? | Conversion | Free, no card, no commitment; book a call |
@@ -99,12 +99,12 @@ Target: ≤ 9 sections, ≤ 1,800 words before the FAQ, ≤ 14,000px on a phone 
 
 | Measure | Before (5 Nov 2026) | Stage B target |
 |---|---|---|
-| Sections | 16 | ≤ 9 |
-| Words in main (desktop) | 4,146 | ≤ 2,200 incl. FAQ |
-| Page height, phone (demos closed) | 31,148px | ≤ 14,000px |
-| Page height, desktop | 24,436px | ≤ 12,000px |
+| Sections | 17 | ≤ 9 |
+| Words in main (desktop) | 4,885 | ≤ 2,200 incl. FAQ |
+| Page height, phone (demos closed) | 35,257px | ≤ 14,000px |
+| Page height, desktop | 27,250px | ≤ 12,000px |
 | First screen states category + price + who for | Partly | Yes |
-| Strongest fear in first two screens | No (section 11) | Yes (section 1 and 3) |
+| Strongest fear in first two screens | No (inside section 11 of 17) | Yes (section 1 and 3) |
 | JavaScript shipped (uncompressed) | ~1.1MB | ≤ 500KB |
 | Invented claims, testimonials, accreditations | 0 | 0 |
 | Browser checks passing | 4 suites | 4 suites + visual diff |

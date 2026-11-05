@@ -8,7 +8,7 @@
 
 The audit scores originality at 4/10. The current site uses the app's design tokens faithfully, which made sense for product consistency, but the result is the default look of 2025–26 SaaS: one geometric sans, 24px-radius cards, pill buttons, pastel bands, floating UI cards. A visitor cannot tell from the first screen that this company knows kitchens. The three directions below each start from something only a kitchen has.
 
-What's kept in all three: the name, the deep green (as a base in C, as the "safe" status colour in A and B), the honest-status system, the founder photo, the temperature-check principles, the disclosures and the prices.
+What's kept in all three: the name, the deep green (as a base in C, as the "safe" status colour in A and B), the honest-status system, the founder photo, the temperature-check principles, the disclosures and the prices. The mockups predate the 2 Nov allergens section; in the chosen concept, allergens joins the "rest of the day" row with the same ticket/record treatment.
 
 ---
 

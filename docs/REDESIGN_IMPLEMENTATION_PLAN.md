@@ -1,13 +1,13 @@
 # Redesign implementation plan (Stage B, after approval)
 
-> **Date:** 5 November 2026. **Status:** proposal. Nothing starts until the owner approves a design direction (see `BRAND_DESIGN_DIRECTIONS.md`). Stage B happens on a new branch and is reviewed privately; the public website does not exist yet and nothing will be deployed.
+> **Date:** 5 November 2026. **Status:** proposal. Nothing starts until the owner approves a design direction (see `BRAND_DESIGN_DIRECTIONS.md`). Stage B happens on a new branch and is reviewed privately. **Hosting note:** since 2 Nov the repository is connected to Vercel with Vercel Authentication on all deployments and `main` as the production branch. Pushing a Stage B branch creates a sign-in-protected preview build, not a public site; nothing is merged to `main` without the owner's approval, and Deployment Protection must stay on.
 
 ## 1. Non-negotiables carried into Stage B
 
 - No public launch, no paid subscriptions, no live checkout, no launch date, no public self-registration. The early-access form stays free and non-committal.
 - Honest status labels on every feature; every demo labelled sample data; planned features never shown as available. **Delete the `NEXT_PUBLIC_LAUNCH_PREVIEW` flag and the "launched" wording branches.**
 - No invented statistics, testimonials, accreditations, performance claims or "EHO approved".
-- The Safe Kitchen application repository is not touched. Only its decision log gets new entries (next ID D-085).
+- The Safe Kitchen application repository is not touched. Only its decision log gets new entries (next free ID after D-088).
 - Keep: the two-step form and its spam protection, booking logic, services layer, `pricing.ts`, `features.ts`, the content/config/logic split, all 51 unit tests, the four browser-check suites, the legal pages, and the accessibility baseline.
 
 ## 2. Architecture (what exists, what changes)
@@ -22,7 +22,7 @@ Changes:
 5. **JavaScript diet:** remove `motion` from the homepage (CSS transitions only), lazy-load each demo with `next/dynamic` on first open, keep Radix for tabs/accordion/dialog only. Target ≤ 500KB uncompressed client JS.
 6. **Images:** founder photo plus licensed photos that pass the accuracy review; add `sizes`, AVIF/WebP via `next/image`, and a real OG image. Replace the placeholder logo with a concept-matched mark (SVG).
 7. **Navigation:** five items that answer questions (How it works · Pricing · Straight answers · Founder · Early access) plus the CTA; mobile menu becomes a short sheet. Header behaviour unchanged (hides on scroll down, never fixed over content).
-8. **Status:** `features.ts` unchanged in shape; add `allergens: "planned"` and `probes` stays vision. The status index section renders from it.
+8. **Status:** `features.ts` unchanged in shape (allergens already present since 2 Nov); the status index section renders from it, and wording follows D-086/D-087: "Planned" means part of the launch plan, "Our vision" does not.
 9. **SEO/metadata (Stage 5 can overlap):** title/description per concept copy, `robots` noindex until go-live, FAQ JSON-LD from the shortened FAQ, Organisation schema with the founder once legal details exist.
 10. **Content:** `home.ts` rewritten section by section from the recommended copy; `founder.ts` unchanged; `legal.ts` unchanged except the launch-preview removal.
 
@@ -30,7 +30,7 @@ Changes:
 
 | Step | Work | Output | Check |
 |---|---|---|---|
-| B0 | Branch `claude/redesign-stainless` (or chosen concept) from `claude/light-redesign`; record D-085 (chosen direction) in the app's decision log | Branch, decision | — |
+| B0 | Branch `claude/redesign-stainless` (or chosen concept) from the current `claude/light-redesign`; record the chosen direction in the app's decision log (next free ID after D-088) | Branch, decision | — |
 | B1 | Tokens, fonts, base styles, logo mark; delete launch-preview flag | `globals.css`, `layout.tsx`, `site.ts`, `logo.tsx` | build, lint, tsc |
 | B2 | Hero + "what it replaces" + header/nav | Sections 1–2 | browser check at 320/375/768/1280, before/after screenshots |
 | B3 | Inspection Mode section and temperature demo restyle | Sections 3–4 | demos.js passes |

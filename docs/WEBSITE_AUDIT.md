@@ -1,6 +1,6 @@
 # Safe Kitchen website: Stage A audit
 
-> **Date:** 5 November 2026. **Audited:** branch `claude/light-redesign` at commit `2760c91`, running locally, and the private preview of the same build. **Method:** every section and component read in source; the page measured in a real browser at 320, 375, 768 and 1280px (`scripts/browser-checks/` plus an audit script); screenshots in `docs/review/stage-a/`.
+> **Date:** 5 November 2026. **Audited:** branch `claude/light-redesign` at commit `9bf39b0` (the current head, which includes the 2 Nov allergens section, the verified FSA figures and the self-hosted font), running locally. **Method:** every section and component read in source; the page measured in a real browser at 320, 375, 768 and 1280px (`scripts/browser-checks/` plus an audit script); screenshots in `docs/review/stage-a/`.
 > **Stance:** this is a critical audit of work I did myself over the last week. I've tried not to defend it.
 
 ## 1. Scores out of 10
@@ -12,8 +12,8 @@
 | **Design quality** | **6** | Clean, consistent, accessible (48px targets, reduced motion, logical properties). But the system is a careful application of defaults, not a point of view. The green-on-green section rhythm reads as "colour-blocked template". Visual hierarchy inside sections is flat: the same card radius and shadow everywhere. |
 | **Clarity (five-second test)** | **7** | After the conversion pass the first screen says what it is, who it's for and the price. That's good. But it still leads with "Running a kitchen is hard enough. The paperwork shouldn't be.", which is a feeling, not a category. A visitor has to read the body copy to learn it's an SFBB-replacement app. The 60-second tour needs scrolling to reach. |
 | **Emotional impact** | **5** | The copy is polite and sensible. The strongest fear in the market (the unannounced inspection) is there, but in section eleven, inside the "records" section, after training, AI, rotas and ordering. The hero visual is a to-do list, which is nobody's fear or desire. The founder story is the most emotionally credible content on the page and arrives fourth. |
-| **Conversion potential** | **6** | Four calls to action is right. The two-step form is good. Against that: the page is 24,400px on desktop and 31,100px on a phone, 4,100 words, 16 sections, 10 CTA-type links. No sticky mobile CTA. No proof of any kind (even a pilot). Pricing is clear but buried at section 14. |
-| **Mobile experience** | **7** | No horizontal overflow at 320px, all targets ≥44px, "Try the demo" buttons shorten the page by a quarter. But 31,000px is still 38 screens, headline sizes crowd the first screen, and the eight-item menu lists sections rather than answering questions. |
+| **Conversion potential** | **6** | Four calls to action is right. The two-step form is good. Against that: the page is 27,250px on desktop and 35,250px on a phone, 4,900 words, 17 sections, 10 CTA-type links. No sticky mobile CTA. No proof of any kind (even a pilot). Pricing is clear but buried at section 14. |
+| **Mobile experience** | **7** | No horizontal overflow at 320px, all targets ≥44px, "Try the demo" buttons shorten the page by a quarter. But 35,000px is still 43 screens, headline sizes crowd the first screen, and the eight-item menu lists sections rather than answering questions. |
 
 **Overall: a competent, honest, generic SaaS page.** It would not embarrass the company. It also would not be remembered, and it does not yet make a restaurant owner feel the product understands their worst Tuesday.
 
@@ -21,10 +21,10 @@
 
 | Metric | Desktop 1280 | Phone 375 | Narrow 320 |
 |---|---|---|---|
-| Page height | 24,436px | 31,148px | 34,078px |
-| Words in `<main>` | 4,146 | 3,059 (demos closed) | 3,059 |
-| Sections | 16 | 16 | 16 |
-| DOM nodes | 2,107 | 2,107 | 2,107 |
+| Page height | 27,250px | 35,257px | 38,644px |
+| Words in `<main>` | 4,885 | 3,621 (demos closed) | 3,621 |
+| Sections | 17 | 17 | 17 |
+| DOM nodes | about 2,300 | about 2,300 | about 2,300 |
 | Requests on load | 31 | 29 | 28 |
 | LCP (dev server, no throttling) | 0.8–1.6s | 0.5s | 0.5s |
 | CLS | 0 | 0 | 0 |
@@ -41,7 +41,7 @@ Ordered by how much each one costs conversions, with evidence.
 2. **The hero visual is a to-do list.** The tablet "Now" screen shows four tasks. It explains the product but carries no emotion and no differentiation. The three floating cards (clock-in, AI, ordering) fragment attention.
 3. **The strongest fear is buried.** "When the EHO walks in" is an H3 inside section 11 ("Inspection-ready records"), at roughly 15,000px on desktop. In this market, inspection anxiety is the lead, not a sub-section.
 4. **No proof of any kind.** No pilot kitchens, no reviews, no "built with" names, no screenshots of the real app (the real app exists: accounts, tablet, PIN sign-in are built). The page shows mock-ups of planned features and none of the built ones.
-5. **Length.** 31,000px on a phone, 24,000px on desktop, 4,100 words. The conversion pass cut 22 sections to 16 and the demos behind buttons, but it still asks a takeaway owner for 10+ minutes of attention.
+5. **Length.** 35,000px on a phone, 27,000px on desktop, 4,900 words, 17 sections. The 1 Nov conversion pass cut 22 sections to 16 and put the demos behind buttons; the 2 Nov allergens section added one back. It still asks a takeaway owner for 10+ minutes of attention.
 6. **Feature-led structure.** Sections 7–11 are one feature each (training, AI, rotas, ordering, records). That is how the product team thinks, not how a buyer decides. A buyer asks "will this get me through an inspection and save me time?"
 7. **Planned features dominate.** Six of the seven interactive demos are for planned features. Honest labels fix the legal problem but not the credibility one: the most elaborate parts of the page are the least real.
 8. **Headline is a mood, not a category.** "Running a kitchen is hard enough. The paperwork shouldn't be." could introduce an accountancy app. The product category ("digital SFBB and kitchen records") appears only in body copy.
@@ -53,10 +53,10 @@ Ordered by how much each one costs conversions, with evidence.
 14. **No sticky mobile CTA.** The header hides on scroll by design (to respect the app's no-fixed-bars rule). On a 38-screen page that means the only CTAs are at screen 1, 2, 30 and 38.
 15. **Stock photography contradicts the message.** `kitchen-line.jpg` and `plating.jpg` are flagged in the manifest as unsuitable for hygiene illustration. Any photo that isn't the founder's is a generic hospitality stock image a competitor could buy tomorrow.
 16. **Placeholder logo.** A leaf-and-tick mark that signals "template" before a word is read.
-17. **Unverified statistics still in the build** (hidden on the real site, shown in launch preview). They should be verified or deleted, not carried.
+17. **The "launch preview" wording branches (`whenLive`) still exist in the code** even though the FSA figures are now verified and sourced (2 Nov). Every `whenLive` call is a place where the public site and a preview can say different things; the flag should go.
 18. **JavaScript weight.** About 1.1MB uncompressed of client code on a marketing homepage, driven by `motion`, Radix and seven demos. Phones on 4G in a kitchen back office will feel it.
-19. **The "launch preview" mode is a liability.** It exists so the owner could see "everything live". If a preview with that flag is ever shared, it misrepresents the product. Stage B should delete the flag.
-20. **Legal and company placeholders in the footer and legal pages** (`[Company or trading name]`, `[ICO registration number]`) are visible in every preview and undermine the "serious company" impression even for private reviewers.
+19. **Planned features now outnumber built ones 8 to 1 on the page** (training, AI, rotas, clock-in, ordering, allergens, exports, offline, versus accounts and the tablet). The allergens section is well sourced, but it is another elaborate demo of something that doesn't exist yet, and it pushes pricing to section 15.
+20. **Legal and company placeholders in the footer and legal pages** (`[Company or trading name]`, `[ICO registration number]`) are visible in every preview, including the sign-in-protected Vercel deployment, and undermine the "serious company" impression even for private reviewers.
 
 ## 4. What is working and should survive
 
@@ -85,9 +85,9 @@ Ordered by how much each one costs conversions, with evidence.
 - All five `<img>` elements have alt text; decorative founder thumbnails use empty alt.
 - Keyboard: tabs, accordions, tour buttons and form all operable. Screen-reader testing has not been done.
 - Colour contrast: previously checked visually; the white-on-white tab bug found on 1 Nov shows the forest/`.tone-forest` token override is fragile. Stage B should remove token-inverting sections.
-- SEO: `noindex` while `allowIndexing` is false (correct). FAQ JSON-LD present. No sitemap, robots, Open Graph image or organisation schema yet (Stage 5 scope).
+- SEO: `noindex` while `allowIndexing` is false (correct). The Vercel deployment is behind Vercel Authentication (all deployments), so nothing is public. FAQ JSON-LD present. No sitemap, robots, Open Graph image or organisation schema yet (Stage 5 scope).
 - Not tested: Lighthouse/Core Web Vitals under throttling, screen readers, Safari/iOS real devices, Windows high-contrast mode.
 
 ## 7. Before screenshots
 
-`docs/review/stage-a/before-desktop-first.png`, `before-mobile-first.png`, `before-narrow-first.png`, plus full-page captures. Compare against the Stage B result using the same script (`scripts/browser-checks/` and `docs/review/stage-a/audit.js`).
+`docs/review/stage-a/before-desktop-first.png`, `before-mobile-first.png`, `before-narrow-first.png`, plus full-page captures, taken from commit `9bf39b0`. Compare against the Stage B result using the same script (`scripts/browser-checks/` and `docs/review/stage-a/audit.js`).
