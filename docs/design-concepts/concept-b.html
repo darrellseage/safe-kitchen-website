@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Concept B · The Record</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;100,700;125,800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: the SFBB diary, redrawn. Paper-white, ink-blue hand entries, a green "checked" stamp as the only brand colour. Calm, documentary, inspector-desk credibility. */
+:root{
+  --paper:#fbfaf6; --paper-2:#f2efe6; --line:#d9d3c4; --ink:#1b2430; --ink-muted:#54606c; --pen:#1d4ed8; --stamp:#128a4a; --stamp-100:#dff3e6; --warn:#b4531a;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif; --body:"Archivo","Helvetica Neue",Arial,sans-serif; --mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-stretch:125%;font-weight:800;margin:0;line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px;padding:0 1.4rem;font-weight:700;font-size:16px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;border-radius:999px}
+.btn.green{background:var(--stamp);border-color:var(--stamp);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:focus-visible{outline:3px solid var(--pen);outline-offset:3px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:66px}
+.logo{font-weight:800;font-stretch:125%;font-size:20px;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:.55rem}
+.logo i{width:22px;height:22px;border-radius:50%;background:var(--stamp);display:inline-grid;place-items:center;color:#fff;font-size:13px;font-style:normal}
+header nav{display:none;gap:1.6rem;font-size:15px}
+header nav a{color:var(--ink-muted);text-decoration:none}
+header .btn{min-height:42px;padding:0 1rem;font-size:15px}
+@media(min-width:960px){header nav{display:flex}}
+/* hero */
+.hero{padding-block:3.5rem 4rem;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;gap:2.5rem}
+@media(min-width:960px){.hero .wrap{grid-template-columns:1fr 1fr;align-items:center}}
+.hero h1{font-size:clamp(2rem,4.6vw,3.6rem)}
+.hero h1 .pen{color:var(--pen);font-family:var(--mono);font-stretch:100%;font-weight:600;font-size:.52em;letter-spacing:0;display:block;margin-top:.5rem;line-height:1.2}
+.hero .lead{font-size:clamp(1.1rem,2vw,1.3rem);color:var(--ink-muted);max-width:50ch;margin:1.4rem 0 0}
+.ctas{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
+.facts{margin-top:1.6rem;display:grid;gap:.4rem;font-size:15px;font-family:var(--mono);color:var(--ink-muted)}
+.facts b{color:var(--ink);font-weight:600}
+.founder-line{display:flex;align-items:center;gap:.75rem;margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--line);font-size:15px;color:var(--ink-muted)}
+.founder-line img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 30%}
+/* the diary page */
+.diary{background:#fff;border:1px solid var(--line);box-shadow:0 20px 50px -30px rgba(27,36,48,.35);padding:1.4rem;position:relative;background-image:repeating-linear-gradient(0deg,transparent 0 35px,#eef0ec 35px 36px);background-position:0 72px}
+.diary .hd{display:flex;justify-content:space-between;gap:1rem;border-bottom:2px solid var(--ink);padding-bottom:.6rem;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.diary table{width:100%;border-collapse:collapse;margin-top:.5rem;font-size:15px}
+.diary td{padding:.45rem .2rem;vertical-align:baseline}
+.diary td.pen{font-family:var(--mono);color:var(--pen);font-weight:600}
+.diary td:last-child{text-align:right;white-space:nowrap}
+.stamp{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);border:2px solid var(--stamp);border-radius:4px;padding:.2rem .5rem;font-weight:600;transform:rotate(-3deg)}
+.stamp.big{font-size:14px;padding:.4rem .8rem;position:absolute;right:1rem;bottom:1rem;transform:rotate(-8deg);background:rgba(255,255,255,.9)}
+.diary .foot{margin-top:.8rem;font-size:12px;color:var(--ink-muted);font-family:var(--mono)}
+/* sections */
+section.sec{padding-block:4.5rem;border-bottom:1px solid var(--line)}
+.sec h2{font-size:clamp(1.8rem,4vw,3rem)}
+.sec .intro{font-size:1.15rem;color:var(--ink-muted);max-width:60ch;margin:1rem 0 0}
+/* index of records */
+.index{margin-top:2rem;display:grid;gap:0;border-top:1px solid var(--ink)}
+.index .row{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.index .row b{font-weight:700}
+.index .row span.m{font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.06em;text-transform:uppercase}
+.index .row em{font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .5rem;border-radius:3px;background:var(--paper-2);color:var(--ink-muted)}
+.index .row em.dev{background:#e6ecfb;color:var(--pen)}
+.index .row em.built{background:var(--stamp-100);color:var(--stamp)}
+/* inspection */
+.two{display:grid;gap:2rem;margin-top:2rem}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr;align-items:start}}
+.quote-card{background:#fff;border:1px solid var(--line);padding:1.4rem;font-size:1.25rem;line-height:1.35;font-weight:500}
+.quote-card small{display:block;margin-top:.8rem;font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase}
+.photo{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);filter:saturate(.8)}
+/* pricing */
+.price{display:grid;gap:1rem;margin-top:2rem}
+@media(min-width:800px){.price{grid-template-columns:1fr 1fr}}
+.plan{border:1px solid var(--line);background:#fff;padding:1.6rem;position:relative}
+.plan.best{border:2px solid var(--stamp)}
+.plan .amt{font-size:clamp(2.6rem,7vw,4rem);font-weight:800;font-stretch:125%;letter-spacing:-.03em;line-height:1}
+.plan .vat{font-family:var(--mono);font-size:13px;color:var(--ink-muted);margin-top:.5rem}
+.plan ul{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.45rem;font-size:15px}
+.plan li::before{content:"✓ ";color:var(--stamp);font-weight:700}
+.never{margin-top:1rem;font-family:var(--mono);font-size:13px;color:var(--ink-muted)}
+/* founder */
+.founder{display:grid;gap:2rem;margin-top:2rem}
+@media(min-width:900px){.founder{grid-template-columns:.75fr 1.25fr;align-items:start}}
+.founder img.p{width:100%;max-width:400px;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border:1px solid var(--line)}
+.founder blockquote{margin:1.4rem 0 0;padding:0 0 0 1.2rem;border-left:3px solid var(--pen);font-size:1.3rem;line-height:1.35;font-weight:500}
+.status{margin-top:2rem;background:#fff;border:1px solid var(--line);padding:1.2rem;font-size:15px}
+.status b{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pen)}
+footer{padding-block:2rem;font-size:13px;color:var(--ink-muted);font-family:var(--mono)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#"><i>✓</i>Safe Kitchen</a>
+  <nav><a href="#records">Records</a><a href="#inspection">Inspections</a><a href="#pricing">Pricing</a><a href="#founder">Founder</a></nav>
+  <a class="btn green" href="#cta">Join early access</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <p class="eyebrow">Concept B · "The Record" · the diary your inspector already trusts, kept properly</p>
+    <h1>Every check your inspector will ask for. Recorded as it happens.<span class="pen">Who. When. Which device. Never prefilled.</span></h1>
+    <p class="lead">Safe Kitchen is the Safer Food, Better Business diary rebuilt for a phone and a shared kitchen tablet: temperatures, cleaning, deliveries, allergens, training, rotas and orders in one record that is always ready to show.</p>
+    <div class="ctas"><a class="btn green" href="#cta">Join early access</a><a class="btn ghost" href="#inspection">How an inspection goes</a></div>
+    <div class="facts"><span><b>£14.99</b> + VAT a month per site (£17.99 incl. VAT) · <b>£149.99</b> + VAT a year</span><span><b>Unlimited staff</b> · Level 2 training included when it launches · no set-up fee</span><span>Early access is free. No card. No commitment.</span></div>
+    <p class="founder-line"><img src="images/founder-darrell.jpg" alt=""><span>Designed by Darrell Seage, head chef and kitchen manager for over 15 years.</span></p>
+  </div>
+  <div class="diary" role="img" aria-label="Illustration of a digital food safety diary page for one day, with readings, who recorded them and a checked stamp">
+    <div class="hd"><span>Daily diary · Tue 3 Nov</span><span>Main kitchen · sample data</span></div>
+    <table>
+      <tr><td>Opening checks</td><td class="pen">6 of 6</td><td>09:41 · Sam · tablet</td></tr>
+      <tr><td>Walk-in fridge</td><td class="pen">3.4 °C</td><td>10:02 · Sam · probe</td></tr>
+      <tr><td>Freezer 1</td><td class="pen">−19.1 °C</td><td>10:03 · Sam · typed</td></tr>
+      <tr><td>Delivery · chicken</td><td class="pen">2.8 °C</td><td>11:06 · Jo · tablet</td></tr>
+      <tr><td>Hot holding · curry</td><td class="pen">78 °C</td><td>12:30 · Priya · probe</td></tr>
+      <tr><td>Closing clean · prep</td><td class="pen" style="color:var(--warn)">1 missed</td><td>22:14 · noted</td></tr>
+    </table>
+    <p class="foot">Illustrative. Missed items are never hidden, and the original entry is never overwritten.</p>
+    <span class="stamp big">Checked · 4-weekly review</span>
+  </div>
+</div></section>
+
+<section class="sec" id="records"><div class="wrap">
+  <p class="eyebrow">Index of records</p>
+  <h2>What goes in the record, and what's true today.</h2>
+  <p class="intro">Each line is a record an Environmental Health Officer can ask to see. The label on the right is the honest status of that part of Safe Kitchen. Nothing here is open to customers yet.</p>
+  <div class="index">
+    <div class="row"><div><b>Accounts, two-step sign-in, shared tablet with staff PINs</b><br><span class="m">The foundation</span></div><em class="built">Built · being tested</em></div>
+    <div class="row"><div><b>Fridge, freezer, cooking, hot-holding and delivery temperatures</b><br><span class="m">Daily diary</span></div><em class="dev">In development</em></div>
+    <div class="row"><div><b>Cleaning schedules, problems and corrective actions</b><br><span class="m">Daily diary</span></div><em class="dev">In development</em></div>
+    <div class="row"><div><b>Inspection Mode: the last 28 days, print or PDF</b><br><span class="m">Show, don't search</span></div><em class="dev">In development</em></div>
+    <div class="row"><div><b>Supplier list and pest control records</b><br><span class="m">Evidence</span></div><em class="dev">In development</em></div>
+    <div class="row"><div><b>Allergen matrix with customer QR information</b><br><span class="m">Natasha's Law</span></div><em>Planned</em></div>
+    <div class="row"><div><b>Level 2 food hygiene training and certificates</b><br><span class="m">Unlimited staff</span></div><em>Planned</em></div>
+    <div class="row"><div><b>Rotas from a photo, clock-in, AI Checker, ordering</b><br><span class="m">The rest of the day</span></div><em>Planned</em></div>
+  </div>
+</div></section>
+
+<section class="sec" id="inspection"><div class="wrap">
+  <p class="eyebrow">Inspections</p>
+  <h2>The visit nobody books.</h2>
+  <div class="two">
+    <div>
+      <p class="intro">An inspection isn't a test of your cooking. It's a test of whether you can show, on the spot, that the checks happened. Safe Kitchen is designed so that showing takes seconds: open Inspection Mode and the last 28 days are on screen, with anything missing shown plainly. It can't guarantee a rating, and it won't do the inspection for you. It means you're not hunting through folders while the food is going cold.</p>
+      <div class="quote-card" style="margin-top:1.4rem">"The EHO wants last month's records. The manager is in the office, searching through folders for the right week."<small>The moment we're designing against · not a testimonial</small></div>
+    </div>
+    <img class="photo" src="images/chef.jpg" alt="A chef in clean whites and a hat working at a kitchen bench">
+  </div>
+</div></section>
+
+<section class="sec" id="pricing"><div class="wrap">
+  <p class="eyebrow">Pricing</p>
+  <h2>One line on the invoice.</h2>
+  <p class="intro">Per site, with every member of staff included. Prices shown with and without VAT.</p>
+  <div class="price">
+    <div class="plan"><p class="eyebrow">Monthly</p><div class="amt">£14.99</div><p class="vat">+ VAT a month per site · £17.99 including VAT</p><ul><li>Unlimited staff</li><li>Every Safe Kitchen tool as it launches</li><li>Cancel any time</li></ul></div>
+    <div class="plan best"><span class="stamp" style="position:absolute;right:1rem;top:1rem">Best value</span><p class="eyebrow">Annual</p><div class="amt">£149.99</div><p class="vat">+ VAT a year per site · £179.99 including VAT · saves £29.89</p><ul><li>Unlimited staff</li><li>Level 2 training and certificates included</li><li>No set-up fee</li></ul></div>
+  </div>
+  <p class="never">Never charged: per-employee fees · per-course training fees · set-up fees · add-on modules</p>
+</div></section>
+
+<section class="sec" id="founder"><div class="wrap">
+  <p class="eyebrow">Designed by chefs and owners, for chefs and owners</p>
+  <h2>Fifteen years of filling these in by hand.</h2>
+  <div class="founder">
+    <img class="p" src="images/founder-darrell.jpg" alt="Darrell Seage, founder of Safe Kitchen, in a black chef's jacket in a professional kitchen">
+    <div>
+      <p class="intro" style="color:var(--ink)">Darrell Seage has spent over 15 years in professional kitchens, including Head Chef and Kitchen Manager roles in restaurants, cafés, pan-Asian kitchens and large hospitality operations, including managing multiple food outlets at a holiday park. He has been the person responsible for hygiene standards, inspections, staff training, rotas, ordering, food costs and the daily checks.</p>
+      <blockquote>"Chefs should be able to concentrate on cooking, not paperwork, and owners should have confidence that their kitchens are being managed properly."</blockquote>
+      <div class="status"><b>Where Safe Kitchen is today</b><br>In development, not open to customers, and not yet piloted. Four restaurants will test it before anyone pays. Safe Kitchen is built around the FSA's Safer Food, Better Business system but is not affiliated with or endorsed by the FSA or any local authority.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="cta" style="border-bottom:0"><div class="wrap">
+  <h2>Keep the record. Lose the folder.</h2>
+  <p class="intro">Join early access: free, no card, no commitment. You'll hear first as each part opens, and you can tell us what's wrong with it.</p>
+  <div class="ctas"><a class="btn green" href="#">Join early access</a><a class="btn ghost" href="#">Book a call</a></div>
+</div></section>
+<footer><div class="wrap">Concept mockup for private review · sample data throughout · no feature shown is available to customers yet</div></footer>
+</body>
+</html>

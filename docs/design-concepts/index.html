@@ -1,0 +1,30 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Safe Kitchen Design Directions</title>
+<style>
+/* Layout: a simple index of three concept mockups, one card each, phone first. */
+:root{--bg:#f6f7f7;--fg:#15181b;--muted:#4b545b;--card:#ffffff;--line:#d7dadc;--accent:#0f7c7a;--hot:#ff5a1f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15181b;--fg:#f6f7f7;--muted:#aab3b9;--card:#1f2429;--line:#3b444c;--accent:#7fd3cf;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15181b;--fg:#f6f7f7;--muted:#aab3b9;--card:#1f2429;--line:#3b444c;--accent:#7fd3cf;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:"Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:2.5rem}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.05;margin:0 0 .5rem;text-wrap:balance}
+p.lead{color:var(--muted);max-width:60ch;margin:0 0 2rem}
+.grid{display:grid;gap:1rem}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.3rem;text-decoration:none;color:inherit}
+.card b{font-size:1.25rem;display:block;margin-bottom:.3rem}
+.card span{color:var(--muted);display:block}
+.card em{display:inline-block;margin-top:.8rem;font-style:normal;font-weight:700;color:var(--accent)}
+.card.rec{border:2px solid var(--hot)}
+.card.rec i{font-style:normal;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--hot);font-weight:700}
+.note{margin-top:2rem;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
+</style>
+<div class="wrap">
+  <h1>Three design directions for the Safe Kitchen website</h1>
+  <p class="lead">Private mockups for Stage A review. Each is a homepage sketch with real copy, confirmed prices and the founder story, so the directions can be compared on a phone and a desktop. Every screen uses sample data and nothing shown is open to customers yet.</p>
+  <div class="grid">
+    <a class="card rec" href="concept-a.html"><i>Recommended</i><b>A · Stainless</b><span>The working kitchen. Brushed-steel neutrals, an amber probe-display accent, record-sheet rules, condensed uppercase headlines. Hero: "When the EHO walks in, your records are already open."</span><em>Open Concept A →</em></a>
+    <a class="card" href="concept-b.html"><b>B · The Record</b><span>The SFBB diary, redrawn. Paper white, ink-blue entries, a green "checked" stamp as the only brand colour. Calm, documentary, inspector-desk credibility. Hero: "Every check your inspector will ask for. Recorded as it happens."</span><em>Open Concept B →</em></a>
+    <a class="card" href="concept-c.html"><b>C · Service</b><span>The kitchen's own voice. Deep Safe Kitchen green, a pass-light orange, kitchen-ticket motifs and a very large headline. Hero: "Cook. We'll keep the paperwork."</span><em>Open Concept C →</em></a>
+  </div>
+  <p class="note">The full reasoning, risks and scores are in docs/BRAND_DESIGN_DIRECTIONS.md in the website repository. Fonts load from Google Fonts; if one fails to load, a system fallback is used.</p>
+</div>

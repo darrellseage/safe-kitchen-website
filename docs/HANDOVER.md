@@ -22,6 +22,10 @@
 
 ---
 
+## 1a. Stage A redesign proposal (5 Nov 2026)
+
+A full redesign and competitive-intelligence brief was run on 5 Nov 2026 as **Stage A only** (research, audit, concepts). Nothing on the site changed. Read, in order: `docs/WEBSITE_AUDIT.md`, `docs/COMPETITOR_RESEARCH.md`, `docs/BRAND_DESIGN_DIRECTIONS.md` (recommends Concept A "Stainless"; private mockups at https://claude.ai/artifact/GZAWDBGbKGyHMhHEVKkBPa, sources in `docs/design-concepts/`), `docs/CONVERSION_STRATEGY.md`, `docs/REDESIGN_IMPLEMENTATION_PLAN.md`. **Stage B (implementation) starts only when the owner approves a direction**, on a new branch. Competitor sites could not be fetched directly (network policy); the research is from search excerpts and is dated.
+
 ## 2. Repositories, branches and links
 
 | What | Where |
