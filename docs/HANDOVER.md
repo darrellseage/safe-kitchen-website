@@ -30,7 +30,7 @@ A full redesign and competitive-intelligence brief was run on 5 Nov 2026 as **St
 
 **Read this before the older sections below, which describe the earlier one-page site.**
 
-- **Branch:** `claude/multi-page-restructure` (from `claude/light-redesign`). **Not merged to `main`.** `main` is Vercel's production branch and still holds the one-page site. All Vercel deployments need the owner's Vercel sign-in.
+- **Branch:** `claude/multi-page-restructure`, **merged to `main` on 11 Nov 2026 at the owner's request** ("make it live on safekitchen.uk"). `main` is Vercel's production branch, served at `safekitchen.uk`. **The site is still not public:** Vercel Authentication on all deployments means visitors get a sign-in page until the owner changes Deployment Protection (docs/SETUP_SERVICES.md §4e), and search engines are still told not to index it.
 - **Design:** the original Safe Kitchen design, unchanged. The redesign concepts (A, B, C, A+) were rejected and their documents are records only.
 - **Pages:** `/` (8 sections), `/features` and eight feature pages under `/features/…`, `/how-it-works`, `/pricing`, `/about`, `/faqs`, `/early-access`, plus the four legal pages. One list drives the menus, footer, breadcrumbs and sitemap: `src/content/site-map.ts`. Named sections resolve to their page through `section()` in `src/content/navigation.ts`.
 - **Feature pages:** one template, `src/components/features/feature-page.tsx`, fed by `src/content/feature-pages.ts`; each opens with its existing section and demo (mapped in `src/app/features/[slug]/page.tsx`). Questions come from `src/content/faqs.ts`.
@@ -39,7 +39,7 @@ A full redesign and competitive-intelligence brief was run on 5 Nov 2026 as **St
 - **Tests:** `npm test` (68), `npx tsc --noEmit`, `npm run lint`, `npm run build`, and `scripts/browser-checks/site.js` (every page at 320/375/768/1280px, every link, menus, demos) and `form.js`.
 - **Removed:** the one-page preview exporter (`scripts/preview-export.mjs`, `early-access.preview.ts`), the launch-preview flag, `promises-band`, and the old one-page browser checks.
 - **Decision log:** app D-089.
-- **Next:** the owner reviews the protected Vercel preview and the screenshots in `docs/review/restructure/`; then approves or requests changes; only then merge to `main`.
+- **Next:** before the owner opens the site to the public: legal pages and company details completed, services connected so the form works, the notice-bar wording changed from "Private preview", logo permissions (docs/LOGO_CHECKLIST.md), Vercel Pro plan. See docs/RELEASE_READINESS.md.
 
 ## 2. Repositories, branches and links
 
