@@ -87,8 +87,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  /* Clears the sticky header: taller on phones and tablets, where it carries the row of page links. */
+  scroll-padding-top: 144px;
   -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 1024px) {
+  html { scroll-padding-top: 88px; }
 }
 
 body {

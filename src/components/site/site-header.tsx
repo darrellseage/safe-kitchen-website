@@ -23,7 +23,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
-  const [mobileFeatures, setMobileFeatures] = useState(false);
+  const [mobileFeatures, setMobileFeatures] = useState(true);
   const lastY = useRef(0);
   const dropdown = useRef<HTMLLIElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -154,8 +154,9 @@ export function SiteHeader() {
             <span className="hidden sm:inline">{cta.label}</span>
           </SiteLink>
           <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
-            <Dialog.Trigger className="inline-flex size-12 items-center justify-center rounded-full border-[1.5px] border-line text-ink lg:hidden" aria-label="Open menu">
+            <Dialog.Trigger className="inline-flex h-12 min-w-12 items-center justify-center gap-2 rounded-full border-[1.5px] border-line px-3 text-[15px] font-bold text-ink lg:hidden" aria-label="Open menu">
               <Menu className="size-5" aria-hidden="true" />
+              <span className="hidden sm:inline">Menu</span>
             </Dialog.Trigger>
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/30 backdrop-blur-sm" />
@@ -226,6 +227,36 @@ export function SiteHeader() {
           </Dialog.Root>
         </div>
       </div>
+
+      {/* Phones and tablets: the main pages, always in view under the header (it hides with the header on scroll down). */}
+      <nav aria-label="Pages" className="border-t border-line lg:hidden">
+        <ul className="mx-auto flex w-[min(1200px,100%-16px)] gap-1 overflow-x-auto py-1.5 text-[15px] font-bold whitespace-nowrap text-ink-muted [scrollbar-width:none]">
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileFeatures(true);
+                setMenuOpen(true);
+              }}
+              className={cn("inline-flex min-h-11 items-center gap-1 rounded-full px-3.5 hover:bg-surface", featuresCurrent ? "bg-brand-50 text-brand-900" : "text-ink")}
+            >
+              Features
+              <ChevronDown className="size-4" aria-hidden="true" />
+            </button>
+          </li>
+          {primaryNav.map((item) => (
+            <li key={item.href}>
+              <SiteLink
+                href={item.href}
+                aria-current={isCurrent(item.href, pathname) ? "page" : undefined}
+                className="inline-flex min-h-11 items-center rounded-full px-3.5 hover:bg-surface aria-[current=page]:bg-brand-50 aria-[current=page]:text-brand-900"
+              >
+                {item.label}
+              </SiteLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }

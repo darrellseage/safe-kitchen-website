@@ -22,3 +22,5 @@ export const preLaunchNotice =
   releaseStage === "launched"
     ? null
     : `Private preview. ${siteConfig.name} is being built and tested with pilot kitchens and isn’t available to customers yet. Screens show sample data.`;
+/** The same notice in a few words, for phones. */
+export const preLaunchNoticeShort = releaseStage === "launched" ? null : `Private preview. ${siteConfig.name} isn’t available to customers yet.`;
