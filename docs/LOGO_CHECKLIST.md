@@ -17,12 +17,11 @@ Shown under **"Built on real hospitality experience"**, directly beneath the hom
 | Sibu (Asian Soul Food) | Sibu | `sibu.png` | Shown | Official file; permission not recorded |
 | Haven | Haven Holidays | `haven.png` | Shown | **Not checked against Haven's official logo**; official file and permission from Haven's brand team |
 | Bourne Leisure | Bourne Leisure | `bourne-leisure.png` | Shown | **Not checked against Bourne Leisure's official logo**; official file and permission |
-| Morley's | Morley's | none | **Shown as a name** | No logo was in the supplied image. Owner to confirm which Morley's and supply its logo |
+| Morley's | Morley's | `morleys.png` | Shown | Supplied by the owner on 11 Nov 2026 as a separate image (white on red, with the "MMM… It Tastes Better" line and ® mark). Official file from the business; permission not recorded |
 
 **Things to resolve before the site goes public**
 1. **Authenticity.** The supplied sheet looks like a prepared mock-up rather than files from each company, and it is low resolution (each logo is about 350 to 480 pixels wide). Outside websites are blocked in the working session, so none of the six could be compared with the company's official logo. Replace each with the official file (SVG preferred) from the company.
 2. **Permission.** A logo is the company's trade mark. The site no longer carries a line saying these are past employers rather than customers or partners, so a visitor could read the row as endorsement. Written permission from each company, especially Haven and Bourne Leisure, is the safeguard. This is recorded as an open risk for the owner and the solicitor review.
-3. **Morley's** logo.
 4. **Spellings** of Burrito Bhais / Burritos Bhais and Kluckaroo's / Kluckuroos (the logo spelling is used for the image description).
 
 ## B. Safe Kitchen customers and pilot kitchens

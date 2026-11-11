@@ -4,7 +4,7 @@
  * experience". Customers and pilot kitchens live in `customers` below and are
  * always shown in a separate section, never in this list.
  *
- * Logo files are in public/logos, cropped from the image the owner supplied
+ * Logo files are in public/logos, cropped from the images the owner supplied
  * on 11 Nov 2026 (see docs/LOGO_CHECKLIST.md for sources and what is still
  * outstanding). A company without a logo file is shown as its name.
  */
@@ -25,7 +25,7 @@ export const experience = {
     { name: "Sibu Asian Soul Food", logo: { src: "/logos/sibu.png", width: 474, height: 227, showAt: 52 } },
     { name: "Haven", logo: { src: "/logos/haven.png", width: 450, height: 183, showAt: 46 } },
     { name: "Bourne Leisure", logo: { src: "/logos/bourne-leisure.png", width: 477, height: 153, showAt: 40 } },
-    { name: "Morley’s", logo: null },
+    { name: "Morley’s", logo: { src: "/logos/morleys.png", width: 1020, height: 310, showAt: 50 } },
   ] as ExperienceEntry[],
 };
 

@@ -13,6 +13,8 @@ function Company({ entry }: { entry: ExperienceEntry }) {
           height={entry.logo.height}
           quality={80}
           sizes="200px"
+          loading="eager"
+          className="rounded-lg"
           style={{ height: entry.logo.showAt, width: "auto" }}
         />
       ) : (
