@@ -1,34 +1,31 @@
 /**
  * The founder's professional experience (confirmed by the owner, 11 Nov 2026).
- * These are places Darrell has worked. They are NOT customers, partners or
- * endorsers of Safe Kitchen, and must never be shown under a heading that
- * suggests they are. Customers and pilot kitchens live in `customers` below
- * and are always shown in a separate section.
+ * These are places Darrell has worked, shown under "Built on real hospitality
+ * experience". Customers and pilot kitchens live in `customers` below and are
+ * always shown in a separate section, never in this list.
  *
- * A logo is only shown when `logo` is set, and `logo` may only be set once
- * the row in docs/LOGO_CHECKLIST.md is complete: the right company identified,
- * an official logo file obtained from the company, and permission recorded.
- * Until then the company name is shown as text.
+ * Logo files are in public/logos, cropped from the image the owner supplied
+ * on 11 Nov 2026 (see docs/LOGO_CHECKLIST.md for sources and what is still
+ * outstanding). A company without a logo file is shown as its name.
  */
 export type ExperienceEntry = {
+  /** Used as the logo's text alternative, spelled as on the logo. */
   name: string;
-  /** Official logo file in public/logos, with its real pixel size. Null until approved. */
-  logo: null | { src: string; width: number; height: number };
+  /** Logo file with its real pixel size, and the height to show it at so the row looks even. */
+  logo: null | { src: string; width: number; height: number; showAt: number };
 };
 
 export const experience = {
   heading: "Built on real hospitality experience",
-  support: "Over 15 years working in professional kitchens, from independent restaurants and takeaways to major hospitality operators.",
-  clarification: "Places Darrell has worked. They are not Safe Kitchen customers, and they don’t use, endorse, sponsor or partner with Safe Kitchen.",
-  listLabel: "Companies the founder has worked with",
+  listLabel: "Companies Darrell has worked with",
   companies: [
-    { name: "Haven Holidays", logo: null },
-    { name: "Bourne Leisure", logo: null },
+    { name: "Sapphire", logo: { src: "/logos/sapphire.png", width: 388, height: 319, showAt: 62 } },
+    { name: "Burrito Bhais", logo: { src: "/logos/burrito-bhais.png", width: 350, height: 330, showAt: 66 } },
+    { name: "Kluckaroo’s", logo: { src: "/logos/kluckaroos.png", width: 389, height: 330, showAt: 66 } },
+    { name: "Sibu Asian Soul Food", logo: { src: "/logos/sibu.png", width: 474, height: 227, showAt: 52 } },
+    { name: "Haven", logo: { src: "/logos/haven.png", width: 450, height: 183, showAt: 46 } },
+    { name: "Bourne Leisure", logo: { src: "/logos/bourne-leisure.png", width: 477, height: 153, showAt: 40 } },
     { name: "Morley’s", logo: null },
-    { name: "Kluckuroos", logo: null },
-    { name: "Burritos Bhais", logo: null },
-    { name: "Sibu", logo: null },
-    { name: "Sapphire Café", logo: null },
   ] as ExperienceEntry[],
 };
 

@@ -99,7 +99,7 @@ const name = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'));
   ok((await p.locator('#savings').innerText()).includes('£15,600'), 'pricing page: calculators work');
   t = await text('/');
   ok(t.includes('£14.99') && t.includes('£17.99') && t.includes('£149.99') && t.includes('£179.99'), 'home: prices shown with and without VAT');
-  ok(['Haven Holidays', 'Bourne Leisure', 'Morley’s', 'Kluckuroos', 'Burritos Bhais', 'Sibu', 'Sapphire Café'].every((x) => t.includes(x)) && t.includes('not Safe Kitchen customers'), 'home: seven experience companies and the clarification');
+  ok(await p.locator('section[aria-labelledby=experience-title] ul:not([aria-hidden=true]) li').count() === 7 && await p.locator('section[aria-labelledby=experience-title] ul:not([aria-hidden=true]) img').count() === 6 && t.includes('Built on real hospitality experience'), 'home: experience band with seven companies (six logos, one name)');
   ok(await p.locator('main > section').count() === 8, `home: eight sections (${await p.locator('main > section').count()})`);
   ok(await p.locator('#features a[href^="/features/"]').count() === 8, 'home: eight feature cards, each linking to its page');
   await p.locator('#inspection').getByRole('tab').nth(1).click();

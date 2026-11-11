@@ -1,34 +1,29 @@
 # Logo checklist
 
-> **Rule:** a logo appears on the website only when its row here is complete: the right company identified, an official logo file obtained from the company itself, and permission recorded. Until then the company's name is shown as text in the site's own typeface. Logos are never copied from search results, logo libraries or similarly named businesses.
+> **Rule:** logos are only ever supplied by the owner or by the company itself. They are never copied from search results, logo libraries or similarly named businesses. A company without a supplied logo is shown as its name.
 > **Where it's used:** `src/content/experience.ts` (data) and `src/components/home/experience-band.tsx` (display). To add a logo: put the official file in `public/logos/`, set `logo: { src, width, height }` on that company, and tick the row below.
 
 ## A. Founder professional experience (previous employers)
 
-Shown under **"Built on real hospitality experience"**, directly beneath the homepage hero and on the About page, with the clarification: *"Places Darrell has worked. They are not Safe Kitchen customers, and they don't use, endorse, sponsor or partner with Safe Kitchen."*
+Shown under **"Built on real hospitality experience"**, directly beneath the homepage hero and on the About page, as one scrolling row of logos with no other text (owner instruction, 11 November 2026: no disclaimer and no text under the logos; the heading gives the context).
 
-Confirmed by the owner on 11 November 2026. Status as of that date: **all seven shown as text; no logo files held; no permissions recorded.**
+**Source of the logo files:** all six were cropped from one image the owner supplied on 11 November 2026 (a sheet of six logos, 1774 × 887 pixels). They are stored in `public/logos/`. No file was taken from the internet.
 
-| Company | Which business exactly? | Official logo source | Logo file held | Permission to show logo | Shown as |
-|---|---|---|---|---|---|
-| Haven Holidays | UK holiday park operator (haven.com), part of Bourne Leisure | Haven's press office / brand team | No | **Not requested** | Text |
-| Bourne Leisure | Parent group of Haven (also Butlin's and Warner Hotels) | Bourne Leisure corporate communications | No | **Not requested** | Text |
-| Morley's | **Owner to confirm** which business and branch (there is a well-known south London fried chicken chain of this name, and other unrelated businesses) | The business itself | No | **Not requested** | Text |
-| Kluckuroos | **Owner to confirm** location and website | The business itself | No | **Not requested** | Text |
-| Burritos Bhais | **Owner to confirm** location and website | The business itself | No | **Not requested** | Text |
-| Sibu | **Owner to confirm** location and website (not to be confused with similarly named businesses) | The business itself | No | **Not requested** | Text |
-| Sapphire Café | **Owner to confirm** location and website (a common name) | The business itself | No | **Not requested** | Text |
+| Company (as on the logo) | Owner's wording | File | Status | Outstanding |
+|---|---|---|---|---|
+| Sapphire | Sapphire Café | `sapphire.png` | Shown | Official file from the business; permission not recorded |
+| Burrito Bhais | Burritos Bhais | `burrito-bhais.png` | Shown | Official file; permission not recorded; **spelling differs from the owner's list** |
+| Kluckaroo's | Kluckuroos | `kluckaroos.png` | Shown | Official file; permission not recorded; **spelling differs from the owner's list** |
+| Sibu (Asian Soul Food) | Sibu | `sibu.png` | Shown | Official file; permission not recorded |
+| Haven | Haven Holidays | `haven.png` | Shown | **Not checked against Haven's official logo**; official file and permission from Haven's brand team |
+| Bourne Leisure | Bourne Leisure | `bourne-leisure.png` | Shown | **Not checked against Bourne Leisure's official logo**; official file and permission |
+| Morley's | Morley's | none | **Shown as a name** | No logo was in the supplied image. Owner to confirm which Morley's and supply its logo |
 
-**Why no logos yet**
-- Official logo files could not be obtained in this working session: outside websites are blocked by the session's network settings, and for five of the seven the exact business needs the owner's confirmation first.
-- A company's logo is its trade mark. Stating truthfully that Darrell worked there is fine; showing the logo is safest with a short written permission, especially from large groups (Haven and Bourne Leisure have brand guidelines).
-- Haven and Bourne Leisure are parent and subsidiary. Both are listed because the owner asked for both.
-
-**What the owner needs to do for each company**
-1. Confirm the exact business (website or address) where it's marked above.
-2. Ask for permission to show the logo on the Safe Kitchen website as a past employer (a one-line email is enough), and keep the reply.
-3. Send the official logo file (SVG preferred, or a high-resolution PNG) supplied by the company.
-4. Tell Claude: it will add the file, tick the row and switch that company from text to logo.
+**Things to resolve before the site goes public**
+1. **Authenticity.** The supplied sheet looks like a prepared mock-up rather than files from each company, and it is low resolution (each logo is about 350 to 480 pixels wide). Outside websites are blocked in the working session, so none of the six could be compared with the company's official logo. Replace each with the official file (SVG preferred) from the company.
+2. **Permission.** A logo is the company's trade mark. The site no longer carries a line saying these are past employers rather than customers or partners, so a visitor could read the row as endorsement. Written permission from each company, especially Haven and Bourne Leisure, is the safeguard. This is recorded as an open risk for the owner and the solicitor review.
+3. **Morley's** logo.
+4. **Spellings** of Burrito Bhais / Burritos Bhais and Kluckaroo's / Kluckuroos (the logo spelling is used for the image description).
 
 ## B. Safe Kitchen customers and pilot kitchens
 

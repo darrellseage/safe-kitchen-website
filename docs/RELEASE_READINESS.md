@@ -64,4 +64,4 @@ No invented testimonials, customer numbers, EHO or FSA endorsements, compliance 
 
 ## Other launch tasks (unchanged)
 
-Company and legal details, ICO registration, solicitor review of legal pages and the founding-offer terms, trademark check, real call hours, database / spam protection / email accounts connected, analytics with a consent banner, founder experience logos (see `LOGO_CHECKLIST.md`).
+Company and legal details, ICO registration, solicitor review of legal pages and the founding-offer terms, trademark check, real call hours, database / spam protection / email accounts connected, analytics with a consent banner, founder experience logos: official files and written permissions for all seven, and the Morley's logo (see `LOGO_CHECKLIST.md`).

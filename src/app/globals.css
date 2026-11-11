@@ -145,43 +145,40 @@ h1, h2, h3 {
 }
 
 /*
- * Experience band (components/home/experience-band.tsx). Still and wrapped by
- * default; a slow continuous row from tablet width when motion is allowed.
+ * Experience band (components/home/experience-band.tsx). A slow continuous
+ * row on every screen size; a still, centred, wrapped row with reduced motion.
  */
 .logo-marquee {
   display: flex;
-  flex-wrap: wrap;
   overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 .logo-marquee .logo-track {
-  flex: 1 1 100%;
-  min-width: 0;
-  flex-wrap: wrap;
-  row-gap: 0.25rem;
-}
-.logo-marquee .logo-track[aria-hidden="true"] {
-  display: none;
+  flex: none;
+  animation: logo-scroll 42s linear infinite;
 }
 @keyframes logo-scroll {
   to { transform: translateX(-100%); }
 }
-@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+.logo-marquee:hover .logo-track,
+.logo-marquee:focus-visible .logo-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
   .logo-marquee {
-    flex-wrap: nowrap;
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: none;
+    padding-inline: 20px;
   }
   .logo-marquee .logo-track {
-    flex: none;
-    flex-wrap: nowrap;
-    animation: logo-scroll 38s linear infinite;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    padding-inline-end: 0;
+    animation: none;
   }
   .logo-marquee .logo-track[aria-hidden="true"] {
-    display: flex;
-  }
-  .logo-marquee:hover .logo-track,
-  .logo-marquee:focus-visible .logo-track,
-  .logo-marquee:focus-within .logo-track {
-    animation-play-state: paused;
+    display: none;
   }
 }
 

@@ -82,11 +82,8 @@ describe("release stage", () => {
 
 describe("founder experience and customers", () => {
   it("lists the seven companies the owner confirmed", () => {
-    expect(experience.companies.map((c) => c.name)).toEqual(["Haven Holidays", "Bourne Leisure", "Morley’s", "Kluckuroos", "Burritos Bhais", "Sibu", "Sapphire Café"]);
-  });
-  it("says plainly that they are not customers or endorsers", () => {
-    expect(experience.clarification).toMatch(/not Safe Kitchen customers/);
-    expect(experience.clarification).toMatch(/endorse/);
+    expect(experience.companies.map((c) => c.name)).toEqual(["Sapphire", "Burrito Bhais", "Kluckaroo’s", "Sibu Asian Soul Food", "Haven", "Bourne Leisure", "Morley’s"]);
+    expect(experience.heading).toBe("Built on real hospitality experience");
   });
   it("shows a logo only from the site's own approved files", () => {
     for (const c of experience.companies) if (c.logo) expect(existsSync(join(root, "public", c.logo.src)), c.name).toBe(true);
