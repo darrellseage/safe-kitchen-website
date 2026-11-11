@@ -1,6 +1,5 @@
 import { SiteLink } from "@/components/site/site-link";
 import { ArrowRight, Check, ExternalLink } from "lucide-react";
-import { siteConfig } from "@/config/site";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { hygiene } from "@/content/home";
 import { section } from "@/content/navigation";
@@ -11,7 +10,7 @@ import { hygieneStats } from "@/content/stats";
  * shown only in the private launch preview, marked as being verified.
  */
 export function HygieneRatings() {
-  const stats = hygieneStats.filter((s) => s.verified || siteConfig.launchPreview);
+  const stats = hygieneStats.filter((s) => s.verified);
   return (
     <div id="hygiene-rating" className="mt-16 rounded-3xl border border-line bg-surface-raised p-6 shadow-card sm:p-9">
       <SectionHeading id="hygiene-title" as="h3" title={hygiene.title} accent={hygiene.accent} intro={hygiene.intro} />

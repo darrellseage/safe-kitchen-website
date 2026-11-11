@@ -1,8 +1,9 @@
 # Website restructure plan: multi-page, original design kept
 
-> **Date:** 11 November 2026. **Status:** Stage A (planning only), awaiting the owner's approval. **No website code has changed.**
-> **Owner decision (11 Nov 2026):** Concepts A, B, C and A+ are **not** being used. The original Safe Kitchen design stays: colours, Plus Jakarta Sans, hero, buttons, cards, founder photo, demos and animations. The problem to fix is structure: one page tries to explain everything.
-> **Audited:** branch `claude/light-redesign` at `fcf96c1` (site code identical to `9bf39b0`). `main` (Vercel production branch, sign-in protected) is at `9bf39b0`.
+> **Status (11 Nov 2026):** **Stage B built** on branch `claude/multi-page-restructure`, awaiting the owner's review. Not merged to `main`; nothing public.
+> **Owner decisions (11 Nov 2026):** the original Safe Kitchen design stays (Concepts A, B, C and A+ are not used); the site becomes multi-page; it is written as the finished launch-ready site with **no per-feature labels**, protected by a pre-launch stage (`docs/RELEASE_READINESS.md`); the homepage gains the founder's professional experience band (`docs/LOGO_CHECKLIST.md`), making eight homepage sections. Recorded in the app's decision log as D-089.
+> **What was built:** sections 2–6 below, as planned, with these differences: components stayed in `src/components/home/` (moving them would only have churned imports); the one-page Claude preview exporter was removed because it can't show a multi-page site; `/features/temperature-checks` and `/features/reports` follow the recommendations in section 8. Screenshots of every page: `docs/review/restructure/`.
+> **Measured:** homepage 7,442px on desktop (was 27,250px) and 12,631px on a phone (was 35,257px); 19 pages; 22 distinct internal links, all valid.
 
 ---
 

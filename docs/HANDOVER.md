@@ -26,9 +26,20 @@
 
 A full redesign and competitive-intelligence brief was run on 5 Nov 2026 as **Stage A only** (research, audit, concepts). Nothing on the site changed. Read, in order: `docs/WEBSITE_AUDIT.md`, `docs/COMPETITOR_RESEARCH.md`, `docs/BRAND_DESIGN_DIRECTIONS.md` (Concept A "Stainless" was recommended; the owner chose A refined with C, now **Concept A+ "Kitchen Command"**, proposed 5 Nov 2026 and awaiting approval; private mockups at https://claude.ai/artifact/GZAWDBGbKGyHMhHEVKkBPa, sources in `docs/design-concepts/`), `docs/CONVERSION_STRATEGY.md`, `docs/REDESIGN_IMPLEMENTATION_PLAN.md`. **Stage B (implementation) starts only when the owner approves a direction**, on a new branch. Competitor sites could not be fetched directly (network policy); the research is from search excerpts and is dated.
 
-## 1b. Current plan: multi-page restructure (11 Nov 2026)
+## 1b. Current state: multi-page site built, awaiting review (11 Nov 2026)
 
-The owner rejected all redesign concepts (A, B, C, A+) and is **keeping the original design**. The agreed direction is an information-architecture change: a seven-section homepage plus feature pages, How it works, Pricing, About, FAQs and Early access. Plan, sitemap, navigation and section map: `docs/WEBSITE_RESTRUCTURE_PLAN.md`. **Stage B starts only after the owner approves that plan**, on a new branch `claude/multi-page-restructure`, reviewed through the sign-in-protected Vercel preview. Nothing merges to `main` without approval.
+**Read this before the older sections below, which describe the earlier one-page site.**
+
+- **Branch:** `claude/multi-page-restructure` (from `claude/light-redesign`). **Not merged to `main`.** `main` is Vercel's production branch and still holds the one-page site. All Vercel deployments need the owner's Vercel sign-in.
+- **Design:** the original Safe Kitchen design, unchanged. The redesign concepts (A, B, C, A+) were rejected and their documents are records only.
+- **Pages:** `/` (8 sections), `/features` and eight feature pages under `/features/…`, `/how-it-works`, `/pricing`, `/about`, `/faqs`, `/early-access`, plus the four legal pages. One list drives the menus, footer, breadcrumbs and sitemap: `src/content/site-map.ts`. Named sections resolve to their page through `section()` in `src/content/navigation.ts`.
+- **Feature pages:** one template, `src/components/features/feature-page.tsx`, fed by `src/content/feature-pages.ts`; each opens with its existing section and demo (mapped in `src/app/features/[slug]/page.tsx`). Questions come from `src/content/faqs.ts`.
+- **Launch-ready copy, pre-launch stage:** no "Planned" / "In development" labels. `featureStatus` in `src/config/features.ts` is now the internal readiness record; `releaseStage` stays `pre-launch` until every launch feature is `available` **and** `NEXT_PUBLIC_RELEASE_STAGE=launched`. In pre-launch every page shows the notice bar (`src/components/site/release-notice.tsx`) and buttons say "Get early access" (`src/content/cta.ts`). Checklist: `docs/RELEASE_READINESS.md`.
+- **Founder experience band:** `src/content/experience.ts` + `src/components/home/experience-band.tsx`. Seven companies shown as text until logos and permissions are recorded in `docs/LOGO_CHECKLIST.md`. Customers and pilots are a separate, empty list.
+- **Tests:** `npm test` (68), `npx tsc --noEmit`, `npm run lint`, `npm run build`, and `scripts/browser-checks/site.js` (every page at 320/375/768/1280px, every link, menus, demos) and `form.js`.
+- **Removed:** the one-page preview exporter (`scripts/preview-export.mjs`, `early-access.preview.ts`), the launch-preview flag, `promises-band`, and the old one-page browser checks.
+- **Decision log:** app D-089.
+- **Next:** the owner reviews the protected Vercel preview and the screenshots in `docs/review/restructure/`; then approves or requests changes; only then merge to `main`.
 
 ## 2. Repositories, branches and links
 

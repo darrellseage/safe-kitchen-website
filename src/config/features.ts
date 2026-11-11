@@ -1,8 +1,9 @@
 /**
- * Honest status for every capability mentioned on the site, checked against
- * the app's plan (docs/REDESIGN_PROPOSAL.md §3). Nothing is "available" until
- * it is really live for customers. Change a status here and every label on
- * the site follows.
+ * Internal readiness record for every capability mentioned on the site,
+ * checked against the app's plan. Nothing is "available" until it is really
+ * built, tested and approved by the owner. The site cannot switch to its
+ * "launched" stage until every launch feature here is "available"
+ * (docs/RELEASE_READINESS.md).
  */
 import { siteConfig } from "./site";
 
@@ -56,12 +57,27 @@ export const featureStatus = {
 
 export type FeatureKey = keyof typeof featureStatus;
 
-/** A feature's status, or "available" for everything in a launch preview. */
+/**
+ * True only when every feature in the launch plan is built, tested and marked
+ * "available" above. "Our vision" ideas are not part of the launch.
+ */
+export const releaseReady = (Object.values(featureStatus) as FeatureStatus[]).every((s) => s === "available" || s === "vision");
+
+/** The stage the site is actually in. A "launched" request is refused until releaseReady. */
+export const releaseStage: "pre-launch" | "launched" =
+  siteConfig.requestedStage === "launched" && releaseReady ? "launched" : "pre-launch";
+
+/**
+ * What the public site shows for a feature. The website is launch-ready copy:
+ * launch features carry no label (the pre-launch notice on every page says the
+ * product isn't available yet); only "Our vision" ideas stay labelled.
+ * `featureStatus` above is the internal readiness record.
+ */
 export function statusOf(key: FeatureKey): FeatureStatus {
-  return siteConfig.launchPreview ? "available" : featureStatus[key];
+  return featureStatus[key] === "vision" ? "vision" : "available";
 }
 
-/** Picks the honest wording now, or the launched wording in a launch preview. */
-export function whenLive(now: string, launched: string): string {
-  return siteConfig.launchPreview ? launched : now;
+/** Launch wording is always used; the first argument is kept as a record of the pre-launch wording. */
+export function whenLive(_now: string, launched: string): string {
+  return launched;
 }

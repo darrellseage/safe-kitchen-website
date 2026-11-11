@@ -1,11 +1,8 @@
-import { CheckCircle2, MonitorPlay } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { statusOf, type FeatureKey } from "@/config/features";
+import { MonitorPlay } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StatusChip } from "@/components/ui/status-chip";
 import { roadmap, trust } from "@/content/home";
-import { Faq } from "./faq";
 
 /**
  * "Straight answers" (conversion review R9, R11, R12): what's really built,
@@ -14,10 +11,6 @@ import { Faq } from "./faq";
  * the labels elsewhere on the page.
  */
 export function TrustSection() {
-  // In a launch preview everything is shown as live, so the status lists would be meaningless.
-  const showStatus = !siteConfig.launchPreview;
-  // Group by each feature's current status, so a change in features.ts moves it to the right list.
-  const listed: Array<[FeatureKey, string]> = trust.groups.flatMap((g): Array<[FeatureKey, string]> => g.features);
   return (
     <Section id="straight-answers" labelledBy="trust-title" tone="white">
       <SectionHeading id="trust-title" eyebrow={trust.eyebrow} title={trust.title} accent={trust.accent} intro={trust.intro} />
@@ -27,37 +20,6 @@ export function TrustSection() {
         {trust.demoNote}
       </p>
 
-      {showStatus ? (
-        <div id="status" className="mt-8 grid scroll-mt-24 gap-4 lg:grid-cols-3">
-          <div className="rounded-3xl border border-line bg-surface p-5 sm:p-6">
-            <p className="text-lg font-extrabold">{trust.built.title}</p>
-            <p className="text-sm text-ink-muted">{trust.built.note}</p>
-            <ul className="mt-4 grid gap-2.5">
-              {trust.built.items.map((i) => (
-                <li key={i} className="flex gap-2.5">
-                  <CheckCircle2 className="mt-0.5 size-5 flex-none text-success" aria-hidden="true" />
-                  {i}
-                </li>
-              ))}
-            </ul>
-          </div>
-          {trust.groups.map((g) => (
-            <div key={g.title} className="rounded-3xl border border-line bg-surface p-6">
-              <p className="text-lg font-extrabold">{g.title}</p>
-              <ul className="mt-4 grid gap-2.5">
-                {listed
-                  .filter(([key]) => statusOf(key) === g.status)
-                  .map(([key, label]) => (
-                    <li key={key} className="flex gap-2.5">
-                      <span aria-hidden="true" className={g.status === "planned" ? "mt-2 size-2 flex-none rounded-full bg-accent-600" : "mt-2 size-2 flex-none rounded-full bg-brand-500"} />
-                      {label}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      ) : null}
 
       <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {trust.cards.map((c) => (
@@ -82,7 +44,6 @@ export function TrustSection() {
         <p className="mt-4 max-w-[80ch] text-sm text-ink-muted">{roadmap.note}</p>
       </div>
 
-      <Faq />
     </Section>
   );
 }

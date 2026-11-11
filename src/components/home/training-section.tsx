@@ -9,11 +9,11 @@ import { gbp } from "./sales-bits";
 import { TrainingDemo } from "./training-demo";
 
 /** Staff Training & Certificates: unlimited in-house training, course to phone, certificate saved. */
-export function TrainingSection() {
+export function TrainingSection({ asPage = false }: { asPage?: boolean } = {}) {
   const { comparison } = training;
   return (
     <Section id="training" labelledBy="training-title" tone="mint">
-      <SectionHeading id="training-title" eyebrow={training.eyebrow} status={training.status} title={training.title} accent={training.accent} intro={training.intro} />
+      <SectionHeading id="training-title" as={asPage ? "h1" : "h2"} eyebrow={training.eyebrow} status={training.status} title={training.title} accent={training.accent} intro={training.intro} />
       <PillarLines lines={training.lines} />
 
       <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-surface-raised shadow-card">

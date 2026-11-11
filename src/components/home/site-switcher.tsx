@@ -10,6 +10,8 @@ export function SiteSwitcher() {
   const reduce = useReducedMotion();
   const [siteId, setSiteId] = useState<(typeof siteSnapshots)[number]["id"]>("main");
   const site = siteSnapshots.find((s) => s.id === siteId)!;
+  // Animate only after someone switches site, so the server and browser agree on the first frame.
+  const [ready, setReady] = useState(false);
   const tiles = [
     { label: "Checks today", value: site.checks },
     { label: "On shift now", value: String(site.onShift) },
@@ -28,7 +30,10 @@ export function SiteSwitcher() {
             key={s.id}
             type="button"
             aria-pressed={s.id === siteId}
-            onClick={() => setSiteId(s.id)}
+            onClick={() => {
+              setReady(true);
+              setSiteId(s.id);
+            }}
             className={cn(
               "min-h-11 flex-1 rounded-xl px-3 text-sm font-bold whitespace-nowrap transition-colors",
               s.id === siteId ? "bg-surface-raised text-ink shadow-card" : "text-ink-muted hover:text-ink",
@@ -40,7 +45,7 @@ export function SiteSwitcher() {
       </div>
       <motion.dl
         key={site.id}
-        initial={reduce ? false : { opacity: 0.2, y: 6 }}
+        initial={ready && !reduce ? { opacity: 0.2, y: 6 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         className="mt-4 grid grid-cols-2 gap-2.5"

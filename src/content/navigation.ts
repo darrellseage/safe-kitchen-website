@@ -1,45 +1,50 @@
 /**
- * Links to homepage sections. On the real site they start with "/" so they
- * work from every page. The private preview copy (NEXT_PUBLIC_PREVIEW_EXPORT)
- * is a single page, so its links stay on the page.
+ * Link helpers. The site is now several pages (docs/WEBSITE_RESTRUCTURE_PLAN.md),
+ * so a "section" such as the training demo or the calculators lives on a
+ * specific page. `section(id)` returns the address of that section wherever
+ * it now lives, so components don't need to know which page they are on.
  */
-export const isPreviewExport = process.env.NEXT_PUBLIC_PREVIEW_EXPORT === "1";
-const home = isPreviewExport ? "" : "/";
-export const section = (id: string) => `${home}#${id}`;
-export const homeHref = home || "index.html";
-/** Other pages: "/privacy" on the real site, "privacy.html" in the single-folder preview. */
-export const pageHref = (slug: string) => (home ? `/${slug}` : `${slug}.html`);
+import { featureHref, legalPages, routes } from "./site-map";
 
-/**
- * The link to use for a header or footer item on a given page. The header and
- * footer appear on every page, so in the preview a homepage section link
- * ("#tour") must point back to the homepage ("index.html#tour") when shown on
- * another page (privacy, terms…). Real-site links ("/#tour") already work everywhere.
- */
-export function hrefFor(href: string, pathname: string | null, preview = isPreviewExport): string {
-  return preview && href.startsWith("#") && !isHomePath(pathname) ? `index.html${href}` : href;
+const sectionHome: Record<string, string> = {
+  tour: `${routes.howItWorks}#tour`,
+  "how-it-works": `${routes.howItWorks}#how-it-works`,
+  familiar: `${routes.howItWorks}#familiar`,
+  "built-for-you": `${routes.howItWorks}#built-for-you`,
+  founder: routes.about,
+  "straight-answers": `${routes.about}#straight-answers`,
+  faq: routes.faqs,
+  pricing: routes.pricing,
+  savings: `${routes.pricing}#savings`,
+  "early-access": routes.earlyAccess,
+  "book-a-call": `${routes.earlyAccess}#book-a-call`,
+  "request-demo": `${routes.earlyAccess}#request-demo`,
+  "food-safety": featureHref("temperature-checks"),
+  inspection: featureHref("inspection-mode"),
+  allergens: featureHref("allergens"),
+  training: featureHref("training"),
+  rotas: featureHref("rotas-clock-in"),
+  "clock-in": `${featureHref("rotas-clock-in")}#clock-in`,
+  ordering: featureHref("ordering"),
+  "ai-checker": featureHref("reports"),
+};
+
+/** The address of a named section, on whichever page it lives. */
+export function section(id: string): string {
+  const href = sectionHome[id];
+  if (!href) throw new Error(`Unknown section "${id}": add it to sectionHome in src/content/navigation.ts`);
+  return href;
 }
+export const sectionIds = Object.keys(sectionHome);
 
-export const isHomePath = (pathname: string | null) =>
-  !pathname || pathname === "/" || pathname === "/index" || pathname.endsWith("/index.html");
+export const homeHref = routes.home;
+export const pageHref = (slug: string) => `/${slug}`;
+export const ctaHref = routes.earlyAccess;
+export const legalNav = legalPages;
 
-
-export const mainNav = [
-  { href: section("tour"), label: "Tour" },
-  { href: section("training"), label: "Training" },
-  { href: section("ai-checker"), label: "AI Checker" },
-  { href: section("rotas"), label: "Rotas" },
-  { href: section("ordering"), label: "Ordering" },
-  { href: section("food-safety"), label: "Records" },
-  { href: section("pricing"), label: "Pricing" },
-  { href: section("straight-answers"), label: "FAQ" },
-] as const;
-
-export const legalNav = [
-  { href: pageHref("privacy"), label: "Privacy" },
-  { href: pageHref("cookies"), label: "Cookies" },
-  { href: pageHref("terms"), label: "Terms" },
-  { href: pageHref("accessibility"), label: "Accessibility" },
-] as const;
-
-export const ctaHref = section("early-access");
+export const isHomePath = (pathname: string | null) => !pathname || pathname === "/";
+/** True when a menu link points at the page being viewed (ignores any #section). */
+export const isCurrent = (href: string, pathname: string | null) => {
+  const path = href.split("#")[0];
+  return path === "/" ? isHomePath(pathname) : pathname === path || !!pathname?.startsWith(`${path}/`);
+};

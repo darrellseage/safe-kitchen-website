@@ -144,6 +144,47 @@ h1, h2, h3 {
   animation: tour-progress linear both;
 }
 
+/*
+ * Experience band (components/home/experience-band.tsx). Still and wrapped by
+ * default; a slow continuous row from tablet width when motion is allowed.
+ */
+.logo-marquee {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.logo-marquee .logo-track {
+  flex: 1 1 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
+.logo-marquee .logo-track[aria-hidden="true"] {
+  display: none;
+}
+@keyframes logo-scroll {
+  to { transform: translateX(-100%); }
+}
+@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .logo-marquee {
+    flex-wrap: nowrap;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .logo-marquee .logo-track {
+    flex: none;
+    flex-wrap: nowrap;
+    animation: logo-scroll 38s linear infinite;
+  }
+  .logo-marquee .logo-track[aria-hidden="true"] {
+    display: flex;
+  }
+  .logo-marquee:hover .logo-track,
+  .logo-marquee:focus-visible .logo-track,
+  .logo-marquee:focus-within .logo-track {
+    animation-play-state: paused;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

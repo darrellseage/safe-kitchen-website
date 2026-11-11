@@ -5,7 +5,6 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { calculator, hygiene, numbers, valueCalc } from "@/content/home";
 import { PaperworkCalculator } from "./calculator";
-import { ComparisonPart } from "./comparison-section";
 import { RevenueCalculator } from "./revenue-calculator";
 import { ValueCalculator } from "./value-calculator";
 import { DemoReveal } from "./demo-reveal";
@@ -42,7 +41,6 @@ export function YourNumbers() {
           ))}
         </Tabs.Root>
       </DemoReveal>
-      <ComparisonPart />
     </Section>
   );
 }

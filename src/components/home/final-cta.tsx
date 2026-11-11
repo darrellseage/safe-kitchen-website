@@ -6,12 +6,12 @@ import { finalCta, hero, promises } from "@/content/home";
 import { EarlyAccessForm } from "./early-access-form";
 
 /** Final call to action: early access, a demo or a booked call, with the price restated. */
-export function FinalCta() {
+export function FinalCta({ asPage = false }: { asPage?: boolean } = {}) {
   return (
     <Section id="early-access" labelledBy="final-title" tone="forest">
       <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <SectionHeading id="final-title" size="xl" title={finalCta.title} accent={finalCta.accent} intro={finalCta.intro} />
+          <SectionHeading id="final-title" as={asPage ? "h1" : "h2"} size="xl" title={finalCta.title} accent={finalCta.accent} intro={finalCta.intro} />
           <ul className="mt-6 flex flex-wrap gap-2">
             {finalCta.freePoints.map((p) => (
               <li key={p} className="rounded-full bg-white/10 px-3.5 py-1.5 font-bold">

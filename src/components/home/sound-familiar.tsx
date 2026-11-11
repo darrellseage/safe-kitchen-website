@@ -5,7 +5,6 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { familiar } from "@/content/home";
 import { images, type StockImage } from "@/content/images";
-import { HygieneRatings } from "./hygiene-ratings";
 
 const visuals: Array<StockImage | "folders"> = [images.plating, "folders", images.owner];
 
@@ -47,7 +46,6 @@ export function SoundFamiliar() {
           );
         })}
       </ul>
-      <HygieneRatings />
     </Section>
   );
 }

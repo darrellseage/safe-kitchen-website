@@ -1,14 +1,16 @@
+import type { ReactNode } from "react";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 import { DemoReveal } from "./demo-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { inspection } from "@/content/home";
 import { InspectionModeDemo } from "./inspection-mode-demo";
 
-/** Inspection: a short real-time story, then Inspection Mode with every record in one place. Second half of the food safety section. */
-export function InspectionPart() {
+/** Inspection: a short real-time story, then Inspection Mode with every record in one place. */
+export function InspectionSection({ asPage = false, children }: { asPage?: boolean; children?: ReactNode } = {}) {
   return (
-    <div id="inspection" className="mt-20 scroll-mt-24 border-t border-line pt-16">
-      <SectionHeading id="eho-title" as="h3" eyebrow={inspection.eyebrow} status={inspection.status} title={inspection.title} accent={inspection.accent} intro={inspection.intro} />
+    <Section id="inspection" labelledBy="eho-title" tone="mint">
+      <SectionHeading id="eho-title" as={asPage ? "h1" : "h2"} eyebrow={inspection.eyebrow} status={inspection.status} title={inspection.title} accent={inspection.accent} intro={inspection.intro} />
       <div className="mt-12 grid grid-cols-[minmax(0,1fr)] items-start gap-12 lg:grid-cols-[0.75fr_1.25fr]">
         <div>
           <ol className="grid">
@@ -31,6 +33,7 @@ export function InspectionPart() {
           <InspectionModeDemo />
         </DemoReveal>
       </div>
-    </div>
+      {children}
+    </Section>
   );
 }

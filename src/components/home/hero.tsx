@@ -11,6 +11,7 @@ import { hero } from "@/content/home";
 import { founder } from "@/content/founder";
 import { formatGBP, pricing } from "@/config/pricing";
 import { ctaHref, section } from "@/content/navigation";
+import { routes } from "@/content/site-map";
 
 /** Section 1: what it is, who it's for, the price, and the founder line, all on the first screen. */
 export function Hero() {
@@ -48,7 +49,7 @@ export function Hero() {
             <ButtonLink href={ctaHref} className="max-sm:w-full">
               {hero.primary}
             </ButtonLink>
-            <ButtonLink href={section("tour")} variant="secondary" className="max-sm:w-full">
+            <ButtonLink href={routes.howItWorks} variant="secondary" className="max-sm:w-full">
               <PlayCircle className="size-5" aria-hidden="true" />
               {hero.secondary}
             </ButtonLink>

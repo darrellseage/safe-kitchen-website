@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SiteFooter } from "@/components/site/site-footer";
+import { ReleaseNotice } from "@/components/site/release-notice";
 import { SiteHeader } from "@/components/site/site-header";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <ReleaseNotice />
         <SiteHeader />
         {children}
         <SiteFooter />

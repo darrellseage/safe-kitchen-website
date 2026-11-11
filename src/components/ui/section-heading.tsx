@@ -26,8 +26,8 @@ export function SectionHeading({
   status?: FeatureKey;
   className?: string;
   size?: "lg" | "xl";
-  /** h3 when the heading sits inside another section. */
-  as?: "h2" | "h3";
+  /** h1 when the section opens a page; h3 when the heading sits inside another section. */
+  as?: "h1" | "h2" | "h3";
 }) {
   return (
     <div className={cn("max-w-3xl", className)}>

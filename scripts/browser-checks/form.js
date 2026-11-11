@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const URL = process.argv[2] || 'http://localhost:3000/';
+const URL = (process.argv[2] || 'http://localhost:3000') .replace(/\/$/, '') + '/early-access';
 let fails = 0;
 const ok = (c, m) => { if (!c) fails++; console.log((c ? 'PASS ' : 'FAIL ') + m); };
 async function open(b, hash = '') {

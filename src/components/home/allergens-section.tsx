@@ -7,10 +7,10 @@ import { AllergenDemo } from "./allergen-demo";
 import { DemoReveal } from "./demo-reveal";
 
 /** Allergen menus (app D-088): what's at stake, with sources, then how Safe Kitchen helps and a filter demo. */
-export function AllergensSection() {
+export function AllergensSection({ asPage = false }: { asPage?: boolean } = {}) {
   return (
     <Section id="allergens" labelledBy="allergens-title" tone="seafoam">
-      <SectionHeading id="allergens-title" eyebrow={allergens.eyebrow} status={allergens.status} title={allergens.title} accent={allergens.accent} intro={allergens.intro} />
+      <SectionHeading id="allergens-title" as={asPage ? "h1" : "h2"} eyebrow={allergens.eyebrow} status={allergens.status} title={allergens.title} accent={allergens.accent} intro={allergens.intro} />
 
       <p className="mt-10 text-[13px] font-bold tracking-[0.08em] text-brand-700 uppercase">{allergens.factsTitle}</p>
       <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

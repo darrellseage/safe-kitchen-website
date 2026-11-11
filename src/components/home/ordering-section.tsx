@@ -9,10 +9,10 @@ import { Catches, ExampleLine, gbp } from "./sales-bits";
 import { WastePart } from "./waste-section";
 
 /** Smart Supplier Ordering with the duplicate-order check, and what it means for food waste. */
-export function OrderingSection() {
+export function OrderingSection({ asPage = false }: { asPage?: boolean } = {}) {
   return (
     <Section id="ordering" labelledBy="ordering-title" tone="forest">
-      <SectionHeading id="ordering-title" eyebrow={ordering.eyebrow} status={ordering.status} title={ordering.title} accent={ordering.accent} intro={ordering.intro} />
+      <SectionHeading id="ordering-title" as={asPage ? "h1" : "h2"} eyebrow={ordering.eyebrow} status={ordering.status} title={ordering.title} accent={ordering.accent} intro={ordering.intro} />
       <PillarLines lines={ordering.lines} />
       <Catches label="AI checks help you catch" items={ordering.catches} />
       <ExampleLine

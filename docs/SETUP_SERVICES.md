@@ -70,7 +70,7 @@ The form's server code runs in Washington DC (`iad1`) by default; the privacy no
 ### 4d. Add the service keys
 Only after sections 1 to 3 above are set up.
 1. **Settings → Environment Variables**. Add each name from `.env.example` with its value, one at a time. Tick **Production** and **Preview**.
-2. Never add `NEXT_PUBLIC_LAUNCH_PREVIEW`, `NEXT_PUBLIC_SHOW_FOUNDING_OFFER`, `PREVIEW_EXPORT` or `NEXT_PUBLIC_PREVIEW_EXPORT`: those are only for the private review copy.
+2. Never add `NEXT_PUBLIC_RELEASE_STAGE` or `NEXT_PUBLIC_SHOW_FOUNDING_OFFER` until the owner approves the launch (see `docs/RELEASE_READINESS.md`). Without them the site stays in its pre-launch stage.
 3. **Redeploy** the newest build, then test the form while signed in.
 
 ### Domain connected (done 2 November 2026)

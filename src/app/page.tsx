@@ -1,60 +1,35 @@
-import { AiCheckerSection } from "@/components/home/ai-checker-section";
-import { AllergensSection } from "@/components/home/allergens-section";
-import { AudiencesSection } from "@/components/home/audiences-section";
+import { FeatureOverview } from "@/components/features/feature-overview";
+import { ReplacesSection } from "@/components/home/comparison-section";
+import { CustomerBand, ExperienceBand } from "@/components/home/experience-band";
 import { FinalCta } from "@/components/home/final-cta";
-import { FoodSafety } from "@/components/home/food-safety";
 import { FounderStory } from "@/components/home/founder-story";
-import { GuidedTour } from "@/components/home/guided-tour";
 import { Hero } from "@/components/home/hero";
-import { OrderingSection } from "@/components/home/ordering-section";
+import { InspectionSection } from "@/components/home/inspection-story";
 import { Pricing } from "@/components/home/pricing";
-import { PromisesBand } from "@/components/home/promises-band";
-import { RotasSection } from "@/components/home/rotas-section";
-import { SoundFamiliar } from "@/components/home/sound-familiar";
-import { TrainingSection } from "@/components/home/training-section";
-import { Transformation } from "@/components/home/transformation";
-import { TrustSection } from "@/components/home/trust-section";
-import { YourNumbers } from "@/components/home/your-numbers";
-import { faq } from "@/content/home";
-
-// FAQ structured data: only facts stated on the page.
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.items.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: { "@type": "Answer", text: item.a },
-  })),
-};
+import { SiteLink } from "@/components/site/site-link";
+import { featureHref } from "@/content/site-map";
 
 /**
- * Homepage, in the order approved in docs/CONVERSION_REVIEW.md §3 (1 Nov 2026):
- * first impression, tour and founder near the top, then the problem, the five
- * strongest selling points (plus allergen menus, app D-088), who it's for, the numbers, pricing, straight
- * answers and the sign-up form. Every interactive demo is kept.
+ * Homepage (docs/WEBSITE_RESTRUCTURE_PLAN.md): hero, the founder's experience,
+ * Inspection Mode, all features, what Safe Kitchen replaces, the founder,
+ * pricing and the call to action. Detail lives on the feature pages.
  */
 export default function HomePage() {
   return (
     <main id="main">
       <Hero />
-      <PromisesBand />
-      <GuidedTour />
-      <FounderStory />
-      <SoundFamiliar />
-      <Transformation />
-      <TrainingSection />
-      <AiCheckerSection />
-      <RotasSection />
-      <OrderingSection />
-      <FoodSafety />
-      <AllergensSection />
-      <AudiencesSection />
-      <YourNumbers />
-      <Pricing />
-      <TrustSection />
+      <ExperienceBand />
+      <InspectionSection>
+        <SiteLink href={featureHref("inspection-mode")} className="mt-8 inline-flex min-h-12 items-center font-bold text-accent-600 hover:text-accent-700">
+          More about Inspection Mode →
+        </SiteLink>
+      </InspectionSection>
+      <FeatureOverview />
+      <ReplacesSection />
+      <FounderStory compact />
+      <CustomerBand />
+      <Pricing compact />
       <FinalCta />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
     </main>
   );
 }

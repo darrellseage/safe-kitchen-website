@@ -13,12 +13,18 @@ export const siteConfig = {
    */
   allowIndexing: false,
   /**
-   * Launch preview: shows the site as it will look once every feature is live
-   * (no status labels, launched wording). For private review only, so the
-   * owner can see the finished site. Never turn this on for the public site
-   * until the features really are live. Set by NEXT_PUBLIC_LAUNCH_PREVIEW=1.
+   * Release stage (owner decision 11 Nov 2026). The website is built as the
+   * finished, launch-ready site with launch wording and no per-feature labels.
+   * Until launch it runs as "pre-launch": every page carries one notice saying
+   * Safe Kitchen is not yet available, and calls to action register interest.
+   * "launched" removes the notice and points calls to action at the app's
+   * sign-up. It only takes effect when NEXT_PUBLIC_RELEASE_STAGE=launched AND
+   * every launch feature in src/config/features.ts is marked "available"
+   * (see releaseReady there and docs/RELEASE_READINESS.md).
    */
-  launchPreview: process.env.NEXT_PUBLIC_LAUNCH_PREVIEW === "1",
+  requestedStage: process.env.NEXT_PUBLIC_RELEASE_STAGE === "launched" ? "launched" : "pre-launch",
+  /** The app's sign-up address, used by calls to action once launched. Not available yet. */
+  appSignUpUrl: null as string | null,
   /** Shown in the footer and privacy policy once supplied by the owner. */
   company: null as null | { legalName: string; address: string; companyNumber?: string; icoNumber?: string; email: string },
 } as const;

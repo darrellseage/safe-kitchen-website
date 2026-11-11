@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { Check, Quote } from "lucide-react";
+import { ArrowRight, Check, Quote } from "lucide-react";
+import { SiteLink } from "@/components/site/site-link";
+import { routes } from "@/content/site-map";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { founder } from "@/content/founder";
 
 /** The founder's real kitchen experience, with his own photo. */
-export function FounderStory() {
+export function FounderStory({ asPage = false, compact = false }: { asPage?: boolean; compact?: boolean } = {}) {
   return (
     <Section id="founder" labelledBy="founder-title" tone="mint">
       <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-12 lg:grid-cols-[0.8fr_1.2fr]">
@@ -34,9 +36,9 @@ export function FounderStory() {
         </div>
 
         <div>
-          <SectionHeading id="founder-title" eyebrow={founder.eyebrow} title={founder.title} accent={founder.accent} />
+          <SectionHeading id="founder-title" as={asPage ? "h1" : "h2"} eyebrow={founder.eyebrow} title={founder.title} accent={founder.accent} />
           <div className="mt-6 grid max-w-[62ch] gap-4 text-lg text-ink-muted">
-            {founder.story.map((p) => (
+            {(compact ? founder.story.slice(0, 2) : founder.story).map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
@@ -49,15 +51,24 @@ export function FounderStory() {
               </footer>
             </div>
           </blockquote>
-          <p className="mt-8 text-[13px] font-bold tracking-[0.08em] text-brand-700 uppercase">{founder.responsibilitiesTitle}</p>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {founder.responsibilities.map((r) => (
-              <li key={r} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-[14.5px] font-semibold">
-                <Check className="size-4 text-brand-500" aria-hidden="true" />
-                {r}
-              </li>
-            ))}
-          </ul>
+          {compact ? (
+            <SiteLink href={routes.about} className="mt-6 inline-flex min-h-12 items-center gap-1.5 font-bold text-accent-600 hover:text-accent-700">
+              Read Darrell’s story
+              <ArrowRight className="size-4 rtl:rotate-180" aria-hidden="true" />
+            </SiteLink>
+          ) : (
+            <>
+            <p className="mt-8 text-[13px] font-bold tracking-[0.08em] text-brand-700 uppercase">{founder.responsibilitiesTitle}</p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {founder.responsibilities.map((r) => (
+                <li key={r} className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-[14.5px] font-semibold">
+                  <Check className="size-4 text-brand-500" aria-hidden="true" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+            </>
+          )}
         </div>
       </div>
     </Section>

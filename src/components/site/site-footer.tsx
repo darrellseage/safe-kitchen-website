@@ -1,21 +1,37 @@
 import { siteConfig } from "@/config/site";
-import { legalNav, mainNav } from "@/content/navigation";
+import { legalNav } from "@/content/navigation";
+import { featureHref, featurePages, primaryNav, routes } from "@/content/site-map";
 import { Logo } from "./logo";
 import { SiteLink } from "./site-link";
+
+const featureLinks = featurePages.map((f) => ({ href: featureHref(f.slug), label: f.name }));
+const companyLinks = [...primaryNav, { href: routes.earlyAccess, label: "Early access" }];
 
 export function SiteFooter() {
   const { company } = siteConfig;
   return (
     <footer className="border-t border-line bg-surface">
-      <div className="mx-auto grid w-[min(1200px,100%-40px)] gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid w-[min(1200px,100%-40px)] gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1.2fr_1fr_1fr]">
         <div className="grid content-start gap-4">
           <Logo />
           <p className="max-w-[34ch] text-lg font-bold tracking-tight text-brand-900">{siteConfig.tagline}</p>
         </div>
-        <nav aria-label="Footer">
-          <h2 className="mb-3 text-[13px] font-bold tracking-[0.08em] text-ink-muted uppercase">Explore</h2>
+        <nav aria-label="Features">
+          <h2 className="mb-3 text-[13px] font-bold tracking-[0.08em] text-ink-muted uppercase">Features</h2>
           <ul className="grid gap-1">
-            {mainNav.map((item) => (
+            {featureLinks.map((item) => (
+              <li key={item.href}>
+                <SiteLink href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
+                  {item.label}
+                </SiteLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Company">
+          <h2 className="mb-3 text-[13px] font-bold tracking-[0.08em] text-ink-muted uppercase">Company</h2>
+          <ul className="grid gap-1">
+            {companyLinks.map((item) => (
               <li key={item.href}>
                 <SiteLink href={item.href} className="inline-flex min-h-10 items-center hover:text-accent-600">
                   {item.label}

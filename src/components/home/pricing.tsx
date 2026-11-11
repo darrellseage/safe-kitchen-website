@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { pricingCopy } from "@/content/home";
 import { ctaHref, section } from "@/content/navigation";
+import { routes } from "@/content/site-map";
 import { minutesPerWeekToCover } from "@/lib/value";
 import { cn } from "@/lib/cn";
 
@@ -12,7 +13,7 @@ import { cn } from "@/lib/cn";
  * Pricing: one plan per site, everything included, unlimited staff (app D-074,
  * D-076, D-079). Monthly and annual side by side, with and without VAT.
  */
-export function Pricing() {
+export function Pricing({ asPage = false, compact = false }: { asPage?: boolean; compact?: boolean } = {}) {
   const saving = annualSaving(pricing.monthly, pricing.annual);
   const plans = [
     { label: pricingCopy.monthlyLabel, price: pricing.monthly, per: pricingCopy.perMonth, best: false },
@@ -22,7 +23,7 @@ export function Pricing() {
 
   return (
     <Section id="pricing" labelledBy="pricing-title" tone="fern">
-      <SectionHeading id="pricing-title" eyebrow={pricingCopy.eyebrow} title={pricingCopy.title} accent={pricingCopy.accent} intro={pricingCopy.intro} />
+      <SectionHeading id="pricing-title" as={asPage ? "h1" : "h2"} eyebrow={pricingCopy.eyebrow} title={pricingCopy.title} accent={pricingCopy.accent} intro={pricingCopy.intro} />
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {plans.map((p) => (
@@ -53,74 +54,83 @@ export function Pricing() {
         ))}
       </div>
 
-      {foundingOffer.announce ? (
-        <aside className="mt-4 flex gap-4 rounded-3xl bg-deep p-6 text-white sm:p-7">
-          <BadgeCheck className="mt-0.5 size-7 flex-none text-accent-300" aria-hidden="true" />
-          <div>
-            <p className="text-xl font-extrabold">{pricingCopy.founding.title}</p>
-            <p className="mt-1 text-white/85">{pricingCopy.founding.body.replace("{limit}", String(foundingOffer.limit))}</p>
-            <p className="mt-2 text-[13px] text-white/70">{pricingCopy.founding.terms}</p>
-          </div>
-        </aside>
-      ) : null}
+      {compact ? null : (
+        <>
+          {foundingOffer.announce ? (
+            <aside className="mt-4 flex gap-4 rounded-3xl bg-deep p-6 text-white sm:p-7">
+              <BadgeCheck className="mt-0.5 size-7 flex-none text-accent-300" aria-hidden="true" />
+              <div>
+                <p className="text-xl font-extrabold">{pricingCopy.founding.title}</p>
+                <p className="mt-1 text-white/85">{pricingCopy.founding.body.replace("{limit}", String(foundingOffer.limit))}</p>
+                <p className="mt-2 text-[13px] text-white/70">{pricingCopy.founding.terms}</p>
+              </div>
+            </aside>
+          ) : null}
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-        <div className="grid gap-6 rounded-3xl border border-line bg-surface-raised p-6 sm:p-8">
-          <div>
-            <p className="text-lg font-extrabold">{pricingCopy.includesTitle}</p>
-            <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {pricing.includes.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <Check className="mt-0.5 size-5 flex-none text-brand-500" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="border-t border-line pt-6">
-            <p className="text-lg font-extrabold">{pricingCopy.neverPayTitle}</p>
-            <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-              {pricing.neverPay.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <X className="mt-0.5 size-5 flex-none text-control-border" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="flex gap-3 rounded-2xl bg-brand-50 p-4 text-[15.5px]">
-            <Clock3 className="mt-0.5 size-5 flex-none text-brand-700" aria-hidden="true" />
-            <span>
-              {pricingCopy.coverLine.replace("{minutes}", String(Math.ceil(minutesPerWeekToCover(pricing.annual, 15))))}{" "}
-              <span className="text-[13px] text-ink-muted">{pricingCopy.coverNote}</span>
-            </span>
-          </p>
-        </div>
+          <div className="mt-4 grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
+            <div className="grid gap-6 rounded-3xl border border-line bg-surface-raised p-6 sm:p-8">
+              <div>
+                <p className="text-lg font-extrabold">{pricingCopy.includesTitle}</p>
+                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                  {pricing.includes.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <Check className="mt-0.5 size-5 flex-none text-brand-500" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border-t border-line pt-6">
+                <p className="text-lg font-extrabold">{pricingCopy.neverPayTitle}</p>
+                <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                  {pricing.neverPay.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <X className="mt-0.5 size-5 flex-none text-control-border" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="flex gap-3 rounded-2xl bg-brand-50 p-4 text-[15.5px]">
+                <Clock3 className="mt-0.5 size-5 flex-none text-brand-700" aria-hidden="true" />
+                <span>
+                  {pricingCopy.coverLine.replace("{minutes}", String(Math.ceil(minutesPerWeekToCover(pricing.annual, 15))))}{" "}
+                  <span className="text-[13px] text-ink-muted">{pricingCopy.coverNote}</span>
+                </span>
+              </p>
+            </div>
 
-        <div className="grid content-start gap-4 rounded-3xl border border-line bg-surface-raised p-6 sm:p-8">
-          <h3 className="text-[22px] font-extrabold tracking-[-0.02em]">{pricingCopy.multiTitle}</h3>
-          <p className="text-lg font-semibold">
-            {pricingCopy.multiExample.replace("{sites}", String(sites)).replace("{amount}", formatGBP(sitesCost(sites)))}
-          </p>
-          <ul className="grid gap-2.5">
-            {pricing.multiSite.map((item) => (
-              <li key={item} className="flex gap-3">
-                <Check className="mt-0.5 size-5 flex-none text-brand-500" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-          <p className="text-ink-muted">{pricingCopy.multiBody}</p>
-          <ButtonLink href={section("book-a-call")} variant="secondary" className="w-full sm:w-fit">
-            Book a call
-          </ButtonLink>
-        </div>
-      </div>
+            <div className="grid content-start gap-4 rounded-3xl border border-line bg-surface-raised p-6 sm:p-8">
+              <h3 className="text-[22px] font-extrabold tracking-[-0.02em]">{pricingCopy.multiTitle}</h3>
+              <p className="text-lg font-semibold">
+                {pricingCopy.multiExample.replace("{sites}", String(sites)).replace("{amount}", formatGBP(sitesCost(sites)))}
+              </p>
+              <ul className="grid gap-2.5">
+                {pricing.multiSite.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <Check className="mt-0.5 size-5 flex-none text-brand-500" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-ink-muted">{pricingCopy.multiBody}</p>
+              <ButtonLink href={section("book-a-call")} variant="secondary" className="w-full sm:w-fit">
+                Book a call
+              </ButtonLink>
+            </div>
+          </div>
 
+        </>
+      )}
       <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
         <ButtonLink href={ctaHref} className="max-sm:w-full">
           Get early access
         </ButtonLink>
+        {compact ? (
+          <ButtonLink href={routes.pricing} variant="secondary" className="max-sm:w-full">
+            See full pricing
+          </ButtonLink>
+        ) : null}
         <p className="max-w-[60ch] text-[15px] font-semibold text-brand-900">{pricingCopy.earlyNote}</p>
       </div>
     </Section>

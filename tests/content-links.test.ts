@@ -1,49 +1,99 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { featureStatus, releaseReady, releaseStage, statusOf, type FeatureKey } from "@/config/features";
+import { cta, preLaunchNotice } from "@/content/cta";
+import { customers, experience } from "@/content/experience";
+import { faqs, faqsFor, faqTopics } from "@/content/faqs";
+import { featureContent } from "@/content/feature-pages";
 import { founder } from "@/content/founder";
 import { buyers, tour } from "@/content/home";
-import { hrefFor, mainNav } from "@/content/navigation";
+import { isCurrent, section, sectionIds } from "@/content/navigation";
+import { allPaths, featurePages, primaryNav, routes } from "@/content/site-map";
 
-// Every id="…" used by a homepage component.
-const dir = join(process.cwd(), "src/components/home");
+const root = process.cwd();
+// Every id="…" used by a component, to check #anchors really exist.
 const ids = new Set(
-  readdirSync(dir)
-    .filter((f) => f.endsWith(".tsx"))
-    .flatMap((f) => [...readFileSync(join(dir, f), "utf8").matchAll(/\bid="([a-z0-9-]+)"/g)].map((m) => m[1])),
+  ["src/components/home", "src/components/features", "src/components/ui"].flatMap((dir) =>
+    readdirSync(join(root, dir))
+      .filter((f) => f.endsWith(".tsx"))
+      .flatMap((f) => [...readFileSync(join(root, dir, f), "utf8").matchAll(/\bid="([a-z0-9-]+)"/g)].map((m) => m[1])),
+  ),
 );
+const pageFile = (path: string) => {
+  if (path === "/") return "src/app/page.tsx";
+  if (path.startsWith("/features/")) return "src/app/features/[slug]/page.tsx";
+  return `src/app${path}/page.tsx`;
+};
+const checkHref = (href: string) => {
+  const [path, anchor] = href.split("#");
+  expect(allPaths, href).toContain(path);
+  if (anchor) expect(ids, href).toContain(anchor);
+};
 
-describe("homepage links", () => {
-  it("every tour step links to a section that exists", () => {
-    for (const step of tour.steps) expect(ids, step.demo).toContain(step.demo);
+describe("pages and links", () => {
+  it("every page in the site map has a page file", () => {
+    for (const path of allPaths) expect(existsSync(join(root, pageFile(path))), path).toBe(true);
   });
-  it("every buyer tab links to a section that exists", () => {
-    for (const tab of buyers.tabs) for (const h of tab.helps) if (h.href) expect(ids, h.href).toContain(h.href);
+  it("has the eight agreed feature pages, each with content", () => {
+    expect(featurePages.map((f) => f.slug)).toEqual(["food-safety", "inspection-mode", "temperature-checks", "allergens", "training", "rotas-clock-in", "ordering", "reports"]);
+    for (const f of featurePages) {
+      const c = featureContent[f.slug];
+      expect(c.metaTitle.length, f.slug).toBeGreaterThan(5);
+      expect(c.owners.length && c.team.length && c.shift.steps.length && c.records.items.length && c.goodToKnow.length, f.slug).toBeGreaterThan(0);
+      for (const r of c.related) expect(featurePages.some((p) => p.slug === r) && r !== f.slug, `${f.slug} → ${r}`).toBe(true);
+      expect(faqsFor(f.slug).length, `${f.slug} questions`).toBeGreaterThan(0);
+    }
   });
-  it("every menu item links to a section that exists", () => {
-    for (const item of mainNav) expect(ids, item.href).toContain(item.href.split("#")[1]);
+  it("every named section points at a real page and anchor", () => {
+    for (const id of sectionIds) checkHref(section(id));
+  });
+  it("tour steps, buyer tabs and the menu link to real places", () => {
+    for (const step of tour.steps) checkHref(section(step.demo));
+    for (const tab of buyers.tabs) for (const h of tab.helps) if (h.href) checkHref(section(h.href));
+    for (const item of primaryNav) checkHref(item.href);
+  });
+  it("marks the current page in the menu", () => {
+    expect(isCurrent(routes.features, "/features/allergens")).toBe(true);
+    expect(isCurrent(routes.pricing, "/pricing")).toBe(true);
+    expect(isCurrent(routes.pricing, "/")).toBe(false);
+    expect(isCurrent("/", "/")).toBe(true);
+  });
+  it("every FAQ belongs to a known topic", () => {
+    for (const f of faqs) expect(faqTopics).toContain(f.topic);
+    expect(new Set(faqs.map((f) => f.q)).size).toBe(faqs.length);
   });
 });
 
-describe("header and footer links on every page", () => {
-  it("real site: section links start with / and work from any page", () => {
-    expect(hrefFor("/#tour", "/privacy", false)).toBe("/#tour");
-    expect(hrefFor("/#tour", "/", false)).toBe("/#tour");
-    expect(hrefFor("/privacy", "/terms", false)).toBe("/privacy");
+describe("release stage", () => {
+  it("stays pre-launch until every launch feature is built and approved", () => {
+    expect(releaseReady).toBe(false);
+    expect(releaseStage).toBe("pre-launch");
+    expect(preLaunchNotice).toMatch(/isn’t available to customers yet/);
   });
-  it("preview: section links stay on the homepage and lead back to it from other pages", () => {
-    expect(hrefFor("#tour", "/", true)).toBe("#tour");
-    expect(hrefFor("#pricing", "/index.html", true)).toBe("#pricing");
-    for (const page of ["/privacy", "/cookies", "/terms", "/accessibility", "/privacy.html"])
-      expect(hrefFor("#early-access", page, true)).toBe("index.html#early-access");
+  it("calls to action register interest on this site, never a payment", () => {
+    expect(cta.href).toBe(routes.earlyAccess);
+    expect(cta.label).toBe("Get early access");
   });
-  it("preview: page links are left alone", () => {
-    expect(hrefFor("privacy.html", "/terms", true)).toBe("privacy.html");
-    expect(hrefFor("index.html", "/terms", true)).toBe("index.html");
+  it("shows no per-feature labels for launch features, only for ideas beyond the launch", () => {
+    for (const key of Object.keys(featureStatus) as FeatureKey[]) expect(statusOf(key)).toBe(featureStatus[key] === "vision" ? "vision" : "available");
   });
 });
 
-describe("founder", () => {
+describe("founder experience and customers", () => {
+  it("lists the seven companies the owner confirmed", () => {
+    expect(experience.companies.map((c) => c.name)).toEqual(["Haven Holidays", "Bourne Leisure", "Morley’s", "Kluckuroos", "Burritos Bhais", "Sibu", "Sapphire Café"]);
+  });
+  it("says plainly that they are not customers or endorsers", () => {
+    expect(experience.clarification).toMatch(/not Safe Kitchen customers/);
+    expect(experience.clarification).toMatch(/endorse/);
+  });
+  it("shows a logo only from the site's own approved files", () => {
+    for (const c of experience.companies) if (c.logo) expect(existsSync(join(root, "public", c.logo.src)), c.name).toBe(true);
+  });
+  it("names no customers until a business has agreed", () => {
+    expect(customers.companies).toEqual([]);
+  });
   it("uses Darrell's own photo, stored on the site", () => {
     expect(founder.photo?.src).toBe("/images/founder-darrell.jpg");
   });
