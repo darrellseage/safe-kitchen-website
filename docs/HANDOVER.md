@@ -26,6 +26,10 @@
 
 A full redesign and competitive-intelligence brief was run on 5 Nov 2026 as **Stage A only** (research, audit, concepts). Nothing on the site changed. Read, in order: `docs/WEBSITE_AUDIT.md`, `docs/COMPETITOR_RESEARCH.md`, `docs/BRAND_DESIGN_DIRECTIONS.md` (Concept A "Stainless" was recommended; the owner chose A refined with C, now **Concept A+ "Kitchen Command"**, proposed 5 Nov 2026 and awaiting approval; private mockups at https://claude.ai/artifact/GZAWDBGbKGyHMhHEVKkBPa, sources in `docs/design-concepts/`), `docs/CONVERSION_STRATEGY.md`, `docs/REDESIGN_IMPLEMENTATION_PLAN.md`. **Stage B (implementation) starts only when the owner approves a direction**, on a new branch. Competitor sites could not be fetched directly (network policy); the research is from search excerpts and is dated.
 
+## 1b. Current plan: multi-page restructure (11 Nov 2026)
+
+The owner rejected all redesign concepts (A, B, C, A+) and is **keeping the original design**. The agreed direction is an information-architecture change: a seven-section homepage plus feature pages, How it works, Pricing, About, FAQs and Early access. Plan, sitemap, navigation and section map: `docs/WEBSITE_RESTRUCTURE_PLAN.md`. **Stage B starts only after the owner approves that plan**, on a new branch `claude/multi-page-restructure`, reviewed through the sign-in-protected Vercel preview. Nothing merges to `main` without approval.
+
 ## 2. Repositories, branches and links
 
 | What | Where |

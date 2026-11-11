@@ -1,5 +1,8 @@
 # Brand and design directions
 
+> **Superseded on 11 November 2026.** The owner reviewed Concepts A, B, C and A+ and decided to **keep the original Safe Kitchen design**. None of these concepts will be built. The current plan is a multi-page restructure with the original design: see `docs/WEBSITE_RESTRUCTURE_PLAN.md`. This file is kept as a record only.
+
+
 > **Date:** 5 November 2026. **Status:** Stage A proposal for the owner's choice. Nothing on the live branch has changed.
 > **Mockups (private):** https://claude.ai/artifact/GZAWDBGbKGyHMhHEVKkBPa (index linking to Concept A, B and C). Sources: `docs/design-concepts/*.html`. Screenshots: `docs/review/stage-a/shot-*.png`.
 > Each mockup is a homepage sketch with real copy, the confirmed prices, the founder's own photo and honest status wording. Sample data throughout.

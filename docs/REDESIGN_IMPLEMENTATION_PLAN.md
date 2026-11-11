@@ -1,5 +1,7 @@
 # Redesign implementation plan (Stage B, after approval)
 
+> **Superseded on 11 November 2026** by `docs/WEBSITE_RESTRUCTURE_PLAN.md`: the owner is keeping the original design and restructuring into multiple pages instead. Kept as a record only.
+
 > **Date:** 5 November 2026. **Status:** proposal. Nothing starts until the owner approves a design direction (see `BRAND_DESIGN_DIRECTIONS.md`). Stage B happens on a new branch and is reviewed privately. **Hosting note:** since 2 Nov the repository is connected to Vercel with Vercel Authentication on all deployments and `main` as the production branch. Pushing a Stage B branch creates a sign-in-protected preview build, not a public site; nothing is merged to `main` without the owner's approval, and Deployment Protection must stay on.
 
 ## 1. Non-negotiables carried into Stage B
